@@ -56,7 +56,6 @@ class ProfilerLogListener implements EventSubscriberInterface
         }
 
         $this->request->attributes->set('_controller', 'BeautyLogBundle:Profiler:panelLog');
-        $event->setController($this->controllerResolver->getController($this->request));
-
+        return $event->setController($this->controllerResolver->getController($this->request));
     }
 }
