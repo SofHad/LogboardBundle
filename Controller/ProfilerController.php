@@ -13,11 +13,17 @@ namespace So\BeautyLogBundle\Controller;
 
 use Symfony\Component\DependencyInjection\ContainerAware;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Bundle\WebProfilerBundle\Profiler\TemplateManager;
+use So\BeautyLogBundle\Model\Meter;
+
+use Symfony\Bundle\WebProfilerBundle\Controller\ProfilerController as BaseProfilerController;
 
 class ProfilerController extends ContainerAware
 {
     private $profiler;
     private $twig;
+    private $templateManager = null;
+    private $templates;
 
     /**
      * Renders a profiler for a logger.
@@ -30,8 +36,11 @@ class ProfilerController extends ContainerAware
      */
     public function panelLogAction($token)
     {
+        $this->templates = $this->container->getParameter('data_collector.templates');
         $this->profiler = $this->container->get("profiler");
         $this->twig = $this->container->get("twig");
+        $request = $this->container->get('request');
+
         $profile = $this->profiler->loadProfile($token);
         if (null === $this->profiler) {
             throw new NotFoundHttpException('The profiler must be enabled.');
@@ -39,7 +48,6 @@ class ProfilerController extends ContainerAware
 
         $this->profiler->disable();
 
-        $request = $this->container->get('request');
         $panel = $request->query->get('panel', 'request');
         $page = $request->query->get('page', 'home');
 
@@ -51,16 +59,23 @@ class ProfilerController extends ContainerAware
             throw new NotFoundHttpException(sprintf('Panel "%s" is not available for token "%s".', $panel, $token));
         }
 
+        $getCollectorPanel = $profile->getCollector($panel);
+
+        $meter = $this->container->get("beauty_log.meter");
+        $countedData = $meter->handle($getCollectorPanel->getLogs())->getCountedData();
+
         return new Response(
-            $this->twig->render("BeautyLogBundle:Collector:config.html.twig",
+            $this->twig->render("BeautyLogBundle:Collector:logger.html.twig",
                 array(
-                    'token' => $token,
-                    'profile' => $profile,
+                    'token'     => $token,
+                    'profile'   => $profile,
                     'collector' => $profile->getCollector($panel),
-                    'panel' => $panel,
-                    'page' => $page,
-                    'request' => $request,
-                    'is_ajax' => $request->isXmlHttpRequest(),
+                    'panel'     => $panel,
+                    'page'      => $page,
+                    'request'   => $request,
+                    'templates' => $this->getTemplateManager()->getTemplates($profile),
+                    'is_ajax'   => $request->isXmlHttpRequest(),
+                    'countedData'   => $countedData,
                 )
             ),
             200,
@@ -68,5 +83,20 @@ class ProfilerController extends ContainerAware
         );
     }
 
+
+
+    /**
+     * Gets the Template Manager.
+     *
+     * @return TemplateManager The Template Manager
+     */
+    protected function getTemplateManager()
+    {
+        if (null === $this->templateManager) {
+            $this->templateManager = new TemplateManager($this->profiler, $this->twig, $this->templates);
+        }
+
+        return $this->templateManager;
+    }
 
 }
