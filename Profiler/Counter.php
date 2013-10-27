@@ -8,9 +8,9 @@
  * file that was distributed with this source code.
  */
 
-namespace So\BeautyLogBundle\Model;
+namespace So\BeautyLogBundle\Profiler;
 
-class Meter implements MeterInterface {
+class Counter implements CounterInterface {
 
     private $data = array();
     private $priority = array();

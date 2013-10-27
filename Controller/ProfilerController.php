@@ -41,7 +41,17 @@ class ProfilerController extends ContainerAware
         $this->twig = $this->container->get("twig");
         $request = $this->container->get('request');
 
-        $profile = $this->profiler->loadProfile($token);
+        //$profile = $this->profiler->loadProfile($token);
+
+       // $similarData = $this->profiler->find($profile->getIp(), $profile->getUrl(), 3, $profile->getMethod(),  null, \date("Y-m-d H:i:s"));
+        $profilerLoader = $this->container->get("beauty_log.profiler_loader");
+        $profilerLoader->loadProfiles($token, "ChartPie");
+        //DUMP--------------------------
+        require_once 'Kint.class.php';
+        \Kint::dump($profilerLoader);
+        exit ;
+        //DUMP--------------------------
+
         if (null === $this->profiler) {
             throw new NotFoundHttpException('The profiler must be enabled.');
         }
