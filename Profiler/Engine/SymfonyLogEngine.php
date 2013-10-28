@@ -13,23 +13,37 @@ namespace So\BeautyLogBundle\Profiler\Engine;
 use Symfony\Component\HttpKernel\Profiler\Profiler;
 use Symfony\Component\PropertyAccess\PropertyAccess;
 
-
+/**
+ * Symfony logs handler
+ *
+ * @author Sofiane HADDAG <sofiane.haddag@yahoo.fr>
+ */
 class SymfonyLogEngine implements EngineInterface {
 
     protected $currentProfile;
     protected $profiler;
     protected $accessor;
-    private $currentToken;
-    private $comparators;
-    private $profiles;
-    private $comparatorsCount;
+    protected $currentToken;
+    protected $comparators;
+    protected $profiles;
+    protected $comparatorsCount;
 
+    /**
+     * Construct
+     *
+     * @param Profiler $profiler            The Profiler
+     *
+     * @return void
+     */
     public function __construct( Profiler $profiler) {
-
         $this->profiler = $profiler;
         $this->accessor = PropertyAccess::createPropertyAccessor();
     }
 
+    /**
+     * {@inheritdoc}
+     *
+     */
     public function loadProfiles($currentToken, $comparatorsCount){
 
         $this->currentToken = $currentToken;
@@ -41,12 +55,19 @@ class SymfonyLogEngine implements EngineInterface {
         return $this->profiles;
     }
 
+    /**
+     * Load the comparators
+     *
+     * @return void
+     */
     public function loadComparators(){
-
-
         $this->comparators = $this->profiler->find($this->currentProfile->getIp(), $this->currentProfile->getUrl(), $this->comparatorsCount, $this->currentProfile->getMethod(),  null, \date("Y-m-d H:i:s"));
     }
 
+    /**
+     * {@inheritdoc}
+     *
+     */
     public function heapUp(){
 
         $this->profiles["current"]["token"] = $this->currentToken;
@@ -57,5 +78,13 @@ class SymfonyLogEngine implements EngineInterface {
             $this->profiles[$comparator["time"]]['token'] = $this->accessor->getValue($comparator, '[token]');
             $this->profiles[$comparator["time"]]['profile'] = $this->profiler->loadProfile($this->accessor->getValue($comparator, '[token]'));
         }
+    }
+
+    /**
+     * {@inheritdoc}
+     *
+     */
+    public function getProfiler(){
+        return  $this->profiler;
     }
 }
