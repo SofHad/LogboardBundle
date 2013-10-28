@@ -8,11 +8,8 @@
  * file that was distributed with this source code.
  */
 
-namespace So\BeautyLogBundle\Profiler;
+namespace So\BeautyLogBundle\Profiler\Engine;
 
-use Symfony\Component\Translation\Tests\String;
-
-interface ProfilerLoaderInterface {
-
+interface EngineInterface {
 
 }

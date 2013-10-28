@@ -12,6 +12,7 @@ namespace So\BeautyLogBundle\Profiler;
 
 use Symfony\Component\Config\Definition\IntegerNode;
 use Symfony\Component\HttpKernel\Profiler\Profiler;
+use Symfony\Component\PropertyAccess\PropertyAccess;
 
 class ProfilerLoader {
 
@@ -37,41 +38,29 @@ class ProfilerLoader {
 
     private $currentProfile;
 
-
-	public function __construct( Profiler $profiler , Counter $counter, $comparatorsCount) {
-
-        $this->profiler = $profiler;
-        $this->counter = $counter;
-        $this->comparatorsCount = $comparatorsCount;
-	}
-
-    public function heapUp(){
+    private $engine;
 
 
-        $this->profiles["current"]["token"] = $this->currentToken;
+	public function __construct( Counter $counter, $comparatorsCount) {
+    $this->counter = $counter;
+    $this->comparatorsCount = $comparatorsCount;
+    $this->accessor = PropertyAccess::createPropertyAccessor();
+}
 
-    }
-
-    public function loadProfiles($currentToken, $chart){
+    public function loadProfiles($engine, $currentToken, $chart){
 
         $this->currentToken = $currentToken;
         $this->chart = $chart;
-        $this->currentProfile = $this->profiler->loadProfile($this->currentToken);
-        $this->loadComparators();
-        $this->heapUp();
+        $this->engine = $engine;
+        $this->profiles = $this->engine->loadProfiles($currentToken, $this->comparatorsCount);
     }
 
-    public function loadComparators(){
-
-       $this->comparators = $this->profiler->find($this->currentProfile->getIp(), $this->currentProfile->getUrl(), $this->comparatorsCount, $this->currentProfile->getMethod(),  null, \date("Y-m-d H:i:s"));
+    public function getProfiles(){
+        return $this->profiles;
     }
 
-    public function load(){
-
-    }
-
-    public function handle(){
-
+    public function getCurrentProfile(){
+        return $this->accessor->getValue($this->profiles, '[current]'); $this->profiles;
     }
 
 }
