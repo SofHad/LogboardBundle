@@ -10,8 +10,6 @@
 
 namespace So\BeautyLogBundle\Profiler;
 
-use Symfony\Component\Translation\Tests\String;
-
 interface ProfilerLoaderInterface {
 
     /**

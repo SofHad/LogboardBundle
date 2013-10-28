@@ -20,7 +20,6 @@ use Symfony\Component\HttpKernel\KernelEvents;
 
 class ProfilerLogListener implements EventSubscriberInterface
 {
-
     private $request;
     private $controllerResolver;
     private $panel;

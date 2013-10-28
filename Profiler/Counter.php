@@ -26,7 +26,6 @@ class Counter implements CounterInterface {
      *
      */
     public function handle(Array $collector){
-
         $this->data = $collector;
 
         if(empty($this->data)){
@@ -52,7 +51,6 @@ class Counter implements CounterInterface {
      *
      */
     public function heapUp(){
-
         foreach( $this->data as $item){
             $this->priority[$item["priority"]][] = $item['priorityName'] ;
         }
