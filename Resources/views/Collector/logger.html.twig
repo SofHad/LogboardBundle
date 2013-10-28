@@ -53,12 +53,10 @@
 
 {% block panel %}
     <h2>Logs</h2>
-    <pre>
-{{ dump(countedData) }}
     {% set priority = request.query.get('priority', 0) %}
 
     {# Chart #}
-    <div id="chart_div" style="text-align: center; width: 100%; "></div>
+    <div id="chart_div" style="text-align: center; width: 100%;  "></div>
     {# Chart #}
     {% if collector.logs %}
         <ul class="alt">

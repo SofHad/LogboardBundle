@@ -60,7 +60,7 @@ class ProfilerController extends ContainerAware
         }
 
         if (!$profilerLoader->hasCollector()) {
-            throw new NotFoundHttpException(sprintf('Panel "%s" is not available for token "%s".', $panel, $token));
+            throw new NotFoundHttpException(sprintf('Panel "%s" is not available for token "%s".', $profilerLoader->getPanel(), $token));
         }
 
         return new Response(
@@ -83,8 +83,9 @@ class ProfilerController extends ContainerAware
     }
 
     /**
-     * Constructor.
+     * Initialize variables
      *
+     * @return void
      */
     public function initialize()
     {
