@@ -8,15 +8,23 @@
  * file that was distributed with this source code.
  */
 
-namespace So\BeautyLogBundle\Model;
+namespace So\BeautyLogBundle\Profiler;
 
-
-class Meter implements MeterInterface {
+/**
+ * Counter
+ *
+ * @author Sofiane HADDAG <sofiane.haddag@yahoo.fr>
+ */
+class Counter implements CounterInterface {
 
     private $data = array();
     private $priority = array();
     private $countedData = array();
 
+    /**
+     * {@inheritdoc}
+     *
+     */
     public function handle(Array $collector){
 
         $this->data = $collector;
@@ -26,14 +34,23 @@ class Meter implements MeterInterface {
         }
 
         $this->heapUp();
+        $this->map();
 
-        return $this->map();
+        return $this;
     }
 
+    /**
+     * {@inheritdoc}
+     *
+     */
     public function getCountedData(){
         return $this->countedData;
     }
 
+    /**
+     * {@inheritdoc}
+     *
+     */
     public function heapUp(){
 
         foreach( $this->data as $item){
@@ -43,8 +60,11 @@ class Meter implements MeterInterface {
         return $this;
     }
 
+    /**
+     * {@inheritdoc}
+     *
+     */
     public function map(){
-
         foreach(  $this->priority as $k => $item){
             $this->countedData[$k]['count'] = count($item);
             $this->countedData[$k]['priorityName'] = $item[0];

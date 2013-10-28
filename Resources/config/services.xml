@@ -7,9 +7,13 @@
 
     <parameters>
         <parameter key="beauty_log.profiler_log_listener.class">So\BeautyLogBundle\EventListener\ProfilerLogListener</parameter>
-        <parameter key="beauty_log.meter.class">So\BeautyLogBundle\Model\Meter</parameter>
+        <parameter key="beauty_log.counter.class">So\BeautyLogBundle\Profiler\Counter</parameter>
         <parameter key="beauty_log.type">panelAction</parameter>
         <parameter key="beauty_log.panel">logger</parameter>
+        <parameter key="beauty_log.engine_default">beauty_log.sfLog_engine</parameter>
+        <parameter key="beauty_log.comparators_count">3</parameter>
+        <parameter key="beauty_log.profiler_loader.class">So\BeautyLogBundle\Profiler\ProfilerLoader</parameter>
+        <parameter key="beauty_log.sfLog_engine.class">So\BeautyLogBundle\Profiler\Engine\SymfonyLogEngine</parameter>
 
     </parameters>
 
@@ -21,8 +25,14 @@
             <argument>%beauty_log.panel%</argument>
             <tag name="kernel.event_listener" event="kernel.controller" method="onKernelController" />
         </service>
-
-        <service id="beauty_log.meter" class="%beauty_log.meter.class%" public="true"></service>
+        <service id="beauty_log.profiler_loader" class="%beauty_log.profiler_loader.class%" public="true">
+            <argument type="service" id="beauty_log.counter" />
+            <argument>%beauty_log.comparators_count%</argument>
+        </service>
+        <service id="beauty_log.counter" class="%beauty_log.counter.class%" public="true" />
+        <service id="beauty_log.sfLog_engine" class="%beauty_log.sfLog_engine.class%" public="true" >
+            <argument type="service" id="profiler" on-invalid="null" />
+        </service>
     </services>
 
 </container>
