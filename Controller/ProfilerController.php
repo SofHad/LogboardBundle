@@ -39,7 +39,7 @@ class ProfilerController extends ContainerAware
 
         $this->initialize();
         $request = $this->container->get('request');
-        $engineService = null === $request->query->get("engine") ? $this->container->getParameter("beauty_log.engine_default") : "blz";
+        $engineService = null === $request->query->get("engine") ? $this->container->getParameter("beauty_log.engine_default") : $request->query->get("engine");
         $engine = $this->container->get($engineService);
 
         $profilerLoader = $this->container->get("beauty_log.profiler_loader");
@@ -53,8 +53,8 @@ class ProfilerController extends ContainerAware
         $this->profiler->disable();
 
         $page = $request->query->get('page', 'home');
-        $profile = $profilerLoader->getCurrentProfile();
 
+        $profile = $profilerLoader->getCurrentProfile();
         if (!$profile) {
             return new Response($this->twig->render('WebProfilerBundle:Profiler:info.html.twig', array('about' => 'no_token', 'token' => $token)), 200, array('Content-Type' => 'text/html'));
         }
