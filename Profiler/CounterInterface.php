@@ -12,9 +12,33 @@ namespace So\BeautyLogBundle\Profiler;
 
 interface CounterInterface {
 
-	public function handle(Array $collector);
+    /**
+     * Handle the operation
+     *
+     * @param Array $collector     Data collection
+     *
+     * @return Counter
+     */
+    public function handle(Array $collector);
 
-	public function heapUp();
+    /**
+     * Get Quantitative data
+     *
+     * @return Array
+     */
+    public function getCountedData();
 
-	public function map();
+    /**
+     * Heap up the mixed data
+     *
+     * @return Counter
+     */
+    public function heapUp();
+
+    /**
+     * Map the data
+     *
+     * @return Counter
+     */
+    public function map();
 }

@@ -12,4 +12,27 @@ namespace So\BeautyLogBundle\Profiler\Engine;
 
 interface EngineInterface {
 
+    /**
+     * Load profiles
+     *
+     * @param string $currentToken                The token
+     * @param integer $comparatorsCount           The number of comparators
+     *
+     * @return Array
+     */
+    public function loadProfiles($currentToken, $comparatorsCount);
+
+    /**
+     * Heap up the mixed data
+     *
+     * @return void
+     */
+    public function heapUp();
+
+    /**
+     * Get profiler
+     *
+     * @return Profiler
+     */
+    public function getProfiler();
 }
