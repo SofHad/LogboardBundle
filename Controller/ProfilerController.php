@@ -63,8 +63,7 @@ class ProfilerController extends ContainerAware
         if (!$this->profilerLoader->hasCollector()) {
             throw new NotFoundHttpException(sprintf('Panel "%s" is not available for token "%s".', $this->profilerLoader->getPanel(), $token));
         }
-
-
+        
         return new Response(
             $this->twig->render("BeautyLogBundle:Collector:logger.html.twig",
                 array(
