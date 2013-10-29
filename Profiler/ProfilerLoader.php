@@ -10,6 +10,7 @@
 
 namespace So\BeautyLogBundle\Profiler;
 
+use So\BeautyLogBundle\Profiler\Engine\EngineInterface;
 use So\BeautyLogBundle\Profiler\Engine\SymfonyLogEngine;
 use Symfony\Component\PropertyAccess\PropertyAccess;
 
@@ -22,18 +23,18 @@ use Symfony\Component\PropertyAccess\PropertyAccess;
 class ProfilerLoader
 {
 
-    private $profiler;
-    private $counter;
-    private $currentToken;
-    private $profiles = array();
-    private $countedData;
-    private $comparatorsCount;
-    private $accessor;
-    private $chart;
-    private $currentProfile;
-    private $engine;
-    private $panel;
-    private $collector;
+    protected $profiler;
+    protected $counter;
+    protected $currentToken;
+    protected $countedData;
+    protected $comparatorsCount;
+    protected $accessor;
+    protected $chart;
+    protected $currentProfile;
+    protected $engine;
+    protected $panel;
+    protected $collector;
+    protected $profiles = array();
 
     /**
      * Construct
@@ -43,7 +44,7 @@ class ProfilerLoader
      *
      * @return void
      */
-    public function __construct(Counter $counter, $comparatorsCount)
+    public function __construct(CounterInterface $counter, $comparatorsCount)
     {
         $this->counter = $counter;
         $this->comparatorsCount = $comparatorsCount;
@@ -55,7 +56,7 @@ class ProfilerLoader
      * {@inheritdoc}
      *
      */
-    public function loadProfiles(SymfonyLogEngine $engine, $currentToken, $panel, $chart)
+    public function loadProfiles(EngineInterface $engine, $currentToken, $panel, $chart)
     {
         $this->engine = $engine;
         $this->currentToken = $currentToken;

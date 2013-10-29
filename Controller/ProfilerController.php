@@ -25,7 +25,6 @@ class ProfilerController extends ContainerAware
     private $templates;
     private $accessor;
     private $request;
-    private $engine;
     private $profilerLoader;
 
     /**
@@ -43,9 +42,9 @@ class ProfilerController extends ContainerAware
         $this->loadServices();
 
         $engineService = null === $this->request->query->get("engine") ? $this->container->getParameter("beauty_log.engine_default") : $this->request->query->get("engine");
-        $this->engine = $this->container->get($engineService);
+        $engine = $this->container->get($engineService);
 
-        $this->profilerLoader->loadProfiles($this->engine, $token, $this->request->query->get('panel', 'request'), "ChartPie");
+        $this->profilerLoader->loadProfiles($engine, $token, $this->request->query->get('panel', 'request'), "ChartPie");
 
         $this->profiler = $this->profilerLoader->getProfiler();
         if (null === $this->profiler) {
