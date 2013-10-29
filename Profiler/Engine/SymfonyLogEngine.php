@@ -20,13 +20,14 @@ use Symfony\Component\PropertyAccess\PropertyAccess;
  */
 class SymfonyLogEngine implements EngineInterface {
 
-    protected $currentProfile;
+    protected $mainProfile;
     protected $profiler;
     protected $accessor;
     protected $currentToken;
     protected $comparators;
     protected $profiles;
     protected $comparatorsCount;
+    protected $panel;
 
     /**
      * Construct
@@ -44,11 +45,12 @@ class SymfonyLogEngine implements EngineInterface {
      * {@inheritdoc}
      *
      */
-    public function loadProfiles($currentToken, $comparatorsCount){
+    public function loadProfiles($token, $comparatorsCount, $panel){
 
-        $this->currentToken = $currentToken;
+        $this->token = $token;
         $this->comparatorsCount = $comparatorsCount;
-        $this->currentProfile = $this->profiler->loadProfile($this->currentToken);
+        $this->panel = $panel;
+        $this->mainProfile = $this->profiler->loadProfile($this->token);
         $this->loadComparators();
         $this->heapUp();
 
@@ -61,7 +63,7 @@ class SymfonyLogEngine implements EngineInterface {
      * @return void
      */
     public function loadComparators(){
-        $this->comparators = $this->profiler->find($this->currentProfile->getIp(), $this->currentProfile->getUrl(), $this->comparatorsCount, $this->currentProfile->getMethod(),  null, \date("Y-m-d H:i:s"));
+        $this->comparators = $this->profiler->find($this->mainProfile->getIp(), $this->mainProfile->getUrl(), $this->comparatorsCount, $this->mainProfile->getMethod(),  null, \date("Y-m-d H:i:s"));
     }
 
     /**
@@ -69,8 +71,8 @@ class SymfonyLogEngine implements EngineInterface {
      *
      */
     public function heapUp(){
-        $this->profiles["current"]["token"] = $this->currentToken;
-        $this->profiles["current"]["profile"] = $this->currentProfile;
+        $this->profiles["main"]["token"] = $this->token;
+        $this->profiles["main"]["profile"] = $this->mainProfile;
 
         foreach($this->comparators as $comparator){
             $this->profiles[$comparator["time"]]['token'] = $this->accessor->getValue($comparator, '[token]');

@@ -23,15 +23,15 @@ class ProfilerLoader
 
     protected $profiler;
     protected $counter;
-    protected $currentToken;
+    protected $token;
     protected $countedData;
     protected $comparatorsCount;
     protected $accessor;
     protected $chart;
-    protected $currentProfile;
+    protected $mainProfile;
     protected $engine;
     protected $panel;
-    protected $collector;
+    protected $mainCollector;
     protected $profiles = array();
 
     /**
@@ -47,20 +47,20 @@ class ProfilerLoader
         $this->counter = $counter;
         $this->comparatorsCount = $comparatorsCount;
         $this->accessor = PropertyAccess::createPropertyAccessor();
-        $this->collector = null;
+        $this->mainCollector = null;
     }
 
     /**
      * {@inheritdoc}
      *
      */
-    public function loadProfiles(EngineInterface $engine, $currentToken, $panel, $chart)
+    public function loadProfiles(EngineInterface $engine, $token, $panel, $chart)
     {
         $this->engine = $engine;
-        $this->currentToken = $currentToken;
+        $this->token = $token;
         $this->panel = $panel;
         $this->chart = $chart;
-        $this->profiles = $this->engine->loadProfiles($currentToken, $this->comparatorsCount);
+        $this->profiles = $this->engine->loadProfiles($token, $this->comparatorsCount, $this->panel);
     }
 
     /**
@@ -87,20 +87,20 @@ class ProfilerLoader
      */
     public function getCountedData()
     {
-        if(null ===  $this->collector){
-            $this->getCollector();
+        if(null ===  $this->mainCollector){
+            $this->getMainCollector();
         }
 
-        return $this->countedData = $this->counter->handle($this->collector->getLogs())->getCountedData();
+        return $this->countedData = $this->counter->handle($this->mainCollector->getLogs())->getCountedData();
     }
 
     /**
      * {@inheritdoc}
      *
      */
-    public function getCollector()
+    public function getMainCollector()
     {
-        return $this->collector = $this->currentProfile->getCollector($this->panel);
+        return $this->mainCollector = $this->mainProfile->getCollector($this->panel);
     }
 
     /**
@@ -109,25 +109,25 @@ class ProfilerLoader
      */
     public function hasCollector()
     {
-        return $this->currentProfile->hasCollector($this->panel);
+        return $this->mainProfile->hasCollector($this->panel);
     }
 
     /**
      * {@inheritdoc}
      *
      */
-    public function getCurrentProfile()
+    public function getMainProfile()
     {
-        return $this->currentProfile = $this->accessor->getValue($this->currentProfileData(), '[profile]');
+        return $this->mainProfile = $this->accessor->getValue($this->mainProfileData(), '[profile]');
     }
 
     /**
      * {@inheritdoc}
      *
      */
-    public function currentProfileData()
+    public function mainProfileData()
     {
-        return $this->accessor->getValue($this->profiles, '[current]');
+        return $this->accessor->getValue($this->profiles, '[main]');
     }
 
     /**

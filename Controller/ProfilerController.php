@@ -55,7 +55,7 @@ class ProfilerController extends ContainerAware
 
         $page = $this->request->query->get('page', 'home');
 
-        $profile = $this->profilerLoader->getCurrentProfile();
+        $profile = $this->profilerLoader->getMainProfile();
         if (!$profile) {
             return new Response($this->twig->render('WebProfilerBundle:Profiler:info.html.twig', array('about' => 'no_token', 'token' => $token)), 200, array('Content-Type' => 'text/html'));
         }
@@ -64,12 +64,13 @@ class ProfilerController extends ContainerAware
             throw new NotFoundHttpException(sprintf('Panel "%s" is not available for token "%s".', $this->profilerLoader->getPanel(), $token));
         }
 
+
         return new Response(
             $this->twig->render("BeautyLogBundle:Collector:logger.html.twig",
                 array(
                     'token' => $token,
                     'profile' => $profile,
-                    'collector' => $this->profilerLoader->getCollector(),
+                    'collector' => $this->profilerLoader->getMainCollector(),
                     'panel' => $this->profilerLoader->getPanel(),
                     'page' => $page,
                     'request' => $this->request,

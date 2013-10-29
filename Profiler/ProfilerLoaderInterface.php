@@ -16,13 +16,13 @@ interface ProfilerLoaderInterface {
      * Load profiles
      *
      * @param SymfonyLogEngine $engine            The engine
-     * @param string $currentToken                The token
+     * @param string $token                The token
      * @param string $panel                       The panel
      * @param string $chart                       The Google chart type
      *
      * @return void
      */
-    public function loadProfiles(SymfonyLogEngine $engine, $currentToken, $panel, $chart);
+    public function loadProfiles(SymfonyLogEngine $engine, $token, $panel, $chart);
 
     /**
      * GET profiles
@@ -50,7 +50,7 @@ interface ProfilerLoaderInterface {
      *
      * @return LoggerDataCollector
      */
-    public function getCollector();
+    public function getMainCollector();
 
     /**
      * Has Collector
@@ -64,14 +64,14 @@ interface ProfilerLoaderInterface {
      *
      * @return Boolean
      */
-    public function getCurrentProfile();
+    public function getMainProfile();
 
     /**
      * Profile data
      *
      * @return Array
      */
-    public function currentProfileData();
+    public function mainProfileData();
 
     /**
      * Get panel

@@ -17,10 +17,11 @@ interface EngineInterface {
      *
      * @param string $currentToken                The token
      * @param integer $comparatorsCount           The number of comparators
+     * @param string $panel                       The panel
      *
      * @return Array
      */
-    public function loadProfiles($currentToken, $comparatorsCount);
+    public function loadProfiles($currentToken, $comparatorsCount, $panel);
 
     /**
      * Heap up the mixed data
