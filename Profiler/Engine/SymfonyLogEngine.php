@@ -69,12 +69,10 @@ class SymfonyLogEngine implements EngineInterface {
      *
      */
     public function heapUp(){
-
         $this->profiles["current"]["token"] = $this->currentToken;
         $this->profiles["current"]["profile"] = $this->currentProfile;
 
         foreach($this->comparators as $comparator){
-
             $this->profiles[$comparator["time"]]['token'] = $this->accessor->getValue($comparator, '[token]');
             $this->profiles[$comparator["time"]]['profile'] = $this->profiler->loadProfile($this->accessor->getValue($comparator, '[token]'));
         }
