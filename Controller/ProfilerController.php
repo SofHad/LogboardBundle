@@ -25,7 +25,7 @@ class ProfilerController extends ContainerAware
     private $templates;
     private $accessor;
     private $request;
-    private $profilerLoader;
+    private $profilerManager;
 
     /**
      * Renders a profiler for a logger.
@@ -41,12 +41,13 @@ class ProfilerController extends ContainerAware
 
         $this->loadServices();
 
-        $engineService = null === $this->request->query->get("engine") ? $this->container->getParameter("beauty_log.engine_default") : $this->request->query->get("engine");
-        $engine = $this->container->get($engineService);
+        $sfLogEngine = $this->container->get("beauty_log.symfony_log_engine");
+        $chart = $this->container->getParameter('beauty_log.chart_pie');
+        $panel = $this->request->query->get('panel', 'request');
 
-        $this->profilerLoader->loadProfiles($engine, $token, $this->request->query->get('panel', 'request'), "ChartPie");
+        $this->profilerManager->loadProfiles(array($sfLogEngine), $token, $panel, $chart);
 
-        $this->profiler = $this->profilerLoader->getProfiler();
+        $this->profiler = $this->profilerManager->getProfiler();
         if (null === $this->profiler) {
             throw new NotFoundHttpException('The profiler must be enabled.');
         }
@@ -55,27 +56,27 @@ class ProfilerController extends ContainerAware
 
         $page = $this->request->query->get('page', 'home');
 
-        $profile = $this->profilerLoader->getMainProfile();
+        $profile = $this->profilerManager->getProfile();
         if (!$profile) {
             return new Response($this->twig->render('WebProfilerBundle:Profiler:info.html.twig', array('about' => 'no_token', 'token' => $token)), 200, array('Content-Type' => 'text/html'));
         }
 
-        if (!$this->profilerLoader->hasCollector()) {
-            throw new NotFoundHttpException(sprintf('Panel "%s" is not available for token "%s".', $this->profilerLoader->getPanel(), $token));
+        if (!$this->profilerManager->hasCollector()) {
+            throw new NotFoundHttpException(sprintf('Panel "%s" is not available for token "%s".', $this->profilerManager->getPanel(), $token));
         }
-        
+
         return new Response(
             $this->twig->render("BeautyLogBundle:Collector:logger.html.twig",
                 array(
                     'token' => $token,
                     'profile' => $profile,
-                    'collector' => $this->profilerLoader->getMainCollector(),
-                    'panel' => $this->profilerLoader->getPanel(),
+                    'collector' => $this->profilerManager->getCollector(),
+                    'panel' => $this->profilerManager->getPanel(),
                     'page' => $page,
                     'request' => $this->request,
                     'templates' => $this->getTemplateManager()->getTemplates($profile),
                     'is_ajax' => $this->request->isXmlHttpRequest(),
-                    'counted_data' => $this->profilerLoader->getCountedData(),
+                    'counted_data' => $this->profilerManager->getCountedData(),
                 )
             ),
             200,
@@ -94,7 +95,7 @@ class ProfilerController extends ContainerAware
         $this->twig = $this->container->get("twig");
         $this->accessor = PropertyAccess::createPropertyAccessor();
         $this->request = $this->container->get('request');
-        $this->profilerLoader = $this->container->get("beauty_log.profiler_loader");
+        $this->profilerManager = $this->container->get("beauty_log.profiler_manager");
     }
 
     /**

@@ -18,49 +18,112 @@ use Symfony\Component\PropertyAccess\PropertyAccess;
  *
  * @author Sofiane HADDAG <sofiane.haddag@yahoo.fr>
  */
-class ProfilerLoader
+class ProfilerManager
 {
 
     protected $profiler;
     protected $counter;
     protected $token;
     protected $countedData;
-    protected $comparatorsCount;
     protected $accessor;
     protected $chart;
-    protected $mainProfile;
-    protected $engine;
+    protected $profile;
+    protected $engines;
     protected $panel;
-    protected $mainCollector;
+    protected $collector;
     protected $profiles = array();
 
     /**
      * Construct
      *
      * @param Counter $counter            The profiler counter
-     * @param integer $comparatorsCount   The number of comparators
+     * @param integer $profiler           The profiler
      *
      * @return void
      */
-    public function __construct(CounterInterface $counter, $comparatorsCount)
+    public function __construct(CounterInterface $counter, $profiler)
     {
         $this->counter = $counter;
-        $this->comparatorsCount = $comparatorsCount;
+        $this->profiler = $profiler;
         $this->accessor = PropertyAccess::createPropertyAccessor();
-        $this->mainCollector = null;
+        $this->collector = null;
     }
 
     /**
      * {@inheritdoc}
      *
      */
-    public function loadProfiles(EngineInterface $engine, $token, $panel, $chart)
+    public function loadProfiles(Array $engines, $token, $panel, $chart)
     {
-        $this->engine = $engine;
+        $this->engines = $engines;
         $this->token = $token;
         $this->panel = $panel;
         $this->chart = $chart;
-        $this->profiles = $this->engine->loadProfiles($token, $this->comparatorsCount, $this->panel);
+
+        $this->executeLoading();
+    }
+
+    /**
+     * {@inheritdoc}
+     *
+     */
+    public function executeLoading()
+    {
+        $this->getProfile();
+
+        foreach($this->engines as $engine){
+            $this->profiles = $engine->loadProfiles($this->profile);
+        }
+    }
+
+    /**
+     * {@inheritdoc}
+     *
+     */
+    public function getCountedData()
+    {
+        if(null ===  $this->collector){
+            $this->getCollector();
+        }
+
+        return $this->countedData = $this->counter->handle($this->collector->getLogs())->getCountedData();
+    }
+
+    /**
+     * {@inheritdoc}
+     *
+     */
+    public function getCollector()
+    {
+        return $this->collector = $this->profile->getCollector($this->panel);
+    }
+
+    /**
+     * {@inheritdoc}
+     *
+     */
+    public function hasCollector()
+    {
+        return $this->profile->hasCollector($this->panel);
+    }
+
+    /**
+     * {@inheritdoc}
+     *
+     */
+    public function getProfile()
+    {
+        return $this->profile = $this->profiler->loadProfile($this->token);
+    }
+
+
+    /**
+     * {@inheritdoc}
+     *
+     */
+    public function getPanel()
+    {
+        return $this->panel;
     }
 
     /**
@@ -78,64 +141,15 @@ class ProfilerLoader
      */
     public function getProfiler()
     {
-        return $this->profiler = $this->engine->getProfiler();
+        return $this->profiler;
     }
 
     /**
      * {@inheritdoc}
      *
      */
-    public function getCountedData()
+    public function getChart()
     {
-        if(null ===  $this->mainCollector){
-            $this->getMainCollector();
-        }
-
-        return $this->countedData = $this->counter->handle($this->mainCollector->getLogs())->getCountedData();
-    }
-
-    /**
-     * {@inheritdoc}
-     *
-     */
-    public function getMainCollector()
-    {
-        return $this->mainCollector = $this->mainProfile->getCollector($this->panel);
-    }
-
-    /**
-     * {@inheritdoc}
-     *
-     */
-    public function hasCollector()
-    {
-        return $this->mainProfile->hasCollector($this->panel);
-    }
-
-    /**
-     * {@inheritdoc}
-     *
-     */
-    public function getMainProfile()
-    {
-        return $this->mainProfile = $this->accessor->getValue($this->mainProfileData(), '[profile]');
-    }
-
-    /**
-     * {@inheritdoc}
-     *
-     */
-    public function mainProfileData()
-    {
-        return $this->accessor->getValue($this->profiles, '[main]');
-    }
-
-    /**
-     * {@inheritdoc}
-     *
-     */
-    public function getPanel()
-    {
-        return $this->panel;
+        return $this->chart;
     }
 }

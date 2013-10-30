@@ -10,19 +10,19 @@
 
 namespace So\BeautyLogBundle\Profiler;
 
-interface ProfilerLoaderInterface {
+interface ProfilerManagerInterface {
 
     /**
      * Load profiles
      *
-     * @param SymfonyLogEngine $engine            The engine
-     * @param string $token                The token
+     * @param Array $engines                      Array of engines
+     * @param string $token                       The token
      * @param string $panel                       The panel
      * @param string $chart                       The Google chart type
      *
      * @return void
      */
-    public function loadProfiles(SymfonyLogEngine $engine, $token, $panel, $chart);
+    public function loadProfiles(Array $engines, $token, $panel, $chart);
 
     /**
      * GET profiles

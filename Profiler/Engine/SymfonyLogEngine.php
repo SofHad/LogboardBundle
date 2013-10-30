@@ -20,14 +20,13 @@ use Symfony\Component\PropertyAccess\PropertyAccess;
  */
 class SymfonyLogEngine implements EngineInterface {
 
-    protected $mainProfile;
+    protected $profile;
     protected $profiler;
     protected $accessor;
     protected $currentToken;
     protected $comparators;
     protected $profiles;
     protected $comparatorsCount;
-    protected $panel;
 
     /**
      * Construct
@@ -36,21 +35,19 @@ class SymfonyLogEngine implements EngineInterface {
      *
      * @return void
      */
-    public function __construct( Profiler $profiler) {
+    public function __construct( Profiler $profiler, $comparatorsCount) {
         $this->profiler = $profiler;
         $this->accessor = PropertyAccess::createPropertyAccessor();
+        $this->comparatorsCount = $comparatorsCount;
+        $this->profiles = array();
     }
 
     /**
      * {@inheritdoc}
      *
      */
-    public function loadProfiles($token, $comparatorsCount, $panel){
-
-        $this->token = $token;
-        $this->comparatorsCount = $comparatorsCount;
-        $this->panel = $panel;
-        $this->mainProfile = $this->profiler->loadProfile($this->token);
+    public function loadProfiles($profile=null){
+        $this->profile = $profile;
         $this->loadComparators();
         $this->heapUp();
 
@@ -63,7 +60,7 @@ class SymfonyLogEngine implements EngineInterface {
      * @return void
      */
     public function loadComparators(){
-        $this->comparators = $this->profiler->find($this->mainProfile->getIp(), $this->mainProfile->getUrl(), $this->comparatorsCount, $this->mainProfile->getMethod(),  null, \date("Y-m-d H:i:s"));
+        $this->comparators = $this->profiler->find($this->profile->getIp(), $this->profile->getUrl(), $this->comparatorsCount, $this->profile->getMethod(),  null, \date("Y-m-d H:i:s"));
     }
 
     /**
@@ -71,12 +68,9 @@ class SymfonyLogEngine implements EngineInterface {
      *
      */
     public function heapUp(){
-        $this->profiles["main"]["token"] = $this->token;
-        $this->profiles["main"]["profile"] = $this->mainProfile;
-
         foreach($this->comparators as $comparator){
-            $this->profiles[$comparator["time"]]['token'] = $this->accessor->getValue($comparator, '[token]');
-            $this->profiles[$comparator["time"]]['profile'] = $this->profiler->loadProfile($this->accessor->getValue($comparator, '[token]'));
+            $this->profiles[$this->getName()][$comparator["time"]]['token'] = $this->accessor->getValue($comparator, '[token]');
+            $this->profiles[$this->getName()][$comparator["time"]]['profile'] = $this->profiler->loadProfile($this->accessor->getValue($comparator, '[token]'));
         }
     }
 
@@ -84,7 +78,7 @@ class SymfonyLogEngine implements EngineInterface {
      * {@inheritdoc}
      *
      */
-    public function getProfiler(){
-        return  $this->profiler;
+    public function getName(){
+        return  'symfony.log';
     }
 }
