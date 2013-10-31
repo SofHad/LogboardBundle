@@ -9,16 +9,15 @@
  */
 
 namespace So\BeautyLogBundle\Profiler;
-use So\BeautyLogBundle\Profiler\Engine\EngineInterface;
+use Symfony\Component\HttpKernel\Profiler\Profiler;
 use Symfony\Component\PropertyAccess\PropertyAccess;
-
 
 /**
  * Profilers manager
  *
  * @author Sofiane HADDAG <sofiane.haddag@yahoo.fr>
  */
-class ProfilerManager
+class ProfilerManager implements ProfilerManagerInterface
 {
 
     protected $profiler;
@@ -33,14 +32,15 @@ class ProfilerManager
     protected $profiles = array();
 
     /**
-     * Construct
+     * Constructor
      *
-     * @param Counter $counter            The profiler counter
-     * @param integer $profiler           The profiler
+     * @param CounterInterface $counter            The counter
+     * @param Profiler $profiler                   The profiler
+     * @param string $panel                        The panel
      *
      * @return void
      */
-    public function __construct(CounterInterface $counter, $profiler, $panel)
+    public function __construct(CounterInterface $counter, Profiler $profiler, $panel)
     {
         $this->counter = $counter;
         $this->profiler = $profiler;
@@ -62,8 +62,9 @@ class ProfilerManager
     }
 
     /**
-     * {@inheritdoc}
+     * Execute load profiles
      *
+     * @return void
      */
     public function executeLoading()
     {
@@ -71,7 +72,7 @@ class ProfilerManager
         $this->initializeCountedData();
 
         foreach($this->engines as $engine){
-            $this->profiles = $engine->loadProfiles($this->profile, $this->panel);
+            $this->profiles = $engine->loadProfiles($this->profile);
         }
     }
 
@@ -85,24 +86,17 @@ class ProfilerManager
             $this->getCollector();
         }
 
-        return $this->countedData['primary']['current'] = $this->counter->handle($this->collector->getLogs())->getCountedData();
+        $this->countedData['primary']['current'] = $this->counter->handle($this->collector->getLogs())->getCountedData();
     }
 
     /**
      * {@inheritdoc}
      *
      */
-    public function getCountedData()
+    public function countData()
     {
         foreach($this->profiles as $k => $profile){
-           //DUMP---------------------------------
-                   include_once 'debug/kint.class.php' ;
-                   \kint::dump($profile,$k) ;
-                   echo "</pre>";
-                   exit ;
-           //DUMP---------------------------------;
-           
-            $this->countedData[$k]= $profile->()->getCountedData();
+            $this->countedData[$profile['name']][]= $this->counter->handle($profile['data'])->getCountedData();
         }
     }
 
@@ -159,6 +153,15 @@ class ProfilerManager
     public function getProfiler()
     {
         return $this->profiler;
+    }
+
+    /**
+     * {@inheritdoc}
+     *
+     */
+    public function getCountedData()
+    {
+        return $this->countedData;
     }
 
 }

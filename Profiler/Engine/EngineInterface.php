@@ -10,17 +10,18 @@
 
 namespace So\BeautyLogBundle\Profiler\Engine;
 
+use Symfony\Component\HttpKernel\Profiler\Profile;
+
 interface EngineInterface {
 
     /**
      * Load profiles
      *
-     * @param Profile $profile       The Profile
-     * @param string $panel          The panel
+     * @param \Symfony\Component\HttpKernel\Profiler\Profile    $profile       The Profile
      *
      * @return Array
      */
-    public function loadProfiles($profile=null, $panel);
+    public function loadProfiles(Profile $profile=null);
 
     /**
      * Heap up the mixed data

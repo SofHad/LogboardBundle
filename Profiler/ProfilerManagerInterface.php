@@ -10,6 +10,7 @@
 
 namespace So\BeautyLogBundle\Profiler;
 
+
 interface ProfilerManagerInterface {
 
     /**
@@ -23,32 +24,25 @@ interface ProfilerManagerInterface {
     public function loadProfiles(Array $engines, $token);
 
     /**
-     * GET profiles
+     * Initialize the counted data
      *
-     * @return Array
+     * @return void
      */
-    public function getProfiles();
-
-    /**
-     * GET profiler
-     *
-     * @return Profiler
-     */
-    public function getProfiler();
+    public function initializeCountedData();
 
     /**
      * Get Quantitative data
      *
-     * @return Array
+     * @return void
      */
-    public function getCountedData();
+    public function countData();
 
     /**
      * Get Collector
      *
-     * @return LoggerDataCollector
+     * @return \Symfony\Component\HttpKernel\DataCollector\LoggerDataCollector
      */
-    public function getMainCollector();
+    public function getCollector();
 
     /**
      * Has Collector
@@ -58,18 +52,11 @@ interface ProfilerManagerInterface {
     public function hasCollector();
 
     /**
-     * Collector hasser
+     * Get Collector
      *
-     * @return Boolean
+     * @return \Symfony\Component\HttpKernel\Profiler\Profile
      */
-    public function getMainProfile();
-
-    /**
-     * Profile data
-     *
-     * @return Array
-     */
-    public function mainProfileData();
+    public function getProfile();
 
     /**
      * Get panel
@@ -77,4 +64,25 @@ interface ProfilerManagerInterface {
      * @return string
      */
     public function getPanel();
+
+    /**
+     * GET profiles
+     *
+     * @return Array
+     */
+    public function getProfiles();
+
+    /**
+     * GET profiler
+     *
+     * @return \Symfony\Component\HttpKernel\Profiler\Profiler
+     */
+    public function getProfiler();
+
+    /**
+     * GET counted data
+     *
+     * @return Profiler
+     */
+    public function getCountedData();
 }

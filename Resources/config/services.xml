@@ -35,6 +35,7 @@
         <service id="beauty_log.symfony_log_engine" class="%beauty_log.symfony_log_engine.class%" public="true" >
             <argument type="service" id="profiler" on-invalid="null" />
             <argument>%beauty_log.comparators_count%</argument>
+            <argument>%beauty_log.panel%</argument>
         </service>
     </services>
 
