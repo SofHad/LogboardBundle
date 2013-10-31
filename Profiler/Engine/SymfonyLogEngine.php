@@ -34,17 +34,17 @@ class SymfonyLogEngine implements EngineInterface {
     /**
      * Construct
      *
-     * @param Profiler $profiler            The Profiler
-     * @param integer $comparatorsCount     The count of comparators
-     * @param integer $panel                The panel
+     * @param Profiler $profiler             The Profiler
+     * @param integer  $comparatorsCount     The count of comparators
+     * @param string   $panel                The panel
      *
      * @return void
      */
     public function __construct( Profiler $profiler, $comparatorsCount, $panel) {
         $this->profiler = $profiler;
-        $this->accessor = PropertyAccess::createPropertyAccessor();
         $this->comparatorsCount = $comparatorsCount;
         $this->panel = $panel;
+        $this->accessor = PropertyAccess::createPropertyAccessor();
         $this->profiles = array();
     }
 
@@ -53,8 +53,6 @@ class SymfonyLogEngine implements EngineInterface {
      *
      */
     public function loadProfiles(Profile $profile=null){
-
-        
         $this->profile = $profile;
         $this->loadComparators();
         $this->heapUp();
