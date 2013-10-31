@@ -24,7 +24,7 @@ interface CounterInterface {
     /**
      * Get Quantitative data
      *
-     * @return CounterInterface
+     * @return Array
      */
     public function getCountedData();
 
