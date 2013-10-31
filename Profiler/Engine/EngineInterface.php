@@ -17,7 +17,7 @@ interface EngineInterface {
     /**
      * Load profiles
      *
-     * @param \Symfony\Component\HttpKernel\Profiler\Profile    $profile       The Profile
+     * @param \Symfony\Component\HttpKernel\Profiler\Profile  $profile  The Profile
      *
      * @return Array
      */
