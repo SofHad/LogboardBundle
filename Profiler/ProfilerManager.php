@@ -62,7 +62,7 @@ class ProfilerManager implements ProfilerManagerInterface
     }
 
     /**
-     * Execute load profiles
+     * Handle the loading operation
      *
      * @return void
      */
