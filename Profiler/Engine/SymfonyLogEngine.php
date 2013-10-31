@@ -27,6 +27,7 @@ class SymfonyLogEngine implements EngineInterface {
     protected $comparators;
     protected $profiles;
     protected $comparatorsCount;
+    protected $panel;
 
     /**
      * Construct
@@ -46,8 +47,9 @@ class SymfonyLogEngine implements EngineInterface {
      * {@inheritdoc}
      *
      */
-    public function loadProfiles($profile=null){
+    public function loadProfiles($profile=null, $panel){
         $this->profile = $profile;
+        $this->panel = $panel;
         $this->loadComparators();
         $this->heapUp();
 
@@ -69,8 +71,11 @@ class SymfonyLogEngine implements EngineInterface {
      */
     public function heapUp(){
         foreach($this->comparators as $comparator){
-            $this->profiles[$this->getName()][$comparator["time"]]['token'] = $this->accessor->getValue($comparator, '[token]');
-            $this->profiles[$this->getName()][$comparator["time"]]['profile'] = $this->profiler->loadProfile($this->accessor->getValue($comparator, '[token]'));
+            $token = $this->accessor->getValue($comparator, '[token]');
+            $profile = $this->profiler->loadProfile($token);
+            $this->profiles[$this->getName()][$comparator["time"]]['token'] = $token;
+            $this->profiles[$this->getName()][$comparator["time"]]['profile'] = $profile ;
+            $this->profiles[$this->getName()][$comparator["time"]]['data'] = $profile->getCollector($this->panel)->getLogs();
         }
     }
 

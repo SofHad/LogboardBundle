@@ -72,7 +72,7 @@ class ProfilerManager
         $this->getProfile();
 
         foreach($this->engines as $engine){
-            $this->profiles = $engine->loadProfiles($this->profile);
+            $this->profiles = $engine->loadProfiles($this->profile, $this->panel);
         }
     }
 

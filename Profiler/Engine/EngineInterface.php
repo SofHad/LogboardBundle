@@ -15,11 +15,12 @@ interface EngineInterface {
     /**
      * Load profiles
      *
-     * @param Profile $profile   The Profile
+     * @param Profile $profile       The Profile
+     * @param string $panel          The panel
      *
      * @return Array
      */
-    public function loadProfiles($profile=null);
+    public function loadProfiles($profile=null, $panel);
 
     /**
      * Heap up the mixed data
