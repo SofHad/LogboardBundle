@@ -26,7 +26,6 @@ class ProfilerManager
     protected $token;
     protected $countedData;
     protected $accessor;
-    protected $chart;
     protected $profile;
     protected $engines;
     protected $panel;
@@ -41,10 +40,11 @@ class ProfilerManager
      *
      * @return void
      */
-    public function __construct(CounterInterface $counter, $profiler)
+    public function __construct(CounterInterface $counter, $profiler, $panel)
     {
         $this->counter = $counter;
         $this->profiler = $profiler;
+        $this->panel = $panel;
         $this->accessor = PropertyAccess::createPropertyAccessor();
         $this->collector = null;
     }
@@ -53,12 +53,10 @@ class ProfilerManager
      * {@inheritdoc}
      *
      */
-    public function loadProfiles(Array $engines, $token, $panel, $chart)
+    public function loadProfiles(Array $engines, $token)
     {
         $this->engines = $engines;
         $this->token = $token;
-        $this->panel = $panel;
-        $this->chart = $chart;
 
         $this->executeLoading();
     }
@@ -70,6 +68,7 @@ class ProfilerManager
     public function executeLoading()
     {
         $this->getProfile();
+        $this->initializeCountedData();
 
         foreach($this->engines as $engine){
             $this->profiles = $engine->loadProfiles($this->profile, $this->panel);
@@ -80,13 +79,31 @@ class ProfilerManager
      * {@inheritdoc}
      *
      */
-    public function getCountedData()
+    public function initializeCountedData()
     {
         if(null ===  $this->collector){
             $this->getCollector();
         }
 
-        return $this->countedData = $this->counter->handle($this->collector->getLogs())->getCountedData();
+        return $this->countedData['primary']['current'] = $this->counter->handle($this->collector->getLogs())->getCountedData();
+    }
+
+    /**
+     * {@inheritdoc}
+     *
+     */
+    public function getCountedData()
+    {
+        foreach($this->profiles as $k => $profile){
+           //DUMP---------------------------------
+                   include_once 'debug/kint.class.php' ;
+                   \kint::dump($profile,$k) ;
+                   echo "</pre>";
+                   exit ;
+           //DUMP---------------------------------;
+           
+            $this->countedData[$k]= $profile->()->getCountedData();
+        }
     }
 
     /**
@@ -144,12 +161,4 @@ class ProfilerManager
         return $this->profiler;
     }
 
-    /**
-     * {@inheritdoc}
-     *
-     */
-    public function getChart()
-    {
-        return $this->chart;
-    }
 }

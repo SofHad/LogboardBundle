@@ -17,12 +17,10 @@ interface ProfilerManagerInterface {
      *
      * @param Array $engines                      Array of engines
      * @param string $token                       The token
-     * @param string $panel                       The panel
-     * @param string $chart                       The Google chart type
      *
      * @return void
      */
-    public function loadProfiles(Array $engines, $token, $panel, $chart);
+    public function loadProfiles(Array $engines, $token);
 
     /**
      * GET profiles

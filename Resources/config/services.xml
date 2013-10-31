@@ -29,6 +29,7 @@
         <service id="beauty_log.profiler_manager" class="%beauty_log.profiler_manager.class%" public="true">
             <argument type="service" id="beauty_log.counter" />
             <argument type="service" id="profiler" on-invalid="null" />
+            <argument>%beauty_log.panel%</argument>
         </service>
         <service id="beauty_log.counter" class="%beauty_log.counter.class%" public="true" />
         <service id="beauty_log.symfony_log_engine" class="%beauty_log.symfony_log_engine.class%" public="true" >

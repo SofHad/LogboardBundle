@@ -43,9 +43,17 @@ class ProfilerController extends ContainerAware
 
         $sfLogEngine = $this->container->get("beauty_log.symfony_log_engine");
         $chart = $this->container->getParameter('beauty_log.chart_pie');
-        $panel = $this->request->query->get('panel', 'request');
 
-        $this->profilerManager->loadProfiles(array($sfLogEngine), $token, $panel, $chart);
+        $this->profilerManager->loadProfiles(array($sfLogEngine), $token);
+        
+        //DUMP---------------------------------
+              $d = $this->profilerManager->getProfiles();
+                include_once 'debug/kint.class.php' ;
+                \kint::dump($this->profilerManager->getCountedData()) ;
+                echo "</pre>";
+                exit ;
+        //DUMP---------------------------------;
+        
 
         $this->profiler = $this->profilerManager->getProfiler();
         if (null === $this->profiler) {
@@ -77,6 +85,7 @@ class ProfilerController extends ContainerAware
                     'templates' => $this->getTemplateManager()->getTemplates($profile),
                     'is_ajax' => $this->request->isXmlHttpRequest(),
                     'counted_data' => $this->profilerManager->getCountedData(),
+                    'chart' => $chart,
                 )
             ),
             200,
