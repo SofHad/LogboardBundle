@@ -10,6 +10,7 @@
 
 namespace So\BeautyLogBundle\Profiler;
 
+
 interface ProfilerManagerInterface {
 
     /**
@@ -17,12 +18,52 @@ interface ProfilerManagerInterface {
      *
      * @param Array $engines                      Array of engines
      * @param string $token                       The token
-     * @param string $panel                       The panel
-     * @param string $chart                       The Google chart type
      *
      * @return void
      */
-    public function loadProfiles(Array $engines, $token, $panel, $chart);
+    public function loadProfiles(Array $engines, $token);
+
+    /**
+     * Initialize the counted data
+     *
+     * @return void
+     */
+    public function initializeCountedData();
+
+    /**
+     * Get Quantitative data
+     *
+     * @return void
+     */
+    public function countData();
+
+    /**
+     * Get Collector
+     *
+     * @return \Symfony\Component\HttpKernel\DataCollector\LoggerDataCollector
+     */
+    public function getCollector();
+
+    /**
+     * Has Collector
+     *
+     * @return Boolean
+     */
+    public function hasCollector();
+
+    /**
+     * Get Collector
+     *
+     * @return \Symfony\Component\HttpKernel\Profiler\Profile
+     */
+    public function getProfile();
+
+    /**
+     * Get panel
+     *
+     * @return string
+     */
+    public function getPanel();
 
     /**
      * GET profiles
@@ -34,49 +75,14 @@ interface ProfilerManagerInterface {
     /**
      * GET profiler
      *
-     * @return Profiler
+     * @return \Symfony\Component\HttpKernel\Profiler\Profiler
      */
     public function getProfiler();
 
     /**
-     * Get Quantitative data
+     * GET counted data
      *
-     * @return Array
+     * @return Profiler
      */
     public function getCountedData();
-
-    /**
-     * Get Collector
-     *
-     * @return LoggerDataCollector
-     */
-    public function getMainCollector();
-
-    /**
-     * Has Collector
-     *
-     * @return Boolean
-     */
-    public function hasCollector();
-
-    /**
-     * Collector hasser
-     *
-     * @return Boolean
-     */
-    public function getMainProfile();
-
-    /**
-     * Profile data
-     *
-     * @return Array
-     */
-    public function mainProfileData();
-
-    /**
-     * Get panel
-     *
-     * @return string
-     */
-    public function getPanel();
 }

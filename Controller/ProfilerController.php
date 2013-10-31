@@ -15,7 +15,6 @@ use Symfony\Bundle\WebProfilerBundle\Profiler\TemplateManager;
 use Symfony\Component\DependencyInjection\ContainerAware;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\PropertyAccess\PropertyAccess;
-use Symfony\Component\PropertyAccess\PropertyAccessor;
 
 class ProfilerController extends ContainerAware
 {
@@ -43,18 +42,14 @@ class ProfilerController extends ContainerAware
 
         $sfLogEngine = $this->container->get("beauty_log.symfony_log_engine");
         $chart = $this->container->getParameter('beauty_log.chart_pie');
-        $panel = $this->request->query->get('panel', 'request');
 
-        $this->profilerManager->loadProfiles(array($sfLogEngine), $token, $panel, $chart);
+        $this->profilerManager->loadProfiles(array($sfLogEngine), $token);
+        $this->profilerManager->countData();
 
         $this->profiler = $this->profilerManager->getProfiler();
         if (null === $this->profiler) {
             throw new NotFoundHttpException('The profiler must be enabled.');
         }
-
-        $this->profiler->disable();
-
-        $page = $this->request->query->get('page', 'home');
 
         $profile = $this->profilerManager->getProfile();
         if (!$profile) {
@@ -72,11 +67,11 @@ class ProfilerController extends ContainerAware
                     'profile' => $profile,
                     'collector' => $this->profilerManager->getCollector(),
                     'panel' => $this->profilerManager->getPanel(),
-                    'page' => $page,
                     'request' => $this->request,
                     'templates' => $this->getTemplateManager()->getTemplates($profile),
                     'is_ajax' => $this->request->isXmlHttpRequest(),
                     'counted_data' => $this->profilerManager->getCountedData(),
+                    'chart' => $chart,
                 )
             ),
             200,

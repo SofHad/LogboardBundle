@@ -22,7 +22,7 @@
         data.addColumn('string', 'Topping');
         data.addColumn('number', 'Slices');
         data.addRows([
-                {% for item in counted_data %}
+                {% for item in counted_data["primary"]["current"] %}
                    ["{{ item["priorityName"] }}", {{ item["count"] }}],
                 {% endfor %}
         ]);;

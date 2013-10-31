@@ -9,16 +9,15 @@
  */
 
 namespace So\BeautyLogBundle\Profiler;
-use So\BeautyLogBundle\Profiler\Engine\EngineInterface;
+use Symfony\Component\HttpKernel\Profiler\Profiler;
 use Symfony\Component\PropertyAccess\PropertyAccess;
-
 
 /**
  * Profilers manager
  *
  * @author Sofiane HADDAG <sofiane.haddag@yahoo.fr>
  */
-class ProfilerManager
+class ProfilerManager implements ProfilerManagerInterface
 {
 
     protected $profiler;
@@ -26,7 +25,6 @@ class ProfilerManager
     protected $token;
     protected $countedData;
     protected $accessor;
-    protected $chart;
     protected $profile;
     protected $engines;
     protected $panel;
@@ -34,17 +32,19 @@ class ProfilerManager
     protected $profiles = array();
 
     /**
-     * Construct
+     * Constructor
      *
-     * @param Counter $counter            The profiler counter
-     * @param integer $profiler           The profiler
+     * @param CounterInterface $counter            The counter
+     * @param Profiler $profiler                   The profiler
+     * @param string $panel                        The panel
      *
      * @return void
      */
-    public function __construct(CounterInterface $counter, $profiler)
+    public function __construct(CounterInterface $counter, Profiler $profiler, $panel)
     {
         $this->counter = $counter;
         $this->profiler = $profiler;
+        $this->panel = $panel;
         $this->accessor = PropertyAccess::createPropertyAccessor();
         $this->collector = null;
     }
@@ -53,26 +53,26 @@ class ProfilerManager
      * {@inheritdoc}
      *
      */
-    public function loadProfiles(Array $engines, $token, $panel, $chart)
+    public function loadProfiles(Array $engines, $token)
     {
         $this->engines = $engines;
         $this->token = $token;
-        $this->panel = $panel;
-        $this->chart = $chart;
 
         $this->executeLoading();
     }
 
     /**
-     * {@inheritdoc}
+     * Execute load profiles
      *
+     * @return void
      */
     public function executeLoading()
     {
         $this->getProfile();
+        $this->initializeCountedData();
 
         foreach($this->engines as $engine){
-            $this->profiles = $engine->loadProfiles($this->profile, $this->panel);
+            $this->profiles = $engine->loadProfiles($this->profile);
         }
     }
 
@@ -80,13 +80,24 @@ class ProfilerManager
      * {@inheritdoc}
      *
      */
-    public function getCountedData()
+    public function initializeCountedData()
     {
         if(null ===  $this->collector){
             $this->getCollector();
         }
 
-        return $this->countedData = $this->counter->handle($this->collector->getLogs())->getCountedData();
+        $this->countedData['primary']['current'] = $this->counter->handle($this->collector->getLogs())->getCountedData();
+    }
+
+    /**
+     * {@inheritdoc}
+     *
+     */
+    public function countData()
+    {
+        foreach($this->profiles as $k => $profile){
+            $this->countedData[$profile['name']][]= $this->counter->handle($profile['data'])->getCountedData();
+        }
     }
 
     /**
@@ -148,8 +159,9 @@ class ProfilerManager
      * {@inheritdoc}
      *
      */
-    public function getChart()
+    public function getCountedData()
     {
-        return $this->chart;
+        return $this->countedData;
     }
+
 }

@@ -10,8 +10,10 @@
 
 namespace So\BeautyLogBundle\Profiler\Engine;
 
+use Symfony\Component\HttpKernel\Profiler\Profile;
 use Symfony\Component\HttpKernel\Profiler\Profiler;
 use Symfony\Component\PropertyAccess\PropertyAccess;
+
 
 /**
  * Symfony logs handler
@@ -33,13 +35,15 @@ class SymfonyLogEngine implements EngineInterface {
      * Construct
      *
      * @param Profiler $profiler            The Profiler
+     * @param integer $comparatorsCount     The count of comparators
      *
      * @return void
      */
-    public function __construct( Profiler $profiler, $comparatorsCount) {
+    public function __construct( Profiler $profiler, $comparatorsCount, $panel) {
         $this->profiler = $profiler;
         $this->accessor = PropertyAccess::createPropertyAccessor();
         $this->comparatorsCount = $comparatorsCount;
+        $this->panel = $panel;
         $this->profiles = array();
     }
 
@@ -47,9 +51,10 @@ class SymfonyLogEngine implements EngineInterface {
      * {@inheritdoc}
      *
      */
-    public function loadProfiles($profile=null, $panel){
+    public function loadProfiles(Profile $profile=null){
+
+        
         $this->profile = $profile;
-        $this->panel = $panel;
         $this->loadComparators();
         $this->heapUp();
 
@@ -73,9 +78,10 @@ class SymfonyLogEngine implements EngineInterface {
         foreach($this->comparators as $comparator){
             $token = $this->accessor->getValue($comparator, '[token]');
             $profile = $this->profiler->loadProfile($token);
-            $this->profiles[$this->getName()][$comparator["time"]]['token'] = $token;
-            $this->profiles[$this->getName()][$comparator["time"]]['profile'] = $profile ;
-            $this->profiles[$this->getName()][$comparator["time"]]['data'] = $profile->getCollector($this->panel)->getLogs();
+            $this->profiles[$comparator["time"]]['token'] = $token;
+            $this->profiles[$comparator["time"]]['profile'] = $profile ;
+            $this->profiles[$comparator["time"]]['data'] = $profile->getCollector($this->panel)->getLogs();
+            $this->profiles[$comparator["time"]]['name'] = $this->getName();
         }
     }
 
