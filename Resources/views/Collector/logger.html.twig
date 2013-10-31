@@ -3,6 +3,7 @@
     {{ parent() }}
     <!--Load the AJAX API-->
     <script type="text/javascript" src="https://www.google.com/jsapi"></script>
+    {% include 'BeautyLogBundle:Collector:TINY.js.twig' %}
     {% include 'BeautyLogBundle:Collector:config_chart.js.twig' %}
 
 {% endblock %}
@@ -59,9 +60,9 @@
     <div id="chart_div" style="text-align: center; width: 100%;  "></div>
     {# Chart #}
     {% if collector.logs %}
-        <ul class="alt">
+        <ul class="alt" id="bloc-notif">
             {% for log in collector.logs if priority >= 0 and log.priority >= priority or priority < 0 and log.context.type|default(0) == priority %}
-                <li class="{{ cycle(['odd', 'even'], loop.index) }}{% if log.priority >= 400 %} error{% elseif log.priority >= 300 %} warning{% endif %}">
+                <li class="{{ log.priorityName }}">
                     {{ logger.display_message(loop.index, log) }}
                 </li>
             {% else %}
