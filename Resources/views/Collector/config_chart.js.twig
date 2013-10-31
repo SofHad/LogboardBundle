@@ -1,11 +1,10 @@
 <script type="text/javascript">
 
     // Load the Visualization API and the piechart package.
-    google.load('visualization', '1.0', {'packages':['corechart']});
+    google.load('visualization', '1.0', {'packages': ['corechart']});
 
     // Set a callback to run when the Google Visualization API is loaded.
     google.setOnLoadCallback(drawChart);
-
 
 
     // Listen for the 'select' event, and call my function selectHandler() when
@@ -22,31 +21,57 @@
         data.addColumn('string', 'Topping');
         data.addColumn('number', 'Slices');
         data.addRows([
-                {% for item in counted_data["primary"]["current"] %}
-                   ["{{ item["priorityName"] }}", {{ item["count"] }}],
-                {% endfor %}
-        ]);;
+            {% for item in counted_data["primary"]["current"] %}
+            ["{{ item["priorityName"] }}", {{ item["count"] }}],
+            {% endfor %}
+        ]);
+        ;
 
 
         // Set chart options
-        var options = {'title':'LOGS',
-            'width':400,
-            'height':200};
+        var options = {'title': 'LOGS',
+            'width': 400,
+            'height': 200};
 
         // Instantiate and draw our chart, passing in some options.
         var chart = new google.visualization.PieChart(document.getElementById('chart_div'));
-       // google.visualization.events.addListener(chart, 'select', selectHandler);
+        google.visualization.events.addListener(chart, 'select', selectHandler);
 
         function selectHandler() {
             var selectedItem = chart.getSelection()[0];
             if (selectedItem) {
                 var value = data.getValue(selectedItem.row, 0);
-                alert('The user selected ' + value);
+
+                //value
+
+                var notif = document.getElementById("bloc-notif");
+                notif.style.backgroundColor = "#CCCCCC";
+                notif.style.border = "thick solid #000000";
+                notif.style.top = "10px";
+
+                var liTag = document.getElementsByTagName('li');
+                for (var li in liTag){
+                    if(liTag[li] && liTag[li].style){
+                        liTag[li].style.display = "bloc";
+                    }
+                }
+
+                //.style.visibility = 'hidden';
+                var cls = document.getElementsByClassName(value);
+                for (var li in cls) {
+                    if (cls[li] && cls[li].style) {
+                        cls[li].style.display = "none";
+                        //console.log(cls[li]);
+                    }
+                }
+
+
             }
         }
 
 
-
         chart.draw(data, options);
     }
+
+
 </script>
