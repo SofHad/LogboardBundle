@@ -37,7 +37,6 @@ class ProfilerController extends ContainerAware
      */
     public function panelLogAction($token)
     {
-
         $this->loadServices();
 
         $sfLogEngine = $this->container->get("beauty_log.symfony_log_engine");
