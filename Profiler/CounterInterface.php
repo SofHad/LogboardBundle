@@ -17,28 +17,28 @@ interface CounterInterface {
      *
      * @param Array $collector     Data collection
      *
-     * @return Counter
+     * @return CounterInterface
      */
     public function handle(Array $collector);
 
     /**
      * Get Quantitative data
      *
-     * @return Array
+     * @return CounterInterface
      */
     public function getCountedData();
 
     /**
      * Heap up the mixed data
      *
-     * @return Counter
+     * @return CounterInterface
      */
     public function heapUp();
 
     /**
      * Map the data
      *
-     * @return Counter
+     * @return CounterInterface
      */
     public function map();
 }
