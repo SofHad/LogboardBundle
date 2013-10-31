@@ -10,17 +10,18 @@
 
 namespace So\BeautyLogBundle\Profiler\Engine;
 
+use Symfony\Component\HttpKernel\Profiler\Profile;
+
 interface EngineInterface {
 
     /**
      * Load profiles
      *
-     * @param string $currentToken                The token
-     * @param integer $comparatorsCount           The number of comparators
+     * @param \Symfony\Component\HttpKernel\Profiler\Profile    $profile       The Profile
      *
      * @return Array
      */
-    public function loadProfiles($currentToken, $comparatorsCount);
+    public function loadProfiles(Profile $profile=null);
 
     /**
      * Heap up the mixed data
@@ -29,10 +30,4 @@ interface EngineInterface {
      */
     public function heapUp();
 
-    /**
-     * Get profiler
-     *
-     * @return Profiler
-     */
-    public function getProfiler();
 }
