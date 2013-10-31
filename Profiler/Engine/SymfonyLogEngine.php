@@ -36,6 +36,7 @@ class SymfonyLogEngine implements EngineInterface {
      *
      * @param Profiler $profiler            The Profiler
      * @param integer $comparatorsCount     The count of comparators
+     * @param integer $panel                The panel
      *
      * @return void
      */
