@@ -16,8 +16,8 @@ interface ProfilerManagerInterface {
     /**
      * Load profiles
      *
-     * @param Array $engines                      Array of engines
-     * @param string $token                       The token
+     * @param Array $engines           Array of engines
+     * @param string $token            The token
      *
      * @return void
      */
@@ -66,21 +66,21 @@ interface ProfilerManagerInterface {
     public function getPanel();
 
     /**
-     * GET profiles
+     * Get profiles
      *
      * @return Array
      */
     public function getProfiles();
 
     /**
-     * GET profiler
+     * Get profiler
      *
      * @return \Symfony\Component\HttpKernel\Profiler\Profiler
      */
     public function getProfiler();
 
     /**
-     * GET counted data
+     * Get counted data
      *
      * @return Profiler
      */

@@ -16,13 +16,16 @@
     // draws it.
     function drawChart() {
 
+
         // Create the data table.
         var data = new google.visualization.DataTable();
         data.addColumn('string', 'Topping');
         data.addColumn('number', 'Slices');
         data.addRows([
-            {% for item in counted_data["primary"]["current"] %}
-            ["{{ item["priorityName"] }}", {{ item["count"] }}],
+            {% for item in counted_data["current"] %}
+            {% for data in item %}
+            ["{{ data["priorityName"] }}", {{ data["count"] }}],
+            {% endfor %}
             {% endfor %}
         ]);
         ;
@@ -30,8 +33,8 @@
 
         // Set chart options
         var options = {'title': 'LOGS',
-            'width': 400,
-            'height': 200};
+            'width': 800,
+            'height': 600};
 
         // Instantiate and draw our chart, passing in some options.
         var chart = new google.visualization.PieChart(document.getElementById('chart_div'));
@@ -50,8 +53,8 @@
                 notif.style.top = "10px";
 
                 var liTag = document.getElementsByTagName('li');
-                for (var li in liTag){
-                    if(liTag[li] && liTag[li].style){
+                for (var li in liTag) {
+                    if (liTag[li] && liTag[li].style) {
                         liTag[li].style.display = "bloc";
                     }
                 }
@@ -68,10 +71,6 @@
 
             }
         }
-
-
         chart.draw(data, options);
     }
-
-
 </script>

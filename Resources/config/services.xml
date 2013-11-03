@@ -14,6 +14,8 @@
         <parameter key="beauty_log.comparators_count">3</parameter>
         <parameter key="beauty_log.profiler_manager.class">So\BeautyLogBundle\Profiler\ProfilerManager</parameter>
         <parameter key="beauty_log.symfony_log_engine.class">So\BeautyLogBundle\Profiler\Engine\SymfonyLogEngine</parameter>
+        <parameter key="beauty_log.symfony_finder.class">So\BeautyLogBundle\Profiler\Engine\Finder\SymfonyFinder</parameter>
+        <parameter key="beauty_log.parameters_handler.class">So\BeautyLogBundle\Profiler\Engine\Finder\ParametersHandler</parameter>
         <parameter key="beauty_log.chart_pie">chartPie</parameter>
 
     </parameters>
@@ -26,17 +28,29 @@
             <argument>%beauty_log.panel%</argument>
             <tag name="kernel.event_listener" event="kernel.controller" method="onKernelController" />
         </service>
+
         <service id="beauty_log.profiler_manager" class="%beauty_log.profiler_manager.class%" public="true">
             <argument type="service" id="beauty_log.counter" />
             <argument type="service" id="profiler" on-invalid="null" />
             <argument>%beauty_log.panel%</argument>
         </service>
+
         <service id="beauty_log.counter" class="%beauty_log.counter.class%" public="true" />
-        <service id="beauty_log.symfony_log_engine" class="%beauty_log.symfony_log_engine.class%" public="true" >
+
+        <service id="beauty_log.parameters_handler" class="%beauty_log.parameters_handler.class%" public="true" />
+
+        <service id="beauty_log.symfony_finder" class="%beauty_log.symfony_finder.class%" public="true">
             <argument type="service" id="profiler" on-invalid="null" />
+        </service>
+
+        <service id="beauty_log.symfony_log_engine" class="%beauty_log.symfony_log_engine.class%" public="true">
+            <argument type="service" id="profiler" on-invalid="null" />
+            <argument type="service" id="beauty_log.symfony_finder" />
+            <argument type="service" id="beauty_log.parameters_handler" />
             <argument>%beauty_log.comparators_count%</argument>
             <argument>%beauty_log.panel%</argument>
         </service>
+
     </services>
 
 </container>
