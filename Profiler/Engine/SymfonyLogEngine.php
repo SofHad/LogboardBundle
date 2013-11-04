@@ -71,7 +71,7 @@ class SymfonyLogEngine implements EngineInterface {
     }
 
     /**
-     * Find the data
+     * Find data
      *
      * @return void
      */

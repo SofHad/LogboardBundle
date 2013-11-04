@@ -33,8 +33,8 @@
 
         // Set chart options
         var options = {'title': 'LOGS',
-            'width': 800,
-            'height': 600};
+            'width': 600,
+            'height': 400};
 
         // Instantiate and draw our chart, passing in some options.
         var chart = new google.visualization.PieChart(document.getElementById('chart_div'));
@@ -45,26 +45,16 @@
             if (selectedItem) {
                 var value = data.getValue(selectedItem.row, 0);
 
-                //value
-
                 var notif = document.getElementById("bloc-notif");
-                notif.style.backgroundColor = "#CCCCCC";
-                notif.style.border = "thick solid #000000";
-                notif.style.top = "10px";
+//
 
-                var liTag = document.getElementsByTagName('li');
-                for (var li in liTag) {
-                    if (liTag[li] && liTag[li].style) {
-                        liTag[li].style.display = "bloc";
-                    }
-                }
-
-                //.style.visibility = 'hidden';
                 var cls = document.getElementsByClassName(value);
+
+                console.log(cls);
                 for (var li in cls) {
+                    cls[li].style.display = "block";
                     if (cls[li] && cls[li].style) {
                         cls[li].style.display = "none";
-                        //console.log(cls[li]);
                     }
                 }
 

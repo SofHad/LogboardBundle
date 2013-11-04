@@ -1,6 +1,8 @@
 {% extends '@WebProfiler/Profiler/layout.html.twig' %}
 {% block head %}
     {{ parent() }}
+    {% include 'BeautyLogBundle:Collector:css.css.twig' %}
+
     <!--Load the AJAX API-->
     <script type="text/javascript" src="https://www.google.com/jsapi"></script>
     {% include 'BeautyLogBundle:Collector:config_chart.js.twig' %}
@@ -25,7 +27,8 @@
     <div id="chart_div" style="text-align: center; width: 100%;  "></div>
     {# Chart #}
     {% if collector.logs %}
-        <ul class="alt" id="bloc-notif">
+    <div class="modal_dialog" id="modal_dialog">
+        <ul class="alt" id="bloc-notif" >
             {% for log in collector.logs if priority >= 0 and log.priority >= priority or priority < 0 and log.context.type|default(0) == priority %}
                 <li class="{{ log.priorityName }}">
                     {{ logger.display_message(loop.index, log) }}
@@ -34,6 +37,7 @@
                 <li><em>No logs available for this priority.</em></li>
             {% endfor %}
         </ul>
+        </div>
     {% else %}
         <p>
             <em>No logs available.</em>

@@ -13,11 +13,11 @@ namespace So\BeautyLogBundle\Profiler\Engine\Finder;
 use Symfony\Component\HttpKernel\Profiler\Profiler;
 
 /**
- * The native Symfony find method
+ * Profiler Finder
  *
  * @author Sofiane HADDAG <sofiane.haddag@yahoo.fr>
  */
-class SymfonyFinder implements FinderInterface
+class ProfilerFinder implements FinderInterface
 {
 
     protected $data = array();
