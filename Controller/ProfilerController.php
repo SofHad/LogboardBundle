@@ -13,6 +13,7 @@ namespace So\BeautyLogBundle\Controller;
 
 use Symfony\Bundle\WebProfilerBundle\Profiler\TemplateManager;
 use Symfony\Component\DependencyInjection\ContainerAware;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\PropertyAccess\PropertyAccess;
 
@@ -35,9 +36,20 @@ class ProfilerController extends ContainerAware
      *
      * @throws NotFoundHttpException
      */
-    public function panelLogAction($token)
+    public function panelLogAction($token, Request $request)
     {
         $this->loadServices();
+
+        $queryManager = $this->container->get('beauty_log.query_manager');
+        $queryManager->handleQueries($request, $token);
+
+        //DUMP--------------------------
+        require_once 'Kint.class.php';
+        \Kint::dump($queryManager);
+        exit ;
+        //DUMP--------------------------
+
+
 
         $chart = $this->container->getParameter('beauty_log.chart_pie');
 
@@ -103,17 +115,6 @@ class ProfilerController extends ContainerAware
         }
 
         return $this->templateManager;
-    }
-
-    /**
-     * Get engine.
-     *
-     * @return \So\BeautyLogBundle\Profiler\Engine\EngineInterface
-     */
-    protected function getEngine()
-    {
-        $engine = $this->request->request->get('engine', 'beauty_log.symfony_log_engine');
-        return $this->container->get($engine);
     }
 
 }
