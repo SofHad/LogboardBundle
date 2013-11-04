@@ -9,7 +9,6 @@
  */
 
 namespace So\BeautyLogBundle\Profiler\Engine;
-
 use So\BeautyLogBundle\Profiler\Engine\Finder\FinderInterface;
 use So\BeautyLogBundle\Profiler\Engine\Finder\ParametersHandlerInterface;
 use Symfony\Component\HttpKernel\Profiler\Profile;
@@ -22,7 +21,8 @@ use Symfony\Component\PropertyAccess\PropertyAccess;
  *
  * @author Sofiane HADDAG <sofiane.haddag@yahoo.fr>
  */
-class SymfonyLogEngine implements EngineInterface {
+class SymfonyLogEngine implements EngineInterface
+{
 
     protected $profile;
     protected $profiler;
@@ -38,15 +38,16 @@ class SymfonyLogEngine implements EngineInterface {
     /**
      * Construct
      *
-     * @param Profiler                     $profiler              The Profiler
-     * @param FinderInterface              $finder                The Finder
-     * @param ParametersHandlerInterface   $parametersHandler     The Finder
-     * @param integer                      $dataCount             The count of data
-     * @param string                       $panel                 The panel
+     * @param Profiler $profiler              The Profiler
+     * @param FinderInterface $finder                The Finder
+     * @param ParametersHandlerInterface $parametersHandler     The Finder
+     * @param integer $dataCount             The count of data
+     * @param string $panel                 The panel
      *
      * @return void
      */
-    public function __construct( Profiler $profiler, FinderInterface $finder, ParametersHandlerInterface $parametersHandler, $dataCount, $panel) {
+    public function __construct(Profiler $profiler, FinderInterface $finder, ParametersHandlerInterface $parametersHandler, $dataCount, $panel)
+    {
         $this->profiler = $profiler;
         $this->finder = $finder;
         $this->parametersHandler = $parametersHandler;
@@ -60,9 +61,10 @@ class SymfonyLogEngine implements EngineInterface {
      * {@inheritdoc}
      *
      */
-    public function loadProfiles(Profile $profile=null){
+    public function loadProfiles(Profile $profile = null)
+    {
         $this->profile = $profile;
-        $this->parameters =  $this->parametersHandler->getParameters($this->profile);
+        $this->parameters = $this->parametersHandler->getParameters($this->profile);
 
         $this->find();
         $this->heapUp();
@@ -75,7 +77,8 @@ class SymfonyLogEngine implements EngineInterface {
      *
      * @return void
      */
-    public function find(){
+    public function find()
+    {
         $this->data = $this->finder->find($this->parameters);
     }
 
@@ -83,12 +86,13 @@ class SymfonyLogEngine implements EngineInterface {
      * {@inheritdoc}
      *
      */
-    public function heapUp(){
-        foreach($this->data as $item){
+    public function heapUp()
+    {
+        foreach ($this->data as $item) {
             $token = $this->accessor->getValue($item, '[token]');
             $profile = $this->profiler->loadProfile($token);
             $this->profiles[$item["time"]]['token'] = $token;
-            $this->profiles[$item["time"]]['profile'] = $profile ;
+            $this->profiles[$item["time"]]['profile'] = $profile;
             $this->profiles[$item["time"]]['data'] = $profile->getCollector($this->panel)->getLogs();
             $this->profiles[$item["time"]]['name'] = $this->getName();
         }
@@ -98,7 +102,8 @@ class SymfonyLogEngine implements EngineInterface {
      * {@inheritdoc}
      *
      */
-    public function getName(){
-        return  'symfony.log';
+    public function getName()
+    {
+        return 'symfony.log';
     }
 }

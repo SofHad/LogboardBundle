@@ -72,7 +72,7 @@ class ProfilerManager implements ProfilerManagerInterface
         $this->getProfile();
         $this->initializeCountedData();
 
-        foreach($this->engines as $engine){
+        foreach ($this->engines as $engine) {
             $this->profiles = $engine->loadProfiles($this->profile);
         }
     }
@@ -83,7 +83,7 @@ class ProfilerManager implements ProfilerManagerInterface
      */
     public function initializeCountedData()
     {
-        if(null ===  $this->collector){
+        if (null === $this->collector) {
             $this->getCollector();
         }
 
@@ -97,8 +97,8 @@ class ProfilerManager implements ProfilerManagerInterface
     public function countData()
     {
 
-        foreach($this->profiles as $k => $profile){
-            $this->countedData[$profile['name']][]= $this->counter->handle($profile['data'])->getCountedData();
+        foreach ($this->profiles as $k => $profile) {
+            $this->countedData[$profile['name']][] = $this->counter->handle($profile['data'])->getCountedData();
         }
     }
 

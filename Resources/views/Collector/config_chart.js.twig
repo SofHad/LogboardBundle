@@ -26,12 +26,14 @@
             'width': 600,
             'height': 400};
 
-        var chart = new google.visualization.PieChart(document.getElementById('chart_current'));
+        //LineChart - PieChart - ColumnChart
+        var chart = new google.visualization.LineChart(document.getElementById('chart_current'));
+
         google.visualization.events.addListener(chart, 'onmouseover', selectHandler);
 
-    function selectHandler(e) {
-        document.getElementById("current-div").style.display = "block";
-        chart.setSelection([e]);
+        function selectHandler(e) {
+            document.getElementById("current-div").style.display = "block";
+            chart.setSelection([e]);
             var selectedItem = chart.getSelection()[0];
             if (selectedItem) {
                 var value = data.getValue(selectedItem.row, 0);
@@ -39,17 +41,18 @@
                 var notif = document.getElementById("current");
                 var notifHtml = notif.innerHTML;
                 var li = notif.getElementsByTagName("li");
-                for(i in li){
+                for (i in li) {
                     if (li[i] && li[i].style) {
-                       if(li[i].getAttribute("class") && value == li[i].getAttribute("class")){
-                           li[i].style.display = "block";
-                       }else{
-                           li[i].style.display = "none";
-                       }
+                        if (li[i].getAttribute("class") && value == li[i].getAttribute("class")) {
+                            li[i].style.display = "block";
+                        } else {
+                            li[i].style.display = "none";
+                        }
                     }
                 }
             }
         }
+
         chart.draw(data, options);
     }
 

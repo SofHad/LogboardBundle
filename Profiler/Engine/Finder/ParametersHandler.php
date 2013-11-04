@@ -29,12 +29,12 @@ class ParametersHandler implements ParametersHandlerInterface
     public function getParameters(Profile $profile)
     {
         return array(
-            'ip'          =>null,
-            'url'         => null,
-            'dataCount'   => self::DATA_COUNT,
-            'method'      => null,
-            'start'       => null,
-            'end'         => null,
+            'ip' => null,
+            'url' => null,
+            'dataCount' => self::DATA_COUNT,
+            'method' => null,
+            'start' => null,
+            'end' => null,
         );
     }
 }

@@ -12,7 +12,8 @@ namespace So\BeautyLogBundle\Profiler\Engine\Finder;
 
 use Symfony\Component\HttpKernel\Profiler\Profile;
 
-interface ParametersHandlerInterface {
+interface ParametersHandlerInterface
+{
 
     /**
      * Get the parameters

@@ -1,10 +1,8 @@
 <?xml version="1.0" ?>
 
 <container xmlns="http://symfony.com/schema/dic/services"
-    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-    xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
-
-
+           xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+           xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
     <parameters>
         <parameter key="beauty_log.profiler_log_listener.class">So\BeautyLogBundle\EventListener\ProfilerLogListener</parameter>
         <parameter key="beauty_log.counter.class">So\BeautyLogBundle\Profiler\Counter</parameter>
@@ -17,9 +15,7 @@
         <parameter key="beauty_log.symfony_finder.class">So\BeautyLogBundle\Profiler\Engine\Finder\ProfilerFinder</parameter>
         <parameter key="beauty_log.parameters_handler.class">So\BeautyLogBundle\Profiler\Engine\Finder\ParametersHandler</parameter>
         <parameter key="beauty_log.chart_pie">chartPie</parameter>
-
     </parameters>
-
     <services>
         <service id="beauty_log.profiler_log_listener" class="%beauty_log.profiler_log_listener.class%" public="true" scope="request">
             <argument type="service" id="request" />

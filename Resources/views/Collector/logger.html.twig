@@ -21,20 +21,37 @@
 {% block panel %}
     {% set priority = request.query.get('priority', 0) %}
     {# Chart #}
-    <div id="chart_current" style="text-align: center; width: 100%;  "></div>
+    <table style="width: 80%; border: 0;">
+        <tr>
+            <td style=" border: none;">
+                <div id="chart_current" style="float: right; "></div>
+            </td>
+            <td style="width: 22px; margin:0; padding: 5px; border: none; ">
+                <a href="#"><img width="21" height="20" title="Pie Chart" alt="Pie Chart"
+                                 src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABUAAAAUCAYAAABiS3YzAAABNUlEQVQ4y62UQa3FIBBFKwEJSEACEioBA02QgIKy7qoSkICESkBAF0jgcXmQNDyg5OdPctOmDKc3MDNLCGGBehHXSBRdJiOxJqAq6vpPKNn3XYdvgs0yUTKK/gWqojxjDMxAKUVSrRM/jstIIiMoFq/nZgTnvAUN27a58A0+gtp6o3MuSCl/gEKIRDuOw2czTahoubHWBqVUE4hn/qZ7UNeCaq0TeAAsojWUt4AQXOIIXoCQrKGyB8UlFdAAmKqhhqoetJTVCzDV8jQUMsYkKJ6EkF6eqaHrCAqt65rO1nuf3hs5qoaSNygEl6iG4rrqNNYqqXMGXC6vuM6N4Xp1iiHhZ8FwjXJD3Pd9YUT02lTMQh/NkMZjlB1NKT7p2GcT06OP5DJzHdjZmqlTk/9x1jyLvU3+D/qDKlyZZw5ZAAAAAElFTkSuQmCC"/></a>
+                <a href="#"><img width="21" height="20" title="Line Chart" alt="Line Chart"
+                                 src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABUAAAAUCAYAAABiS3YzAAACI0lEQVQ4y7WUW2saURDH913z2mdJ6UMLpUk/QPuieAMVb+sFDXhFUaSLIIR6jcZ6rbeoIajVahO3aVOaNklptuSb2ZmFFbt2hVZzYB72nP/+zsx/ZpeYzWbEpmPjwPuDyuXypkajCRGbXDqd7i4QCLxZlyOVSh8pFIp9tVotJkiSZBKJxMGawC2AXTmdzp9+v/+IsFgsTDqdPhASoz3s7SuASqWyj8BUKvW5Wq0WV0IRaLPZGLzdbreLBTT7VquVicfjX05gdbtdkSBUJpO5zGYzE4vFvsLtNLz0lg8GDWk0Gn9Fo9HLdrt91uv1JOzB36BoularvYtEIt+azeZ0OByOIYPTRTAAn6MmHA5/r9frdL/ffzEH8KHokUqloj0ez49isfgRxNRgMDhZBDscjmd6vf4SbLkulUqo8f9RJh+KHkE2t2D6BZRz2Ol0RPl8XlIul9/B8wcEY0OwZNg/h73XS0YvQk0mk9xgMLAeAawHvks4nc/n285msyMEc3DIsMY2RggKZT2AsbgIBoNXtVqNhheVfK3b7X7Igcfj8fG8MULQTCZTpSiKK4kSmksODJW8FNKwUBB9ajQaUxyd+aytWC6XS7zqnIVidtDhCXYYsnxMrLsQWigUzieTyfvRaPQK/HwSCoWewo9mBz6/XfhJLAXuc8E/W4JipjA6NHrr9XpvcFb/NVgofIp7yWSSBOONrVbLVKlUzLlcjoTm/Vcg8zdcyywV96VefwAAAABJRU5ErkJggg=="/></a>
+                <a href="#"><img width="21" height="20" title="" alt=""
+                                 src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABUAAAAUCAYAAABiS3YzAAABnUlEQVQ4jdWVX0vCUBjG/QLd9wW6iS60T9CF4qZTh0yHDIYO8WII3rhAWTTBi3Rgm/kPBEGwKCkr7A8VUX0ye17BKMIgPBAJjxye9zk/j+/Oyzyz2czDWvOvQCAQCofDriiKDsR5Vv0QlOf5jKqqT8VicQqlmEAjkUgmn8/fuq47hhLMoIVC4abb7Z5C0m8Zfr9/DS3cDgaDPo7jNphACRiLxd6ohZqm2UygdEICWpZ1Wa/XraXQaDS6jrCGW5FBnf8Jir/sy2azD47jjAeDgbkUiqvljcfjL7lc7h4P8YAJFEBvOp1+rFarF7gR+8ygX4L/DoqHd4R+v8qy/CxJkpc8TORqUNxHh6aPel0ul7fIEwRhNSj8Q9M0r+Ado7ZJHvb/AbTX6+0ZhpFSFMXQdf2u2WyeIehgWmR4KjTCekJQ1BDRFfR391P2O5TCtVrtvFQqXVcqlUm/3z8ZDocjOgV5JFqTRzXK4BDTRfYDSo2mX8TcJtvttoRNCdu2k41GI9lqtRKdTkfCKeYeidbkUY0ytG+RxaDsMH+VkN4Bg/xUj8dF0hsAAAAASUVORK5CYII="/></a>
+            </td>
+        </tr>
+    </table>
+
     {# Chart #}
     {% if collector.logs %}
-    <div class="modal_dialog" id="current-div" style="display: none; ">
-        <ul class="alt" id="current" >
-            {% for log in collector.logs if priority >= 0 and log.priority >= priority or priority < 0 and log.context.type|default(0) == priority %}
-                <li class="{{ log.priorityName }}">
-                    {{ logger.display_message(loop.index, log) }}
-                </li>
-            {% else %}
-                <li><em>No logs available for this priority.</em></li>
-            {% endfor %}
-        </ul>
-        <img onclick="selectClose()" style="position: absolute; top: 1px; right: 5px; cursor: pointer; " width="16" height="16" title="" alt="close" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAACOUlEQVR42qWTS2saURiGnSEgihGUxCveMQvFuw6ICG6E/oAWhBS6y6JZh0AW7SqrtNssheQHBOwmMCvBzZDxfll4Q/EuCoKKIlrtd2acNJQSWnJgmJl33nnO+d7vHIz3xoFxDyaT6dhsNl/gOO7dbrcHfzPDt58wco1G46ZSqXSfAXq9/ggAT4PBwIBh2Ksz7nY7nlQq7YOXqFarHcYdCoWuQbjifkamP0FIY2bc63K5/DYej58zb8Fg8BEA7/Yf7sbj8Xe4X/Z6vVOkKRSK2Gg0+iKTyc76/f75XqMSiYSfAfj9fhIAYTSLWCwm8vk8LRAIcIIgolDzYTabjczn87XVaj1ZrVZl0BCApiiKYABgJIEcRs8Gg+FHoVB4P5lM1nw+H0djuVxuAIyA9+VymVsVnUwmWYDX6yW73W6Yqxe68ZDJZCKz2WyN3oVCIR4IBKLFYvET51GpVHQ6nWYBbreb7HQ6YS4s6MpDqVSKLBYLBoBWAp5ovV5/BqjVahpKYwFOp5NstVpcCTFY5gdUs0gkYkqYTqcblIndbr+D1n1EPo1GQ0NWLMDhcJDNZpMBaLVaAjKgUc0+ny8KoR2i1aBMLBbLyXA4LG82G55Op6PBxwJcLtdjrVZj2miz2e7B8A3qvkylUqd7LQbaV9DOQPuMNKPRSOVyObaNHo/nGrbm1f+cAQj6FkJkNxIkeiSRSJ4gB8O//KxUKvvQWqLdbnewF+Ix9PYCNsmrhwmuHOzUG+ja78P0lvELv74bMqBtS1EAAAAASUVORK5CYII=" />
+        <div class="modal_dialog" id="current-div" style="display: none; ">
+            <ul class="alt" id="current">
+                {% for log in collector.logs if priority >= 0 and log.priority >= priority or priority < 0 and log.context.type|default(0) == priority %}
+                    <li class="{{ log.priorityName }}">
+                        {{ logger.display_message(loop.index, log) }}
+                    </li>
+                {% else %}
+                    <li><em>No logs available for this priority.</em></li>
+                {% endfor %}
+            </ul>
+            <img onclick="selectClose()" style="position: absolute; top: 1px; right: 5px; cursor: pointer; " width="16"
+                 height="16" title="" alt="close"
+                 src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAACOUlEQVR42qWTS2saURiGnSEgihGUxCveMQvFuw6ICG6E/oAWhBS6y6JZh0AW7SqrtNssheQHBOwmMCvBzZDxfll4Q/EuCoKKIlrtd2acNJQSWnJgmJl33nnO+d7vHIz3xoFxDyaT6dhsNl/gOO7dbrcHfzPDt58wco1G46ZSqXSfAXq9/ggAT4PBwIBh2Ksz7nY7nlQq7YOXqFarHcYdCoWuQbjifkamP0FIY2bc63K5/DYej58zb8Fg8BEA7/Yf7sbj8Xe4X/Z6vVOkKRSK2Gg0+iKTyc76/f75XqMSiYSfAfj9fhIAYTSLWCwm8vk8LRAIcIIgolDzYTabjczn87XVaj1ZrVZl0BCApiiKYABgJIEcRs8Gg+FHoVB4P5lM1nw+H0djuVxuAIyA9+VymVsVnUwmWYDX6yW73W6Yqxe68ZDJZCKz2WyN3oVCIR4IBKLFYvET51GpVHQ6nWYBbreb7HQ6YS4s6MpDqVSKLBYLBoBWAp5ovV5/BqjVahpKYwFOp5NstVpcCTFY5gdUs0gkYkqYTqcblIndbr+D1n1EPo1GQ0NWLMDhcJDNZpMBaLVaAjKgUc0+ny8KoR2i1aBMLBbLyXA4LG82G55Op6PBxwJcLtdjrVZj2miz2e7B8A3qvkylUqd7LQbaV9DOQPuMNKPRSOVyObaNHo/nGrbm1f+cAQj6FkJkNxIkeiSRSJ4gB8O//KxUKvvQWqLdbnewF+Ix9PYCNsmrhwmuHOzUG+ja78P0lvELv74bMqBtS1EAAAAASUVORK5CYII="/>
         </div>
     {% else %}
         <p>

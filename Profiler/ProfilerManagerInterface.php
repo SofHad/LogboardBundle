@@ -11,7 +11,8 @@
 namespace So\BeautyLogBundle\Profiler;
 
 
-interface ProfilerManagerInterface {
+interface ProfilerManagerInterface
+{
 
     /**
      * Load profiles
