@@ -8,26 +8,19 @@
  * file that was distributed with this source code.
  */
 
-namespace So\BeautyLogBundle\Profiler\Engine;
+namespace So\BeautyLogBundle\Profiler\Engine\Finder;
 
 use Symfony\Component\HttpKernel\Profiler\Profile;
 
-interface EngineInterface {
+interface ParametersHandlerInterface {
 
     /**
-     * Load profiles
+     * Get the parameters
      *
-     * @param \Symfony\Component\HttpKernel\Profiler\Profile  $profile  The Profile
+     * @param Profile $profile
      *
      * @return Array
      */
-    public function loadProfiles(Profile $profile=null);
-
-    /**
-     * Heap up the data
-     *
-     * @return void
-     */
-    public function heapUp();
+    public function getParameters(Profile $profile);
 
 }

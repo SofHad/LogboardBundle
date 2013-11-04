@@ -10,6 +10,8 @@
 
 namespace So\BeautyLogBundle\Profiler\Engine;
 
+use So\BeautyLogBundle\Profiler\Engine\Finder\FinderInterface;
+use So\BeautyLogBundle\Profiler\Engine\Finder\ParametersHandlerInterface;
 use Symfony\Component\HttpKernel\Profiler\Profile;
 use Symfony\Component\HttpKernel\Profiler\Profiler;
 use Symfony\Component\PropertyAccess\PropertyAccess;
@@ -25,24 +27,30 @@ class SymfonyLogEngine implements EngineInterface {
     protected $profile;
     protected $profiler;
     protected $accessor;
-    protected $currentToken;
-    protected $comparators;
+    protected $data;
     protected $profiles;
-    protected $comparatorsCount;
+    protected $dataCount;
     protected $panel;
+    protected $finder;
+    protected $parameters;
+    protected $parametersHandler;
 
     /**
      * Construct
      *
-     * @param Profiler $profiler             The Profiler
-     * @param integer  $comparatorsCount     The count of comparators
-     * @param string   $panel                The panel
+     * @param Profiler                     $profiler              The Profiler
+     * @param FinderInterface              $finder                The Finder
+     * @param ParametersHandlerInterface   $parametersHandler     The Finder
+     * @param integer                      $dataCount             The count of data
+     * @param string                       $panel                 The panel
      *
      * @return void
      */
-    public function __construct( Profiler $profiler, $comparatorsCount, $panel) {
+    public function __construct( Profiler $profiler, FinderInterface $finder, ParametersHandlerInterface $parametersHandler, $dataCount, $panel) {
         $this->profiler = $profiler;
-        $this->comparatorsCount = $comparatorsCount;
+        $this->finder = $finder;
+        $this->parametersHandler = $parametersHandler;
+        $this->dataCount = $dataCount;
         $this->panel = $panel;
         $this->accessor = PropertyAccess::createPropertyAccessor();
         $this->profiles = array();
@@ -54,19 +62,21 @@ class SymfonyLogEngine implements EngineInterface {
      */
     public function loadProfiles(Profile $profile=null){
         $this->profile = $profile;
-        $this->loadComparators();
+        $this->parameters =  $this->parametersHandler->getParameters($this->profile);
+
+        $this->find();
         $this->heapUp();
 
         return $this->profiles;
     }
 
     /**
-     * Load the comparators
+     * Find data
      *
      * @return void
      */
-    public function loadComparators(){
-        $this->comparators = $this->profiler->find($this->profile->getIp(), $this->profile->getUrl(), $this->comparatorsCount, $this->profile->getMethod(),  null, \date("Y-m-d H:i:s"));
+    public function find(){
+        $this->data = $this->finder->find($this->parameters);
     }
 
     /**
@@ -74,13 +84,13 @@ class SymfonyLogEngine implements EngineInterface {
      *
      */
     public function heapUp(){
-        foreach($this->comparators as $comparator){
-            $token = $this->accessor->getValue($comparator, '[token]');
+        foreach($this->data as $item){
+            $token = $this->accessor->getValue($item, '[token]');
             $profile = $this->profiler->loadProfile($token);
-            $this->profiles[$comparator["time"]]['token'] = $token;
-            $this->profiles[$comparator["time"]]['profile'] = $profile ;
-            $this->profiles[$comparator["time"]]['data'] = $profile->getCollector($this->panel)->getLogs();
-            $this->profiles[$comparator["time"]]['name'] = $this->getName();
+            $this->profiles[$item["time"]]['token'] = $token;
+            $this->profiles[$item["time"]]['profile'] = $profile ;
+            $this->profiles[$item["time"]]['data'] = $profile->getCollector($this->panel)->getLogs();
+            $this->profiles[$item["time"]]['name'] = $this->getName();
         }
     }
 

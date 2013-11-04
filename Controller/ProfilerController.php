@@ -39,10 +39,9 @@ class ProfilerController extends ContainerAware
     {
         $this->loadServices();
 
-        $sfLogEngine = $this->container->get("beauty_log.symfony_log_engine");
         $chart = $this->container->getParameter('beauty_log.chart_pie');
 
-        $this->profilerManager->loadProfiles(array($sfLogEngine), $token);
+        $this->profilerManager->loadProfiles(array($this->getEngine()), $token);
         $this->profilerManager->countData();
 
         $this->profiler = $this->profilerManager->getProfiler();
@@ -104,6 +103,17 @@ class ProfilerController extends ContainerAware
         }
 
         return $this->templateManager;
+    }
+
+    /**
+     * Get engine.
+     *
+     * @return \So\BeautyLogBundle\Profiler\Engine\EngineInterface
+     */
+    protected function getEngine()
+    {
+        $engine = $this->request->request->get('engine', 'beauty_log.symfony_log_engine');
+        return $this->container->get($engine);
     }
 
 }

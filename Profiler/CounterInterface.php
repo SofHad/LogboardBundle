@@ -34,11 +34,4 @@ interface CounterInterface {
      * @return CounterInterface
      */
     public function heapUp();
-
-    /**
-     * Map the data
-     *
-     * @return CounterInterface
-     */
-    public function map();
 }
