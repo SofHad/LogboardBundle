@@ -15,25 +15,25 @@ namespace So\BeautyLogBundle\Profiler;
  *
  * @author Sofiane HADDAG <sofiane.haddag@yahoo.fr>
  */
-class Counter implements CounterInterface {
+class Counter implements CounterInterface
+{
 
     private $data = array();
-    private $priority = array();
     private $countedData = array();
 
     /**
      * {@inheritdoc}
      *
      */
-    public function handle(Array $collector){
+    public function handle(Array $collector)
+    {
         $this->data = $collector;
 
-        if(empty($this->data)){
+        if (empty($this->data)) {
             return array();
         }
 
         $this->heapUp();
-        $this->map();
 
         return $this;
     }
@@ -42,32 +42,27 @@ class Counter implements CounterInterface {
      * {@inheritdoc}
      *
      */
-    public function getCountedData(){
+    public function heapUp()
+    {
+        foreach ($this->data as $item) {
+            if (isset($this->countedData[$item["priority"]])) {
+                $this->countedData[$item["priority"]]['count']++;
+            } else {
+                $this->countedData[$item["priority"]]['count'] = 1;
+                $this->countedData[$item["priority"]]['priorityName'] = $item["priorityName"];
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * {@inheritdoc}
+     *
+     */
+    public function getCountedData()
+    {
         return $this->countedData;
     }
 
-    /**
-     * {@inheritdoc}
-     *
-     */
-    public function heapUp(){
-        foreach( $this->data as $item){
-            $this->priority[$item["priority"]][] = $item['priorityName'] ;
-        }
-
-        return $this;
-    }
-
-    /**
-     * {@inheritdoc}
-     *
-     */
-    public function map(){
-        foreach(  $this->priority as $k => $item){
-            $this->countedData[$k]['count'] = count($item);
-            $this->countedData[$k]['priorityName'] = $item[0];
-        }
-
-        return $this;
-    }
 }

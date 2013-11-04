@@ -3,75 +3,62 @@
     // Load the Visualization API and the piechart package.
     google.load('visualization', '1.0', {'packages': ['corechart']});
 
-    // Set a callback to run when the Google Visualization API is loaded.
     google.setOnLoadCallback(drawChart);
 
 
-    // Listen for the 'select' event, and call my function selectHandler() when
-    // the user selects something on the chart.
-
-
-    // Callback that creates and populates a data table,
-    // instantiates the pie chart, passes in the data and
-    // draws it.
     function drawChart() {
+
 
         // Create the data table.
         var data = new google.visualization.DataTable();
         data.addColumn('string', 'Topping');
         data.addColumn('number', 'Slices');
         data.addRows([
-            {% for item in counted_data["primary"]["current"] %}
-            ["{{ item["priorityName"] }}", {{ item["count"] }}],
+            {% for item in counted_data["current"] %}
+            {% for data in item %}
+            ["{{ data["priorityName"] }}", {{ data["count"] }}],
+            {% endfor %}
             {% endfor %}
         ]);
         ;
 
-
-        // Set chart options
         var options = {'title': 'LOGS',
-            'width': 400,
-            'height': 200};
+            'width': 600,
+            'height': 400};
 
-        // Instantiate and draw our chart, passing in some options.
-        var chart = new google.visualization.PieChart(document.getElementById('chart_div'));
-        google.visualization.events.addListener(chart, 'select', selectHandler);
+        var chart = new google.visualization.PieChart(document.getElementById('chart_current'));
+        google.visualization.events.addListener(chart, 'onmouseover', selectHandler);
 
-        function selectHandler() {
+    function selectHandler(e) {
+        document.getElementById("current-div").style.display = "block";
+        chart.setSelection([e]);
             var selectedItem = chart.getSelection()[0];
             if (selectedItem) {
                 var value = data.getValue(selectedItem.row, 0);
 
-                //value
-
-                var notif = document.getElementById("bloc-notif");
-                notif.style.backgroundColor = "#CCCCCC";
-                notif.style.border = "thick solid #000000";
-                notif.style.top = "10px";
-
-                var liTag = document.getElementsByTagName('li');
-                for (var li in liTag){
-                    if(liTag[li] && liTag[li].style){
-                        liTag[li].style.display = "bloc";
+                var notif = document.getElementById("current");
+                var notifHtml = notif.innerHTML;
+                var li = notif.getElementsByTagName("li");
+                for(i in li){
+                    if (li[i] && li[i].style) {
+                       if(li[i].getAttribute("class") && value == li[i].getAttribute("class")){
+                           li[i].style.display = "block";
+                       }else{
+                           li[i].style.display = "none";
+                       }
                     }
                 }
-
-                //.style.visibility = 'hidden';
-                var cls = document.getElementsByClassName(value);
-                for (var li in cls) {
-                    if (cls[li] && cls[li].style) {
-                        cls[li].style.display = "none";
-                        //console.log(cls[li]);
-                    }
-                }
-
-
             }
         }
-
-
         chart.draw(data, options);
     }
 
+    function selectClose(e) {
+        document.getElementById("current-div").style.display = "none";
+    }
+
+    function select() {
+
+    }
 
 </script>

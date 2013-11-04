@@ -9,6 +9,7 @@
  */
 
 namespace So\BeautyLogBundle\Profiler;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpKernel\Profiler\Profiler;
 use Symfony\Component\PropertyAccess\PropertyAccess;
 
@@ -58,15 +59,15 @@ class ProfilerManager implements ProfilerManagerInterface
         $this->engines = $engines;
         $this->token = $token;
 
-        $this->executeLoading();
+        $this->executeLoad();
     }
 
     /**
-     * Handle the loading operation
+     * Run the load
      *
      * @return void
      */
-    public function executeLoading()
+    public function executeLoad()
     {
         $this->getProfile();
         $this->initializeCountedData();
@@ -86,7 +87,7 @@ class ProfilerManager implements ProfilerManagerInterface
             $this->getCollector();
         }
 
-        $this->countedData['primary']['current'] = $this->counter->handle($this->collector->getLogs())->getCountedData();
+        $this->countedData['current'][] = $this->counter->handle($this->collector->getLogs())->getCountedData();
     }
 
     /**
@@ -95,6 +96,7 @@ class ProfilerManager implements ProfilerManagerInterface
      */
     public function countData()
     {
+
         foreach($this->profiles as $k => $profile){
             $this->countedData[$profile['name']][]= $this->counter->handle($profile['data'])->getCountedData();
         }
