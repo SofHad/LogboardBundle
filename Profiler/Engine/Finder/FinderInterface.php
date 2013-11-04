@@ -11,7 +11,8 @@
 namespace So\BeautyLogBundle\Profiler\Engine\Finder;
 
 
-interface FinderInterface {
+interface FinderInterface
+{
 
     /**
      * Find the data

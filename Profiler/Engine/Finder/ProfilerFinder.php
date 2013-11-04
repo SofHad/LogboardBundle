@@ -25,11 +25,12 @@ class ProfilerFinder implements FinderInterface
     /**
      * Construct
      *
-     * @param Profiler  $profiler   The Profiler
+     * @param Profiler $profiler   The Profiler
      *
      * @return void
      */
-    public function __construct(Profiler $profiler) {
+    public function __construct(Profiler $profiler)
+    {
         $this->profiler = $profiler;
     }
 

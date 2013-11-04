@@ -10,7 +10,8 @@
 
 namespace So\BeautyLogBundle\Profiler;
 
-interface CounterInterface {
+interface CounterInterface
+{
 
     /**
      * Handle the operation

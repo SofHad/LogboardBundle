@@ -41,10 +41,10 @@ class ProfilerLogListener implements EventSubscriberInterface
 
     public function onKernelController(FilterControllerEvent $event)
     {
-        $controller = $event->getController() ;
-        $type = $controller[1] ;
+        $controller = $event->getController();
+        $type = $controller[1];
 
-        if($this->type !== $type){
+        if ($this->type !== $type) {
             return;
         }
 
