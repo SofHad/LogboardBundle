@@ -15,7 +15,7 @@
         <parameter key="beauty_log.symfony_finder.class">So\BeautyLogBundle\Profiler\Engine\Finder\ProfilerFinder</parameter>
         <parameter key="beauty_log.parameters_handler.class">So\BeautyLogBundle\Profiler\Engine\Finder\ParametersHandler</parameter>
         <parameter key="beauty_log.query_manager.class">So\BeautyLogBundle\Profiler\QueryManager</parameter>
-        <parameter key="beauty_log.chart_pie">chartPie</parameter>
+        <parameter key="beauty_log.default_chart">chartPie</parameter>
     </parameters>
     <services>
         <service id="beauty_log.profiler_log_listener" class="%beauty_log.profiler_log_listener.class%" public="true"
@@ -38,6 +38,7 @@
         <service id="beauty_log.query_manager" class="%beauty_log.query_manager.class%" public="true">
             <argument type="service" id="router"/>
             <argument>%beauty_log.panel%</argument>
+            <argument>%beauty_log.default_chart%</argument>
         </service>
 
         <service id="beauty_log.parameters_handler" class="%beauty_log.parameters_handler.class%" public="true"/>

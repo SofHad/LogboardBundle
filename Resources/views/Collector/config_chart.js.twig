@@ -11,23 +11,21 @@
 
         // Create the data table.
         var data = new google.visualization.DataTable();
-        data.addColumn('string', 'Topping');
-        data.addColumn('number', 'Slices');
+        data.addColumn('string', 'Priority name');
+        data.addColumn('number', 'Number of logs');
         data.addRows([
-            {% for item in counted_data["current"] %}
-            {% for data in item %}
-            ["{{ data["priorityName"] }}", {{ data["count"] }}],
-            {% endfor %}
+            {% for item in counted_data %}
+            ["{{ item["priorityName"] }}", {{ item["count"] }}],
             {% endfor %}
         ]);
         ;
 
-        var options = {'title': 'LOGS',
+        var options = {
             'width': 600,
             'height': 400};
 
         //LineChart - PieChart - ColumnChart
-        var chart = new google.visualization.LineChart(document.getElementById('chart_current'));
+        var chart = new google.visualization.{{ query_manager.getChart }}(document.getElementById('chart_current'));
 
         google.visualization.events.addListener(chart, 'onmouseover', selectHandler);
 

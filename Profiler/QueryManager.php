@@ -11,13 +11,14 @@
 namespace So\BeautyLogBundle\Profiler;
 
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\Routing\Router;
 
 /**
  * Profilers manager
  *
  * @author Sofiane HADDAG <sofiane.haddag@yahoo.fr>
  */
-class QueryManager
+class QueryManager implements QueryManagerInterface
 {
 
     const DEFAULT_ENGINE = 'symfony_log_engine';
@@ -27,29 +28,28 @@ class QueryManager
     protected $token;
     protected $request;
     protected $isEngineSubmitted = false;
-
+    protected $defaultChart;
+    protected $chart;
 
     /**
      * Constructor
      *
-     * @param string $panel                        The panel
+     * @param \Symfony\Component\Routing\Router   $router                       The panel
+     * @param string                              $panel                        The panel
+     * @param string                              $defaultChart                 The default chart
      *
      * @return void
      */
-    public function __construct($router, $panel)
+    public function __construct(Router $router, $panel, $defaultChart)
     {
         $this->router = $router;
         $this->panel = $panel;
+        $this->defaultChart = $defaultChart;
     }
 
-
     /**
-     * Handle the queries
+     * {@inheritdoc}
      *
-     * @param \Symfony\Component\HttpFoundation\Request\Request   $request    The request
-     * @param string                                              $token      The token
-     *
-     * @return void
      */
     public function handleQueries(Request $request, $token)
     {
@@ -59,33 +59,50 @@ class QueryManager
         $this->checkEngine();
 
         $this->generateIconSwitcherUrl();
+
+        $this->selectChart();
     }
 
-
     /**
-     * Check Engine
+     * {@inheritdoc}
      *
-     * @return void
      */
-    protected function checkEngine()
+    public function checkEngine()
     {
         if($this->request->query->has('engine')){
             $this->isEngineSubmitted = true;
         }
 
-        $this->engine = $this->request->query->get('engine', 'symfony_log_engine');
+        $this->engine = $this->request->query->get('engine', null);
     }
 
     /**
-     * Generate the icon switcher url
+     * {@inheritdoc}
      *
-     * @return void
+     */
+    public function selectChart()
+    {
+        $this->chart = $this->request->query->get('chart', $this->defaultChart );
+    }
+
+    /**
+     * {@inheritdoc}
+     *
+     */
+    public function getChart()
+    {
+        return $this->chart;
+    }
+
+    /**
+     * {@inheritdoc}
+     *
      */
     public function generateIconSwitcherUrl()
     {
         $currentRoute = $this->request->attributes->get('_route');
         $this->iconSwitcherUrl = $this->router
-                           ->generate($currentRoute, array('token' => $this->token ), true);
+                                      ->generate($currentRoute, array('token' => $this->token ), true);
 
         $this->iconSwitcherUrl .= "?panel=".$this->panel;
 
@@ -95,9 +112,8 @@ class QueryManager
     }
 
     /**
-     * Get the icon switcher url
+     * {@inheritdoc}
      *
-     * @return string
      */
     public function getIconSwitcherUrl()
     {
@@ -105,9 +121,8 @@ class QueryManager
     }
 
     /**
-     * Get token
+     * {@inheritdoc}
      *
-     * @return string
      */
     public function getToken()
     {
@@ -115,9 +130,8 @@ class QueryManager
     }
 
     /**
-     * Get engine
+     * {@inheritdoc}
      *
-     * @return string
      */
     public function getEngine()
     {

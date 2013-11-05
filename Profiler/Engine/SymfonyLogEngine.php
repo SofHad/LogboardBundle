@@ -65,6 +65,12 @@ class SymfonyLogEngine implements EngineInterface
     {
         $this->profile = $profile;
         $this->parameters = $this->parametersHandler->getParameters($this->profile);
+        //DUMP---------------------------------
+                include_once 'debug/kint.class.php' ;
+                \kint::dump( $this->parameters) ;
+                echo "</pre>";
+                exit ;
+        //DUMP---------------------------------
 
         $this->find();
         $this->heapUp();

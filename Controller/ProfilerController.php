@@ -24,7 +24,6 @@ class ProfilerController extends ContainerAware
     private $templateManager = null;
     private $templates;
     private $accessor;
-    private $request;
     private $profilerManager;
 
     /**
@@ -38,23 +37,13 @@ class ProfilerController extends ContainerAware
      */
     public function panelLogAction($token, Request $request)
     {
+
         $this->loadServices();
 
         $queryManager = $this->container->get('beauty_log.query_manager');
         $queryManager->handleQueries($request, $token);
 
-        //DUMP--------------------------
-        require_once 'Kint.class.php';
-        \Kint::dump($queryManager);
-        exit ;
-        //DUMP--------------------------
-
-
-
-        $chart = $this->container->getParameter('beauty_log.chart_pie');
-
-        $this->profilerManager->loadProfiles(array($this->getEngine()), $token);
-        $this->profilerManager->countData();
+        $this->profilerManager->loadProfiles($queryManager);
 
         $this->profiler = $this->profilerManager->getProfiler();
         if (null === $this->profiler) {
@@ -77,11 +66,11 @@ class ProfilerController extends ContainerAware
                     'profile' => $profile,
                     'collector' => $this->profilerManager->getCollector(),
                     'panel' => $this->profilerManager->getPanel(),
-                    'request' => $this->request,
+                    'request' => $request,
                     'templates' => $this->getTemplateManager()->getTemplates($profile),
-                    'is_ajax' => $this->request->isXmlHttpRequest(),
+                    'is_ajax' => $request->isXmlHttpRequest(),
                     'counted_data' => $this->profilerManager->getCountedData(),
-                    'chart' => $chart,
+                    'query_manager' => $queryManager,
                 )
             ),
             200,
@@ -99,7 +88,6 @@ class ProfilerController extends ContainerAware
         $this->templates = $this->container->getParameter('data_collector.templates');
         $this->twig = $this->container->get("twig");
         $this->accessor = PropertyAccess::createPropertyAccessor();
-        $this->request = $this->container->get('request');
         $this->profilerManager = $this->container->get("beauty_log.profiler_manager");
     }
 

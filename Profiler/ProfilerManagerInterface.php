@@ -22,14 +22,7 @@ interface ProfilerManagerInterface
      *
      * @return void
      */
-    public function loadProfiles(Array $engines, $token);
-
-    /**
-     * Initialize the counted data
-     *
-     * @return void
-     */
-    public function initializeCountedData();
+    public function loadProfiles(QueryManagerInterface $queryManager);
 
     /**
      * Get Quantitative data
