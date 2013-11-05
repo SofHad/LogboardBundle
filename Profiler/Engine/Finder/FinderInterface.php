@@ -17,10 +17,10 @@ interface FinderInterface
     /**
      * Find the data
      *
-     * @param array $options
+     * @param array $parameters
      *
      * @return Array
      */
-    public function find(Array $options);
+    public function find(Array $parameters);
 
 }

@@ -15,7 +15,7 @@ use Symfony\Component\HttpKernel\Profiler\Profiler;
 use Symfony\Component\PropertyAccess\PropertyAccess;
 
 /**
- * Profilers manager
+ * Profiler Manager
  *
  * @author Sofiane HADDAG <sofiane.haddag@yahoo.fr>
  */
@@ -37,9 +37,9 @@ class ProfilerManager implements ProfilerManagerInterface
     /**
      * Constructor
      *
-     * @param CounterInterface $counter The counter
-     * @param Profiler $profiler The profiler
-     * @param string $panel The panel
+     * @param CounterInterface                                          $counter    The counter
+     * @param \Symfony\Component\HttpKernel\Profiler\Profiler\Profiler  $profiler   The profiler
+     * @param string                                                    $panel      The panel
      *
      * @return void
      */
@@ -75,7 +75,7 @@ class ProfilerManager implements ProfilerManagerInterface
     {
         if (null === $this->engine) {
             $this->countedData = $this->counter->handle($this->getCollector()->getLogs())
-                ->getCountedData();
+                                               ->getCountedData();
         }else{
             $this->data = $this->engine->loadProfiles($this->profile);
             $this->countedData = $this->counter->handle($this->data)->getCountedData();
@@ -112,7 +112,6 @@ class ProfilerManager implements ProfilerManagerInterface
     {
         return $this->profile = $this->profiler->loadProfile($this->token);
     }
-
 
     /**
      * {@inheritdoc}

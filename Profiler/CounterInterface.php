@@ -30,7 +30,7 @@ interface CounterInterface
     public function getCountedData();
 
     /**
-     * Heap up the mixed data
+     * Heap up the data
      *
      * @return CounterInterface
      */

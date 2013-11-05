@@ -17,8 +17,7 @@ interface ProfilerManagerInterface
     /**
      * Load profiles
      *
-     * @param Array $engines           Array of engines
-     * @param string $token            The token
+     * @param QueryManagerInterface $queryManager  The query manager object
      *
      * @return void
      */

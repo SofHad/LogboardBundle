@@ -38,11 +38,11 @@ class SymfonyLogEngine implements EngineInterface
     /**
      * Construct
      *
-     * @param Profiler $profiler              The Profiler
-     * @param FinderInterface $finder                The Finder
-     * @param ParametersHandlerInterface $parametersHandler     The Finder
-     * @param integer $dataCount             The count of data
-     * @param string $panel                 The panel
+     * @param Profiler                    $profiler              The Profiler
+     * @param FinderInterface             $finder                The Finder
+     * @param ParametersHandlerInterface  $parametersHandler     The Finder
+     * @param integer                     $dataCount             The count of data
+     * @param string                      $panel                 The panel
      *
      * @return void
      */

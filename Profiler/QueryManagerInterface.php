@@ -15,7 +15,7 @@ use Symfony\Component\Routing\Router;
 use So\BeautyLogBundle\Profiler\Engine\EngineInterface;
 
 /**
- * PQueryManagerInterface
+ * Query Manager Interface
  *
  * @author Sofiane HADDAG <sofiane.haddag@yahoo.fr>
  */
