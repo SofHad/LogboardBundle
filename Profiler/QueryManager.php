@@ -10,6 +10,7 @@
 
 namespace So\BeautyLogBundle\Profiler;
 
+use So\BeautyLogBundle\Profiler\Engine\EngineInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Router;
 
@@ -24,12 +25,13 @@ class QueryManager implements QueryManagerInterface
     const DEFAULT_ENGINE = 'symfony_log_engine';
 
     protected $iconSwitcherUrl;
-    protected $engine;
     protected $token;
     protected $request;
-    protected $isEngineSubmitted = false;
     protected $defaultChart;
     protected $chart;
+    protected $engine = null;
+    protected $engineServiceId = null;
+    protected $isEngineSubmitted = false;
 
     /**
      * Constructor
@@ -73,7 +75,35 @@ class QueryManager implements QueryManagerInterface
             $this->isEngineSubmitted = true;
         }
 
-        $this->engine = $this->request->query->get('engine', null);
+        $this->engineServiceId = $this->request->query->get('engine', null);
+    }
+
+    /**
+     * {@inheritdoc}
+     *
+     */
+    public function setEngine(EngineInterface $engine)
+    {
+        $this->engine = $engine;
+    }
+
+
+    /**
+     * {@inheritdoc}
+     *
+     */
+    public function getEngineServiceId()
+    {
+        return $this->engineServiceId;
+    }
+
+    /**
+     * {@inheritdoc}
+     *
+     */
+    public function hasEngine()
+    {
+        return null === $this->engine ? false : true;
     }
 
     /**

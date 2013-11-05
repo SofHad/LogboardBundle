@@ -1,0 +1,20 @@
+{% if logs_stack %}
+    <div class="modal_dialog" id="current-div" style="display: none; ">
+        <ul class="alt" id="current">
+            {% for log in collector.logs if priority >= 0 and log.priority >= priority or priority < 0 and log.context.type|default(0) == priority %}
+                <li class="{{ log.priorityName }}">
+                    {{ logger.display_message(loop.index, log) }}
+                </li>
+            {% else %}
+                <li><em>No logs available for this priority.</em></li>
+            {% endfor %}
+        </ul>
+        <img onclick="selectClose()" style="position: absolute; top: 1px; right: 5px; cursor: pointer; " width="16"
+             height="16" title="" alt="close"
+             src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAACOUlEQVR42qWTS2saURiGnSEgihGUxCveMQvFuw6ICG6E/oAWhBS6y6JZh0AW7SqrtNssheQHBOwmMCvBzZDxfll4Q/EuCoKKIlrtd2acNJQSWnJgmJl33nnO+d7vHIz3xoFxDyaT6dhsNl/gOO7dbrcHfzPDt58wco1G46ZSqXSfAXq9/ggAT4PBwIBh2Ksz7nY7nlQq7YOXqFarHcYdCoWuQbjifkamP0FIY2bc63K5/DYej58zb8Fg8BEA7/Yf7sbj8Xe4X/Z6vVOkKRSK2Gg0+iKTyc76/f75XqMSiYSfAfj9fhIAYTSLWCwm8vk8LRAIcIIgolDzYTabjczn87XVaj1ZrVZl0BCApiiKYABgJIEcRs8Gg+FHoVB4P5lM1nw+H0djuVxuAIyA9+VymVsVnUwmWYDX6yW73W6Yqxe68ZDJZCKz2WyN3oVCIR4IBKLFYvET51GpVHQ6nWYBbreb7HQ6YS4s6MpDqVSKLBYLBoBWAp5ovV5/BqjVahpKYwFOp5NstVpcCTFY5gdUs0gkYkqYTqcblIndbr+D1n1EPo1GQ0NWLMDhcJDNZpMBaLVaAjKgUc0+ny8KoR2i1aBMLBbLyXA4LG82G55Op6PBxwJcLtdjrVZj2miz2e7B8A3qvkylUqd7LQbaV9DOQPuMNKPRSOVyObaNHo/nGrbm1f+cAQj6FkJkNxIkeiSRSJ4gB8O//KxUKvvQWqLdbnewF+Ix9PYCNsmrhwmuHOzUG+ja78P0lvELv74bMqBtS1EAAAAASUVORK5CYII="/>
+    </div>
+{% else %}
+    <p>
+        <em>No logs available.</em>
+    </p>
+{% endif %}

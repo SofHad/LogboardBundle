@@ -60,11 +60,11 @@ interface ProfilerManagerInterface
     public function getPanel();
 
     /**
-     * Get profiles
+     * Get the data
      *
      * @return Array
      */
-    public function getProfiles();
+    public function getData();
 
     /**
      * Get profiler

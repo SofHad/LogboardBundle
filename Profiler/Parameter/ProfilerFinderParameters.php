@@ -8,7 +8,7 @@
  * file that was distributed with this source code.
  */
 
-namespace So\BeautyLogBundle\Profiler\Engine\Finder;
+namespace So\BeautyLogBundle\Profiler\Parameter;
 
 use Symfony\Component\HttpKernel\Profiler\Profile;
 
@@ -17,10 +17,9 @@ use Symfony\Component\HttpKernel\Profiler\Profile;
  *
  * @author Sofiane HADDAG <sofiane.haddag@yahoo.fr>
  */
-class ParametersHandler implements ParametersHandlerInterface
+class ProfilerFinderParameters implements ParametersHandlerInterface
 {
 
-    const DATA_COUNT = 20;
 
     /**
      * {@inheritdoc}
@@ -31,7 +30,7 @@ class ParametersHandler implements ParametersHandlerInterface
         return array(
             'ip' => null,
             'url' => null,
-            'dataCount' => self::DATA_COUNT,
+            'dataCount' => 100,
             'method' => null,
             'start' => null,
             'end' => null,

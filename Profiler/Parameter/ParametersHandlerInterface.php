@@ -8,7 +8,7 @@
  * file that was distributed with this source code.
  */
 
-namespace So\BeautyLogBundle\Profiler\Engine\Finder;
+namespace So\BeautyLogBundle\Profiler\Parameter;
 
 use Symfony\Component\HttpKernel\Profiler\Profile;
 

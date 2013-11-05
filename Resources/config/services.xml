@@ -11,9 +11,9 @@
         <parameter key="beauty_log.symfony_log_engine">beauty_log.sfLog_engine</parameter>
         <parameter key="beauty_log.comparators_count">3</parameter>
         <parameter key="beauty_log.profiler_manager.class">So\BeautyLogBundle\Profiler\ProfilerManager</parameter>
-        <parameter key="beauty_log.symfony_log_engine.class">So\BeautyLogBundle\Profiler\Engine\SymfonyLogEngine</parameter>
+        <parameter key="beauty_log.symfony_log.class">So\BeautyLogBundle\Profiler\Engine\SymfonyLogEngine</parameter>
         <parameter key="beauty_log.symfony_finder.class">So\BeautyLogBundle\Profiler\Engine\Finder\ProfilerFinder</parameter>
-        <parameter key="beauty_log.parameters_handler.class">So\BeautyLogBundle\Profiler\Engine\Finder\ParametersHandler</parameter>
+        <parameter key="beauty_log.parameters_handler.class">So\BeautyLogBundle\Profiler\Parameter\ProfilerFinderParameters</parameter>
         <parameter key="beauty_log.query_manager.class">So\BeautyLogBundle\Profiler\QueryManager</parameter>
         <parameter key="beauty_log.default_chart">chartPie</parameter>
     </parameters>
@@ -47,7 +47,7 @@
             <argument type="service" id="profiler" on-invalid="null"/>
         </service>
 
-        <service id="beauty_log.symfony_log_engine" class="%beauty_log.symfony_log_engine.class%" public="true">
+        <service id="beauty_log.symfony_log" class="%beauty_log.symfony_log.class%" public="true">
             <argument type="service" id="profiler" on-invalid="null"/>
             <argument type="service" id="beauty_log.symfony_finder"/>
             <argument type="service" id="beauty_log.parameters_handler"/>

@@ -32,7 +32,7 @@ class ProfilerManager implements ProfilerManagerInterface
     protected $panel;
     protected $collector;
     protected $queryManager;
-    protected $profiles = array();
+    protected $data = array();
 
     /**
      * Constructor
@@ -64,39 +64,8 @@ class ProfilerManager implements ProfilerManagerInterface
 
         $this->getProfile();
 
-        $this->executeLoad();
+        $this->countData();
     }
-
-    /**
-     * Run the load
-     *
-     * @return void
-     */
-    public function executeLoad()
-    {
-
-        if (null === $this->engine) {
-            $this->countedData = $this->counter->handle($this->getCollector()->getLogs())
-                ->getCountedData();
-        }else{
-            $profile = $this->engine->loadProfiles($this->profile);
-            //$this->countedData[] = $this->counter->handle($profile['data'])->getCountedData();
-        }
-
-    }
-
-    /**
-     * {@inheritdoc}
-     *
-     */
-//    public function initializeCountedData()
-//    {
-//        if (null === $this->collector) {
-//            $this->getCollector();
-//        }
-//
-//        $this->countedData[] = $this->counter->handle($this->collector->getLogs())->getCountedData();
-//    }
 
     /**
      * {@inheritdoc}
@@ -104,11 +73,12 @@ class ProfilerManager implements ProfilerManagerInterface
      */
     public function countData()
     {
-
-
-
-        foreach ($this->profiles as $k => $profile) {
-
+        if (null === $this->engine) {
+            $this->countedData = $this->counter->handle($this->getCollector()->getLogs())
+                ->getCountedData();
+        }else{
+            $this->data = $this->engine->loadProfiles($this->profile);
+            $this->countedData = $this->counter->handle($this->data)->getCountedData();
         }
     }
 
@@ -157,9 +127,9 @@ class ProfilerManager implements ProfilerManagerInterface
      * {@inheritdoc}
      *
      */
-    public function getProfiles()
+    public function getData()
     {
-        return $this->profiles;
+        return $this->data;
     }
 
     /**
