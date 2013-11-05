@@ -29,9 +29,11 @@ class QueryManager implements QueryManagerInterface
     protected $request;
     protected $defaultChart;
     protected $chart;
+    protected $engineSwitcherUrl;
     protected $engine = null;
     protected $engineServiceId = null;
     protected $isEngineSubmitted = false;
+    protected $isChartSubmitted = false;
 
     /**
      * Constructor
@@ -60,9 +62,9 @@ class QueryManager implements QueryManagerInterface
 
         $this->checkEngine();
 
-        $this->generateIconSwitcherUrl();
-
         $this->selectChart();
+
+        $this->generateSwitcherUrls();
     }
 
     /**
@@ -112,7 +114,14 @@ class QueryManager implements QueryManagerInterface
      */
     public function selectChart()
     {
-        $this->chart = $this->request->query->get('chart', $this->defaultChart );
+        $chart = $this->request->query->get('chart');
+
+        if(null !== $chart){
+            $this->isChartSubmitted = true;
+            $this->chart = $chart;
+        }else{
+            $this->chart = $this->defaultChart ;
+        }
     }
 
     /**
@@ -128,16 +137,20 @@ class QueryManager implements QueryManagerInterface
      * {@inheritdoc}
      *
      */
-    public function generateIconSwitcherUrl()
+    public function generateSwitcherUrls()
     {
         $currentRoute = $this->request->attributes->get('_route');
-        $this->iconSwitcherUrl = $this->router
-                                      ->generate($currentRoute, array('token' => $this->token ), true);
+        $baseUrl = $this->router
+                        ->generate($currentRoute, array('token' => $this->token ), true);
 
-        $this->iconSwitcherUrl .= "?panel=".$this->panel;
+        $this->iconSwitcherUrl = $this->engineSwitcherUrl = $baseUrl .= "?panel=".$this->panel;
 
         if($this->isEngineSubmitted){
-            $this->iconSwitcherUrl .= "&engine=".$this->engine;
+            $this->iconSwitcherUrl .= "&engine=".$this->engineServiceId;
+        }
+
+        if($this->isChartSubmitted){
+            $this->engineSwitcherUrl .= "&chart=".$this->chart;
         }
     }
 
@@ -147,7 +160,16 @@ class QueryManager implements QueryManagerInterface
      */
     public function getIconSwitcherUrl()
     {
-       return $this->iconSwitcherUrl;
+        return $this->iconSwitcherUrl;
+    }
+
+    /**
+     * {@inheritdoc}
+     *
+     */
+    public function getEngineSwitcherUrl()
+    {
+        return $this->engineSwitcherUrl;
     }
 
     /**

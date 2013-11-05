@@ -1,7 +1,7 @@
 {% if logs_stack %}
     <div class="modal_dialog" id="current-div" style="display: none; ">
         <ul class="alt" id="current">
-            {% for log in collector.logs if priority >= 0 and log.priority >= priority or priority < 0 and log.context.type|default(0) == priority %}
+            {% for log in logs_stack if priority >= 0 and log.priority >= priority or priority < 0 and log.context.type|default(0) == priority %}
                 <li class="{{ log.priorityName }}">
                     {{ logger.display_message(loop.index, log) }}
                 </li>

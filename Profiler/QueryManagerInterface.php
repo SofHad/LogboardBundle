@@ -84,7 +84,14 @@ interface QueryManagerInterface
      *
      * @return void
      */
-    public function generateIconSwitcherUrl();
+    public function generateSwitcherUrls();
+
+    /**
+     * Get the engine switcher url
+     *
+     * @return string
+     */
+    public function getEngineSwitcherUrl();
 
     /**
      * Get the icon switcher url
