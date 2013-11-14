@@ -43,7 +43,14 @@ class ProfilerFinder implements FinderInterface
      */
     public function find(Array $parameters)
     {
-        return $this->data = $this->profiler->find($parameters['ip'], $parameters['url'], $parameters['data_count'], $parameters['method'], $parameters['start'], $parameters['end']);
+        return $this->data = $this->profiler->find(
+                                                    $parameters['ip'],
+                                                    $parameters['url'],
+                                                    $parameters['data_count'],
+                                                    $parameters['method'],
+                                                    $parameters['start'],
+                                                    $parameters['end']
+                                                  );
     }
 
 }
