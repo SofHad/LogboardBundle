@@ -75,7 +75,7 @@ class ProfilerController extends ContainerAware
      *
      * @return Response A Response instance
      *
-     * @throws NotFoundHttpException
+     * @throws NotFoundHttpException if the profiler is null
      */
     public function panelLogAction($token, Request $request)
     {
