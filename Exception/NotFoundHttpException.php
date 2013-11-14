@@ -11,7 +11,7 @@
 
 namespace So\LogboardBundle\Exception;
 
-use Symfony\Component\HttpKernel\Exception\NotFoundHttpException as BaseNotFoundHttpException ;
+use Symfony\Component\HttpKernel\Exception\NotFoundHttpException as BaseNotFoundHttpException;
 
 /**
  * NotFoundHttpException

@@ -122,10 +122,6 @@ class ProfilerManager implements ProfilerManagerInterface
         $this->token = $this->queryManager->getToken();
         $this->engine = $this->queryManager->getEngine();
 
-        if(null === $this->engine){
-            throw new BadQueryHttpException("The engine must not be null");
-        }
-
         $this->getProfile();
 
         if(null === $this->profile){

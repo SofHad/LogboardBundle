@@ -13,12 +13,11 @@
 namespace So\LogboardBundle\EventListener;
 
 use So\LogboardBundle\Exception\BadQueryHttpException;
-use Symfony\Component\Config\Definition\Exception\Exception;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpKernel\Controller\ControllerResolverInterface;
 use Symfony\Component\HttpKernel\Event\FilterControllerEvent;
 use Symfony\Component\HttpKernel\KernelEvents;
-use Symfony\Component\HttpKernel\Controller\ControllerResolverInterface;
 
 /**
  * Profiler Listner

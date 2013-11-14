@@ -22,8 +22,6 @@ use Symfony\Component\Routing\Router;
 class QueryManager implements QueryManagerInterface
 {
 
-    const DEFAULT_ENGINE = 'symfony_log_engine';
-
     /**
      * Icons chart urls
      * @var string
@@ -80,13 +78,13 @@ class QueryManager implements QueryManagerInterface
     protected $engineServiceId = null;
 
     /**
-     * Is engine submitted
+     * The engine submission status
      * @var Boolean
      */
     protected $isEngineSubmitted = false;
 
     /**
-     * Is chart submitted
+     * The chart submission status
      * @var Boolean
      */
     protected $isChartSubmitted = false;
@@ -98,7 +96,7 @@ class QueryManager implements QueryManagerInterface
     protected $isPreview = false;
 
     /**
-     * Index
+     * The index variables (Titles, labels, services names)
      * @var Array
      */
     protected $index;
