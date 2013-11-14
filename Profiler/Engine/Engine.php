@@ -8,9 +8,9 @@
  * file that was distributed with this source code.
  */
 
-namespace So\BeautyLogBundle\Profiler\Engine;
-use So\BeautyLogBundle\Profiler\Engine\Finder\FinderInterface;
-use So\BeautyLogBundle\Profiler\Parameter\ParametersHandlerInterface;
+namespace So\LogboardBundle\Profiler\Engine;
+use So\LogboardBundle\Profiler\Engine\Finder\FinderInterface;
+use So\LogboardBundle\Profiler\Parameter\ParametersHandlerInterface;
 use Symfony\Component\HttpKernel\Profiler\Profile;
 use Symfony\Component\HttpKernel\Profiler\Profiler;
 use Symfony\Component\PropertyAccess\PropertyAccess;
@@ -67,7 +67,7 @@ abstract class Engine implements EngineInterface
 
     /**
      * The finder
-     * @var \So\BeautyLogBundle\Profiler\Engine\Finder\FinderInterface
+     * @var \So\LogboardBundle\Profiler\Engine\Finder\FinderInterface
      */
     protected $finder;
 
@@ -79,7 +79,7 @@ abstract class Engine implements EngineInterface
 
     /**
      * The parameters handler
-     * @var \So\BeautyLogBundle\Profiler\Parameter\ParametersHandlerInterface
+     * @var \So\LogboardBundle\Profiler\Parameter\ParametersHandlerInterface
      */
     protected $parametersHandler;
 

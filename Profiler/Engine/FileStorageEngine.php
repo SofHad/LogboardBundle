@@ -8,7 +8,7 @@
  * file that was distributed with this source code.
  */
 
-namespace So\BeautyLogBundle\Profiler\Engine;
+namespace So\LogboardBundle\Profiler\Engine;
 
 
 /**

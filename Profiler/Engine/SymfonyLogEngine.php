@@ -8,9 +8,9 @@
  * file that was distributed with this source code.
  */
 
-namespace So\BeautyLogBundle\Profiler\Engine;
+namespace So\LogboardBundle\Profiler\Engine;
 
-use So\BeautyLogBundle\Profiler\DataResolver;
+use So\LogboardBundle\Profiler\DataResolver;
 
 /**
  * Symfony logs engine handler

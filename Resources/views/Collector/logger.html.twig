@@ -1,21 +1,21 @@
 {% extends '@WebProfiler/Profiler/layout.html.twig' %}
 {% block head %}
     {{ parent() }}
-    {% include 'BeautyLogBundle:Collector:style.css.twig' %}
+    {% include 'LogboardBundle:Collector:style.css.twig' %}
 
     <!--Load the AJAX API-->
     <script type="text/javascript" src="https://www.google.com/jsapi"></script>
-    {% include 'BeautyLogBundle:Collector:config_chart.js.twig' %}
+    {% include 'LogboardBundle:Collector:config_chart.js.twig' %}
 
 {% endblock %}
 {% import _self as logger %}
 
 {% block toolbar %}
-    {% include 'BeautyLogBundle:Collector:toolbar.html.twig' %}
+    {% include 'LogboardBundle:Collector:toolbar.html.twig' %}
 {% endblock %}
 
 {% block menu %}
-    {% include 'BeautyLogBundle:Collector:menu.html.twig' %}
+    {% include 'LogboardBundle:Collector:menu.html.twig' %}
 {% endblock %}
 
 {% block panel %}

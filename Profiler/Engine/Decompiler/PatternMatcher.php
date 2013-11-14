@@ -9,9 +9,9 @@
  * file that was distributed with this source code.
  */
 
-namespace So\BeautyLogBundle\Profiler\Engine\Decompiler;
+namespace So\LogboardBundle\Profiler\Engine\Decompiler;
 
-use So\BeautyLogBundle\Exception\InvalidArgumentException;
+use So\LogboardBundle\Exception\InvalidArgumentException;
 use Symfony\Component\PropertyAccess\PropertyAccess;
 
 class PatternMatcher implements DecompilerInterface

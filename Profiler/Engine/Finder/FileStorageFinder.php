@@ -8,9 +8,9 @@
  * file that was distributed with this source code.
  */
 
-namespace So\BeautyLogBundle\Profiler\Engine\Finder;
+namespace So\LogboardBundle\Profiler\Engine\Finder;
 
-use So\BeautyLogBundle\Profiler\Engine\Decompiler\DecompilerInterface;
+use So\LogboardBundle\Profiler\Engine\Decompiler\DecompilerInterface;
 use Symfony\Component\DependencyInjection\Exception\InvalidArgumentException;
 use Symfony\Component\Filesystem\Filesystem;
 use Symfony\Component\HttpFoundation\File\Exception\FileNotFoundException;
@@ -49,7 +49,7 @@ class FileStorageFinder implements FinderInterface
 
     /**
      * The decompiler interface
-     * @var \So\BeautyLogBundle\Profiler\Engine\Decompiler\DecompilerInterface
+     * @var \So\LogboardBundle\Profiler\Engine\Decompiler\DecompilerInterface
      */
     protected $decompiler;
 
