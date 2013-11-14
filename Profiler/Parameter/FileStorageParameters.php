@@ -20,20 +20,20 @@ use Symfony\Component\HttpKernel\Profiler\Profile;
 class FileStorageParameters implements ParametersHandlerInterface
 {
     protected $filesystem;
-    protected $kernelRootDir;
+    protected $file;
 
     /**
      * Construct
      *
      * @param integer $dataCount             The count of data
-     * @param string $panel                 The panel
+     * @param string  $file                  The file path
      *
      * @return void
      */
-    public function __construct($filesystem, $kernelRootDir)
+    public function __construct($filesystem, $file)
     {
         $this->filesystem = $filesystem;
-        $this->kernelRootDir = $kernelRootDir;
+        $this->file = $file;
     }
 
     /**
@@ -44,7 +44,7 @@ class FileStorageParameters implements ParametersHandlerInterface
     {
         return array(
             'filesystem' => $this->filesystem,
-            'kernel_root_dir' => $this->kernelRootDir
+            'data' => $this->file
         );
     }
 }

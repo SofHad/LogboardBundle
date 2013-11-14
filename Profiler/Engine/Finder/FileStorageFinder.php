@@ -73,13 +73,13 @@ class FileStorageFinder implements FinderInterface
     public function find(Array $parameters)
     {
 
-        if (null === $this->accessor->getValue($parameters, '[filesystem]') || null === $this->accessor->getValue($parameters, '[kernel_root_dir]')) {
+        if (null === $this->accessor->getValue($parameters, '[filesystem]') || null === $this->accessor->getValue($parameters, '[data]')) {
             throw new InvalidArgumentException();
         }
 
         $filesystem = $this->accessor->getValue($parameters, '[filesystem]');
 
-        $filePath = $this->accessor->getValue($parameters, '[kernel_root_dir]');
+        $filePath = $this->accessor->getValue($parameters, '[data]');
 
         if (!$filesystem instanceof Filesystem) {
             throw new InvalidArgumentException();
