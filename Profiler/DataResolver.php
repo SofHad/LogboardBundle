@@ -19,9 +19,9 @@ class DataResolver
 {
 
     /**
-     * Refine the data
+     * Data adapter
      *
-     * @param Array   $collections    Data collection
+     * @param Array   $collections   Data collection
      *
      * @return Array
      */
