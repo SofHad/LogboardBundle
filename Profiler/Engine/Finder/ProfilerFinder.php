@@ -26,7 +26,7 @@ class ProfilerFinder implements FinderInterface
     protected $data = array();
 
     /**
-     * Constructor 
+     * Constructor
      *
      * @param Profiler $profiler   The Profiler
      *

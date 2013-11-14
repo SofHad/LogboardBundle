@@ -25,8 +25,8 @@ interface QueryManagerInterface
     /**
      * Handle the queries
      *
-     * @param Request   $request    The request
-     * @param string                                      $token      The token
+     * @param Request $request    The request
+     * @param string $token      The token
      *
      * @return void
      */

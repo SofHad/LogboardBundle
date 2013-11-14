@@ -22,8 +22,8 @@ class ProfilerFinderParameters implements ParametersHandlerInterface
     /**
      * Construct
      *
-     * @param integer                     $dataCount             The count of data
-     * @param string                      $panel                 The panel
+     * @param integer $dataCount             The count of data
+     * @param string $panel                 The panel
      *
      * @return void
      */
@@ -33,11 +33,11 @@ class ProfilerFinderParameters implements ParametersHandlerInterface
         $this->panel = $panel;
     }
 
-   /**
+    /**
      * {@inheritdoc}
      *
      */
-    public function getParameters(Profile $profile=null)
+    public function getParameters(Profile $profile = null)
     {
         //TODO for v2.0
         //There are no settings in the version 1.0
@@ -47,7 +47,7 @@ class ProfilerFinderParameters implements ParametersHandlerInterface
             'method' => null,
             'start' => null,
             'end' => null,
-            'data_count' =>  $this->dataCount,
+            'data_count' => $this->dataCount,
             'panel' => $this->panel,
         );
     }

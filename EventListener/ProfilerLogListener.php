@@ -53,7 +53,7 @@ class ProfilerLogListener implements EventSubscriberInterface
 
     public function __construct(Request $request, ControllerResolverInterface $controllerResolver, $type, $panel)
     {
-        if(null === $panel){
+        if (null === $panel) {
             throw new BadQueryHttpException("The panel must not be null");
         }
 

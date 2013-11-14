@@ -92,11 +92,11 @@ class FileStorageFinder implements FinderInterface
         $file = new \SplFileObject($filePath);
 
         foreach ($file as $line) {
-            if(null !== $data = $this->decompiler->split($line)){
+            if (null !== $data = $this->decompiler->split($line)) {
                 $this->data[] = $data;
             }
         }
 
-        return  $this->data;
+        return $this->data;
     }
 }

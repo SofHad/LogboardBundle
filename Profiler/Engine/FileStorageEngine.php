@@ -24,7 +24,7 @@ class FileStorageEngine extends Engine
      */
     public function heapUp()
     {
-        return $this->profiles  = $this->data;
+        return $this->profiles = $this->data;
     }
 
     /**

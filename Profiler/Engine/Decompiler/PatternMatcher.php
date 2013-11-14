@@ -32,15 +32,15 @@ class PatternMatcher implements DecompilerInterface
      */
     public function __construct($pattern, $key = 1, $value = 2)
     {
-        if(!is_string($pattern)){
+        if (!is_string($pattern)) {
             throw new InvalidArgumentException(sprintf('Argument 1 passed to "%s" must be a string', __METHOD__));
         }
 
-        if(!is_integer($key)){
+        if (!is_integer($key)) {
             throw new InvalidArgumentException(sprintf('Argument 2 passed to "%s" must be an integer', __METHOD__));
         }
 
-        if(!is_integer($value)){
+        if (!is_integer($value)) {
             throw new InvalidArgumentException(sprintf('Argument 3 passed to "%s" must be an integer', __METHOD__));
         }
 
@@ -65,7 +65,7 @@ class PatternMatcher implements DecompilerInterface
 
         preg_match($this->pattern, $input, $matches);
 
-        if (null === $matches ||  !isset( $matches[$this->key]) ||  !isset( $matches[$this->value])) {
+        if (null === $matches || !isset($matches[$this->key]) || !isset($matches[$this->value])) {
             return;
         }
 

@@ -26,8 +26,8 @@
     <table style="width: 80%; border: 0;">
         <tr>
             <td style=" border: none;">
-                {% if counted_data is not empty  %}
-                <div id="chart_current" style="float: right; "></div>
+                {% if counted_data is not empty %}
+                    <div id="chart_current" style="float: right; "></div>
                 {% else %}
                     <p>
                         <em>No logs available.</em>
@@ -35,17 +35,19 @@
                 {% endif %}
             </td>
             <td style="width: 22px; margin:0; padding: 5px; border: none; ">
-                {% if counted_data is not empty  %}
-                <a href="{{ query_manager.getIconSwitcherUrl }}&chart=PieChart"><img width="21" height="20"
-                                                                                     title="Pie Chart" alt="Pie Chart"
-                                                                                     src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABUAAAAUCAYAAABiS3YzAAABNUlEQVQ4y62UQa3FIBBFKwEJSEACEioBA02QgIKy7qoSkICESkBAF0jgcXmQNDyg5OdPctOmDKc3MDNLCGGBehHXSBRdJiOxJqAq6vpPKNn3XYdvgs0yUTKK/gWqojxjDMxAKUVSrRM/jstIIiMoFq/nZgTnvAUN27a58A0+gtp6o3MuSCl/gEKIRDuOw2czTahoubHWBqVUE4hn/qZ7UNeCaq0TeAAsojWUt4AQXOIIXoCQrKGyB8UlFdAAmKqhhqoetJTVCzDV8jQUMsYkKJ6EkF6eqaHrCAqt65rO1nuf3hs5qoaSNygEl6iG4rrqNNYqqXMGXC6vuM6N4Xp1iiHhZ8FwjXJD3Pd9YUT02lTMQh/NkMZjlB1NKT7p2GcT06OP5DJzHdjZmqlTk/9x1jyLvU3+D/qDKlyZZw5ZAAAAAElFTkSuQmCC"/></a>
-                <a href="{{ query_manager.getIconSwitcherUrl }}&chart=LineChart"><img width="21" height="20"
-                                                                                      title="Line Chart"
-                                                                                      alt="Line Chart"
-                                                                                      src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABUAAAAUCAYAAABiS3YzAAACI0lEQVQ4y7WUW2saURDH913z2mdJ6UMLpUk/QPuieAMVb+sFDXhFUaSLIIR6jcZ6rbeoIajVahO3aVOaNklptuSb2ZmFFbt2hVZzYB72nP/+zsx/ZpeYzWbEpmPjwPuDyuXypkajCRGbXDqd7i4QCLxZlyOVSh8pFIp9tVotJkiSZBKJxMGawC2AXTmdzp9+v/+IsFgsTDqdPhASoz3s7SuASqWyj8BUKvW5Wq0WV0IRaLPZGLzdbreLBTT7VquVicfjX05gdbtdkSBUJpO5zGYzE4vFvsLtNLz0lg8GDWk0Gn9Fo9HLdrt91uv1JOzB36BoularvYtEIt+azeZ0OByOIYPTRTAAn6MmHA5/r9frdL/ffzEH8KHokUqloj0ez49isfgRxNRgMDhZBDscjmd6vf4SbLkulUqo8f9RJh+KHkE2t2D6BZRz2Ol0RPl8XlIul9/B8wcEY0OwZNg/h73XS0YvQk0mk9xgMLAeAawHvks4nc/n285msyMEc3DIsMY2RggKZT2AsbgIBoNXtVqNhheVfK3b7X7Igcfj8fG8MULQTCZTpSiKK4kSmksODJW8FNKwUBB9ajQaUxyd+aytWC6XS7zqnIVidtDhCXYYsnxMrLsQWigUzieTyfvRaPQK/HwSCoWewo9mBz6/XfhJLAXuc8E/W4JipjA6NHrr9XpvcFb/NVgofIp7yWSSBOONrVbLVKlUzLlcjoTm/Vcg8zdcyywV96VefwAAAABJRU5ErkJggg=="/></a>
-                <a href="{{ query_manager.getIconSwitcherUrl }}&chart=ColumnChart"><img width="21" height="20" title=""
-                                                                                        alt=""
-                                                                                        src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABUAAAAUCAYAAABiS3YzAAABnUlEQVQ4jdWVX0vCUBjG/QLd9wW6iS60T9CF4qZTh0yHDIYO8WII3rhAWTTBi3Rgm/kPBEGwKCkr7A8VUX0ye17BKMIgPBAJjxye9zk/j+/Oyzyz2czDWvOvQCAQCofDriiKDsR5Vv0QlOf5jKqqT8VicQqlmEAjkUgmn8/fuq47hhLMoIVC4abb7Z5C0m8Zfr9/DS3cDgaDPo7jNphACRiLxd6ohZqm2UygdEICWpZ1Wa/XraXQaDS6jrCGW5FBnf8Jir/sy2azD47jjAeDgbkUiqvljcfjL7lc7h4P8YAJFEBvOp1+rFarF7gR+8ygX4L/DoqHd4R+v8qy/CxJkpc8TORqUNxHh6aPel0ul7fIEwRhNSj8Q9M0r+Ado7ZJHvb/AbTX6+0ZhpFSFMXQdf2u2WyeIehgWmR4KjTCekJQ1BDRFfR391P2O5TCtVrtvFQqXVcqlUm/3z8ZDocjOgV5JFqTRzXK4BDTRfYDSo2mX8TcJtvttoRNCdu2k41GI9lqtRKdTkfCKeYeidbkUY0ytG+RxaDsMH+VkN4Bg/xUj8dF0hsAAAAASUVORK5CYII="/></a>
+                {% if counted_data is not empty %}
+                    <a href="{{ query_manager.getIconSwitcherUrl }}&chart=PieChart"><img width="21" height="20"
+                                                                                         title="Pie Chart"
+                                                                                         alt="Pie Chart"
+                                                                                         src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABUAAAAUCAYAAABiS3YzAAABNUlEQVQ4y62UQa3FIBBFKwEJSEACEioBA02QgIKy7qoSkICESkBAF0jgcXmQNDyg5OdPctOmDKc3MDNLCGGBehHXSBRdJiOxJqAq6vpPKNn3XYdvgs0yUTKK/gWqojxjDMxAKUVSrRM/jstIIiMoFq/nZgTnvAUN27a58A0+gtp6o3MuSCl/gEKIRDuOw2czTahoubHWBqVUE4hn/qZ7UNeCaq0TeAAsojWUt4AQXOIIXoCQrKGyB8UlFdAAmKqhhqoetJTVCzDV8jQUMsYkKJ6EkF6eqaHrCAqt65rO1nuf3hs5qoaSNygEl6iG4rrqNNYqqXMGXC6vuM6N4Xp1iiHhZ8FwjXJD3Pd9YUT02lTMQh/NkMZjlB1NKT7p2GcT06OP5DJzHdjZmqlTk/9x1jyLvU3+D/qDKlyZZw5ZAAAAAElFTkSuQmCC"/></a>
+                    <a href="{{ query_manager.getIconSwitcherUrl }}&chart=LineChart"><img width="21" height="20"
+                                                                                          title="Line Chart"
+                                                                                          alt="Line Chart"
+                                                                                          src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABUAAAAUCAYAAABiS3YzAAACI0lEQVQ4y7WUW2saURDH913z2mdJ6UMLpUk/QPuieAMVb+sFDXhFUaSLIIR6jcZ6rbeoIajVahO3aVOaNklptuSb2ZmFFbt2hVZzYB72nP/+zsx/ZpeYzWbEpmPjwPuDyuXypkajCRGbXDqd7i4QCLxZlyOVSh8pFIp9tVotJkiSZBKJxMGawC2AXTmdzp9+v/+IsFgsTDqdPhASoz3s7SuASqWyj8BUKvW5Wq0WV0IRaLPZGLzdbreLBTT7VquVicfjX05gdbtdkSBUJpO5zGYzE4vFvsLtNLz0lg8GDWk0Gn9Fo9HLdrt91uv1JOzB36BoularvYtEIt+azeZ0OByOIYPTRTAAn6MmHA5/r9frdL/ffzEH8KHokUqloj0ez49isfgRxNRgMDhZBDscjmd6vf4SbLkulUqo8f9RJh+KHkE2t2D6BZRz2Ol0RPl8XlIul9/B8wcEY0OwZNg/h73XS0YvQk0mk9xgMLAeAawHvks4nc/n285msyMEc3DIsMY2RggKZT2AsbgIBoNXtVqNhheVfK3b7X7Igcfj8fG8MULQTCZTpSiKK4kSmksODJW8FNKwUBB9ajQaUxyd+aytWC6XS7zqnIVidtDhCXYYsnxMrLsQWigUzieTyfvRaPQK/HwSCoWewo9mBz6/XfhJLAXuc8E/W4JipjA6NHrr9XpvcFb/NVgofIp7yWSSBOONrVbLVKlUzLlcjoTm/Vcg8zdcyywV96VefwAAAABJRU5ErkJggg=="/></a>
+                    <a href="{{ query_manager.getIconSwitcherUrl }}&chart=ColumnChart"><img width="21" height="20"
+                                                                                            title=""
+                                                                                            alt=""
+                                                                                            src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABUAAAAUCAYAAABiS3YzAAABnUlEQVQ4jdWVX0vCUBjG/QLd9wW6iS60T9CF4qZTh0yHDIYO8WII3rhAWTTBi3Rgm/kPBEGwKCkr7A8VUX0ye17BKMIgPBAJjxye9zk/j+/Oyzyz2czDWvOvQCAQCofDriiKDsR5Vv0QlOf5jKqqT8VicQqlmEAjkUgmn8/fuq47hhLMoIVC4abb7Z5C0m8Zfr9/DS3cDgaDPo7jNphACRiLxd6ohZqm2UygdEICWpZ1Wa/XraXQaDS6jrCGW5FBnf8Jir/sy2azD47jjAeDgbkUiqvljcfjL7lc7h4P8YAJFEBvOp1+rFarF7gR+8ygX4L/DoqHd4R+v8qy/CxJkpc8TORqUNxHh6aPel0ul7fIEwRhNSj8Q9M0r+Ado7ZJHvb/AbTX6+0ZhpFSFMXQdf2u2WyeIehgWmR4KjTCekJQ1BDRFfR391P2O5TCtVrtvFQqXVcqlUm/3z8ZDocjOgV5JFqTRzXK4BDTRfYDSo2mX8TcJtvttoRNCdu2k41GI9lqtRKdTkfCKeYeidbkUY0ytG+RxaDsMH+VkN4Bg/xUj8dF0hsAAAAASUVORK5CYII="/></a>
                 {% endif %}
             </td>
         </tr>
@@ -61,20 +63,20 @@
                         </td>
                     </tr>
 
-                            {% if query_manager.getIndex and query_manager.getIndex is not empty %}
-                            {% for keyIndex, menu in query_manager.getIndex %}
-                    <tr>
-                        <td>
+                    {% if query_manager.getIndex and query_manager.getIndex is not empty %}
+                        {% for keyIndex, menu in query_manager.getIndex %}
+                            <tr>
+                                <td>
                                     <h3>{{ keyIndex }}:</h3>
                                     {% for sub_key, sub_menu in menu %}
                                         <div class="menu-index"><a
                                                     href="{{ query_manager.getEngineSwitcherUrl }}&engine={{ sub_menu["engine_service"] }}">{{ sub_menu["title"] }}</a>
                                         </div>
                                     {% endfor %}
-                        </td>
-                    </tr>
-                            {% endfor %}
-                            {% endif %}
+                                </td>
+                            </tr>
+                        {% endfor %}
+                    {% endif %}
                 </table>
             </td>
         </tr>

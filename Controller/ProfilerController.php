@@ -70,7 +70,7 @@ class ProfilerController extends ContainerAware
     /**
      * Renders a profiler for a logger.
      *
-     * @param string  $token The profiler token
+     * @param string $token The profiler token
      * @param Request $request The Request
      *
      * @return Response A Response instance
@@ -91,8 +91,8 @@ class ProfilerController extends ContainerAware
 
         $this->profilerManager->loadProfiles($this->queryManager);
 
-        if($this->queryManager->isPreview()){
-            return new Response($this->twig->render("LogboardBundle:Collector:test.html.twig", array('logs_stack' => $this->profilerManager->getPreviewData(), 'preview' => $this->queryManager->getPreview() )), 200, array('Content-Type' => 'text/html'));
+        if ($this->queryManager->isPreview()) {
+            return new Response($this->twig->render("LogboardBundle:Collector:test.html.twig", array('logs_stack' => $this->profilerManager->getPreviewData(), 'preview' => $this->queryManager->getPreview())), 200, array('Content-Type' => 'text/html'));
         }
 
         $this->profiler = $this->profilerManager->getProfiler();

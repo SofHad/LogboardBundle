@@ -25,8 +25,8 @@ class FileStorageParameters implements ParametersHandlerInterface
     /**
      * Construct
      *
-     * @param integer                     $dataCount             The count of data
-     * @param string                      $panel                 The panel
+     * @param integer $dataCount             The count of data
+     * @param string $panel                 The panel
      *
      * @return void
      */
@@ -36,14 +36,14 @@ class FileStorageParameters implements ParametersHandlerInterface
         $this->kernelRootDir = $kernelRootDir;
     }
 
-   /**
+    /**
      * {@inheritdoc}
      *
      */
-    public function getParameters(Profile $profile=null)
+    public function getParameters(Profile $profile = null)
     {
         return array(
-            'filesystem' => $this->filesystem ,
+            'filesystem' => $this->filesystem,
             'kernel_root_dir' => $this->kernelRootDir
         );
     }

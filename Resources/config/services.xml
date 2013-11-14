@@ -23,8 +23,7 @@
     </parameters>
 
     <services>
-        <service id="logboard.profiler_log_listener" class="%logboard.profiler_log_listener.class%" public="true"
-                 scope="request">
+        <service id="logboard.profiler_log_listener" class="%logboard.profiler_log_listener.class%" public="true" scope="request">
             <argument type="service" id="request"/>
             <argument type="service" id="controller_resolver"/>
             <argument>%logboard.type%</argument>
@@ -46,7 +45,8 @@
             <argument>%logboard.default_chart%</argument>
         </service>
 
-        <service id="logboard.profiler_finder_parameters" class="%logboard.profiler_finder_parameters.class%" public="true">
+        <service id="logboard.profiler_finder_parameters" class="%logboard.profiler_finder_parameters.class%"
+                 public="true">
             <argument>%logboard.comparators_count%</argument>
             <argument>%logboard.panel%</argument>
         </service>

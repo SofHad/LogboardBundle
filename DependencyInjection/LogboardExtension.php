@@ -39,9 +39,9 @@ class LogboardExtension extends Extension
 
         $index = array();
 
-        foreach($config as $key => $configBase){
+        foreach ($config as $key => $configBase) {
 
-            foreach($configBase["menu"] as $menu => $configMenu){
+            foreach ($configBase["menu"] as $menu => $configMenu) {
 
                 $engine = isset($configMenu["engine"]) ? $configMenu["engine"] : $configBase["engine"];
                 $engineService = "{$engine}_{$menu}";
@@ -63,7 +63,7 @@ class LogboardExtension extends Extension
 
                 $source = isset($configMenu["src"]) ? $configMenu["src"] : $configBase["src"];
 
-                if('file' === $source && !file_exists($data)){
+                if ('file' === $source && !file_exists($data)) {
                     throw new InvalidConfigurationException("The LogboardBundle configuration is invalid. please check your data path.");
                 }
 
@@ -110,9 +110,10 @@ class LogboardExtension extends Extension
      * @param string $context              The string
      * @param ContainerBuilder $container  The ContainerBuilder
      */
-    public function loadService($context, ContainerBuilder $container){
-        preg_match("/\%(.*)%/", $context, $matches );
-        if(!empty($matches)){
+    public function loadService($context, ContainerBuilder $container)
+    {
+        preg_match("/\%(.*)%/", $context, $matches);
+        if (!empty($matches)) {
             $service = $container->getParameter($matches[1]);
             return str_replace($matches[0], $service, $context);
         }

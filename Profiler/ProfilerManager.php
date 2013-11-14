@@ -97,9 +97,9 @@ class ProfilerManager implements ProfilerManagerInterface
     /**
      * Constructor
      *
-     * @param CounterInterface                                          $counter    The counter
-     * @param \Symfony\Component\HttpKernel\Profiler\Profiler           $profiler   The profiler
-     * @param string                                                    $panel      The panel
+     * @param CounterInterface $counter    The counter
+     * @param \Symfony\Component\HttpKernel\Profiler\Profiler $profiler   The profiler
+     * @param string $panel      The panel
      *
      * @return void
      */
@@ -124,17 +124,17 @@ class ProfilerManager implements ProfilerManagerInterface
 
         $this->getProfile();
 
-        if(null === $this->profile){
+        if (null === $this->profile) {
             return;
         }
 
         $this->compile();
 
-        if(null === $this->data){
+        if (null === $this->data) {
             throw new BadQueryHttpException('The request was invalid or cannot be otherwise served because the data cannot be null.');
         }
 
-        return $this->queryManager->isPreview() ? $this->aggregateData(): $this->countData();
+        return $this->queryManager->isPreview() ? $this->aggregateData() : $this->countData();
     }
 
     /**
@@ -143,12 +143,12 @@ class ProfilerManager implements ProfilerManagerInterface
      */
     public function countData()
     {
-        if(empty($this->data)){
+        if (empty($this->data)) {
             return;
         }
 
         $this->countedData = $this->counter->handle($this->data)
-                                           ->getCountedData();
+            ->getCountedData();
     }
 
     /**
@@ -157,7 +157,7 @@ class ProfilerManager implements ProfilerManagerInterface
      */
     public function compile()
     {
-        $this->data = null === $this->engine ? DataResolver::refine($this->getCollector()->getLogs()): $this->engine->loadProfiles($this->profile);
+        $this->data = null === $this->engine ? DataResolver::refine($this->getCollector()->getLogs()) : $this->engine->loadProfiles($this->profile);
     }
 
     /**
@@ -168,12 +168,12 @@ class ProfilerManager implements ProfilerManagerInterface
     {
         $preview = $this->queryManager->getPreview();
 
-        if(null === $preview){
+        if (null === $preview) {
             throw new BadQueryHttpException('The request was invalid or cannot be otherwise served because the preview value cannot be null.');
         }
 
         foreach ($this->data as $item) {
-            if($preview === $item["key"]){
+            if ($preview === $item["key"]) {
                 if (isset($this->previewData[$item["value"]])) {
                     $this->previewData[$item["value"]]['count']++;
                 } else {

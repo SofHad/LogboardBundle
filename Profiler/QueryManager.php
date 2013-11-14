@@ -27,87 +27,73 @@ class QueryManager implements QueryManagerInterface
      * @var string
      */
     protected $iconSwitcherUrl;
-
     /**
      * The token
      * @var string
      */
     protected $token;
-
     /**
      * The request
      * @var \Symfony\Component\HttpFoundation\Request
      */
     protected $request;
-
     /**
      * The default chart
      * @var string
      */
     protected $defaultChart;
-
     /**
      * The chart
      * @var string
      */
     protected $chart;
-
-
     /**
      * Preview value
      * @var Boolean
      */
     protected $preview;
-
     /**
      * The engine links urls
      * @var string
      */
     protected $engineSwitcherUrl;
-
     /**
      * Engine
      * @var \So\LogboardBundle\Profiler\Engine\EngineInterface
      */
     protected $engine = null;
-
     /**
      * The engine service id
      * @var string
      */
     protected $engineServiceId = null;
-
     /**
      * The engine submission status
      * @var Boolean
      */
     protected $isEngineSubmitted = false;
-
     /**
      * The chart submission status
      * @var Boolean
      */
     protected $isChartSubmitted = false;
-
     /**
      * Isser preview
      * @var Boolean
      */
     protected $isPreview = false;
-
     /**
      * The index variables (Titles, labels, services names)
      * @var Array
      */
     protected $index;
 
-
     /**
      * Constructor
      *
-     * @param \Symfony\Component\Routing\Router   $router                       The panel
-     * @param string                              $panel                        The panel
-     * @param string                              $defaultChart                 The default chart
+     * @param \Symfony\Component\Routing\Router $router                       The panel
+     * @param string $panel                        The panel
+     * @param string $defaultChart                 The default chart
      *
      * @return void
      */
@@ -143,11 +129,48 @@ class QueryManager implements QueryManagerInterface
      */
     public function checkEngine()
     {
-        if($this->request->query->has('engine')){
+        if ($this->request->query->has('engine')) {
             $this->isEngineSubmitted = true;
         }
 
         $this->engineServiceId = $this->request->query->get('engine', null);
+    }
+
+    /**
+     * {@inheritdoc}
+     *
+     */
+    public function selectChart()
+    {
+        $chart = $this->request->query->get('chart');
+
+        if (null !== $chart) {
+            $this->isChartSubmitted = true;
+            $this->chart = $chart;
+        } else {
+            $this->chart = $this->defaultChart;
+        }
+    }
+
+    /**
+     * {@inheritdoc}
+     *
+     */
+    public function generateSwitcherUrls()
+    {
+        $currentRoute = $this->request->attributes->get('_route');
+        $this->router
+            ->generate($currentRoute, array('token' => $this->token), true);
+
+        $this->iconSwitcherUrl = $this->engineSwitcherUrl .= "?panel=" . $this->panel;
+
+        if ($this->isEngineSubmitted) {
+            $this->iconSwitcherUrl .= "&engine=" . $this->engineServiceId;
+        }
+
+        if ($this->isChartSubmitted) {
+            $this->engineSwitcherUrl .= "&chart=" . $this->chart;
+        }
     }
 
     /**
@@ -182,16 +205,6 @@ class QueryManager implements QueryManagerInterface
      * {@inheritdoc}
      *
      */
-    public function setEngine(EngineInterface $engine)
-    {
-        $this->engine = $engine;
-    }
-
-
-    /**
-     * {@inheritdoc}
-     *
-     */
     public function getEngineServiceId()
     {
         return $this->engineServiceId;
@@ -210,46 +223,9 @@ class QueryManager implements QueryManagerInterface
      * {@inheritdoc}
      *
      */
-    public function selectChart()
-    {
-        $chart = $this->request->query->get('chart');
-
-        if(null !== $chart){
-            $this->isChartSubmitted = true;
-            $this->chart = $chart;
-        }else{
-            $this->chart = $this->defaultChart ;
-        }
-    }
-
-    /**
-     * {@inheritdoc}
-     *
-     */
     public function getChart()
     {
         return $this->chart;
-    }
-
-    /**
-     * {@inheritdoc}
-     *
-     */
-    public function generateSwitcherUrls()
-    {
-        $currentRoute = $this->request->attributes->get('_route');
-        $baseUrl = $this->router
-                        ->generate($currentRoute, array('token' => $this->token ), true);
-
-        $this->iconSwitcherUrl = $this->engineSwitcherUrl = $baseUrl .= "?panel=".$this->panel;
-
-        if($this->isEngineSubmitted){
-            $this->iconSwitcherUrl .= "&engine=".$this->engineServiceId;
-        }
-
-        if($this->isChartSubmitted){
-            $this->engineSwitcherUrl .= "&chart=".$this->chart;
-        }
     }
 
     /**
@@ -286,6 +262,15 @@ class QueryManager implements QueryManagerInterface
     public function getEngine()
     {
         return $this->engine;
+    }
+
+    /**
+     * {@inheritdoc}
+     *
+     */
+    public function setEngine(EngineInterface $engine)
+    {
+        $this->engine = $engine;
     }
 
     /**
