@@ -45,7 +45,6 @@ class Counter implements CounterInterface
     public function heapUp()
     {
         foreach ($this->data as $item) {
-
             if (isset($this->countedData[$item["key"]])) {
                 $this->countedData[$item["key"]]['count']++;
             } else {
