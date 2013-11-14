@@ -10,8 +10,8 @@
 
 namespace So\LogboardBundle\Profiler;
 
+use Doctrine\Common\Proxy\Exception\InvalidArgumentException;
 use So\LogboardBundle\Exception\BadQueryHttpException;
-use Symfony\Component\HttpKernel\Exception\BadRequestHttpException;
 use Symfony\Component\HttpKernel\Profiler\Profiler;
 use Symfony\Component\PropertyAccess\PropertyAccess;
 
@@ -121,6 +121,10 @@ class ProfilerManager implements ProfilerManagerInterface
         $this->queryManager = $queryManager;
         $this->token = $this->queryManager->getToken();
         $this->engine = $this->queryManager->getEngine();
+
+        if(null === $this->engine){
+            throw new BadQueryHttpException("The engine must not be null");
+        }
 
         $this->getProfile();
 

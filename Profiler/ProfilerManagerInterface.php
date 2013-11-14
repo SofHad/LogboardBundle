@@ -21,7 +21,7 @@ interface ProfilerManagerInterface
      *
      * @return void
      *
-     * @throws \So\LogboardBundle\Exception\BadQueryHttpException
+     * @throws \So\LogboardBundle\Exception\BadQueryHttpException when the engine or data are null
      */
     public function loadProfiles(QueryManagerInterface $queryManager);
 
