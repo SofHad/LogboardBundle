@@ -1,0 +1,66 @@
+<?xml version="1.0" ?>
+
+<container xmlns="http://symfony.com/schema/dic/services"
+           xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+           xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
+    <parameters>
+        <parameter key="logboard.profiler_log_listener.class">So\LogboardBundle\EventListener\ProfilerLogListener</parameter>
+        <parameter key="logboard.counter.class">So\LogboardBundle\Profiler\Counter</parameter>
+        <parameter key="logboard.type">panelAction</parameter>
+        <parameter key="logboard.panel">logger</parameter>
+        <parameter key="logboard.symfony_log_engine">logboard.sfLog_engine</parameter>
+        <parameter key="logboard.comparators_count">30000000</parameter>
+        <parameter key="logboard.profiler_manager.class">So\LogboardBundle\Profiler\ProfilerManager</parameter>
+        <parameter key="logboard.symfony_log.class">So\LogboardBundle\Profiler\Engine\SymfonyLogEngine</parameter>
+        <parameter key="logboard.file_storage.class">So\LogboardBundle\Profiler\Engine\FileStorageEngine</parameter>
+        <parameter key="logboard.symfony_finder.class">So\LogboardBundle\Profiler\Engine\Finder\ProfilerFinder</parameter>
+        <parameter key="logboard.finder.file_storage.class">So\LogboardBundle\Profiler\Engine\Finder\FileStorageFinder</parameter>
+        <parameter key="logboard.profiler_finder_parameters.class">So\LogboardBundle\Profiler\Parameter\ProfilerFinderParameters</parameter>
+        <parameter key="logboard.parameters.file_storage.class">So\LogboardBundle\Profiler\Parameter\FileStorageParameters</parameter>
+        <parameter key="logboard.query_manager.class">So\LogboardBundle\Profiler\QueryManager</parameter>
+        <parameter key="logboard.decompiler.pattern_matcher.class">So\LogboardBundle\Profiler\Engine\Decompiler\PatternMatcher</parameter>
+        <parameter key="logboard.default_chart">PieChart</parameter>
+    </parameters>
+
+    <services>
+        <service id="logboard.profiler_log_listener" class="%logboard.profiler_log_listener.class%" public="true"
+                 scope="request">
+            <argument type="service" id="request"/>
+            <argument type="service" id="controller_resolver"/>
+            <argument>%logboard.type%</argument>
+            <argument>%logboard.panel%</argument>
+            <tag name="kernel.event_listener" event="kernel.controller" method="onKernelController"/>
+        </service>
+
+        <service id="logboard.profiler_manager" class="%logboard.profiler_manager.class%" public="true">
+            <argument type="service" id="logboard.counter"/>
+            <argument type="service" id="profiler" on-invalid="null"/>
+            <argument>%logboard.panel%</argument>
+        </service>
+
+        <service id="logboard.counter" class="%logboard.counter.class%" public="true"/>
+
+        <service id="logboard.query_manager" class="%logboard.query_manager.class%" public="true">
+            <argument type="service" id="router"/>
+            <argument>%logboard.panel%</argument>
+            <argument>%logboard.default_chart%</argument>
+        </service>
+
+        <service id="logboard.profiler_finder_parameters" class="%logboard.profiler_finder_parameters.class%" public="true">
+            <argument>%logboard.comparators_count%</argument>
+            <argument>%logboard.panel%</argument>
+        </service>
+
+        <service id="logboard.symfony_finder" class="%logboard.symfony_finder.class%" public="true">
+            <argument type="service" id="profiler" on-invalid="null"/>
+        </service>
+
+        <service id="logboard.symfony_log" class="%logboard.symfony_log.class%" public="true">
+            <argument type="service" id="profiler" on-invalid="null"/>
+            <argument type="service" id="logboard.symfony_finder"/>
+            <argument type="service" id="logboard.profiler_finder_parameters"/>
+        </service>
+
+    </services>
+
+</container>
