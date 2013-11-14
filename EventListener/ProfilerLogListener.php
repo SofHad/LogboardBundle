@@ -12,6 +12,8 @@
 
 namespace So\LogboardBundle\EventListener;
 
+use So\LogboardBundle\Exception\BadQueryHttpException;
+use Symfony\Component\Config\Definition\Exception\Exception;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpKernel\Event\FilterControllerEvent;
@@ -52,6 +54,10 @@ class ProfilerLogListener implements EventSubscriberInterface
 
     public function __construct(Request $request, ControllerResolverInterface $controllerResolver, $type, $panel)
     {
+        if(null === $panel){
+            throw new BadQueryHttpException("The panel must not be null");
+        }
+
         $this->request = $request;
         $this->controllerResolver = $controllerResolver;
         $this->type = $type;

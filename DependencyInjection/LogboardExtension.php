@@ -97,7 +97,7 @@ class LogboardExtension extends Extension
             }
         }
 
-        //Inject index
+        //Inject the index
         $queryManagerDefinition = $container->findDefinition("logboard.query_manager");
         $queryManagerArguments = $queryManagerDefinition->getArguments();
         $queryManagerArguments[3] = $index;
