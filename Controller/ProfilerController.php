@@ -91,7 +91,7 @@ class ProfilerController extends ContainerAware
             if($this->container->has($service)){
                 $this->queryManager->setEngine($this->container->get($service));
             }else{
-                throw new BadQueryHttpException(sprintf('The specified Logboard engine "%s" does not exist or it is not configured correctly', $service));
+                throw new BadQueryHttpException(sprintf('The specified Logboard engine "%s" does not exist or is not configured correctly', $service));
             }
         }
 
