@@ -1,4 +1,6 @@
 {% extends '@WebProfiler/Profiler/layout.html.twig' %}
+{% import _self as logger %}
+
 {% block head %}
     {{ parent() }}
     {% include 'LogboardBundle:Collector:style.css.twig' %}
@@ -23,9 +25,9 @@
     {# Chart #}
     <h2>Logs</h2>
 
-    <table style="width: 80%; border: 0;">
+    <table class="logboard-table">
         <tr>
-            <td style=" border: none;">
+            <td style="border-right: none;">
                 {% if counted_data is not empty %}
                     <div id="chart_current" style="float: right; "></div>
                 {% else %}
@@ -34,7 +36,7 @@
                     </p>
                 {% endif %}
             </td>
-            <td style="width: 22px; margin:0; padding: 5px; border: none; ">
+            <td style="width: 22px; margin:0; padding: 5px; border-left: none; ">
                 {% if counted_data is not empty %}
                     <a href="{{ query_manager.getIconSwitcherUrl }}&chart=PieChart"><img width="21" height="20"
                                                                                          title="Pie Chart"
@@ -58,7 +60,7 @@
                         <td>
                             <h3>Runtime logs:</h3>
 
-                            <div class="menu-index"><a href="{{ query_manager.getEngineSwitcherUrl }}">Priority</a>
+                            <div class="menu-index"><a href="{{ query_manager.getEngineSwitcherUrl }}" {{ logger.selected(null, query_manager.getEngine) }}>Priority</a>
                             </div>
                         </td>
                     </tr>
@@ -69,8 +71,7 @@
                                 <td>
                                     <h3>{{ keyIndex }}:</h3>
                                     {% for sub_key, sub_menu in menu %}
-                                        <div class="menu-index"><a
-                                          href="{{ query_manager.getEngineSwitcherUrl }}&engine={{ sub_menu["engine_service"] }}">{{ sub_menu["title"] }}</a>
+                                        <div class="menu-index{{ logger.selected(sub_menu["engine_service"], query_manager.getEngineServiceId) }}"><a href="{{ query_manager.getEngineSwitcherUrl }}&engine={{ sub_menu["engine_service"] }}"  >{{ sub_menu["title"] }}</a>
                                         </div>
                                     {% endfor %}
                                 </td>
@@ -82,5 +83,13 @@
         </tr>
     </table>
 {% endblock %}
+
+{% macro selected(value, engine) %}
+{% if value == engine %}
+    {% spaceless %}
+      logboard-selected
+    {% endspaceless %}
+{% endif %}
+{% endmacro %}
 
 
