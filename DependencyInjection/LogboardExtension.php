@@ -44,7 +44,7 @@ class LogboardExtension extends Extension
             foreach ($configBase["menu"] as $menu => $configMenu) {
 
                 $engine = isset($configMenu["engine"]) ? $configMenu["engine"] : $configBase["engine"];
-                $engineService = "{$engine}_{$menu}";
+                $engineService = "{$engine}_{$menu}_{$key}";
 
                 $split = $configMenu["split"];
 

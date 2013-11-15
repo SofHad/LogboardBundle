@@ -165,11 +165,11 @@ class QueryManager implements QueryManagerInterface
         $this->iconSwitcherUrl = $this->engineSwitcherUrl .= "?panel=" . $this->panel;
 
         if ($this->isEngineSubmitted) {
-            $this->iconSwitcherUrl .= "&engine=" . $this->engineServiceId;
+            $this->iconSwitcherUrl .= sprintf('&engine=%s', $this->engineServiceId);
         }
 
         if ($this->isChartSubmitted) {
-            $this->engineSwitcherUrl .= "&chart=" . $this->chart;
+            $this->engineSwitcherUrl .= sprintf('&chart=%s', $this->chart);
         }
     }
 
