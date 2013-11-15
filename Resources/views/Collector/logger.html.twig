@@ -58,9 +58,9 @@
                 <table style="padding: 0; margin: 0">
                     <tr>
                         <td>
-                            <h3>Runtime logs:</h3>
+                            <h3>Token ({{ token }})</h3>
 
-                            <div class="menu-index"><a href="{{ query_manager.getEngineSwitcherUrl }}" {{ logger.selected(null, query_manager.getEngine) }}>Priority</a>
+                            <div class="menu-index{{ logger.selected(null, query_manager.getEngine) }}"><a href="{{ query_manager.getEngineSwitcherUrl }}" >Priority</a>
                             </div>
                         </td>
                     </tr>
