@@ -70,7 +70,7 @@
                                     <h3>{{ keyIndex }}:</h3>
                                     {% for sub_key, sub_menu in menu %}
                                         <div class="menu-index"><a
-                                                    href="{{ query_manager.getEngineSwitcherUrl }}&engine={{ sub_menu["engine_service"] }}">{{ sub_menu["title"] }}</a>
+                                          href="{{ query_manager.getEngineSwitcherUrl }}&engine={{ sub_menu["engine_service"] }}">{{ sub_menu["title"] }}</a>
                                         </div>
                                     {% endfor %}
                                 </td>
@@ -83,45 +83,4 @@
     </table>
 {% endblock %}
 
-{% macro display_message(log_index, log) %}
-    {% if constant('Symfony\\Component\\HttpKernel\\Debug\\ErrorHandler::TYPE_DEPRECATION') == log.context.type|default(0) %}
-DEPRECATION -  {{ log.message }}
-        {% set id = 'sf-call-stack-' ~ log_index %}
-<a href="#"
-   onclick="Sfjs.toggle('{{ id }}', document.getElementById('{{ id }}-on'), document.getElementById('{{ id }}-off')); return false;">
-    <img class="toggle" id="{{ id }}-off" alt="-"
-         src="data:image/gif;base64,R0lGODlhEgASAMQSANft94TG57Hb8GS44ez1+mC24IvK6ePx+Wa44dXs92+942e54o3L6W2844/M6dnu+P/+/l614P///wAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACH5BAEAABIALAAAAAASABIAQAVCoCQBTBOd6Kk4gJhGBCTPxysJb44K0qD/ER/wlxjmisZkMqBEBW5NHrMZmVKvv9hMVsO+hE0EoNAstEYGxG9heIhCADs="
-         style="display:none">
-    <img class="toggle" id="{{ id }}-on" alt="+"
-         src="data:image/gif;base64,R0lGODlhEgASAMQTANft99/v+Ga44bHb8ITG52S44dXs9+z1+uPx+YvK6WC24G+944/M6W28443L6dnu+Ge54v/+/l614P///wAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACH5BAEAABMALAAAAAASABIAQAVS4DQBTiOd6LkwgJgeUSzHSDoNaZ4PU6FLgYBA5/vFID/DbylRGiNIZu74I0h1hNsVxbNuUV4d9SsZM2EzWe1qThVzwWFOAFCQFa1RQq6DJB4iIQA7"
-         style="display:inline">
-</a>
-{% for index, call in log.context.stack if index > 1 %}
-            {% if index == 2 %}
-<ul class="sf-call-stack" id="{{ id }}" style="display: none">
-    {% endif %}
-    {% if call.class is defined %}
-        {% set from = call.class|abbr_class ~ '::' ~ call.function|abbr_method() %}
-    {% elseif call.function is defined %}
-        {% set from = call.function|abbr_method %}
-    {% elseif call.file is defined %}
-        {% set from = call.file %}
-    {% else %}
-        {% set from = '-' %}
-    {% endif %}
 
-    <li>Called
-        from {{ call.file is defined and call.line is defined ? call.file|format_file(call.line, from) : from|raw }}</li>
-
-    {{ index == log.context.stack|length - 1 ? '</ul>' : '' }}
-    {% endfor %}
-    {% else %}
-        {{ log.key }} - {{ log.value }}
-        {% if log.context is defined and log.context is not empty %}
-            <br/>
-            <small>
-                <strong>Context</strong>: {{ log.context|json_encode(64 b-or 256) }}
-            </small>
-        {% endif %}
-    {% endif %}
-    {% endmacro %}
