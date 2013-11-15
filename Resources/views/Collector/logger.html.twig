@@ -28,7 +28,7 @@
     <table class="logboard-table">
         <tr>
             <td style="border-right: none;">
-                {% if counted_data is not empty %}
+                {% if counted_data is iterable %}
                     <div id="chart_current" style="float: right; "></div>
                 {% else %}
                     <p>

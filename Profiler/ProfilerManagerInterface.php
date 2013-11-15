@@ -44,7 +44,7 @@ interface ProfilerManagerInterface
      *
      * @return void
      *
-     * @throws \Symfony\Component\HttpKernel\Exception\BadRequestHttpException if the preview value is null
+     * @throws \So\LogboardBundle\Exception\BadQueryHttpException if the preview value is null
      */
     public function aggregateData();
 
