@@ -12,7 +12,7 @@
 namespace So\LogboardBundle\Exception;
 
 /**
- * InvalidConfigurationException
+ * Invalid configuration exception
  *
  * @author Sofiane HADDAG <sofiane.haddag@yahoo.fr>
  */

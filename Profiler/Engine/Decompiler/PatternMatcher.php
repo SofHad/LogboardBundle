@@ -70,7 +70,7 @@ class PatternMatcher implements DecompilerInterface
         }
 
         $output['key'] = $matches[$this->key];
-        $output['value'] = $matches[$this->value];
+        $output['value'] = str_replace("[]", null, $matches[0]);
 
         return $output;
     }

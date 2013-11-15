@@ -5,19 +5,20 @@
 
     google.setOnLoadCallback(drawChart);
 
+
     function drawChart() {
 
 
         // Create the data table.
         var data = new google.visualization.DataTable();
         data.addColumn('string', 'Priority name');
-        data.addColumn('number', 'Number of logs');
+        data.addColumn('number', 'Logs');
         data.addRows([
             {% for key, item in counted_data %}
             ["{{ key }}", {{ item["count"] }}],
             {% endfor %}
         ]);
-        ;
+
 
         var options = {
             'width': 600,

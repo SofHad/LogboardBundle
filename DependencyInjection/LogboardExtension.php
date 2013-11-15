@@ -17,7 +17,6 @@ use Symfony\Component\HttpKernel\DependencyInjection\Extension;
  */
 class LogboardExtension extends Extension
 {
-
     /**
      * {@inheritdoc}
      *
@@ -28,12 +27,8 @@ class LogboardExtension extends Extension
 
         $loader->load('services.xml');
         $loader->load('extension.xml');
-        $loader->load('config.xml');
 
-        $configDefault[0] = $container->getParameter('logboard.config_default');
         $configuration = $this->getConfiguration($configs, $container);
-
-        $configs = !empty($configs[0]) ? array_merge($configDefault, $configs) : $configDefault;
 
         $config = $this->processConfiguration($configuration, $configs);
 
@@ -59,12 +54,10 @@ class LogboardExtension extends Extension
 
                 //ParametersService
                 $data = isset($configMenu["data"]) ? $configMenu["data"] : $configBase["data"];
-                $data = $this->loadService($data, $container);
-
                 $source = isset($configMenu["src"]) ? $configMenu["src"] : $configBase["src"];
 
                 if ('file' === $source && !file_exists($data)) {
-                    throw new InvalidConfigurationException("The LogboardBundle configuration is invalid. please check your data path.");
+                    throw new InvalidConfigurationException(sprintf('The LogboardBundle configuration is invalid. please check the data source for "%s > %s"', $configBase["title"], $configMenu["title"]));
                 }
 
                 $parametersServiceId = "logboard.parameters.{$engineService}";
@@ -103,22 +96,4 @@ class LogboardExtension extends Extension
         $queryManagerArguments[3] = $index;
         $queryManagerDefinition->setArguments($queryManagerArguments);
     }
-
-    /**
-     * Load the services
-     *
-     * @param string $context              The string
-     * @param ContainerBuilder $container  The ContainerBuilder
-     */
-    public function loadService($context, ContainerBuilder $container)
-    {
-        preg_match("/\%(.*)%/", $context, $matches);
-        if (!empty($matches)) {
-            $service = $container->getParameter($matches[1]);
-            return str_replace($matches[0], $service, $context);
-        }
-
-        return $context;
-    }
-
 }
