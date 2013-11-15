@@ -11,6 +11,7 @@
 
 namespace So\LogboardBundle\Controller;
 
+use So\LogboardBundle\Exception\BadQueryHttpException;
 use So\LogboardBundle\Exception\NotFoundHttpException;
 use Symfony\Bundle\WebProfilerBundle\Profiler\TemplateManager;
 use Symfony\Component\DependencyInjection\ContainerAware;
@@ -75,7 +76,7 @@ class ProfilerController extends ContainerAware
      *
      * @return Response A Response instance
      *
-     * @throws NotFoundHttpException if the profiler is null
+     * @throws NotFoundHttpException if the profiler is null or the service does not exist
      */
     public function panelLogAction($token, Request $request)
     {
@@ -86,7 +87,12 @@ class ProfilerController extends ContainerAware
         $engine = $this->queryManager->getEngineServiceId();
 
         if (null !== $engine) {
-            $this->queryManager->setEngine($this->container->get('logboard.' . $engine));
+            $service = sprintf('logboard.%s', $engine);
+            if($this->container->has($service)){
+                $this->queryManager->setEngine($this->container->get($service));
+            }else{
+                throw new BadQueryHttpException(sprintf('The specified Logboard engine "%s" does not exist or it is not configured correctly', $service));
+            }
         }
 
         $this->profilerManager->loadProfiles($this->queryManager);
