@@ -13,6 +13,7 @@ namespace So\LogboardBundle\Profiler\Engine\Finder;
 use So\LogboardBundle\Profiler\Engine\Decompiler\DecompilerInterface;
 use Symfony\Component\DependencyInjection\Exception\InvalidArgumentException;
 use Symfony\Component\Filesystem\Filesystem;
+use Symfony\Component\Form\Exception\InvalidConfigurationException;
 use Symfony\Component\HttpFoundation\File\Exception\FileNotFoundException;
 use Symfony\Component\HttpKernel\Profiler\Profiler;
 use Symfony\Component\PropertyAccess\PropertyAccess;
@@ -53,6 +54,8 @@ class FileStorageFinder implements FinderInterface
      */
     protected $decompiler;
 
+    protected $callback = null;
+
     /**
      * Constructor
      *
@@ -60,10 +63,11 @@ class FileStorageFinder implements FinderInterface
      *
      * @return void
      */
-    public function __construct(DecompilerInterface $decompiler)
+    public function __construct(DecompilerInterface $decompiler, $callback)
     {
         $this->accessor = PropertyAccess::createPropertyAccessor();
         $this->decompiler = $decompiler;
+        $this->callback = $callback;
     }
 
     /**
@@ -93,10 +97,35 @@ class FileStorageFinder implements FinderInterface
 
         foreach ($file as $line) {
             if (null !== $data = $this->decompiler->split($line)) {
-                $this->data[] = $data;
+
+                if($this->hasCallback()){
+                    $data = $this->callbackHandler($data);
+                }
+
+                if(null !== $data){
+                    $this->data[] = $data;
+                }
             }
         }
 
         return $this->data;
+    }
+
+    /**
+     * {@inheritdoc}
+     *
+     */
+    public function callbackHandler($data)
+    {
+       return call_user_func_array($this->callback, array($data));
+    }
+
+    /**
+     * {@inheritdoc}
+     *
+     */
+    public function hasCallback()
+    {
+       return null === $this->callback ? false : true;
     }
 }
