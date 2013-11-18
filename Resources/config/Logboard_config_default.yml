@@ -1,9 +1,9 @@
 ###########################################################################################
-#                            Import this file in your config_dev.yml                      #
+# Copy and paste this file in your app/config directory and import it in config_dev.yml   #
 ###########################################################################################
 
 #imports:
-#    - { resource: "@LogboardBundle/Resources/config/Logboard_config_default.yml" }
+#    - { resource: "Logboard_config_default.yml" }
 
 logboard:
 
@@ -11,12 +11,14 @@ logboard:
         title: All logs
         src: file
         data: %kernel.root_dir%/logs/dev.log
-        exclude: ~
         engine: file_storage
         decompiler: pattern_matcher
         menu:
            date:
-                  split:  /^\[([0-9]{4}-[[0-9]{2}-[[0-9]{2})\s[0-9]{2}:[0-9]{2}:[0-9]{2}\]\s[a-z]*\.[a-zA-Z]*.\s(.*)$/
+                  split:  /^\[([0-9]{4}-[[0-9]{2}-[[0-9]{2}).*/
+                      calls:
+                          - test.service
+
                   title: Date
            priority:
                    split:  /^\[[0-9]{4}-[[0-9]{2}-[[0-9]{2}\s[0-9]{2}:[0-9]{2}:[0-9]{2}\]\s[a-z]*\.([a-zA-Z]*).\s(.*)$/
@@ -25,26 +27,26 @@ logboard:
                    split:  /(kernel.[a-zA-Z]*).*(to.*)/
                    title: Events
 
-    PHP logs:
-        title: PHP logs
-        src: file
-        data: C:\xampp\php\logs\php_error_log
-        exclude: ~
-        engine: file_storage
-        decompiler: pattern_matcher
-        menu:
-           date:
-                  split: /\[([0-9]{2}-[a-zA-Z]{3}-[0-9]{4})\s[0-9]{2}:[0-9]{2}:[0-9]{2}\s[A-Z]*](.*)/
-                  title: Date
-
-    Apache logs:
-        title: Apache logs
-        src: file
-        data: C:\xampp\apache\logs\error.log
-        exclude: ~
-        engine: file_storage
-        decompiler: pattern_matcher
-        menu:
-           date:
-                  split: /^\[([a-zA-Z0-9\s:.]*)\](.*)/
-                  title: Date
+#    PHP logs:
+#        title: PHP logs
+#        src: file
+#        data: C:\xampp\php\logs\php_error_log
+#        exclude: ~
+#        engine: file_storage
+#        decompiler: pattern_matcher
+#        menu:
+#           date:
+#                  split: /\[([0-9]{2}-[a-zA-Z]{3}-[0-9]{4})\s[0-9]{2}:[0-9]{2}:[0-9]{2}\s[A-Z]*](.*)/
+#                  title: Date
+#
+#    Apache logs:
+#        title: Apache logs
+#        src: file
+#        data: C:\xampp\apache\logs\error.log
+#        exclude: ~
+#        engine: file_storage
+#        decompiler: pattern_matcher
+#        menu:
+#           date:
+#                  split: /^\[([a-zA-Z0-9\s:.]*)\](.*)/
+#                  title: Date

@@ -19,7 +19,6 @@ class PatternMatcher implements DecompilerInterface
 
     protected $pattern;
     protected $key;
-    protected $value;
 
     /**
      * Constructor
@@ -30,7 +29,7 @@ class PatternMatcher implements DecompilerInterface
      *
      * @return void
      */
-    public function __construct($pattern, $key = 1, $value = 2)
+    public function __construct($pattern, $key = 1)
     {
         if (!is_string($pattern)) {
             throw new InvalidArgumentException(sprintf('Argument 1 passed to "%s" must be a string', __METHOD__));
@@ -40,14 +39,9 @@ class PatternMatcher implements DecompilerInterface
             throw new InvalidArgumentException(sprintf('Argument 2 passed to "%s" must be an integer', __METHOD__));
         }
 
-        if (!is_integer($value)) {
-            throw new InvalidArgumentException(sprintf('Argument 3 passed to "%s" must be an integer', __METHOD__));
-        }
-
         $this->accessor = PropertyAccess::createPropertyAccessor();
         $this->pattern = $pattern;
         $this->key = $key;
-        $this->value = $value;
     }
 
     /**
@@ -65,9 +59,11 @@ class PatternMatcher implements DecompilerInterface
 
         preg_match($this->pattern, $input, $matches);
 
-        if (null === $matches || !isset($matches[$this->key]) || !isset($matches[$this->value])) {
+
+        if (null === $matches || !isset($matches[$this->key])) {
             return;
         }
+
 
         $output['key'] = $matches[$this->key];
         $output['value'] = str_replace("[]", null, $matches[0]);
