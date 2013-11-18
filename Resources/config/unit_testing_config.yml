@@ -7,7 +7,7 @@ logboard:
         enabled: true
         title:  Unit Tests
         src: file
-        data: C:\xampp\htdocs\BeautyLogBundle\Symfony.2.4\src\So\LogboardBundle\Tests\UnitTestingLogs.log
+        data: ../../Tests/UnitTestingLogs.log
         engine: file_storage
         decompiler: pattern_matcher
         menu:
@@ -28,12 +28,12 @@ logboard:
 
            # TOTAL                   =  40   Logs
 
-           date:
-               enabled: true
-               title: Date
-               split:
-                   callback: \So\LogboardBundle\Callback\dateFormatter::standardFormat
-                   parameter: /^\[([0-9]{4}-[[0-9]{2}-[[0-9]{2}).*/
+            date:
+                enabled: true
+                title: Date
+                split:
+                    callback: \So\LogboardBundle\Callback\dateFormatter::standardFormat
+                    parameter: /^\[([0-9]{4}-[[0-9]{2}-[[0-9]{2}).*/
            ########### @DATE ###################################################################
 
 
@@ -43,10 +43,10 @@ logboard:
           # INFO                      =   3  Logs
 
           # TOTAL                     =  40  Logs
-           priority:
-               title: Priority
-               split:
-                   parameter: /^\[[0-9]{4}-[[0-9]{2}-[[0-9]{2}\s[0-9]{2}:[0-9]{2}:[0-9]{2}\]\s[a-z]*\.([a-zA-Z]*).*/
+            priority:
+                title: Priority
+                split:
+                    parameter: /^\[[0-9]{4}-[[0-9]{2}-[[0-9]{2}\s[0-9]{2}:[0-9]{2}:[0-9]{2}\]\s[a-z]*\.([a-zA-Z]*).*/
            ########### @PRIORITY ################################################################
 
 
@@ -57,10 +57,10 @@ logboard:
            # kernel.request            = 13   Logs
 
            # TOTAL                     = 23   Logs
-           Events:
-               title: Events
-               split:
-                   parameter: /.*(kernel.[a-zA-Z]*).*/
+            Events:
+                title: Events
+                split:
+                    parameter: /.*(kernel.[a-zA-Z]*).*/
            ########### @EVENTS ##################################################################
 
 
@@ -70,9 +70,9 @@ logboard:
            # DoctrineExtensionListener  =   4   Logs
 
            # TOTAL                      =  18   Logs
-           Doctrine:
-               title: Doctrine
-               split:
-                   parameter: /.*(Doctrine[^\s\:]*).*/i
+            Doctrine:
+                title: Doctrine
+                split:
+                    parameter: /.*(Doctrine[^\s\:]*).*/i
            ########### @DOCTRINE #################################################################
 
