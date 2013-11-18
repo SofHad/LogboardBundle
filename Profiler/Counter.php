@@ -64,4 +64,13 @@ class Counter implements CounterInterface
         return $this->countedData;
     }
 
+    /**
+     * Get data
+     *
+     * @return Array
+     */
+    public function getData(){
+        return $this->data;
+    }
+
 }
