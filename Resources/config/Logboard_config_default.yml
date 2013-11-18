@@ -1,9 +1,9 @@
 ###########################################################################################
 # Copy and paste this file in your app/config directory and import it in config_dev.yml   #
 ###########################################################################################
-
-imports:
-    - { resource: "unit_testing_config.yml" }
+#
+#imports:
+#    - { resource: "unit_testing_config.yml" }
 
 logboard:
 
