@@ -7,7 +7,7 @@ logboard:
         enabled: true
         title:  Unit Tests
         src: file
-        data: C:\xampp\htdocs\BeautyLogBundle\Symfony.2.4\src\So\LogboardBundle\Tests\UnitTestLogs.log
+        data: C:\xampp\htdocs\BeautyLogBundle\Symfony.2.4\src\So\LogboardBundle\Tests\UnitTestingLogs.log
         engine: file_storage
         decompiler: pattern_matcher
         menu:
@@ -15,18 +15,18 @@ logboard:
 
            ########### DATE ###################################################################
            ###Assert Equals:
-           # Sat, 28-Oct-2013   =  28   Logs
-           # Sat, 26-Oct-2013   =  1    Logs
-           # Sat, 24-Oct-2013   =  1    Logs
-           # Sat, 22-Oct-2013   =  1    Logs
-           # Sat, 21-Oct-2013   =  1    Logs
-           # Sat, 16-Oct-2013   =  4    Logs
-           # Sat, 14-Oct-2013   =  1    Logs
-           # Sat, 13-Oct-2013   =  1    Logs
-           # Sat, 12-Oct-2013   =  1    Logs
-           # Sat, 11-Oct-2013   =  1    Logs
+           # Sat, 28-Oct-2013        =  28   Logs
+           # Sat, 26-Oct-2013        =  1    Logs
+           # Sat, 24-Oct-2013        =  1    Logs
+           # Sat, 22-Oct-2013        =  1    Logs
+           # Sat, 21-Oct-2013        =  1    Logs
+           # Sat, 16-Oct-2013        =  4    Logs
+           # Sat, 14-Oct-2013        =  1    Logs
+           # Sat, 13-Oct-2013        =  1    Logs
+           # Sat, 12-Oct-2013        =  1    Logs
+           # Sat, 11-Oct-2013        =  1    Logs
 
-           # TOTAL              =  40   Logs
+           # TOTAL                   =  40   Logs
 
            date:
                enabled: true
@@ -39,10 +39,10 @@ logboard:
 
           ########### PRIORITY #################################################################
           ###Assert Equals:
-          # DEBUG              =  37  Logs
-          # INFO               =   3  Logs
+          # DEBUG                     =  37  Logs
+          # INFO                      =   3  Logs
 
-          # TOTAL              =  40  Logs
+          # TOTAL                     =  40  Logs
            priority:
                title: Priority
                split:
@@ -52,24 +52,24 @@ logboard:
 
            ########### EVENTS ###################################################################
            ###Assert Equals:
-           # kernel.controller =  5   Logs
-           # kernel.response   =  5   Logs
-           # kernel.request    = 13   Logs
+           # kernel.controller         =  5   Logs
+           # kernel.response           =  5   Logs
+           # kernel.request            = 13   Logs
 
-           # TOTAL             =  23   Logs
+           # TOTAL                     = 23   Logs
            Events:
                title: Events
                split:
                    parameter: /.*(kernel.[a-zA-Z]*).*/
-           ########### @EVENTS ###################################################################
+           ########### @EVENTS ##################################################################
 
 
            ########### DOCTRINE #################################################################
            ###Assert Equals:
-           # doctrine.DEBUG              =  14   Logs
-           # DoctrineExtensionListener   =   4   Logs
+           # doctrine.DEBUG             =  14   Logs
+           # DoctrineExtensionListener  =   4   Logs
 
-           # TOTAL                       =  18   Logs
+           # TOTAL                      =  18   Logs
            Doctrine:
                title: Doctrine
                split:
