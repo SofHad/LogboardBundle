@@ -34,8 +34,6 @@ class LogboardExtension extends Extension
 
         $index = array();
 
-
-
         foreach ($config as $key => $configBase) {
            if(true === (bool)$configBase["enabled"]){
 
