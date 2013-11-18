@@ -2,7 +2,10 @@
 
 namespace So\LogboardBundle\Callback;
 
-
+/**
+ * Date formatter
+ *
+ */
 class dateFormatter
 {
     public static function standardFormat($data)
