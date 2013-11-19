@@ -14,7 +14,7 @@ use So\LogboardBundle\Profiler\Engine\Decompiler\PatternMatcher;
 use So\LogboardBundle\Tests\KernelTest;
 
 /**
- * Testing the FileStorageParameters class
+ * Testing the PatternMatcher class
  *
  * @author Sofiane HADDAG <sofiane.haddag@yahoo.fr>
  */
@@ -42,7 +42,6 @@ class PatternMatcherTest extends KernelTest
      */
     public function testSplitDate($input)
     {
-
       $data = $this->patternMatcherDate->split($input);
 
       $this->assertObjectHasAttribute('pattern', $this->patternMatcherDate);
@@ -60,7 +59,6 @@ class PatternMatcherTest extends KernelTest
      */
     public function testSplitPriority($input)
     {
-
         $data = $this->patternMatcherPriority->split($input);
 
         $this->assertObjectHasAttribute('pattern', $this->patternMatcherPriority);
