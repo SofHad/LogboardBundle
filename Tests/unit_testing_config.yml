@@ -7,11 +7,10 @@ logboard:
         enabled: true
         title:  Unit Tests
         src: file
-        data: ../../Tests/UnitTestingLogs.log
+        data: "@LogboardBundle/../Tests/unit_testing_logs.log"
         engine: file_storage
         decompiler: pattern_matcher
         menu:
-
 
            ########### DATE ###################################################################
            ###Assert Equals:

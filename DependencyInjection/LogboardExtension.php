@@ -60,6 +60,7 @@ class LogboardExtension extends Extension
                    //ParametersService
                    $data = isset($configMenu["data"]) ? $configMenu["data"] : $configBase["data"];
                    $source = isset($configMenu["src"]) ? $configMenu["src"] : $configBase["src"];
+                   $data = $this->getDIPath($data);
 
                    if ('file' === $source && !file_exists($data)) {
                        throw new InvalidConfigurationException(sprintf('The LogboardBundle configuration is invalid. please check the data source for "%s > %s"', $configBase["title"], $configMenu["title"]));
@@ -103,5 +104,14 @@ class LogboardExtension extends Extension
         $queryManagerArguments = $queryManagerDefinition->getArguments();
         $queryManagerArguments[3] = $index;
         $queryManagerDefinition->setArguments($queryManagerArguments);
+    }
+
+    public function getDIPath($path){
+
+        if(!is_string($path)){
+            return;
+        }
+
+        return str_replace("@LogboardBundle", __DIR__, $path);
     }
 }
