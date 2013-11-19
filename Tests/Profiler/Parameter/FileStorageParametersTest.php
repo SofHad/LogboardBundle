@@ -20,17 +20,10 @@ use So\LogboardBundle\Tests\KernelTest;
  */
 class FileStorageParametersTest extends KernelTest
 {
-
-    public function setUp()
-    {
-        parent::setUp();
-    }
-
     public function testGetParameters()
     {
-
         $filesystem = $this->container->get('filesystem');
-        $file = __FILE__;
+        $file = sprintf('%s/dev.log',$this->container->getParameter('kernel.logs_dir') );
         $fileStorageParameters = new FileStorageParameters($filesystem, $file);
         $parameters = $fileStorageParameters->getParameters(null);
 
@@ -39,13 +32,6 @@ class FileStorageParametersTest extends KernelTest
         $this->assertArrayHasKey('data', $parameters);
         $this->assertObjectHasAttribute('filesystem', $fileStorageParameters);
         $this->assertObjectHasAttribute('file', $fileStorageParameters);
-    }
-
-    /**
-     * @return void
-     */
-    public function tearDown()
-    {
-        parent::tearDown();
+        $this->assertFileExists($file);
     }
 }
