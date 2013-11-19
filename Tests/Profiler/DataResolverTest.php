@@ -11,29 +11,28 @@
 namespace So\LogboardBundle\Tests\Profiler;
 
 use So\LogboardBundle\Profiler\DataResolver;
+use So\LogboardBundle\Tests\DataProvider;
 
 /**
  * Data Resolver Test
  *
  * @author Sofiane HADDAG <sofiane.haddag@yahoo.fr>
  */
-class DataResolverTest extends \PHPUnit_Framework_TestCase {
+class DataResolverTest extends \PHPUnit_Framework_TestCase
+{
 
-    public function testRefine(){
+    public function testRefine()
+    {
 
-        $collections[0] = array(
-            "timestamp"   => '1384807747',
-            "message"     => 'Notified event "kernel.request" to listener "Symfony\Bundle\FrameworkBundle\EventListener\SessionListener::onKernelRequest',
-            "priority" =>  '',
-            "priorityName"=> 'DEBUG',
-            "context" => array()
-        );
+        $DataProvider = new DataProvider();
+        $collections = $DataProvider->unrefinedProfilerData();
 
         $data = DataResolver::refine($collections);
 
         $this->assertArrayHasKey('key', $data[0]);
         $this->assertArrayHasKey('value', $data[0]);
         $this->assertEquals("DEBUG", $data[0]['key']);
-        $this->assertTrue(2 === count( $data[0]));
+        $this->assertCount(2, $data[0]);
+        $this->assertCount(20, $data);
     }
 }

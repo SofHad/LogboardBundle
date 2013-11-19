@@ -3,7 +3,7 @@
 ###########################################################################################
 #
 
-##Enable this resource for tests
+##Enable this resource only for tests
 imports:
     - { resource: "@LogboardBundle/Tests/unit_testing_config.yml" }
 
