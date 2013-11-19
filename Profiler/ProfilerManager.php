@@ -157,7 +157,7 @@ class ProfilerManager implements ProfilerManagerInterface
      */
     public function compile()
     {
-        $this->data = null === $this->engine ? DataResolver::refine($this->getCollector()->getLogs()) : $this->engine->loadProfiles($this->profile);
+        $this->data = null === $this->engine ? DataResolver::refine($this->getCollector()->getLogs()) : $this->engine->loadProfiles();
     }
 
     /**

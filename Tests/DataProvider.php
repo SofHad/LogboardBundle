@@ -19,6 +19,9 @@ namespace So\LogboardBundle\Tests;
 class DataProvider
 {
 
+    const SYMFONY_PATTERN_DATE = '/^\[([0-9]{4}-[[0-9]{2}-[[0-9]{2}).*/';
+    const TESTS_LOG_FILE = 'unit_testing_logs.log';
+
     public function unrefinedProfilerData()
     {
         $data = array();
@@ -310,6 +313,17 @@ class DataProvider
                 'value' => '[2013-10-28 16:23:34] doctrine.DEBUG: SELECT t0.id AS id1, t0.service AS service2, t0.description AS description3, t0.mens AS mens4, t0.fpremc AS fpremc5, t0.fparc AS fparc6, t0.fparl AS fparl7, t0.udate AS udate8, t0.quantity AS quantity9, t0.quotation_id AS quotation_id10 FROM quotation_data t0 WHERE t0.quotation_id = ? [24] '
             )
 
+        );
+    }
+
+    public function indexForQueryManager(){
+        return array(
+            'Unit Tests' => array(
+                'date' => array(
+                    'engine_service' => 'file_storage_date_0',
+                    'title' => 'Date'
+                ),
+            )
         );
     }
 }

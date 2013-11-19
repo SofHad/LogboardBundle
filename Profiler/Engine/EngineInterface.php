@@ -18,11 +18,9 @@ interface EngineInterface
     /**
      * Load profiles
      *
-     * @param \Symfony\Component\HttpKernel\Profiler\Profile $profile  The Profile
-     *
      * @return Array
      */
-    public function loadProfiles(Profile $profile = null);
+    public function loadProfiles();
 
     /**
      * Heap up the data

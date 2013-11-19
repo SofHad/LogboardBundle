@@ -107,14 +107,14 @@ abstract class Engine implements EngineInterface
      * {@inheritdoc}
      *
      */
-    public function loadProfiles(Profile $profile = null)
+    public function loadProfiles()
     {
-
         $this->parameters = $this->parametersHandler->getParameters($this->profile);
 
         $this->find();
 
         $this->heapUp();
+
 
         return $this->profiles;
     }
