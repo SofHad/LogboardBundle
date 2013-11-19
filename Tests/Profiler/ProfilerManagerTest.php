@@ -50,7 +50,7 @@ class ProfilerManagerTest extends KernelTest {
         $this->assertObjectHasAttribute('index', $queryManager);
 
         //Request
-        $request = Request::createFromGlobals();
+
 
 
 
