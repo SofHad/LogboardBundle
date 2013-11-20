@@ -159,6 +159,7 @@ class QueryManager implements QueryManagerInterface
     public function generateSwitcherUrls()
     {
         $currentRoute = $this->request->attributes->get('_route');
+
         $this->router
             ->generate($currentRoute, array('token' => $this->token), true);
 
