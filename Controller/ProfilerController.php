@@ -98,7 +98,7 @@ class ProfilerController extends ContainerAware
         $this->profilerManager->loadProfiles($this->queryManager);
 
         if ($this->queryManager->isPreview()) {
-            return new Response($this->twig->render("LogboardBundle:Collector:test.html.twig", array('logs_stack' => $this->profilerManager->getPreviewData(), 'preview' => $this->queryManager->getPreview())), 200, array('Content-Type' => 'text/html'));
+            return new Response($this->twig->render("LogboardBundle:Collector:viewer.html.twig", array('logs_stack' => $this->profilerManager->getPreviewData(), 'preview' => $this->queryManager->getPreview())), 200, array('Content-Type' => 'text/html'));
         }
 
         $this->profiler = $this->profilerManager->getProfiler();
