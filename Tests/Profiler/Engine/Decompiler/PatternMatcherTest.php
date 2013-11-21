@@ -42,16 +42,16 @@ class PatternMatcherTest extends KernelTest
      */
     public function testSplitDate($input)
     {
-      $data = $this->patternMatcherDate->split($input);
+        $data = $this->patternMatcherDate->split($input);
 
-      $this->assertObjectHasAttribute('pattern', $this->patternMatcherDate);
-      $this->assertObjectHasAttribute('key', $this->patternMatcherDate);
+        $this->assertObjectHasAttribute('pattern', $this->patternMatcherDate);
+        $this->assertObjectHasAttribute('key', $this->patternMatcherDate);
 
-      $this->assertArrayHasKey('key', $data);
-      $this->assertArrayHasKey('value', $data);
+        $this->assertArrayHasKey('key', $data);
+        $this->assertArrayHasKey('value', $data);
 
-      $this->assertEquals('2013-10-14', $data['key']);
-      $this->assertEquals(str_replace("[]", null, $input), $data['value']);
+        $this->assertEquals('2013-10-14', $data['key']);
+        $this->assertEquals(str_replace("[]", null, $input), $data['value']);
     }
 
     /**

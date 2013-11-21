@@ -316,7 +316,8 @@ class DataProvider
         );
     }
 
-    public function indexForQueryManager(){
+    public function indexForQueryManager()
+    {
         return array(
             'Unit Tests' => array(
                 'date' => array(

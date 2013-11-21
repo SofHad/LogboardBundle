@@ -18,7 +18,8 @@ class ProfilerManagerTest extends QueryManagerTest
 {
     protected $profilerManager;
 
-    public function setUp(){
+    public function setUp()
+    {
         parent::setUp();
 
         $this->initializeProfilerManager();
@@ -26,22 +27,28 @@ class ProfilerManagerTest extends QueryManagerTest
         $this->loadProfiles();
     }
 
-    public function initializeProfilerManager(){
+    public function initializeProfilerManager()
+    {
         $counter = new Counter();
 
         $this->profilerManager = new ProfilerManager($counter, $this->profilerTest, $this->panel);
     }
 
-   public function testInitializationProfilerManagerForEmptyEngine(){
-       $this->assertObjectHasAttribute("collector", $this->profilerManager);
-   }
+    public function testInitializationProfilerManagerForEmptyEngine()
+    {
+        $this->assertObjectHasAttribute("collector", $this->profilerManager);
+    }
 
-    public function loadProfiles(){
+    public function loadProfiles()
+    {
         $this->profilerManager->loadProfiles($this->queryManager);
     }
 
-    public function testProfilesLoaded(){
+    public function testProfilesLoaded()
+    {
         $this->assertObjectHasAttribute('countedData', $this->profilerManager);
+        $this->assertArrayHasKey('DEBUG', $this->profilerManager->getCountedData());
+        $this->assertArrayHasKey('INFO', $this->profilerManager->getCountedData());
     }
 
 }

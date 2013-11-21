@@ -69,7 +69,8 @@ class QueryManagerTest extends KernelTest
         $this->found = $this->profilerTest->find(null, null, 1, null, 0, null);
     }
 
-    public function HandleQueries(){
+    public function HandleQueries()
+    {
         $this->token = $this->found[0]["token"];
         $this->queryManager->handleQueries($this->request, $this->token);
     }
@@ -90,7 +91,8 @@ class QueryManagerTest extends KernelTest
 
     }
 
-    public function testTheResultAfterHandlingQueries(){
+    public function testTheResultAfterHandlingQueries()
+    {
         $this->assertObjectHasAttribute("isChartSubmitted", $this->queryManager);
         $this->assertObjectHasAttribute("engineSwitcherUrl", $this->queryManager);
         $this->assertObjectHasAttribute("iconSwitcherUrl", $this->queryManager);
@@ -98,12 +100,13 @@ class QueryManagerTest extends KernelTest
         $this->assertFalse($this->queryManager->hasEngine());
     }
 
-    public function getDsn(){
+    public function getDsn()
+    {
 
         $file = "/index.csv";
         $dsn = sprintf('%s/../cache.profiler/', __DIR__);
 
-        if (file_exists($dsn.$file)) {
+        if (file_exists($dsn . $file)) {
             return sprintf('file:%s', $dsn);
         }
 

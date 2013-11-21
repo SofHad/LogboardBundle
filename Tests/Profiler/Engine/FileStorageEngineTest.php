@@ -18,7 +18,8 @@ use So\LogboardBundle\Profiler\Parameter\FileStorageParameters;
 use So\LogboardBundle\Tests\DataProvider;
 use So\LogboardBundle\Tests\KernelTest;
 
-class FileStorageEngineTest extends KernelTest {
+class FileStorageEngineTest extends KernelTest
+{
 
     private $fileStorageEngine;
 
@@ -30,17 +31,18 @@ class FileStorageEngineTest extends KernelTest {
         parent::setUp();
     }
 
-    public function testLoadProfilesForFileStorageEngine(){
-         $dataProvider = new DataProvider();
-        
-         $profiler = $this->container->get('profiler');
-         $patternMatcher = new PatternMatcher($dataProvider::SYMFONY_PATTERN_DATE);
-         $this->assertObjectHasAttribute('pattern', $patternMatcher);
+    public function testLoadProfilesForFileStorageEngine()
+    {
+        $dataProvider = new DataProvider();
+
+        $profiler = $this->container->get('profiler');
+        $patternMatcher = new PatternMatcher($dataProvider::SYMFONY_PATTERN_DATE);
+        $this->assertObjectHasAttribute('pattern', $patternMatcher);
 
         //Finder
-         $finder = new FileStorageFinder($patternMatcher, null);
-         $this->assertObjectHasAttribute('callback', $finder);
-         $this->assertObjectHasAttribute('decompiler', $finder);
+        $finder = new FileStorageFinder($patternMatcher, null);
+        $this->assertObjectHasAttribute('callback', $finder);
+        $this->assertObjectHasAttribute('decompiler', $finder);
 
         //LogFile
         $logFileForTests = sprintf("%s/../../%s", __DIR__, $dataProvider::TESTS_LOG_FILE);
@@ -68,5 +70,4 @@ class FileStorageEngineTest extends KernelTest {
     }
 
 
-
-} 
+}
