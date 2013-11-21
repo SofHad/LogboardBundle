@@ -20,7 +20,7 @@ use Symfony\Component\HttpKernel\Profiler\FileProfilerStorage;
 use Symfony\Component\HttpKernel\Profiler\Profiler;
 
 
-abstract class QueryManagerTest extends KernelTest
+class QueryManagerTest extends KernelTest
 {
 
     protected $request;
@@ -28,6 +28,7 @@ abstract class QueryManagerTest extends KernelTest
     protected $queryManager;
     protected $profilerTest;
     protected $panel;
+    protected $found;
 
     /**
      * @return void
@@ -36,6 +37,15 @@ abstract class QueryManagerTest extends KernelTest
     {
         parent::setUp();
 
+        $this->queryManagerInitialization();
+
+        $this->findData();
+
+        $this->HandleQueries();
+    }
+
+    public function queryManagerInitialization()
+    {
         $dataProvider = new DataProvider();
 
         //Create queryManager
@@ -47,7 +57,24 @@ abstract class QueryManagerTest extends KernelTest
         $this->queryManager = new QueryManager($router, $this->panel, $defaultChart, $index);
     }
 
-    public function testInitializationQueryManager()
+    public function findData()
+    {
+        $this->request = new Request();
+        $this->request->attributes->set('_route', '_profiler');
+
+        //create profilerTest
+        $storage = new FileProfilerStorage($this->getDsn());
+        $this->profilerTest = new Profiler($storage);
+
+        $this->found = $this->profilerTest->find(null, null, 1, null, 0, null);
+    }
+
+    public function HandleQueries(){
+        $this->token = $this->found[0]["token"];
+        $this->queryManager->handleQueries($this->request, $this->token);
+    }
+
+    public function testQueryManagerInitialization()
     {
         $this->assertObjectHasAttribute('router', $this->queryManager);
         $this->assertObjectHasAttribute('panel', $this->queryManager);
@@ -55,33 +82,15 @@ abstract class QueryManagerTest extends KernelTest
         $this->assertObjectHasAttribute('index', $this->queryManager);
     }
 
-    public function findData()
+    public function testFoundData()
     {
-        $this->request = new Request();
-        $this->request->attributes->set('_route', '_profiler');
+        $this->assertTrue(is_array($this->found));
+        $this->assertCount(1, $this->found);
+        $this->assertArrayHasKey("token", $this->found[0]);
 
-        $storage = new FileProfilerStorage($this->getDsn());
-
-        //create profilerTest
-        $this->profilerTest = new Profiler($storage);
-        
-
-        return  $this->profilerTest->find(null, null, 1, null, 0, null);
     }
 
-
-    public function testHandleQueriesForEmptyEngine()
-    {
-        $found = $this->findData();
-
-        $this->assertTrue(is_array($found));
-        $this->assertCount(1, $found);
-        $this->assertArrayHasKey("token", $found[0]);
-
-        //447c8d
-        $this->token = $found[0]["token"];
-        $this->queryManager->handleQueries($this->request, $this->token);
-
+    public function testTheResultAfterHandlingQueries(){
         $this->assertObjectHasAttribute("isChartSubmitted", $this->queryManager);
         $this->assertObjectHasAttribute("engineSwitcherUrl", $this->queryManager);
         $this->assertObjectHasAttribute("iconSwitcherUrl", $this->queryManager);
@@ -98,7 +107,7 @@ abstract class QueryManagerTest extends KernelTest
             return sprintf('file:%s', $dsn);
         }
 
-        throw new NotFoundHttpException('There is no token in the "%s" directory', $dsn);
+        throw new NotFoundHttpException('The resource index.csv file not found in the "%s" directory.', $dsn);
     }
 
 

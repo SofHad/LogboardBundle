@@ -18,26 +18,30 @@ class ProfilerManagerTest extends QueryManagerTest
 {
     protected $profilerManager;
 
-    public function initializeProfilerManager(){
-
+    public function setUp(){
         parent::setUp();
 
-        $this->testHandleQueriesForEmptyEngine();
+        $this->initializeProfilerManager();
 
+        $this->loadProfiles();
+    }
+
+    public function initializeProfilerManager(){
         $counter = new Counter();
 
         $this->profilerManager = new ProfilerManager($counter, $this->profilerTest, $this->panel);
     }
 
    public function testInitializationProfilerManagerForEmptyEngine(){
-
-       $this->initializeProfilerManager();
-
        $this->assertObjectHasAttribute("collector", $this->profilerManager);
-
-       $this->profilerManager->loadProfiles($this->queryManager);
-
-       $this->assertObjectHasAttribute('countedData', $this->profilerManager);
    }
+
+    public function loadProfiles(){
+        $this->profilerManager->loadProfiles($this->queryManager);
+    }
+
+    public function testProfilesLoaded(){
+        $this->assertObjectHasAttribute('countedData', $this->profilerManager);
+    }
 
 }
