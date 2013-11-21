@@ -31,43 +31,36 @@ class ProfilerController extends ContainerAware
      * @var \Symfony\Component\HttpKernel\Profiler\Profiler
      */
     private $profiler;
-
     /**
      * Twig
      * @var \Twig_Environment
      */
     private $twig;
-
     /**
      * The template manager
      * @var \Symfony\Bundle\WebProfilerBundle\Profiler\TemplateManager
      */
     private $templateManager = null;
-
     /**
      * Templates
      * @var Array
      */
     private $templates;
-
     /**
      * Property accessor component
      * @var \Symfony\Component\PropertyAccess\PropertyAccessor
      */
     private $accessor;
-
     /**
      * The profiler manager
      * @var \So\LogboardBundle\Profiler\ProfilerManagerInterface
      */
     private $profilerManager;
-
     /**
      * Query manager
      * @var \So\LogboardBundle\Profiler\QueryManagerInterface
      */
     private $queryManager;
-
     /**
      * Engine
      * @var string
@@ -87,22 +80,17 @@ class ProfilerController extends ContainerAware
     public function logboardAction($token, Request $request)
     {
         $this->loadServices($token, $request);
-
         if ($this->queryManager->isPreview()) {
             return new Response($this->twig->render("LogboardBundle:Collector:viewer.html.twig", array('logs_stack' => $this->profilerManager->getPreviewData(), 'preview' => $this->queryManager->getPreview())), 200, array('Content-Type' => 'text/html'));
         }
-
-        if (null === $this->profiler = $this->profilerManager->getProfiler()) {
+        if (null === $this->profiler = $this->profilerManager->getProfiler())
             throw new NotFoundHttpException('The profiler must be enabled.');
-        }
 
-        if (!$profile = $this->profilerManager->getProfile()) {
+        if (!$profile = $this->profilerManager->getProfile())
             return new Response($this->twig->render('WebProfilerBundle:Profiler:info.html.twig', array('about' => 'no_token', 'token' => $token)), 200, array('Content-Type' => 'text/html'));
-        }
 
-        if (!$this->profilerManager->hasCollector()) {
+        if (!$this->profilerManager->hasCollector())
             throw new NotFoundHttpException(sprintf('Panel "%s" is not available for token "%s".', $this->profilerManager->getPanel(), $token));
-        }
 
         return new Response(
             $this->twig->render("LogboardBundle:Collector:logger.html.twig",
@@ -142,6 +130,23 @@ class ProfilerController extends ContainerAware
     }
 
     /**
+     * Set the engine for queryManager
+     *
+     * @throws BadQueryHttpException if The specified engine does not exist
+     */
+    protected function setEngine()
+    {
+        if (null !== $this->engine) {
+            $service = sprintf('logboard.%s', $this->engine);
+            if ($this->container->has($service)) {
+                $this->queryManager->setEngine($this->container->get($service));
+            } else {
+                throw new BadQueryHttpException(sprintf('The specified Logboard engine "%s" does not exist or is not configured correctly', $service));
+            }
+        }
+    }
+
+    /**
      * Gets the Template Manager.
      *
      * @return TemplateManager The Template Manager
@@ -153,23 +158,6 @@ class ProfilerController extends ContainerAware
         }
 
         return $this->templateManager;
-    }
-
-    /**
-     * Set the engine for queryManager
-     *
-     * @throws BadQueryHttpException if The specified engine does not exist
-     */
-    protected function setEngine()
-    {
-        if (null !== $this->engine) {
-            $service = sprintf('logboard.%s', $this->engine);
-            if($this->container->has($service)){
-                $this->queryManager->setEngine($this->container->get($service));
-            }else{
-                throw new BadQueryHttpException(sprintf('The specified Logboard engine "%s" does not exist or is not configured correctly', $service));
-            }
-        }
     }
 
 }
