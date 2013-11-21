@@ -69,6 +69,12 @@ class ProfilerController extends ContainerAware
     private $queryManager;
 
     /**
+     * Engine
+     * @var string
+     */
+    private $engine;
+
+    /**
      * The Logboard controller
      *
      * @param string $token The profiler token
@@ -80,14 +86,10 @@ class ProfilerController extends ContainerAware
      */
     public function logboardAction($token, Request $request)
     {
-        $this->loadServices();
+        $this->loadServices($token, $request);
 
-        $this->queryManager->handleQueries($request, $token);
-
-        $engine = $this->queryManager->getEngineServiceId();
-
-        if (null !== $engine) {
-            $service = sprintf('logboard.%s', $engine);
+        if (null !== $this->engine) {
+            $service = sprintf('logboard.%s', $this->engine);
             if($this->container->has($service)){
                 $this->queryManager->setEngine($this->container->get($service));
             }else{
@@ -140,13 +142,17 @@ class ProfilerController extends ContainerAware
      *
      * @return void
      */
-    public function loadServices()
+    protected function loadServices($token, Request $request)
     {
         $this->templates = $this->container->getParameter('data_collector.templates');
         $this->twig = $this->container->get("twig");
         $this->accessor = PropertyAccess::createPropertyAccessor();
         $this->profilerManager = $this->container->get("logboard.profiler_manager");
         $this->queryManager = $this->container->get('logboard.query_manager');
+
+        $this->queryManager->handleQueries($request, $token);
+
+        $this->engine = $this->queryManager->getEngineServiceId();
     }
 
     /**

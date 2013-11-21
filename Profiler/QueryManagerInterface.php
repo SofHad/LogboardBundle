@@ -12,7 +12,6 @@ namespace So\LogboardBundle\Profiler;
 
 use So\LogboardBundle\Profiler\Engine\EngineInterface;
 use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\Routing\Router;
 
 /**
  * Query Manager Interface

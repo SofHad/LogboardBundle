@@ -39,7 +39,6 @@ class ProfilerFinderParameters implements ParametersHandlerInterface
      */
     public function getParameters(Profile $profile = null)
     {
-        //TODO for v2.0
         //There are no settings in the version 1.0
         return array(
             'ip' => null,
