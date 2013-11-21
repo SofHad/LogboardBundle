@@ -89,17 +89,13 @@ class ProfilerController extends ContainerAware
         if (!$profile = $this->profilerManager->getProfile())
             return new Response($this->twig->render('WebProfilerBundle:Profiler:info.html.twig', array('about' => 'no_token', 'token' => $token)), 200, array('Content-Type' => 'text/html'));
 
-        if (!$this->profilerManager->hasCollector())
-            throw new NotFoundHttpException(sprintf('Panel "%s" is not available for token "%s".', $this->profilerManager->getPanel(), $token));
-
-        return new Response(
-            $this->twig->render("LogboardBundle:Collector:logger.html.twig", array(
-                    'profile' => $profile,
-                    'profiler_manager' => $this->profilerManager,
-                    'templates' => $this->getTemplateManager()->getTemplates($profile),
-                    'is_ajax' => $request->isXmlHttpRequest(),
-                    'query_manager' => $this->queryManager )
-            ), 200, array('Content-Type' => 'text/html'));
+        return new Response( $this->twig->render("LogboardBundle:Collector:logger.html.twig", array(
+                'profile' => $profile,
+                'profiler_manager' => $this->profilerManager,
+                'templates' => $this->getTemplateManager()->getTemplates($profile),
+                'is_ajax' => $request->isXmlHttpRequest(),
+                'query_manager' => $this->queryManager)
+        ), 200, array('Content-Type' => 'text/html'));
     }
 
     /**

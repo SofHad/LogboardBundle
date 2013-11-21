@@ -11,6 +11,7 @@
 namespace So\LogboardBundle\Profiler;
 
 use So\LogboardBundle\Exception\BadQueryHttpException;
+use So\LogboardBundle\Exception\NotFoundHttpException;
 use Symfony\Component\HttpKernel\Profiler\Profiler;
 use Symfony\Component\PropertyAccess\PropertyAccess;
 
@@ -26,67 +27,56 @@ class ProfilerManager implements ProfilerManagerInterface
      * @var \Symfony\Component\HttpKernel\Profiler\Profiler
      */
     protected $profiler;
-
     /**
      * The counter
      * @var \So\LogboardBundle\Profiler\CounterInterface
      */
     protected $counter;
-
     /**
      * The token
      * @var string
      */
     protected $token;
-
     /**
      * Data counted
      * @var Array
      */
     protected $countedData;
-
     /**
      * Property accessor component
      * @var \Symfony\Component\PropertyAccess\PropertyAccessor
      */
     protected $accessor;
-
     /**
      * The profile
      * @var \Symfony\Component\HttpKernel\Profiler\Profile
      */
     protected $profile;
-
     /**
      * The engine
      * @var \So\LogboardBundle\Profiler\Engine\EngineInterface
      */
     protected $engine;
-
     /**
      * The panel
      * @var string
      */
     protected $panel;
-
     /**
      * The collector
      * @var \Symfony\Component\HttpKernel\DataCollector\DataCollectorInterface
      */
     protected $collector;
-
     /**
      * Query manager
      * @var \So\LogboardBundle\Profiler\QueryManagerInterface
      */
     protected $queryManager;
-
     /**
      * The data
      * @var Array
      */
     protected $data = array();
-
     /**
      * The preview data
      * @var Array
@@ -140,14 +130,15 @@ class ProfilerManager implements ProfilerManagerInterface
      * {@inheritdoc}
      *
      */
-    public function countData()
+    public function getProfile()
     {
-        if (empty($this->data)) {
-            return;
+        $this->profile = $this->profiler->loadProfile($this->token);
+
+        if(!$this->hasCollector()){
+            throw new NotFoundHttpException(sprintf('Panel "%s" is not available for token "%s".', $this->getPanel(), $this->queryManager->getToken()));
         }
 
-        $this->countedData = $this->counter->handle($this->data)
-                                                                ->getCountedData();
+        return $this->profile;
     }
 
     /**
@@ -157,6 +148,31 @@ class ProfilerManager implements ProfilerManagerInterface
     public function compile()
     {
         $this->data = null === $this->engine ? DataResolver::refine($this->getCollector()->getLogs()) : $this->engine->loadProfiles();
+    }
+
+    /**
+     * {@inheritdoc}
+     *
+     */
+    public function getCollector()
+    {
+        if (null !== $this->collector) {
+            $this->collector;
+        }
+
+         return $this->collector = $this->profile->getCollector($this->panel);
+
+
+
+    }
+
+    /**
+     * {@inheritdoc}
+     *
+     */
+    public function getPanel()
+    {
+        return $this->panel;
     }
 
     /**
@@ -186,13 +202,14 @@ class ProfilerManager implements ProfilerManagerInterface
      * {@inheritdoc}
      *
      */
-    public function getCollector()
+    public function countData()
     {
-        if (null !== $this->collector) {
-            $this->collector;
+        if (empty($this->data)) {
+            return;
         }
 
-        return $this->collector = $this->profile->getCollector($this->panel);
+        $this->countedData = $this->counter->handle($this->data)
+            ->getCountedData();
     }
 
     /**
@@ -208,27 +225,9 @@ class ProfilerManager implements ProfilerManagerInterface
      * {@inheritdoc}
      *
      */
-    public function getProfile()
-    {
-        return $this->profile = $this->profiler->loadProfile($this->token);
-    }
-
-    /**
-     * {@inheritdoc}
-     *
-     */
     public function getPreviewData()
     {
         return $this->previewData;
-    }
-
-    /**
-     * {@inheritdoc}
-     *
-     */
-    public function getPanel()
-    {
-        return $this->panel;
     }
 
     /**
