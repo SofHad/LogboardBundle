@@ -87,9 +87,6 @@ class ProfilerController extends ContainerAware
     public function logboardAction($token, Request $request)
     {
         $this->loadServices($token, $request);
-        $this->setEngine();
-
-        $this->profilerManager->loadProfiles($this->queryManager);
 
         if ($this->queryManager->isPreview()) {
             return new Response($this->twig->render("LogboardBundle:Collector:viewer.html.twig", array('logs_stack' => $this->profilerManager->getPreviewData(), 'preview' => $this->queryManager->getPreview())), 200, array('Content-Type' => 'text/html'));
@@ -140,6 +137,10 @@ class ProfilerController extends ContainerAware
         $this->queryManager->handleQueries($request, $token);
 
         $this->engine = $this->queryManager->getEngineServiceId();
+
+        $this->setEngine();
+
+        $this->profilerManager->loadProfiles($this->queryManager);
     }
 
     /**
