@@ -92,13 +92,11 @@ class ProfilerController extends ContainerAware
             return new Response($this->twig->render("LogboardBundle:Collector:viewer.html.twig", array('logs_stack' => $this->profilerManager->getPreviewData(), 'preview' => $this->queryManager->getPreview())), 200, array('Content-Type' => 'text/html'));
         }
 
-        $this->profiler = $this->profilerManager->getProfiler();
-        if (null === $this->profiler) {
+        if (null === $this->profiler = $this->profilerManager->getProfiler()) {
             throw new NotFoundHttpException('The profiler must be enabled.');
         }
 
-        $profile = $this->profilerManager->getProfile();
-        if (!$profile) {
+        if (!$profile = $this->profilerManager->getProfile()) {
             return new Response($this->twig->render('WebProfilerBundle:Profiler:info.html.twig', array('about' => 'no_token', 'token' => $token)), 200, array('Content-Type' => 'text/html'));
         }
 
