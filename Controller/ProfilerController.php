@@ -80,9 +80,9 @@ class ProfilerController extends ContainerAware
     public function logboardAction($token, Request $request)
     {
         $this->loadServices($token, $request);
-        if ($this->queryManager->isPreview()) {
+        if ($this->queryManager->isPreview())
             return new Response($this->twig->render("LogboardBundle:Collector:viewer.html.twig", array('logs_stack' => $this->profilerManager->getPreviewData(), 'preview' => $this->queryManager->getPreview())), 200, array('Content-Type' => 'text/html'));
-        }
+
         if (null === $this->profiler = $this->profilerManager->getProfiler())
             throw new NotFoundHttpException('The profiler must be enabled.');
 
@@ -99,7 +99,7 @@ class ProfilerController extends ContainerAware
                     'profiler_manager' => $this->profilerManager,
                     'templates' => $this->getTemplateManager()->getTemplates($profile),
                     'is_ajax' => $request->isXmlHttpRequest(),
-                    'query_manager' => $this->queryManager,
+                    'query_manager' => $this->queryManager
                 )
             ),
             200,
