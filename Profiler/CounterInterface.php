@@ -16,7 +16,7 @@ interface CounterInterface
     /**
      * Handle the operation
      *
-     * @param Array $collector     Data collection
+     * @param Array $collector Data collection
      *
      * @return CounterInterface
      */

@@ -10,7 +10,6 @@
 
 namespace So\LogboardBundle\Profiler;
 
-use Doctrine\Common\Proxy\Exception\InvalidArgumentException;
 use So\LogboardBundle\Exception\BadQueryHttpException;
 use Symfony\Component\HttpKernel\Profiler\Profiler;
 use Symfony\Component\PropertyAccess\PropertyAccess;
@@ -97,9 +96,9 @@ class ProfilerManager implements ProfilerManagerInterface
     /**
      * Constructor
      *
-     * @param CounterInterface $counter    The counter
-     * @param \Symfony\Component\HttpKernel\Profiler\Profiler $profiler   The profiler
-     * @param string $panel      The panel
+     * @param CounterInterface $counter The counter
+     * @param \Symfony\Component\HttpKernel\Profiler\Profiler $profiler The profiler
+     * @param string $panel The panel
      *
      * @return void
      */
@@ -148,7 +147,7 @@ class ProfilerManager implements ProfilerManagerInterface
         }
 
         $this->countedData = $this->counter->handle($this->data)
-            ->getCountedData();
+                                                                ->getCountedData();
     }
 
     /**

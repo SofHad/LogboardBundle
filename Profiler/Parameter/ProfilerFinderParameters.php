@@ -22,8 +22,8 @@ class ProfilerFinderParameters implements ParametersHandlerInterface
     /**
      * Construct
      *
-     * @param integer $dataCount             The count of data
-     * @param string $panel                 The panel
+     * @param integer $dataCount The count of data
+     * @param string $panel The panel
      *
      * @return void
      */

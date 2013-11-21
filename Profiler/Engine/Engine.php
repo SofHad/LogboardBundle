@@ -9,9 +9,9 @@
  */
 
 namespace So\LogboardBundle\Profiler\Engine;
+
 use So\LogboardBundle\Profiler\Engine\Finder\FinderInterface;
 use So\LogboardBundle\Profiler\Parameter\ParametersHandlerInterface;
-use Symfony\Component\HttpKernel\Profiler\Profile;
 use Symfony\Component\HttpKernel\Profiler\Profiler;
 use Symfony\Component\PropertyAccess\PropertyAccess;
 
@@ -86,11 +86,11 @@ abstract class Engine implements EngineInterface
     /**
      * Construct
      *
-     * @param Profiler $profiler              The Profiler
-     * @param FinderInterface $finder                The Finder
-     * @param ParametersHandlerInterface $parametersHandler     The Finder
-     * @param integer $dataCount             The count of data
-     * @param string $panel                 The panel
+     * @param Profiler $profiler The Profiler
+     * @param FinderInterface $finder The Finder
+     * @param ParametersHandlerInterface $parametersHandler The Finder
+     * @param integer $dataCount The count of data
+     * @param string $panel The panel
      *
      * @return void
      */

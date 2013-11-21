@@ -17,7 +17,7 @@ interface ProfilerManagerInterface
     /**
      * Load profiles
      *
-     * @param QueryManagerInterface $queryManager  The query manager object
+     * @param QueryManagerInterface $queryManager The query manager object
      *
      * @return void
      *

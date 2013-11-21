@@ -13,7 +13,7 @@ namespace So\LogboardBundle\Profiler\Parameter;
 use Symfony\Component\HttpKernel\Profiler\Profile;
 
 /**
- * Symfony logs handler
+ * File storage parameters
  *
  * @author Sofiane HADDAG <sofiane.haddag@yahoo.fr>
  */
@@ -25,8 +25,8 @@ class FileStorageParameters implements ParametersHandlerInterface
     /**
      * Construct
      *
-     * @param integer $dataCount             The count of data
-     * @param string  $file                  The file path
+     * @param integer $dataCount The count of data
+     * @param string $file The file path
      *
      * @return void
      */

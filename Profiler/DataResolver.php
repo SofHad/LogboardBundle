@@ -21,7 +21,7 @@ class DataResolver
     /**
      * Data adapter
      *
-     * @param Array $collections   Data collection
+     * @param Array $collections Data collection
      *
      * @return Array
      */

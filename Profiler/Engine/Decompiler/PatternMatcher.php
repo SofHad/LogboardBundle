@@ -16,16 +16,15 @@ use Symfony\Component\PropertyAccess\PropertyAccess;
 
 class PatternMatcher implements DecompilerInterface
 {
-
     protected $pattern;
     protected $key;
 
     /**
      * Constructor
      *
-     * @param string $pattern   The regex pattern
-     * @param integer $key      The key
-     * @param integer $value    The value
+     * @param string $pattern The regex pattern
+     * @param integer $key The key
+     * @param integer $value The value
      *
      * @return void
      */
@@ -59,11 +58,9 @@ class PatternMatcher implements DecompilerInterface
 
         preg_match($this->pattern, $input, $matches);
 
-
         if (null === $matches || !isset($matches[$this->key])) {
             return;
         }
-
 
         $output['key'] = $matches[$this->key];
         $output['value'] = str_replace("[]", null, $matches[0]);

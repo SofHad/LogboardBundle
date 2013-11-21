@@ -25,8 +25,8 @@ interface QueryManagerInterface
     /**
      * Handle the queries
      *
-     * @param Request $request    The request
-     * @param string $token      The token
+     * @param Request $request The request
+     * @param string $token The token
      *
      * @return void
      */
@@ -43,7 +43,7 @@ interface QueryManagerInterface
     /**
      * Set Engine
      *
-     * @param EngineInterface $engine  The engine
+     * @param EngineInterface $engine The engine
      *
      * @return void
      */

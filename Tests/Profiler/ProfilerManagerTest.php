@@ -46,9 +46,14 @@ class ProfilerManagerTest extends QueryManagerTest
 
     public function testProfilesLoaded()
     {
+        $countedData = $this->profilerManager->getCountedData();
         $this->assertObjectHasAttribute('countedData', $this->profilerManager);
-        $this->assertArrayHasKey('DEBUG', $this->profilerManager->getCountedData());
+
+        $this->assertArrayHasKey('DEBUG', $countedData);
+        $this->assertEquals(27, $countedData["DEBUG"]["count"]);
+
         $this->assertArrayHasKey('INFO', $this->profilerManager->getCountedData());
+        $this->assertEquals(1, $countedData["INFO"]["count"]);
     }
 
 }

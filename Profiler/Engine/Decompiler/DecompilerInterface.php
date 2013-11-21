@@ -17,7 +17,7 @@ interface DecompilerInterface
     /**
      *  Breaks a string into an array
      *
-     * @param string $input  The input string
+     * @param string $input The input string
      *
      * @return Array
      */

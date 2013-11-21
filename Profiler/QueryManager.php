@@ -91,9 +91,9 @@ class QueryManager implements QueryManagerInterface
     /**
      * Constructor
      *
-     * @param \Symfony\Component\Routing\Router $router                       The panel
-     * @param string $panel                        The panel
-     * @param string $defaultChart                 The default chart
+     * @param \Symfony\Component\Routing\Router $router The panel
+     * @param string $panel The panel
+     * @param string $defaultChart The default chart
      *
      * @return void
      */
@@ -161,7 +161,7 @@ class QueryManager implements QueryManagerInterface
         $currentRoute = $this->request->attributes->get('_route');
 
         $this->router
-            ->generate($currentRoute, array('token' => $this->token), true);
+                    ->generate($currentRoute, array('token' => $this->token), true);
 
         $this->iconSwitcherUrl = $this->engineSwitcherUrl .= "?panel=" . $this->panel;
 

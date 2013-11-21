@@ -13,7 +13,6 @@ namespace So\LogboardBundle\Profiler\Engine\Finder;
 use So\LogboardBundle\Profiler\Engine\Decompiler\DecompilerInterface;
 use Symfony\Component\DependencyInjection\Exception\InvalidArgumentException;
 use Symfony\Component\Filesystem\Filesystem;
-use Symfony\Component\Form\Exception\InvalidConfigurationException;
 use Symfony\Component\HttpFoundation\File\Exception\FileNotFoundException;
 use Symfony\Component\HttpKernel\Profiler\Profiler;
 use Symfony\Component\PropertyAccess\PropertyAccess;
@@ -41,25 +40,24 @@ class FileStorageFinder implements FinderInterface
      * The elements
      * @var Array
      */
+    protected $elements = array();
 
     /**
      * The decompiler
      * @var Array
      */
-    protected $elements = array();
-
-    /**
-     * The decompiler interface
-     * @var \So\LogboardBundle\Profiler\Engine\Decompiler\DecompilerInterface
-     */
     protected $decompiler;
 
+    /**
+     * The callback
+     * @var string
+     */
     protected $callback = null;
 
     /**
      * Constructor
      *
-     * @param Profiler $decompiler   The Decompiler
+     * @param Profiler $decompiler The Decompiler
      *
      * @return void
      */
@@ -98,11 +96,11 @@ class FileStorageFinder implements FinderInterface
         foreach ($file as $line) {
             if (null !== $data = $this->decompiler->split($line)) {
 
-                if($this->hasCallback()){
+                if ($this->hasCallback()) {
                     $data = $this->callbackHandler($data);
                 }
 
-                if(null !== $data){
+                if (null !== $data) {
                     $this->data[] = $data;
                 }
             }
@@ -117,7 +115,7 @@ class FileStorageFinder implements FinderInterface
      */
     public function callbackHandler($data)
     {
-       return call_user_func_array($this->callback, array($data));
+        return call_user_func_array($this->callback, array($data));
     }
 
     /**
@@ -126,6 +124,6 @@ class FileStorageFinder implements FinderInterface
      */
     public function hasCallback()
     {
-       return null === $this->callback ? false : true;
+        return null === $this->callback ? false : true;
     }
 }

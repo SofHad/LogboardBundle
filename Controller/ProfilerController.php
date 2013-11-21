@@ -69,7 +69,7 @@ class ProfilerController extends ContainerAware
     private $queryManager;
 
     /**
-     * Renders a profiler for a logger.
+     * The Logboard controller
      *
      * @param string $token The profiler token
      * @param Request $request The Request
@@ -78,7 +78,7 @@ class ProfilerController extends ContainerAware
      *
      * @throws NotFoundHttpException if the profiler is null or the service does not exist
      */
-    public function panelLogAction($token, Request $request)
+    public function logboardAction($token, Request $request)
     {
         $this->loadServices();
 

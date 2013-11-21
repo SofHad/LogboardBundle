@@ -10,8 +10,6 @@
 
 namespace So\LogboardBundle\Profiler\Engine;
 
-use Symfony\Component\HttpKernel\Profiler\Profile;
-
 interface EngineInterface
 {
 

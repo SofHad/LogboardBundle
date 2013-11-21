@@ -91,7 +91,7 @@ class ProfilerLogListener implements EventSubscriberInterface
             return;
         }
 
-        $this->request->attributes->set('_controller', 'LogboardBundle:Profiler:panelLog');
+        $this->request->attributes->set('_controller', 'LogboardBundle:Profiler:logboard');
 
         return $event->setController($this->controllerResolver->getController($this->request));
     }
