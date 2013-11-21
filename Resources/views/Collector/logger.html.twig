@@ -1,6 +1,11 @@
+{% set token = query_manager.token %}
+{% set panel = profiler_manager.getPanel %}
+
 {% extends '@WebProfiler/Profiler/layout.html.twig' %}
+
 {% import _self as logger %}
 
+{% set counted_data = profiler_manager.getCountedData %}
 {% block head %}
     {{ parent() }}
     {% include 'LogboardBundle:Collector:style.css.twig' %}
@@ -21,7 +26,8 @@
 {% endblock %}
 
 {% block panel %}
-    {% set priority = request.query.get('priority', 0) %}
+
+    {% set priority = query_manager.getRequest.query.get('priority', 0) %}
     {# Chart #}
     <h2>Logs</h2>
 

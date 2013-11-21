@@ -292,4 +292,13 @@ class QueryManager implements QueryManagerInterface
         return $this->index;
     }
 
+    /**
+     * {@inheritdoc}
+     *
+     */
+    public function getRequest()
+    {
+        return $this->request;
+    }
+
 }

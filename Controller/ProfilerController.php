@@ -87,15 +87,7 @@ class ProfilerController extends ContainerAware
     public function logboardAction($token, Request $request)
     {
         $this->loadServices($token, $request);
-
-        if (null !== $this->engine) {
-            $service = sprintf('logboard.%s', $this->engine);
-            if($this->container->has($service)){
-                $this->queryManager->setEngine($this->container->get($service));
-            }else{
-                throw new BadQueryHttpException(sprintf('The specified Logboard engine "%s" does not exist or is not configured correctly', $service));
-            }
-        }
+        $this->setEngine();
 
         $this->profilerManager->loadProfiles($this->queryManager);
 
@@ -120,16 +112,11 @@ class ProfilerController extends ContainerAware
         return new Response(
             $this->twig->render("LogboardBundle:Collector:logger.html.twig",
                 array(
-                    'token' => $token,
                     'profile' => $profile,
-                    'collector' => $this->profilerManager->getCollector(),
-                    'panel' => $this->profilerManager->getPanel(),
-                    'request' => $request,
+                    'profiler_manager' => $this->profilerManager,
                     'templates' => $this->getTemplateManager()->getTemplates($profile),
                     'is_ajax' => $request->isXmlHttpRequest(),
-                    'counted_data' => $this->profilerManager->getCountedData(),
                     'query_manager' => $this->queryManager,
-                    'logs_stack' => $this->profilerManager->getData()
                 )
             ),
             200,
@@ -167,6 +154,23 @@ class ProfilerController extends ContainerAware
         }
 
         return $this->templateManager;
+    }
+
+    /**
+     * Set the engine for queryManager
+     *
+     * @throws BadQueryHttpException if The specified engine does not exist
+     */
+    protected function setEngine()
+    {
+        if (null !== $this->engine) {
+            $service = sprintf('logboard.%s', $this->engine);
+            if($this->container->has($service)){
+                $this->queryManager->setEngine($this->container->get($service));
+            }else{
+                throw new BadQueryHttpException(sprintf('The specified Logboard engine "%s" does not exist or is not configured correctly', $service));
+            }
+        }
     }
 
 }

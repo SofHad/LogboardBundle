@@ -119,4 +119,11 @@ interface QueryManagerInterface
      * @return Array
      */
     public function getIndex();
+
+    /**
+     * Get the request
+     *
+     * @return \Symfony\Component\HttpFoundation\Request
+     */
+    public function getRequest();
 }
