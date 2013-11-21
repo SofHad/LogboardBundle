@@ -1,9 +1,10 @@
 #Logboard Bundle
 
 [![SensioLabsInsight](https://insight.sensiolabs.com/projects/1804b213-0d85-40e8-8f67-d1c768c7b7e2/big.png)](https://insight.sensiolabs.com/projects/1804b213-0d85-40e8-8f67-d1c768c7b7e2)
-Log Reporting Dashboard for Symfony2
 
-![LogboardBundle](screen.png "LogboardBundle Screenshot")
+> Log Reporting Dashboard for Symfony2
+
+[LogboardBundle](screen.png "LogboardBundle Screenshot")
 
 
 ## Installation
