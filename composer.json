@@ -3,7 +3,7 @@
     "type":        "symfony-bundle",
     "description": "Log Reporting Dashboard for Symfony2",
     "keywords":    ["profiler", "logger", "dashboard log", "logboard bundle"],
-    "homepage":    "git@github.com:SofHad/LogboardBundle.git",
+    "homepage":    "https://github.com/SofHad/LogboardBundle",
     "license":     "MIT",
     "authors": [
         {
