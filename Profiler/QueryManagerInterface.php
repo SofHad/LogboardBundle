@@ -126,4 +126,12 @@ interface QueryManagerInterface
      * @return \Symfony\Component\HttpFoundation\Request
      */
     public function getRequest();
+
+
+    /**
+     * Get the title of the current page
+     *
+     * @return string
+     */
+    public function getCurrentTitle();
 }

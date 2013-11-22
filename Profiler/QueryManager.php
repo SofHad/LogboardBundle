@@ -301,4 +301,19 @@ class QueryManager implements QueryManagerInterface
         return $this->request;
     }
 
+    /**
+     * {@inheritdoc}
+     *
+     */
+    public function getCurrentTitle()
+    {
+       foreach($this->index as $menu){
+           foreach($menu as $subMenu){
+                if($subMenu['engine_service'] === $this->engineServiceId ){
+                    return $subMenu['title'];
+                }
+           }
+       }
+    }
+
 }
