@@ -26,7 +26,6 @@ class LogboardExtension extends Extension
         $loader = new Loader\XmlFileLoader($container, new FileLocator(__DIR__ . '/../Resources/config'));
 
         $loader->load('services.xml');
-        $loader->load('extension.xml');
 
         $configuration = $this->getConfiguration($configs, $container);
 
@@ -108,7 +107,6 @@ class LogboardExtension extends Extension
 
     public function getDIPath($path)
     {
-
         if (!is_string($path)) {
             return;
         }

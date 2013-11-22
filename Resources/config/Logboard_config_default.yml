@@ -58,11 +58,6 @@ logboard:
                 split:
                     parameter: /.*(PHP\s[^\s:]*).*/
 
-            priority:
-                title: Priority
-                split:
-                    parameter: /.*(PHP\s[^\s:]*).*/
-
             files:
                 title: Files
                 split:

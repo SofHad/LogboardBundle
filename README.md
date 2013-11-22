@@ -6,8 +6,6 @@
 
 ## Installation
 
-#### If you are working with Symfony >= 2.2
-
 Add this in your `composer.json`
 
     "require-dev": {

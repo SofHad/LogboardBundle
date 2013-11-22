@@ -99,7 +99,10 @@ class ProfilerController extends ContainerAware
     }
 
     /**
-     * Initialize variables
+     * Load the services
+     *
+     * @param string $token The profiler token
+     * @param Request $request The Request
      *
      * @return void
      */
@@ -123,7 +126,7 @@ class ProfilerController extends ContainerAware
     /**
      * Set the engine for queryManager
      *
-     * @throws BadQueryHttpException if The specified engine does not exist
+     * @throws BadQueryHttpException if The engine does not exist
      */
     protected function setEngine()
     {
