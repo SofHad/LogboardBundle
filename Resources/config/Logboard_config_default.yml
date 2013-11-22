@@ -111,17 +111,3 @@ logboard:
                 split:
                     parameter: /^\[([0-9\/A-Za-z]*)(.*)/
 #-----------------------------------------------------------------------------------------------------------------------
-
-#The process ID
-#
-#    Apache logs:
-#        title: Apache logs
-#        src: file
-#        data: C:\xampp\apache\logs\error.log
-#        exclude: ~
-#        engine: file_storage
-#        decompiler: pattern_matcher
-#        menu:
-#           date:
-#                  split: /^\[([a-zA-Z0-9\s:.]*)\](.*)/
-#                  title: Date
