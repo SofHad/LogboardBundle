@@ -1,0 +1,17 @@
+<h4>Result for: {{ preview }}</h4>
+{% if logs_stack %}
+    <table style="border: 1px solid #d0dbb3; font-family: Verdana, Arial, Helvetica, sans-serif; font-size: 11px; padding: 0; margin: 0; border-spacing: 0; ">
+        {% for k, log in logs_stack %}
+            <tr>
+                <td style="border: 1px solid #d0dbb3; padding: 3px 5px;">{{ log["count"] }}</td>
+                <td style="border: 1px solid #d0dbb3; padding: 3px 5px;">{{ k }}</td>
+            </tr>
+        {% else %}
+            <li><em>No logs available for this priority.</em></li>
+        {% endfor %}
+    </table>
+{% else %}
+    <p>
+        <em>No logs available.</em>
+    </p>
+{% endif %}

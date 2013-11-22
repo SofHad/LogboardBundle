@@ -2,9 +2,12 @@
 
     // Load the Visualization API and the piechart package.
     google.load('visualization', '1.0', {'packages': ['corechart']});
+
     google.setOnLoadCallback(drawChart);
 
+
     function drawChart() {
+
 
         // Create the data table.
         var data = new google.visualization.DataTable();
@@ -14,14 +17,17 @@
             {% for key, item in counted_data %}
             ["{{ key }}", {{ item["count"] }}],
             {% endfor %}
+
         ]);
 
+
         var options = {
-            vAxis: {title: '{{ query_manager.getCurrentTitle }}',  titleTextStyle: {color: '#aacd4e', fontSize: 22, bold: true}},
-            'width': 650,
-            'height': 400
+            'width': 600,
+            'height': 400,
+            'colors': ['#b255e3', '#1fa2ed', '#40e525', '#ffea00', '#ffa200','#ff0006','#8f0b0e','#2d2d2d']
         };
 
+        //LineChart - PieChart - ColumnChart
         var chart = new google.visualization.{{ query_manager.getChart }}(document.getElementById('chart_current'));
 
         google.visualization.events.addListener(chart, 'select', selectHandler);
@@ -45,4 +51,9 @@
     function selectClose(e) {
         document.getElementById("current-div").style.display = "none";
     }
+
+    function select() {
+
+    }
+
 </script>
