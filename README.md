@@ -30,5 +30,7 @@ Most of the time, we need this bundle to be only activated in the `dev` environm
 
 ## Screenshot
 
+Here is a quick look at the log reporting dashboard:
+
 ![Screenshot](screen.png)
 
