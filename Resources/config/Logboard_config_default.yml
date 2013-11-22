@@ -4,11 +4,12 @@
 #
 
 ##Enable this resource only for tests
-imports:
-    - { resource: "@LogboardBundle/Tests/unit_testing_config.yml" }
+#imports:
+#    - { resource: "@LogboardBundle/Tests/unit_testing_config.yml" }
 
 logboard:
 
+#-----------------------------------------------------------------------------------------------------------------------
     All logs:
         enabled: true
         title: All logs
@@ -38,23 +39,77 @@ logboard:
                 title: Doctrine
                 split:
                     parameter: /.*(Doctrine[^\s\:]*).*/i
+#-----------------------------------------------------------------------------------------------------------------------
 
+    PHP:
+        title: PHP logs
+        src: file
+        data: C:\xampp\php\logs\php_error_log
+        engine: file_storage
+        decompiler: pattern_matcher
+        menu:
+            date:
+                title: Date
+                split:
+                    parameter: /\[([0-9]{2}-[a-zA-Z]{3}-[0-9]{4})\s[0-9]{2}:[0-9]{2}:[0-9]{2}\s[A-Z]*].*/
 
-#           Events:
-#                   split:  /(kernel.[a-zA-Z]*).*(to.*)/
-#                   title: Events
+            priority:
+                title: Priority
+                split:
+                    parameter: /.*(PHP\s[^\s:]*).*/
 
-#    PHP logs:
-#        title: PHP logs
-#        src: file
-#        data: C:\xampp\php\logs\php_error_log
-#        exclude: ~
-#        engine: file_storage
-#        decompiler: pattern_matcher
-#        menu:
-#           date:
-#                  split: /\[([0-9]{2}-[a-zA-Z]{3}-[0-9]{4})\s[0-9]{2}:[0-9]{2}:[0-9]{2}\s[A-Z]*](.*)/
-#                  title: Date
+            priority:
+                title: Priority
+                split:
+                    parameter: /.*(PHP\s[^\s:]*).*/
+
+            files:
+                title: Files
+                split:
+                    parameter: |.*\\+(\w*.php).*|
+
+            Exceptions:
+                title: Exceptions
+                split:
+                    parameter: |.*Uncaught exception+.*\\+(\w*.php).*|
+#-----------------------------------------------------------------------------------------------------------------------
+
+    Apache:
+        title: Apache logs
+        src: file
+        data: C:\xampp\apache\logs\error.log
+        engine: file_storage
+        decompiler: pattern_matcher
+        menu:
+            date:
+                title: Date
+                split:
+                    parameter: /^\[([a-zA-Z0-9\s:.]*)\](.*)/
+                    callback: \So\LogboardBundle\Callback\dateFormatter::apacheFormat
+
+            priority:
+                title: Priority
+                split:
+                    parameter: /^\[+[^\]]*.\s\[([^\]]*)(.*)/
+
+            tid :
+                title: Process PID
+                split:
+                    parameter: /^\[+[^\]]*.\s\[[^\]]*\]\s\[(pid\s\d*)(.*)/
+
+            pid :
+                title: Process TID
+                split:
+                    parameter: /^\[+[^\]]*.\s\[[^\]]*\]\s\[.*(tid\s\d*)(.*)/
+
+            SSL_REQUEST :
+                title: SSL Request
+                data: C:\xampp\apache\logs\ssl_request.log
+                split:
+                    parameter: /^\[([0-9\/A-Za-z]*)(.*)/
+#-----------------------------------------------------------------------------------------------------------------------
+
+#The process ID
 #
 #    Apache logs:
 #        title: Apache logs
