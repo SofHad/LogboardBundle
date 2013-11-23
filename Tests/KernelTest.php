@@ -10,7 +10,7 @@
 
 namespace So\LogboardBundle\Tests;
 
-require_once dirname(__DIR__) . '/../../../app/AppKernel.php';
+require_once 'AppKernel.php';
 
 /**
  * Crea
