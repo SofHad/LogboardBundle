@@ -10,8 +10,13 @@ before_script:
   - wget http://getcomposer.org/composer.phar
   - php composer.phar install
 #  - php composer.phar create-project symfony/framework-standard-edition app/
-  - symfony/framework-standard-edition": 2.4.*@dev
+  - symfony/framework-standard-edition": 2.2.*
   - composer update --dev
+  - ls
+  - cd vendor
+  - ls
+  - cd ..
+
 
 
 script: phpunit --coverage-text
