@@ -11,6 +11,7 @@ before_script:
   - php composer.phar install
 #  - php composer.phar create-project symfony/framework-standard-edition app/
   - composer require symfony/framework-bundle:${SYMFONY_VERSION} --no-update
+  - composer require symfony/property-access: 2.5.*@dev
   - composer update --dev
 
 
