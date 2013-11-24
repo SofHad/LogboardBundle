@@ -10,11 +10,11 @@
 
 namespace So\LogboardBundle\Tests;
 
-$file = __DIR__ . '/../vendor/app/AppKernel.php';
+$file = __DIR__ . '/../vendor/symfony/app/AppKernel.php';
 
 if (!file_exists($file)) {
 
-    if ($handle = opendir( __DIR__ . '/../vendor/')) {
+    if ($handle = opendir( __DIR__ . '/../vendor/symfony/')) {
         echo "Gestionnaire du dossier : $handle\n";
         echo "Entrées :\n";
 
