@@ -4,7 +4,7 @@ php:
   - 5.4
 
 before_script:
-    - git clone git@github.com:symfony/symfony-standard.git
+    - 'git clone git@github.com:symfony/symfony-standard.git'
     - composer self-update
     - composer require --no-update symfony/framework-bundle:${SYMFONY_VERSION}
     - composer install --prefer-source
