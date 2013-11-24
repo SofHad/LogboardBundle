@@ -10,11 +10,12 @@
 
 namespace So\LogboardBundle\Tests;
 
-$file = __DIR__ . '/../vendor/symfony/app/AppKernel.php';
+//http-kernel
+$file = __DIR__ . '/Resources/AppKernel.php';
 
 if (!file_exists($file)) {
 
-    if ($handle = opendir( __DIR__ . '/../vendor/symfony/')) {
+    if ($handle = opendir( __DIR__ . '/Resources/')) {
         echo "Gestionnaire du dossier : $handle\n";
         echo "Entrées :\n";
 
@@ -56,7 +57,7 @@ abstract class KernelTest extends \PHPUnit_Framework_TestCase
      */
     public function setUp()
     {
-        $this->kernel = new \AppKernel('test', true);
+        $this->kernel = new AppKernel('test', true);
         $this->kernel->boot();
 
         $this->container = $this->kernel->getContainer();
