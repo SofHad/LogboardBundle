@@ -3,7 +3,7 @@ language: php
 php:
   - 5.4
 
-before_script: composer.phar create-project symfony/framework-standard-edition path/
+before_script: composer.phar create-project symfony/framework-standard-edition ./path/
 
 script: phpunit -c app
 
