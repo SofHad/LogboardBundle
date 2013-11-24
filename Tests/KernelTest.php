@@ -35,11 +35,7 @@ abstract class KernelTest extends WebTestCase
         if (null !== static::$kernel) {
             static::$kernel->shutdown();
         }
-//DUMP--------------------------
-require_once 'Kint.class.php';
-\Kint::dump($this->createKernel());
-exit ;
-//DUMP--------------------------
+
 
         $this->container = static::$kernel->getContainer();
     }
