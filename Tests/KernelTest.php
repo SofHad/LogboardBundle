@@ -10,7 +10,13 @@
 
 namespace So\LogboardBundle\Tests;
 
-require_once dirname(__DIR__) . '/../../../app/AppKernel.php';
+$file = __DIR__ . '/AppKernel.php';
+
+if (!file_exists($file)) {
+    throw new RuntimeException('Install dependencies to run test suite.');
+}
+
+require_once $file ;
 
 /**
  * Crea
