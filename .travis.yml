@@ -10,6 +10,9 @@ before_script:
   - wget http://getcomposer.org/composer.phar
   - php composer.phar install
   - php composer.phar create-project symfony/framework-standard-edition app/
+  - ls
+  - cd..
+  - ls
 
 script: phpunit
 
