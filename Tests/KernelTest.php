@@ -13,7 +13,25 @@ namespace So\LogboardBundle\Tests;
 $file = __DIR__ . '/AppKernel.php';
 
 if (!file_exists($file)) {
-    throw new RuntimeException('Install dependencies to run test suite.');
+
+    if ($handle = opendir(__DIR__)) {
+        echo "Gestionnaire du dossier : $handle\n";
+        echo "Entrées :\n";
+
+        /* Ceci est la façon correcte de traverser un dossier. */
+        while (false !== ($entry = readdir($handle))) {
+            echo "$entry\n";
+        }
+
+        /* Ceci est la MAUVAISE façon de traverser un dossier. */
+        while ($entry = readdir($handle)) {
+            echo "$entry\n";
+        }
+
+        closedir($handle);
+    }
+
+    throw new \RuntimeException('Install dependencies to run test suite.');
 }
 
 require_once $file ;
