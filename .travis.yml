@@ -11,5 +11,6 @@ before_script:
   - php composer.phar install
   - php composer.phar create-project symfony/framework-standard-edition app/
 
+
 script: phpunit --coverage-text
 
