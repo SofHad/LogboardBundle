@@ -15,7 +15,67 @@ $file = __DIR__ . '/../vendor/path/app/AppKernel.php';
 
 if (!file_exists($file)) {
 
-    if ($handle = opendir( __DIR__ . '/../vendor/')) {
+    if ($handle = opendir( __DIR__ . '/../')) {
+        echo "Gestionnaire du dossier : $handle\n";
+        echo "Entrées :\n";
+
+        /* Ceci est la façon correcte de traverser un dossier. */
+        while (false !== ($entry = readdir($handle))) {
+            echo "$entry\n";
+        }
+
+        /* Ceci est la MAUVAISE façon de traverser un dossier. */
+        while ($entry = readdir($handle)) {
+            echo "$entry\n";
+        }
+
+        closedir($handle);
+    }
+
+
+    echo "<hr />";
+
+    if ($handle = opendir( __DIR__ . '/../vendor/symfony/')) {
+        echo "Gestionnaire du dossier : $handle\n";
+        echo "Entrées :\n";
+
+        /* Ceci est la façon correcte de traverser un dossier. */
+        while (false !== ($entry = readdir($handle))) {
+            echo "$entry\n";
+        }
+
+        /* Ceci est la MAUVAISE façon de traverser un dossier. */
+        while ($entry = readdir($handle)) {
+            echo "$entry\n";
+        }
+
+        closedir($handle);
+    }
+
+
+    echo "<hr />";
+
+    if ($handle = opendir(dirname( __DIR__) )) {
+        echo "Gestionnaire du dossier : $handle\n";
+        echo "Entrées :\n";
+
+        /* Ceci est la façon correcte de traverser un dossier. */
+        while (false !== ($entry = readdir($handle))) {
+            echo "$entry\n";
+        }
+
+        /* Ceci est la MAUVAISE façon de traverser un dossier. */
+        while ($entry = readdir($handle)) {
+            echo "$entry\n";
+        }
+
+        closedir($handle);
+    }
+
+
+    echo "<hr />";
+
+    if ($handle = opendir(dirname(dirname( __DIR__)) )) {
         echo "Gestionnaire du dossier : $handle\n";
         echo "Entrées :\n";
 
