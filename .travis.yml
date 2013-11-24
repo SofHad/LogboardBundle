@@ -9,7 +9,9 @@ env:
 before_script:
   - wget http://getcomposer.org/composer.phar
   - php composer.phar install
-  - php composer.phar create-project symfony/framework-standard-edition app/
+#  - php composer.phar create-project symfony/framework-standard-edition app/
+  - composer require symfony/framework-bundle:${SYMFONY_VERSION} --no-update
+  - composer update --dev
 
 
 script: phpunit --coverage-text
