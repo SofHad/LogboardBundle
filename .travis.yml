@@ -11,8 +11,8 @@ before_script:
   - php composer.phar install
   - php composer.phar create-project symfony/framework-standard-edition app/
   - ls
-  - cd ..
+  - cd app
   - ls
 
-script: phpunit
+script: phpunit -c app/app/
 
