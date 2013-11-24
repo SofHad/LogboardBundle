@@ -19,11 +19,12 @@ class AppKernel extends Kernel
            // new So\LogboardBundle\LogboardBundle(),
         );
 
+
         return $bundles;
     }
 
     public function registerContainerConfiguration(LoaderInterface $loader)
     {
-        $loader->load(__DIR__.'/config/config.yml');
+        $loader->load(__DIR__.'/config/config_'.$this->getEnvironment().'.yml');
     }
 }
