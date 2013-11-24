@@ -2,8 +2,8 @@
 $sfAutoload = __DIR__ . '/../app/vendor/autoload.php';
 $bundleAutoload = __DIR__ . '/../vendor/autoload.php';
 
-require_once $sfAutoload;
-require_once $bundleAutoload;
+$autoload = require_once $sfAutoload;
+require_once .= $bundleAutoload;
 
 //
 //if (file_exists($sfAutoload)) {
