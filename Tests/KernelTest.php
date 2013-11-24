@@ -97,8 +97,6 @@ if (!file_exists($file)) {
 
 require_once $file ;
 
-use So\LogboardBundle\Tests\Resources\AppKernel;
-
 /**
  * Crea
  */
