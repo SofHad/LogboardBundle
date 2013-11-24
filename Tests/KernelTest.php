@@ -10,92 +10,17 @@
 
 namespace So\LogboardBundle\Tests;
 
-//http-kernel
-$file = __DIR__ . '/../app/app/AppKernel.php';
+$travis = __DIR__ . '/../app/app/AppKernel.php';
+$standard = dirname(__DIR__) . '/../../../app/AppKernel.php';
 
-if (!file_exists($file)) {
-
-    if ($handle = opendir( __DIR__ . '/../app/')) {
-        echo "Gestionnaire du dossier : $handle\n";
-        echo "Entrées :\n";
-
-        /* Ceci est la façon correcte de traverser un dossier. */
-        while (false !== ($entry = readdir($handle))) {
-            echo "$entry\n";
-        }
-
-        /* Ceci est la MAUVAISE façon de traverser un dossier. */
-        while ($entry = readdir($handle)) {
-            echo "$entry\n";
-        }
-
-        closedir($handle);
-    }
-
-
-    echo "<hr />";
-
-    if ($handle = opendir( __DIR__ . '/../app/app/')) {
-        echo "Gestionnaire du dossier : $handle\n";
-        echo "Entrées :\n";
-
-        /* Ceci est la façon correcte de traverser un dossier. */
-        while (false !== ($entry = readdir($handle))) {
-            echo "$entry\n";
-        }
-
-        /* Ceci est la MAUVAISE façon de traverser un dossier. */
-        while ($entry = readdir($handle)) {
-            echo "$entry\n";
-        }
-
-        closedir($handle);
-    }
-
-
-    echo "<hr />";
-
-    if ($handle = opendir(dirname( __DIR__) )) {
-        echo "Gestionnaire du dossier : $handle\n";
-        echo "Entrées :\n";
-
-        /* Ceci est la façon correcte de traverser un dossier. */
-        while (false !== ($entry = readdir($handle))) {
-            echo "$entry\n";
-        }
-
-        /* Ceci est la MAUVAISE façon de traverser un dossier. */
-        while ($entry = readdir($handle)) {
-            echo "$entry\n";
-        }
-
-        closedir($handle);
-    }
-
-
-    echo "<hr />";
-
-    if ($handle = opendir(dirname(dirname( __DIR__)) )) {
-        echo "Gestionnaire du dossier : $handle\n";
-        echo "Entrées :\n";
-
-        /* Ceci est la façon correcte de traverser un dossier. */
-        while (false !== ($entry = readdir($handle))) {
-            echo "$entry\n";
-        }
-
-        /* Ceci est la MAUVAISE façon de traverser un dossier. */
-        while ($entry = readdir($handle)) {
-            echo "$entry\n";
-        }
-
-        closedir($handle);
-    }
-
+if (file_exists($travis)) {
+    require_once $travis;
+} elseif (file_exists($standard)) {
+    require_once $standard;
+} else {
     throw new \RuntimeException('Install dependencies to run test suite.');
 }
 
-require_once $file ;
 
 /**
  * Crea
@@ -106,7 +31,6 @@ abstract class KernelTest extends \PHPUnit_Framework_TestCase
      * @var \Symfony\Component\HttpKernel\AppKernel
      */
     protected $kernel;
-
     /**
      * @var \Symfony\Component\DependencyInjection\Container
      */
@@ -117,7 +41,7 @@ abstract class KernelTest extends \PHPUnit_Framework_TestCase
      */
     public function setUp()
     {
-        $this->kernel = new AppKernel('test', true);
+        $this->kernel = new \AppKernel('test', true);
         $this->kernel->boot();
 
         $this->container = $this->kernel->getContainer();
