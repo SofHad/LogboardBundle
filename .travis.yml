@@ -10,7 +10,7 @@ before_script:
   - wget http://getcomposer.org/composer.phar
   - php composer.phar install
 #  - php composer.phar create-project symfony/framework-standard-edition app/
-  -composer require symfony/symfony": 2.2.* --no-update
+  -composer require symfony/symfony: 2.2.* --no-update
   #-composer require symfony/framework-bundle:${SYMFONY_VERSION} --no-update
   - composer update --dev
   - ls
