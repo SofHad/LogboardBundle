@@ -1,5 +1,7 @@
 <?php
 
+namespace So\LogboardBundle\Tests\Resources;
+
 use Symfony\Component\HttpKernel\Kernel;
 use Symfony\Component\Config\Loader\LoaderInterface;
 

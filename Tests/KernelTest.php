@@ -13,6 +13,7 @@ namespace So\LogboardBundle\Tests;
 //http-kernel
 $file = __DIR__ . '/Resources/AppKernel.php';
 
+
 if (!file_exists($file)) {
 
     if ($handle = opendir( __DIR__ . '/Resources/')) {
@@ -36,6 +37,8 @@ if (!file_exists($file)) {
 }
 
 require_once $file ;
+
+use So\LogboardBundle\Tests\Resources\AppKernel;
 
 /**
  * Crea
