@@ -6,9 +6,6 @@ php:
 before_script:
   - php composer.phar create-project symfony/framework-standard-edition sfpath/
   - composer install
-  - cp app/config/parameters.yml.dist app/config/parameters.yml
-  - export ADDITIONAL_PATH=`php -i | grep -F --color=never 'Scan this dir for additional .ini files'`
-  - echo 'xdebug.max_nesting_level=9999' | sudo tee ${ADDITIONAL_PATH:42}/symfony2.ini
 
 script: script: phpunit -c app/
 
