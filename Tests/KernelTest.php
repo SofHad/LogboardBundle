@@ -11,11 +11,11 @@
 namespace So\LogboardBundle\Tests;
 
 //http-kernel
-$file = __DIR__ . '/../vendor/path/app/AppKernel.php';
+$file = __DIR__ . '/../app/app/AppKernel.php';
 
 if (!file_exists($file)) {
 
-    if ($handle = opendir( __DIR__ . '/../')) {
+    if ($handle = opendir( __DIR__ . '/../app/')) {
         echo "Gestionnaire du dossier : $handle\n";
         echo "Entrées :\n";
 
@@ -35,7 +35,7 @@ if (!file_exists($file)) {
 
     echo "<hr />";
 
-    if ($handle = opendir( __DIR__ . '/../vendor/symfony/')) {
+    if ($handle = opendir( __DIR__ . '/../app/app/')) {
         echo "Gestionnaire du dossier : $handle\n";
         echo "Entrées :\n";
 

@@ -9,7 +9,7 @@ env:
 before_script:
   - wget http://getcomposer.org/composer.phar
   - php composer.phar install
-  - php composer.phar create-project symfony/framework-standard-edition path/
+  - php composer.phar create-project symfony/framework-standard-edition app/
 
 script: phpunit
 
