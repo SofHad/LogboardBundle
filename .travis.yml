@@ -1,11 +1,11 @@
 language: php
 
 php:
-  - 5.3
+    - 5.3
 
-before_script:
-  - php composer.phar create-project symfony/framework-standard-edition sfpath/
-  - composer install
+before_script:1
+    - php composer.phar create-project symfony/framework-standard-edition sfpath/
+    - composer install
 
 script: script: phpunit -c app/
 
