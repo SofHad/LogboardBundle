@@ -11,7 +11,7 @@
 namespace So\LogboardBundle\Tests;
 
 //http-kernel
-$file = __DIR__ . '/../../vendor/path/app/AppKernel.php';
+$file = __DIR__ . '/../../vendor/symfony-standard/app/AppKernel.php';
 
 
 if (!file_exists($file)) {
