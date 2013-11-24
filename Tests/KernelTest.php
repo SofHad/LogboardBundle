@@ -10,18 +10,16 @@
 
 namespace So\LogboardBundle\Tests;
 
-//$travis = __DIR__ . '/../app/app/AppKernel.php';
-//$standard = dirname(__DIR__) . '/../../../app/AppKernel.php';
+$travis =  __DIR__ . '/app/AppKernel.php';
+$standard = dirname(__DIR__) . '/../../../app/AppKernel.php';
 
-//if (file_exists($travis)) {
-//    require_once $travis;
-//} elseif (file_exists($standard)) {
-//    require_once $standard;
-//} else {
-//    throw new \RuntimeException('Install dependencies to run test suite.');
-//}
-
-require_once __DIR__ . '/app/AppKernel.php';
+if (file_exists($standard)) {
+    require_once $standard;
+} elseif (file_exists($travis)) {
+    require_once $travis;
+} else {
+    throw new \RuntimeException('Install dependencies to run test suite.');
+}
 
 /**
  * Crea
