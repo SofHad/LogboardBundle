@@ -12,13 +12,14 @@ namespace So\LogboardBundle\Tests\Profiler;
 
 use So\LogboardBundle\Profiler\DataResolver;
 use So\LogboardBundle\Tests\DataProvider;
+use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 
 /**
  * Data Resolver Test
  *
  * @author Sofiane HADDAG <sofiane.haddag@yahoo.fr>
  */
-class DataResolverTest extends \PHPUnit_Framework_TestCase
+class DataResolverTest extends WebTestCase
 {
 
     public function testRefine()

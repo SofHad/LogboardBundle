@@ -12,13 +12,14 @@ namespace So\LogboardBundle\Tests\Profiler;
 
 use So\LogboardBundle\Profiler\Counter;
 use So\LogboardBundle\Tests\DataProvider;
+use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 
 /**
  * Counter Test
  *
  * @author Sofiane HADDAG <sofiane.haddag@yahoo.fr>
  */
-class CounterTest extends \PHPUnit_Framework_TestCase
+class CounterTest extends WebTestCase
 {
 
     private $counter;
