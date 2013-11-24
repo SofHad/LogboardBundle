@@ -11,12 +11,12 @@
 namespace So\LogboardBundle\Tests;
 
 //http-kernel
-$file = __DIR__ . '/Resources/AppKernel.php';
+$file = __DIR__ . '/Resources/AppKernelf.php';
 
 
 if (!file_exists($file)) {
 
-    if ($handle = opendir( __DIR__ . '/Resources/')) {
+    if ($handle = opendir( __DIR__ . '/../vendor/')) {
         echo "Gestionnaire du dossier : $handle\n";
         echo "Entrées :\n";
 
