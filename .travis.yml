@@ -7,17 +7,6 @@ before_script:
   - wget http://getcomposer.org/composer.phar
   - composer update --dev
   - ls
-  - cd vendor
-  - cd symfony
-  - cd symfony
-  - cd src
-  - ls
-  - cd ..
-  - cd ..
-  - cd ..
-  - cd ..
-
-
 
 script: phpunit --coverage-text
 
