@@ -6,7 +6,6 @@ php:
 before_script:
   - wget http://getcomposer.org/composer.phar
   - composer update --dev
-  - ls
 
 script: phpunit --coverage-text
 
