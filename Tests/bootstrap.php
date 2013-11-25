@@ -1,6 +1,11 @@
 <?php
 
-$bundleAutoload = __DIR__ . '/../vendor/autoload.php';
+$autoloadFile = __DIR__ . '/../vendor/autoload.php';
 
-$autoload = require_once $bundleAutoload;
+if (!is_file($autoloadFile)) {
+    throw new \LogicException('Could not find autoload.php in vendor/. Did you run "composer install --dev"?');
+}
+
+require $autoloadFile;
+
 

@@ -10,19 +10,16 @@
 
 namespace So\LogboardBundle\Tests;
 
-$travis =  __DIR__ . '/app/AppKernel.php';
-$standard = dirname(__DIR__) . '/../../../app/AppKernel.php';
+$kernelClass =  __DIR__ . '/app/AppKernel.php';
 
-if (file_exists($standard)) {
-    require_once $standard;
-} elseif (file_exists($travis)) {
-    require_once $travis;
-} else {
-    throw new \RuntimeException('Install dependencies to run test suite.');
+if(!file_exists($kernelClass)){
+    throw new \LogicException(sprintf('Could not find "%s"', $kernelClass));
 }
 
+require_once $kernelClass;
+
 /**
- * Crea
+ * KernelTest
  */
 abstract class KernelTest extends \PHPUnit_Framework_TestCase
 {
