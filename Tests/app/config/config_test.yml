@@ -1,5 +1,6 @@
 imports:
     - { resource: parameters.yml }
+   # - { resource: "%kernel.root_dir%/../../Resources/config/routing.yml" }
 
 #framework:
 #    #esi:             ~

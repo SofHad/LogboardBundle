@@ -10,7 +10,6 @@
 
 namespace So\LogboardBundle\Tests;
 
-
 /**
  * Data Provider
  *
@@ -18,7 +17,6 @@ namespace So\LogboardBundle\Tests;
  */
 class DataProvider
 {
-
     const SYMFONY_PATTERN_DATE = '/^\[([0-9]{4}-[[0-9]{2}-[[0-9]{2}).*/';
     const SYMFONY_PATTERN_PRIORITY = '/^\[[0-9]{4}-[[0-9]{2}-[[0-9]{2}\s[0-9]{2}:[0-9]{2}:[0-9]{2}\]\s[a-z]*\.([a-zA-Z]*).*/';
     const TESTS_LOG_FILE = '/app/logs/unit_testing_logs.log';

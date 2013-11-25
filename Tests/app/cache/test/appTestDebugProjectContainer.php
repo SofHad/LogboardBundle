@@ -36,6 +36,7 @@ class appTestDebugProjectContainer extends Container
             'cache_clearer' => 'getCacheClearerService',
             'cache_warmer' => 'getCacheWarmerService',
             'controller_name_converter' => 'getControllerNameConverterService',
+            'controller_resolver' => 'getControllerResolverService',
             'data_collector.form' => 'getDataCollector_FormService',
             'data_collector.form.extractor' => 'getDataCollector_Form_ExtractorService',
             'data_collector.request' => 'getDataCollector_RequestService',
@@ -97,6 +98,13 @@ class appTestDebugProjectContainer extends Container
             'http_kernel' => 'getHttpKernelService',
             'kernel' => 'getKernelService',
             'locale_listener' => 'getLocaleListenerService',
+            'logboard.counter' => 'getLogboard_CounterService',
+            'logboard.profiler_finder_parameters' => 'getLogboard_ProfilerFinderParametersService',
+            'logboard.profiler_log_listener' => 'getLogboard_ProfilerLogListenerService',
+            'logboard.profiler_manager' => 'getLogboard_ProfilerManagerService',
+            'logboard.query_manager' => 'getLogboard_QueryManagerService',
+            'logboard.symfony_finder' => 'getLogboard_SymfonyFinderService',
+            'logboard.symfony_log' => 'getLogboard_SymfonyLogService',
             'profiler' => 'getProfilerService',
             'profiler_listener' => 'getProfilerListenerService',
             'property_accessor' => 'getPropertyAccessorService',
@@ -172,6 +180,9 @@ class appTestDebugProjectContainer extends Container
             'validator' => 'getValidatorService',
             'validator.expression' => 'getValidator_ExpressionService',
             'validator.mapping.class_metadata_factory' => 'getValidator_Mapping_ClassMetadataFactoryService',
+            'web_profiler.controller.exception' => 'getWebProfiler_Controller_ExceptionService',
+            'web_profiler.controller.profiler' => 'getWebProfiler_Controller_ProfilerService',
+            'web_profiler.controller.router' => 'getWebProfiler_Controller_RouterService',
         );
         $this->aliases = array(
             'debug.templating.engine.twig' => 'templating',
@@ -286,7 +297,7 @@ class appTestDebugProjectContainer extends Container
      */
     protected function getDebug_ControllerResolverService()
     {
-        return $this->services['debug.controller_resolver'] = new \Symfony\Component\HttpKernel\Controller\TraceableControllerResolver(new \Symfony\Bundle\FrameworkBundle\Controller\ControllerResolver($this, $this->get('controller_name_converter'), NULL), $this->get('debug.stopwatch'));
+        return $this->services['debug.controller_resolver'] = new \Symfony\Component\HttpKernel\Controller\TraceableControllerResolver($this->get('controller_resolver'), $this->get('debug.stopwatch'));
     }
 
     /**
@@ -328,6 +339,7 @@ class appTestDebugProjectContainer extends Container
         $this->services['debug.event_dispatcher'] = $instance = new \Symfony\Component\HttpKernel\Debug\TraceableEventDispatcher(new \Symfony\Component\EventDispatcher\ContainerAwareEventDispatcher($this), $this->get('debug.stopwatch'), NULL);
 
         $instance->addListenerService('kernel.controller', array(0 => 'data_collector.router', 1 => 'onKernelController'), 0);
+        $instance->addListenerService('kernel.controller', array(0 => 'logboard.profiler_log_listener', 1 => 'onKernelController'), 0);
         $instance->addSubscriberService('response_listener', 'Symfony\\Component\\HttpKernel\\EventListener\\ResponseListener');
         $instance->addSubscriberService('streamed_response_listener', 'Symfony\\Component\\HttpKernel\\EventListener\\StreamedResponseListener');
         $instance->addSubscriberService('locale_listener', 'Symfony\\Component\\HttpKernel\\EventListener\\LocaleListener');
@@ -1052,6 +1064,103 @@ class appTestDebugProjectContainer extends Container
     protected function getLocaleListenerService()
     {
         return $this->services['locale_listener'] = new \Symfony\Component\HttpKernel\EventListener\LocaleListener('en', $this->get('router', ContainerInterface::NULL_ON_INVALID_REFERENCE), $this->get('request_stack'));
+    }
+
+    /**
+     * Gets the 'logboard.counter' service.
+     *
+     * This service is shared.
+     * This method always returns the same instance of the service.
+     *
+     * @return So\LogboardBundle\Profiler\Counter A So\LogboardBundle\Profiler\Counter instance.
+     */
+    protected function getLogboard_CounterService()
+    {
+        return $this->services['logboard.counter'] = new \So\LogboardBundle\Profiler\Counter();
+    }
+
+    /**
+     * Gets the 'logboard.profiler_finder_parameters' service.
+     *
+     * This service is shared.
+     * This method always returns the same instance of the service.
+     *
+     * @return So\LogboardBundle\Profiler\Parameter\ProfilerFinderParameters A So\LogboardBundle\Profiler\Parameter\ProfilerFinderParameters instance.
+     */
+    protected function getLogboard_ProfilerFinderParametersService()
+    {
+        return $this->services['logboard.profiler_finder_parameters'] = new \So\LogboardBundle\Profiler\Parameter\ProfilerFinderParameters(30000000, 'logger');
+    }
+
+    /**
+     * Gets the 'logboard.profiler_log_listener' service.
+     *
+     * This service is shared.
+     * This method always returns the same instance of the service.
+     *
+     * @return So\LogboardBundle\EventListener\ProfilerLogListener A So\LogboardBundle\EventListener\ProfilerLogListener instance.
+     * 
+     * @throws InactiveScopeException when the 'logboard.profiler_log_listener' service is requested while the 'request' scope is not active
+     */
+    protected function getLogboard_ProfilerLogListenerService()
+    {
+        if (!isset($this->scopedServices['request'])) {
+            throw new InactiveScopeException('logboard.profiler_log_listener', 'request');
+        }
+
+        return $this->services['logboard.profiler_log_listener'] = $this->scopedServices['request']['logboard.profiler_log_listener'] = new \So\LogboardBundle\EventListener\ProfilerLogListener($this->get('request'), $this->get('controller_resolver'), 'panelAction', 'logger');
+    }
+
+    /**
+     * Gets the 'logboard.profiler_manager' service.
+     *
+     * This service is shared.
+     * This method always returns the same instance of the service.
+     *
+     * @return So\LogboardBundle\Profiler\ProfilerManager A So\LogboardBundle\Profiler\ProfilerManager instance.
+     */
+    protected function getLogboard_ProfilerManagerService()
+    {
+        return $this->services['logboard.profiler_manager'] = new \So\LogboardBundle\Profiler\ProfilerManager($this->get('logboard.counter'), $this->get('profiler', ContainerInterface::NULL_ON_INVALID_REFERENCE), 'logger');
+    }
+
+    /**
+     * Gets the 'logboard.query_manager' service.
+     *
+     * This service is shared.
+     * This method always returns the same instance of the service.
+     *
+     * @return So\LogboardBundle\Profiler\QueryManager A So\LogboardBundle\Profiler\QueryManager instance.
+     */
+    protected function getLogboard_QueryManagerService()
+    {
+        return $this->services['logboard.query_manager'] = new \So\LogboardBundle\Profiler\QueryManager($this->get('router'), 'logger', 'PieChart', array());
+    }
+
+    /**
+     * Gets the 'logboard.symfony_finder' service.
+     *
+     * This service is shared.
+     * This method always returns the same instance of the service.
+     *
+     * @return So\LogboardBundle\Profiler\Engine\Finder\ProfilerFinder A So\LogboardBundle\Profiler\Engine\Finder\ProfilerFinder instance.
+     */
+    protected function getLogboard_SymfonyFinderService()
+    {
+        return $this->services['logboard.symfony_finder'] = new \So\LogboardBundle\Profiler\Engine\Finder\ProfilerFinder($this->get('profiler', ContainerInterface::NULL_ON_INVALID_REFERENCE));
+    }
+
+    /**
+     * Gets the 'logboard.symfony_log' service.
+     *
+     * This service is shared.
+     * This method always returns the same instance of the service.
+     *
+     * @return So\LogboardBundle\Profiler\Engine\SymfonyLogEngine A So\LogboardBundle\Profiler\Engine\SymfonyLogEngine instance.
+     */
+    protected function getLogboard_SymfonyLogService()
+    {
+        return $this->services['logboard.symfony_log'] = new \So\LogboardBundle\Profiler\Engine\SymfonyLogEngine($this->get('profiler', ContainerInterface::NULL_ON_INVALID_REFERENCE), $this->get('logboard.symfony_finder'), $this->get('logboard.profiler_finder_parameters'));
     }
 
     /**
@@ -2004,6 +2113,8 @@ class appTestDebugProjectContainer extends Container
 
         $instance->addPath('C:\\xampp\\htdocs\\PROJECTS\\SymfonyProjects\\BeautyLogBundle\\BeautyLogBundle\\src\\So\\LogboardBundle\\vendor\\symfony\\symfony\\src\\Symfony\\Bundle\\FrameworkBundle/Resources/views', 'Framework');
         $instance->addPath('C:\\xampp\\htdocs\\PROJECTS\\SymfonyProjects\\BeautyLogBundle\\BeautyLogBundle\\src\\So\\LogboardBundle\\vendor\\symfony\\symfony\\src\\Symfony\\Bundle\\TwigBundle/Resources/views', 'Twig');
+        $instance->addPath('C:\\xampp\\htdocs\\PROJECTS\\SymfonyProjects\\BeautyLogBundle\\BeautyLogBundle\\src\\So\\LogboardBundle/Resources/views', 'Logboard');
+        $instance->addPath('C:\\xampp\\htdocs\\PROJECTS\\SymfonyProjects\\BeautyLogBundle\\BeautyLogBundle\\src\\So\\LogboardBundle\\vendor\\symfony\\symfony\\src\\Symfony\\Bundle\\WebProfilerBundle/Resources/views', 'WebProfiler');
         $instance->addPath('C:\\xampp\\htdocs\\PROJECTS\\SymfonyProjects\\BeautyLogBundle\\BeautyLogBundle\\src\\So\\LogboardBundle\\vendor\\symfony\\symfony\\src\\Symfony\\Bridge\\Twig/Resources/views/Form');
 
         return $instance;
@@ -2062,6 +2173,45 @@ class appTestDebugProjectContainer extends Container
     }
 
     /**
+     * Gets the 'web_profiler.controller.exception' service.
+     *
+     * This service is shared.
+     * This method always returns the same instance of the service.
+     *
+     * @return Symfony\Bundle\WebProfilerBundle\Controller\ExceptionController A Symfony\Bundle\WebProfilerBundle\Controller\ExceptionController instance.
+     */
+    protected function getWebProfiler_Controller_ExceptionService()
+    {
+        return $this->services['web_profiler.controller.exception'] = new \Symfony\Bundle\WebProfilerBundle\Controller\ExceptionController($this->get('profiler', ContainerInterface::NULL_ON_INVALID_REFERENCE), $this->get('twig'), true);
+    }
+
+    /**
+     * Gets the 'web_profiler.controller.profiler' service.
+     *
+     * This service is shared.
+     * This method always returns the same instance of the service.
+     *
+     * @return Symfony\Bundle\WebProfilerBundle\Controller\ProfilerController A Symfony\Bundle\WebProfilerBundle\Controller\ProfilerController instance.
+     */
+    protected function getWebProfiler_Controller_ProfilerService()
+    {
+        return $this->services['web_profiler.controller.profiler'] = new \Symfony\Bundle\WebProfilerBundle\Controller\ProfilerController($this->get('router', ContainerInterface::NULL_ON_INVALID_REFERENCE), $this->get('profiler', ContainerInterface::NULL_ON_INVALID_REFERENCE), $this->get('twig'), array('data_collector.config' => array(0 => 'config', 1 => '@WebProfiler/Collector/config.html.twig'), 'data_collector.request' => array(0 => 'request', 1 => '@WebProfiler/Collector/request.html.twig'), 'data_collector.exception' => array(0 => 'exception', 1 => '@WebProfiler/Collector/exception.html.twig'), 'data_collector.events' => array(0 => 'events', 1 => '@WebProfiler/Collector/events.html.twig'), 'data_collector.logger' => array(0 => 'logger', 1 => '@WebProfiler/Collector/logger.html.twig'), 'data_collector.time' => array(0 => 'time', 1 => '@WebProfiler/Collector/time.html.twig'), 'data_collector.memory' => array(0 => 'memory', 1 => '@WebProfiler/Collector/memory.html.twig'), 'data_collector.router' => array(0 => 'router', 1 => '@WebProfiler/Collector/router.html.twig'), 'data_collector.form' => array(0 => 'form', 1 => '@WebProfiler/Collector/form.html.twig')), 'bottom');
+    }
+
+    /**
+     * Gets the 'web_profiler.controller.router' service.
+     *
+     * This service is shared.
+     * This method always returns the same instance of the service.
+     *
+     * @return Symfony\Bundle\WebProfilerBundle\Controller\RouterController A Symfony\Bundle\WebProfilerBundle\Controller\RouterController instance.
+     */
+    protected function getWebProfiler_Controller_RouterService()
+    {
+        return $this->services['web_profiler.controller.router'] = new \Symfony\Bundle\WebProfilerBundle\Controller\RouterController($this->get('profiler', ContainerInterface::NULL_ON_INVALID_REFERENCE), $this->get('twig'), $this->get('router', ContainerInterface::NULL_ON_INVALID_REFERENCE));
+    }
+
+    /**
      * Gets the 'controller_name_converter' service.
      *
      * This service is shared.
@@ -2076,6 +2226,23 @@ class appTestDebugProjectContainer extends Container
     protected function getControllerNameConverterService()
     {
         return $this->services['controller_name_converter'] = new \Symfony\Bundle\FrameworkBundle\Controller\ControllerNameParser($this->get('kernel'));
+    }
+
+    /**
+     * Gets the 'controller_resolver' service.
+     *
+     * This service is shared.
+     * This method always returns the same instance of the service.
+     *
+     * This service is private.
+     * If you want to be able to request this service from the container directly,
+     * make it public, otherwise you might end up with broken code.
+     *
+     * @return Symfony\Bundle\FrameworkBundle\Controller\ControllerResolver A Symfony\Bundle\FrameworkBundle\Controller\ControllerResolver instance.
+     */
+    protected function getControllerResolverService()
+    {
+        return $this->services['controller_resolver'] = new \Symfony\Bundle\FrameworkBundle\Controller\ControllerResolver($this, $this->get('controller_name_converter'), NULL);
     }
 
     /**
@@ -2223,6 +2390,8 @@ class appTestDebugProjectContainer extends Container
             'kernel.bundles' => array(
                 'FrameworkBundle' => 'Symfony\\Bundle\\FrameworkBundle\\FrameworkBundle',
                 'TwigBundle' => 'Symfony\\Bundle\\TwigBundle\\TwigBundle',
+                'LogboardBundle' => 'So\\LogboardBundle\\LogboardBundle',
+                'WebProfilerBundle' => 'Symfony\\Bundle\\WebProfilerBundle\\WebProfilerBundle',
             ),
             'kernel.charset' => 'UTF-8',
             'kernel.container_class' => 'appTestDebugProjectContainer',
@@ -2464,6 +2633,26 @@ class appTestDebugProjectContainer extends Container
 
                 ),
             ),
+            'logboard.profiler_log_listener.class' => 'So\\LogboardBundle\\EventListener\\ProfilerLogListener',
+            'logboard.counter.class' => 'So\\LogboardBundle\\Profiler\\Counter',
+            'logboard.type' => 'panelAction',
+            'logboard.panel' => 'logger',
+            'logboard.symfony_log_engine' => 'logboard.sfLog_engine',
+            'logboard.comparators_count' => 30000000,
+            'logboard.profiler_manager.class' => 'So\\LogboardBundle\\Profiler\\ProfilerManager',
+            'logboard.symfony_log.class' => 'So\\LogboardBundle\\Profiler\\Engine\\SymfonyLogEngine',
+            'logboard.file_storage.class' => 'So\\LogboardBundle\\Profiler\\Engine\\FileStorageEngine',
+            'logboard.symfony_finder.class' => 'So\\LogboardBundle\\Profiler\\Engine\\Finder\\ProfilerFinder',
+            'logboard.finder.file_storage.class' => 'So\\LogboardBundle\\Profiler\\Engine\\Finder\\FileStorageFinder',
+            'logboard.profiler_finder_parameters.class' => 'So\\LogboardBundle\\Profiler\\Parameter\\ProfilerFinderParameters',
+            'logboard.parameters.file_storage.class' => 'So\\LogboardBundle\\Profiler\\Parameter\\FileStorageParameters',
+            'logboard.query_manager.class' => 'So\\LogboardBundle\\Profiler\\QueryManager',
+            'logboard.decompiler.pattern_matcher.class' => 'So\\LogboardBundle\\Profiler\\Engine\\Decompiler\\PatternMatcher',
+            'logboard.default_chart' => 'PieChart',
+            'web_profiler.controller.profiler.class' => 'Symfony\\Bundle\\WebProfilerBundle\\Controller\\ProfilerController',
+            'web_profiler.controller.router.class' => 'Symfony\\Bundle\\WebProfilerBundle\\Controller\\RouterController',
+            'web_profiler.controller.exception.class' => 'Symfony\\Bundle\\WebProfilerBundle\\Controller\\ExceptionController',
+            'web_profiler.debug_toolbar.position' => 'bottom',
             'data_collector.templates' => array(
                 'data_collector.config' => array(
                     0 => 'config',

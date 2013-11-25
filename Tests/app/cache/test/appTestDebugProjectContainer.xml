@@ -10,6 +10,8 @@
     <parameter key="kernel.bundles" type="collection">
       <parameter key="FrameworkBundle">Symfony\Bundle\FrameworkBundle\FrameworkBundle</parameter>
       <parameter key="TwigBundle">Symfony\Bundle\TwigBundle\TwigBundle</parameter>
+      <parameter key="LogboardBundle">So\LogboardBundle\LogboardBundle</parameter>
+      <parameter key="WebProfilerBundle">Symfony\Bundle\WebProfilerBundle\WebProfilerBundle</parameter>
     </parameter>
     <parameter key="kernel.charset">UTF-8</parameter>
     <parameter key="kernel.container_class">appTestDebugProjectContainer</parameter>
@@ -241,6 +243,26 @@
       <parameter key="debug">true</parameter>
       <parameter key="paths" type="collection"/>
     </parameter>
+    <parameter key="logboard.profiler_log_listener.class">So\LogboardBundle\EventListener\ProfilerLogListener</parameter>
+    <parameter key="logboard.counter.class">So\LogboardBundle\Profiler\Counter</parameter>
+    <parameter key="logboard.type">panelAction</parameter>
+    <parameter key="logboard.panel">logger</parameter>
+    <parameter key="logboard.symfony_log_engine">logboard.sfLog_engine</parameter>
+    <parameter key="logboard.comparators_count">30000000</parameter>
+    <parameter key="logboard.profiler_manager.class">So\LogboardBundle\Profiler\ProfilerManager</parameter>
+    <parameter key="logboard.symfony_log.class">So\LogboardBundle\Profiler\Engine\SymfonyLogEngine</parameter>
+    <parameter key="logboard.file_storage.class">So\LogboardBundle\Profiler\Engine\FileStorageEngine</parameter>
+    <parameter key="logboard.symfony_finder.class">So\LogboardBundle\Profiler\Engine\Finder\ProfilerFinder</parameter>
+    <parameter key="logboard.finder.file_storage.class">So\LogboardBundle\Profiler\Engine\Finder\FileStorageFinder</parameter>
+    <parameter key="logboard.profiler_finder_parameters.class">So\LogboardBundle\Profiler\Parameter\ProfilerFinderParameters</parameter>
+    <parameter key="logboard.parameters.file_storage.class">So\LogboardBundle\Profiler\Parameter\FileStorageParameters</parameter>
+    <parameter key="logboard.query_manager.class">So\LogboardBundle\Profiler\QueryManager</parameter>
+    <parameter key="logboard.decompiler.pattern_matcher.class">So\LogboardBundle\Profiler\Engine\Decompiler\PatternMatcher</parameter>
+    <parameter key="logboard.default_chart">PieChart</parameter>
+    <parameter key="web_profiler.controller.profiler.class">Symfony\Bundle\WebProfilerBundle\Controller\ProfilerController</parameter>
+    <parameter key="web_profiler.controller.router.class">Symfony\Bundle\WebProfilerBundle\Controller\RouterController</parameter>
+    <parameter key="web_profiler.controller.exception.class">Symfony\Bundle\WebProfilerBundle\Controller\ExceptionController</parameter>
+    <parameter key="web_profiler.debug_toolbar.position">bottom</parameter>
     <parameter key="data_collector.templates" type="collection">
       <parameter key="data_collector.config" type="collection">
         <parameter>config</parameter>
@@ -285,6 +307,12 @@
     <service id="controller_name_converter" class="Symfony\Bundle\FrameworkBundle\Controller\ControllerNameParser" public="false">
       <tag name="monolog.logger" channel="request"/>
       <argument type="service" id="kernel"/>
+    </service>
+    <service id="controller_resolver" class="Symfony\Bundle\FrameworkBundle\Controller\ControllerResolver" public="false">
+      <tag name="monolog.logger" channel="request"/>
+      <argument type="service" id="service_container"/>
+      <argument type="service" id="controller_name_converter"/>
+      <argument>null</argument>
     </service>
     <service id="response_listener" class="Symfony\Component\HttpKernel\EventListener\ResponseListener">
       <tag name="kernel.event_subscriber"/>
@@ -636,6 +664,14 @@
         </argument>
         <argument>0</argument>
       </call>
+      <call method="addListenerService">
+        <argument>kernel.controller</argument>
+        <argument type="collection">
+          <argument>logboard.profiler_log_listener</argument>
+          <argument>onKernelController</argument>
+        </argument>
+        <argument>0</argument>
+      </call>
       <call method="addSubscriberService">
         <argument>response_listener</argument>
         <argument>Symfony\Component\HttpKernel\EventListener\ResponseListener</argument>
@@ -682,14 +718,7 @@
       </call>
     </service>
     <service id="debug.controller_resolver" class="Symfony\Component\HttpKernel\Controller\TraceableControllerResolver">
-      <argument type="service">
-        <service class="Symfony\Bundle\FrameworkBundle\Controller\ControllerResolver" public="false">
-          <tag name="monolog.logger" channel="request"/>
-          <argument type="service" id="service_container"/>
-          <argument type="service" id="controller_name_converter"/>
-          <argument>null</argument>
-        </service>
-      </argument>
+      <argument type="service" id="controller_resolver"/>
       <argument type="service" id="debug.stopwatch"/>
     </service>
     <service id="debug.deprecation_logger_listener" class="Symfony\Component\HttpKernel\EventListener\ErrorsLoggerListener">
@@ -1328,6 +1357,91 @@
       <argument type="service" id="twig"/>
       <argument>true</argument>
     </service>
+    <service id="logboard.profiler_log_listener" class="So\LogboardBundle\EventListener\ProfilerLogListener" scope="request">
+      <tag name="kernel.event_listener" event="kernel.controller" method="onKernelController"/>
+      <argument type="service" id="request"/>
+      <argument type="service" id="controller_resolver"/>
+      <argument>panelAction</argument>
+      <argument>logger</argument>
+    </service>
+    <service id="logboard.profiler_manager" class="So\LogboardBundle\Profiler\ProfilerManager">
+      <argument type="service" id="logboard.counter"/>
+      <argument type="service" id="profiler" on-invalid="null"/>
+      <argument>logger</argument>
+    </service>
+    <service id="logboard.counter" class="So\LogboardBundle\Profiler\Counter"/>
+    <service id="logboard.query_manager" class="So\LogboardBundle\Profiler\QueryManager">
+      <argument type="service" id="router"/>
+      <argument>logger</argument>
+      <argument>PieChart</argument>
+      <argument type="collection"/>
+    </service>
+    <service id="logboard.profiler_finder_parameters" class="So\LogboardBundle\Profiler\Parameter\ProfilerFinderParameters">
+      <argument>30000000</argument>
+      <argument>logger</argument>
+    </service>
+    <service id="logboard.symfony_finder" class="So\LogboardBundle\Profiler\Engine\Finder\ProfilerFinder">
+      <argument type="service" id="profiler" on-invalid="null"/>
+    </service>
+    <service id="logboard.symfony_log" class="So\LogboardBundle\Profiler\Engine\SymfonyLogEngine">
+      <argument type="service" id="profiler" on-invalid="null"/>
+      <argument type="service" id="logboard.symfony_finder"/>
+      <argument type="service" id="logboard.profiler_finder_parameters"/>
+    </service>
+    <service id="web_profiler.controller.profiler" class="Symfony\Bundle\WebProfilerBundle\Controller\ProfilerController">
+      <argument type="service" id="router" on-invalid="null"/>
+      <argument type="service" id="profiler" on-invalid="null"/>
+      <argument type="service" id="twig"/>
+      <argument type="collection">
+        <argument key="data_collector.config" type="collection">
+          <argument>config</argument>
+          <argument>@WebProfiler/Collector/config.html.twig</argument>
+        </argument>
+        <argument key="data_collector.request" type="collection">
+          <argument>request</argument>
+          <argument>@WebProfiler/Collector/request.html.twig</argument>
+        </argument>
+        <argument key="data_collector.exception" type="collection">
+          <argument>exception</argument>
+          <argument>@WebProfiler/Collector/exception.html.twig</argument>
+        </argument>
+        <argument key="data_collector.events" type="collection">
+          <argument>events</argument>
+          <argument>@WebProfiler/Collector/events.html.twig</argument>
+        </argument>
+        <argument key="data_collector.logger" type="collection">
+          <argument>logger</argument>
+          <argument>@WebProfiler/Collector/logger.html.twig</argument>
+        </argument>
+        <argument key="data_collector.time" type="collection">
+          <argument>time</argument>
+          <argument>@WebProfiler/Collector/time.html.twig</argument>
+        </argument>
+        <argument key="data_collector.memory" type="collection">
+          <argument>memory</argument>
+          <argument>@WebProfiler/Collector/memory.html.twig</argument>
+        </argument>
+        <argument key="data_collector.router" type="collection">
+          <argument>router</argument>
+          <argument>@WebProfiler/Collector/router.html.twig</argument>
+        </argument>
+        <argument key="data_collector.form" type="collection">
+          <argument>form</argument>
+          <argument>@WebProfiler/Collector/form.html.twig</argument>
+        </argument>
+      </argument>
+      <argument>bottom</argument>
+    </service>
+    <service id="web_profiler.controller.router" class="Symfony\Bundle\WebProfilerBundle\Controller\RouterController">
+      <argument type="service" id="profiler" on-invalid="null"/>
+      <argument type="service" id="twig"/>
+      <argument type="service" id="router" on-invalid="null"/>
+    </service>
+    <service id="web_profiler.controller.exception" class="Symfony\Bundle\WebProfilerBundle\Controller\ExceptionController">
+      <argument type="service" id="profiler" on-invalid="null"/>
+      <argument type="service" id="twig"/>
+      <argument>true</argument>
+    </service>
     <service id="session.storage.filesystem" class="Symfony\Component\HttpFoundation\Session\Storage\MockFileSessionStorage">
       <argument>C:/xampp/htdocs/PROJECTS/SymfonyProjects/BeautyLogBundle/BeautyLogBundle/src/So/LogboardBundle/Tests/app/cache/test/sessions</argument>
       <argument>MOCKSESSID</argument>
@@ -1411,6 +1525,14 @@
       <call method="addPath">
         <argument>C:\xampp\htdocs\PROJECTS\SymfonyProjects\BeautyLogBundle\BeautyLogBundle\src\So\LogboardBundle\vendor\symfony\symfony\src\Symfony\Bundle\TwigBundle/Resources/views</argument>
         <argument>Twig</argument>
+      </call>
+      <call method="addPath">
+        <argument>C:\xampp\htdocs\PROJECTS\SymfonyProjects\BeautyLogBundle\BeautyLogBundle\src\So\LogboardBundle/Resources/views</argument>
+        <argument>Logboard</argument>
+      </call>
+      <call method="addPath">
+        <argument>C:\xampp\htdocs\PROJECTS\SymfonyProjects\BeautyLogBundle\BeautyLogBundle\src\So\LogboardBundle\vendor\symfony\symfony\src\Symfony\Bundle\WebProfilerBundle/Resources/views</argument>
+        <argument>WebProfiler</argument>
       </call>
       <call method="addPath">
         <argument>C:\xampp\htdocs\PROJECTS\SymfonyProjects\BeautyLogBundle\BeautyLogBundle\src\So\LogboardBundle\vendor\symfony\symfony\src\Symfony\Bridge\Twig/Resources/views/Form</argument>

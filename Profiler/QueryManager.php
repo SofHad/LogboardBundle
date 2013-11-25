@@ -185,6 +185,7 @@ class QueryManager implements QueryManagerInterface
     }
 
     /**
+     * @codeCoverageIgnore
      * {@inheritdoc}
      *
      */
@@ -194,6 +195,7 @@ class QueryManager implements QueryManagerInterface
     }
 
     /**
+     * @codeCoverageIgnore
      * {@inheritdoc}
      *
      */
@@ -203,6 +205,7 @@ class QueryManager implements QueryManagerInterface
     }
 
     /**
+     * @codeCoverageIgnore
      * {@inheritdoc}
      *
      */
@@ -221,6 +224,7 @@ class QueryManager implements QueryManagerInterface
     }
 
     /**
+     * @codeCoverageIgnore
      * {@inheritdoc}
      *
      */
@@ -230,6 +234,7 @@ class QueryManager implements QueryManagerInterface
     }
 
     /**
+     * @codeCoverageIgnore
      * {@inheritdoc}
      *
      */
@@ -239,6 +244,7 @@ class QueryManager implements QueryManagerInterface
     }
 
     /**
+     * @codeCoverageIgnore
      * {@inheritdoc}
      *
      */
@@ -248,6 +254,7 @@ class QueryManager implements QueryManagerInterface
     }
 
     /**
+     * @codeCoverageIgnore
      * {@inheritdoc}
      *
      */
@@ -257,6 +264,7 @@ class QueryManager implements QueryManagerInterface
     }
 
     /**
+     * @codeCoverageIgnore
      * {@inheritdoc}
      *
      */
@@ -266,6 +274,7 @@ class QueryManager implements QueryManagerInterface
     }
 
     /**
+     * @codeCoverageIgnore
      * {@inheritdoc}
      *
      */
@@ -275,6 +284,7 @@ class QueryManager implements QueryManagerInterface
     }
 
     /**
+     * @codeCoverageIgnore
      * {@inheritdoc}
      *
      */
@@ -284,6 +294,7 @@ class QueryManager implements QueryManagerInterface
     }
 
     /**
+     * @codeCoverageIgnore
      * {@inheritdoc}
      *
      */
@@ -293,6 +304,7 @@ class QueryManager implements QueryManagerInterface
     }
 
     /**
+     * @codeCoverageIgnore
      * {@inheritdoc}
      *
      */
@@ -302,6 +314,7 @@ class QueryManager implements QueryManagerInterface
     }
 
     /**
+     * @codeCoverageIgnore
      * {@inheritdoc}
      *
      */
