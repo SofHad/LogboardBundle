@@ -20,7 +20,7 @@ use Symfony\Component\HttpKernel\Profiler\FileProfilerStorage;
 use Symfony\Component\HttpKernel\Profiler\Profiler;
 
 
-class QueryManagerTest extends KernelTest
+abstract class QueryManagerTest extends KernelTest
 {
 
     protected $request;
