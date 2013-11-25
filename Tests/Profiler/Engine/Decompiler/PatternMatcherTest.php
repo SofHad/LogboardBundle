@@ -10,8 +10,11 @@
 
 namespace So\LogboardBundle\Tests\Profiler\Engine\Decompiler;
 
+use So\LogboardBundle\Exception\InvalidArgumentException;
 use So\LogboardBundle\Profiler\Engine\Decompiler\PatternMatcher;
+use So\LogboardBundle\Tests\DataProvider;
 use So\LogboardBundle\Tests\KernelTest;
+use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 /**
  * Testing the PatternMatcher class
@@ -30,11 +33,10 @@ class PatternMatcherTest extends KernelTest
     public function setUp()
     {
         parent::setUp();
-        $patternDate = '/^\[([0-9]{4}-[[0-9]{2}-[[0-9]{2}).*/';
-        $patternPriority = '/^\[[0-9]{4}-[[0-9]{2}-[[0-9]{2}\s[0-9]{2}:[0-9]{2}:[0-9]{2}\]\s[a-z]*\.([a-zA-Z]*).*/';
+        $patternDate = DataProvider::SYMFONY_PATTERN_DATE;
+        $patternPriority = DataProvider::SYMFONY_PATTERN_PRIORITY;
         $this->patternMatcherDate = new PatternMatcher($patternDate);
         $this->patternMatcherPriority = new PatternMatcher($patternPriority);
-
     }
 
     /**
@@ -54,6 +56,7 @@ class PatternMatcherTest extends KernelTest
         $this->assertEquals(str_replace("[]", null, $input), $data['value']);
     }
 
+
     /**
      * @dataProvider Provider
      */
@@ -71,6 +74,24 @@ class PatternMatcherTest extends KernelTest
         $this->assertEquals(str_replace("[]", null, $input), $data['value']);
     }
 
+    /**
+     * @expectedException InvalidArgumentException
+     */
+    public function testExceptionForPatternArgument()
+    {
+        $this->setExpectedException('InvalidArgumentException');
+
+        new PatternMatcher(100);
+    }
+
+    /**
+     * @expectedException InvalidArgumentException
+     */
+    public function testExceptionForArgumentKey()
+    {
+        new PatternMatcher(DataProvider::SYMFONY_PATTERN_DATE, "String");
+    }
+
     public function Provider()
     {
         return array(
@@ -79,4 +100,4 @@ class PatternMatcherTest extends KernelTest
         );
     }
 
-} 
+}

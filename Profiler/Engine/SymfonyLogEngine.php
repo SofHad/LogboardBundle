@@ -39,13 +39,4 @@ class SymfonyLogEngine extends Engine
         }
 
     }
-
-    /**
-     * {@inheritdoc}
-     *
-     */
-    public function getName()
-    {
-        return 'symfony.log';
-    }
 }

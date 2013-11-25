@@ -134,10 +134,4 @@ abstract class Engine implements EngineInterface
      *
      */
     abstract public function heapUp();
-
-    /**
-     * {@inheritdoc}
-     *
-     */
-    abstract public function getName();
 }
