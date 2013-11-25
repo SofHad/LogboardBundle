@@ -83,7 +83,31 @@
     <parameter key="kernel.trusted_hosts" type="collection"/>
     <parameter key="kernel.trusted_proxies" type="collection"/>
     <parameter key="kernel.default_locale">en</parameter>
+    <parameter key="session.class">Symfony\Component\HttpFoundation\Session\Session</parameter>
+    <parameter key="session.flashbag.class">Symfony\Component\HttpFoundation\Session\Flash\FlashBag</parameter>
+    <parameter key="session.attribute_bag.class">Symfony\Component\HttpFoundation\Session\Attribute\AttributeBag</parameter>
+    <parameter key="session.storage.metadata_bag.class">Symfony\Component\HttpFoundation\Session\Storage\MetadataBag</parameter>
+    <parameter key="session.metadata.storage_key">_sf2_meta</parameter>
+    <parameter key="session.storage.native.class">Symfony\Component\HttpFoundation\Session\Storage\NativeSessionStorage</parameter>
+    <parameter key="session.storage.php_bridge.class">Symfony\Component\HttpFoundation\Session\Storage\PhpBridgeSessionStorage</parameter>
+    <parameter key="session.storage.mock_file.class">Symfony\Component\HttpFoundation\Session\Storage\MockFileSessionStorage</parameter>
+    <parameter key="session.handler.native_file.class">Symfony\Component\HttpFoundation\Session\Storage\Handler\NativeFileSessionHandler</parameter>
+    <parameter key="session.handler.write_check.class">Symfony\Component\HttpFoundation\Session\Storage\Handler\WriteCheckSessionHandler</parameter>
+    <parameter key="session_listener.class">Symfony\Bundle\FrameworkBundle\EventListener\SessionListener</parameter>
+    <parameter key="session.storage.options" type="collection"/>
+    <parameter key="session.save_path">C:/xampp/htdocs/PROJECTS/SymfonyProjects/BeautyLogBundle/BeautyLogBundle/src/So/LogboardBundle/Tests/app/cache/test/sessions</parameter>
+    <parameter key="session.metadata.update_threshold">0</parameter>
     <parameter key="security.secure_random.class">Symfony\Component\Security\Core\Util\SecureRandom</parameter>
+    <parameter key="security.csrf.token_generator.class">Symfony\Component\Security\Csrf\TokenGenerator\UriSafeTokenGenerator</parameter>
+    <parameter key="security.csrf.token_storage.class">Symfony\Component\Security\Csrf\TokenStorage\SessionTokenStorage</parameter>
+    <parameter key="security.csrf.token_manager.class">Symfony\Component\Security\Csrf\CsrfTokenManager</parameter>
+    <parameter key="form.resolved_type_factory.class">Symfony\Component\Form\ResolvedFormTypeFactory</parameter>
+    <parameter key="form.registry.class">Symfony\Component\Form\FormRegistry</parameter>
+    <parameter key="form.factory.class">Symfony\Component\Form\FormFactory</parameter>
+    <parameter key="form.extension.class">Symfony\Component\Form\Extension\DependencyInjection\DependencyInjectionExtension</parameter>
+    <parameter key="form.type_guesser.validator.class">Symfony\Component\Form\Extension\Validator\ValidatorTypeGuesser</parameter>
+    <parameter key="form.type_extension.csrf.enabled">true</parameter>
+    <parameter key="form.type_extension.csrf.field_name">_token</parameter>
     <parameter key="templating.engine.delegating.class">Symfony\Bundle\FrameworkBundle\Templating\DelegatingEngine</parameter>
     <parameter key="templating.name_parser.class">Symfony\Bundle\FrameworkBundle\Templating\TemplateNameParser</parameter>
     <parameter key="templating.filename_parser.class">Symfony\Bundle\FrameworkBundle\Templating\TemplateFilenameParser</parameter>
@@ -119,7 +143,43 @@
     <parameter key="templating.engines" type="collection">
       <parameter>twig</parameter>
     </parameter>
-    <parameter key="data_collector.templates" type="collection"/>
+    <parameter key="validator.class">Symfony\Component\Validator\Validator</parameter>
+    <parameter key="validator.mapping.class_metadata_factory.class">Symfony\Component\Validator\Mapping\ClassMetadataFactory</parameter>
+    <parameter key="validator.mapping.cache.apc.class">Symfony\Component\Validator\Mapping\Cache\ApcCache</parameter>
+    <parameter key="validator.mapping.cache.prefix"></parameter>
+    <parameter key="validator.mapping.loader.loader_chain.class">Symfony\Component\Validator\Mapping\Loader\LoaderChain</parameter>
+    <parameter key="validator.mapping.loader.static_method_loader.class">Symfony\Component\Validator\Mapping\Loader\StaticMethodLoader</parameter>
+    <parameter key="validator.mapping.loader.annotation_loader.class">Symfony\Component\Validator\Mapping\Loader\AnnotationLoader</parameter>
+    <parameter key="validator.mapping.loader.xml_files_loader.class">Symfony\Component\Validator\Mapping\Loader\XmlFilesLoader</parameter>
+    <parameter key="validator.mapping.loader.yaml_files_loader.class">Symfony\Component\Validator\Mapping\Loader\YamlFilesLoader</parameter>
+    <parameter key="validator.validator_factory.class">Symfony\Bundle\FrameworkBundle\Validator\ConstraintValidatorFactory</parameter>
+    <parameter key="validator.mapping.loader.xml_files_loader.mapping_files" type="collection">
+      <parameter>C:\xampp\htdocs\PROJECTS\SymfonyProjects\BeautyLogBundle\BeautyLogBundle\src\So\LogboardBundle\vendor\symfony\symfony\src\Symfony\Component\Form/Resources/config/validation.xml</parameter>
+    </parameter>
+    <parameter key="validator.mapping.loader.yaml_files_loader.mapping_files" type="collection"/>
+    <parameter key="validator.expression.class">Symfony\Component\Validator\Constraints\ExpressionValidator</parameter>
+    <parameter key="validator.translation_domain">validators</parameter>
+    <parameter key="fragment.listener.class">Symfony\Component\HttpKernel\EventListener\FragmentListener</parameter>
+    <parameter key="form.resolved_type_factory.data_collector_proxy.class">Symfony\Component\Form\Extension\DataCollector\Proxy\ResolvedTypeFactoryDataCollectorProxy</parameter>
+    <parameter key="form.type_extension.form.data_collector.class">Symfony\Component\Form\Extension\DataCollector\Type\DataCollectorTypeExtension</parameter>
+    <parameter key="profiler.class">Symfony\Component\HttpKernel\Profiler\Profiler</parameter>
+    <parameter key="profiler_listener.class">Symfony\Component\HttpKernel\EventListener\ProfilerListener</parameter>
+    <parameter key="data_collector.config.class">Symfony\Component\HttpKernel\DataCollector\ConfigDataCollector</parameter>
+    <parameter key="data_collector.request.class">Symfony\Component\HttpKernel\DataCollector\RequestDataCollector</parameter>
+    <parameter key="data_collector.exception.class">Symfony\Component\HttpKernel\DataCollector\ExceptionDataCollector</parameter>
+    <parameter key="data_collector.events.class">Symfony\Component\HttpKernel\DataCollector\EventDataCollector</parameter>
+    <parameter key="data_collector.logger.class">Symfony\Component\HttpKernel\DataCollector\LoggerDataCollector</parameter>
+    <parameter key="data_collector.time.class">Symfony\Component\HttpKernel\DataCollector\TimeDataCollector</parameter>
+    <parameter key="data_collector.memory.class">Symfony\Component\HttpKernel\DataCollector\MemoryDataCollector</parameter>
+    <parameter key="data_collector.router.class">Symfony\Bundle\FrameworkBundle\DataCollector\RouterDataCollector</parameter>
+    <parameter key="data_collector.form.class">Symfony\Component\Form\Extension\DataCollector\FormDataCollector</parameter>
+    <parameter key="data_collector.form.extractor.class">Symfony\Component\Form\Extension\DataCollector\FormDataExtractor</parameter>
+    <parameter key="profiler_listener.only_exceptions">false</parameter>
+    <parameter key="profiler_listener.only_master_requests">false</parameter>
+    <parameter key="profiler.storage.dsn">file:C:/xampp/htdocs/PROJECTS/SymfonyProjects/BeautyLogBundle/BeautyLogBundle/src/So/LogboardBundle/Tests/app/cache/test/profiler</parameter>
+    <parameter key="profiler.storage.username"></parameter>
+    <parameter key="profiler.storage.password"></parameter>
+    <parameter key="profiler.storage.lifetime">86400</parameter>
     <parameter key="router.class">Symfony\Bundle\FrameworkBundle\Routing\Router</parameter>
     <parameter key="router.request_context.class">Symfony\Component\Routing\RequestContext</parameter>
     <parameter key="routing.loader.class">Symfony\Bundle\FrameworkBundle\Routing\DelegatingLoader</parameter>
@@ -180,6 +240,44 @@
       <parameter key="charset">UTF-8</parameter>
       <parameter key="debug">true</parameter>
       <parameter key="paths" type="collection"/>
+    </parameter>
+    <parameter key="data_collector.templates" type="collection">
+      <parameter key="data_collector.config" type="collection">
+        <parameter>config</parameter>
+        <parameter>@WebProfiler/Collector/config.html.twig</parameter>
+      </parameter>
+      <parameter key="data_collector.request" type="collection">
+        <parameter>request</parameter>
+        <parameter>@WebProfiler/Collector/request.html.twig</parameter>
+      </parameter>
+      <parameter key="data_collector.exception" type="collection">
+        <parameter>exception</parameter>
+        <parameter>@WebProfiler/Collector/exception.html.twig</parameter>
+      </parameter>
+      <parameter key="data_collector.events" type="collection">
+        <parameter>events</parameter>
+        <parameter>@WebProfiler/Collector/events.html.twig</parameter>
+      </parameter>
+      <parameter key="data_collector.logger" type="collection">
+        <parameter>logger</parameter>
+        <parameter>@WebProfiler/Collector/logger.html.twig</parameter>
+      </parameter>
+      <parameter key="data_collector.time" type="collection">
+        <parameter>time</parameter>
+        <parameter>@WebProfiler/Collector/time.html.twig</parameter>
+      </parameter>
+      <parameter key="data_collector.memory" type="collection">
+        <parameter>memory</parameter>
+        <parameter>@WebProfiler/Collector/memory.html.twig</parameter>
+      </parameter>
+      <parameter key="data_collector.router" type="collection">
+        <parameter>router</parameter>
+        <parameter>@WebProfiler/Collector/router.html.twig</parameter>
+      </parameter>
+      <parameter key="data_collector.form" type="collection">
+        <parameter>form</parameter>
+        <parameter>@WebProfiler/Collector/form.html.twig</parameter>
+      </parameter>
     </parameter>
     <parameter key="console.command.ids" type="collection"/>
   </parameters>
@@ -530,6 +628,14 @@
       </argument>
       <argument type="service" id="debug.stopwatch"/>
       <argument>null</argument>
+      <call method="addListenerService">
+        <argument>kernel.controller</argument>
+        <argument type="collection">
+          <argument>data_collector.router</argument>
+          <argument>onKernelController</argument>
+        </argument>
+        <argument>0</argument>
+      </call>
       <call method="addSubscriberService">
         <argument>response_listener</argument>
         <argument>Symfony\Component\HttpKernel\EventListener\ResponseListener</argument>
@@ -549,6 +655,22 @@
       <call method="addSubscriberService">
         <argument>debug.deprecation_logger_listener</argument>
         <argument>Symfony\Component\HttpKernel\EventListener\ErrorsLoggerListener</argument>
+      </call>
+      <call method="addSubscriberService">
+        <argument>session_listener</argument>
+        <argument>Symfony\Bundle\FrameworkBundle\EventListener\SessionListener</argument>
+      </call>
+      <call method="addSubscriberService">
+        <argument>fragment.listener</argument>
+        <argument>Symfony\Component\HttpKernel\EventListener\FragmentListener</argument>
+      </call>
+      <call method="addSubscriberService">
+        <argument>profiler_listener</argument>
+        <argument>Symfony\Component\HttpKernel\EventListener\ProfilerListener</argument>
+      </call>
+      <call method="addSubscriberService">
+        <argument>data_collector.request</argument>
+        <argument>Symfony\Component\HttpKernel\DataCollector\RequestDataCollector</argument>
       </call>
       <call method="addSubscriberService">
         <argument>router_listener</argument>
@@ -576,10 +698,236 @@
       <argument>deprecation</argument>
       <argument>null</argument>
     </service>
+    <service id="session" class="Symfony\Component\HttpFoundation\Session\Session">
+      <argument type="service" id="session.storage.native"/>
+      <argument type="service">
+        <service class="Symfony\Component\HttpFoundation\Session\Attribute\AttributeBag" public="false"/>
+      </argument>
+      <argument type="service">
+        <service class="Symfony\Component\HttpFoundation\Session\Flash\FlashBag" public="false"/>
+      </argument>
+    </service>
+    <service id="session.storage.metadata_bag" class="Symfony\Component\HttpFoundation\Session\Storage\MetadataBag" public="false">
+      <argument>_sf2_meta</argument>
+      <argument>0</argument>
+    </service>
+    <service id="session.storage.native" class="Symfony\Component\HttpFoundation\Session\Storage\NativeSessionStorage">
+      <argument type="collection"/>
+      <argument type="service" id="session.handler"/>
+      <argument type="service" id="session.storage.metadata_bag"/>
+    </service>
+    <service id="session.storage.php_bridge" class="Symfony\Component\HttpFoundation\Session\Storage\PhpBridgeSessionStorage">
+      <argument type="service" id="session.handler"/>
+      <argument type="service" id="session.storage.metadata_bag"/>
+    </service>
+    <service id="session_listener" class="Symfony\Bundle\FrameworkBundle\EventListener\SessionListener">
+      <tag name="kernel.event_subscriber"/>
+      <argument type="service" id="service_container"/>
+    </service>
     <service id="security.secure_random" class="Symfony\Component\Security\Core\Util\SecureRandom">
       <tag name="monolog.logger" channel="security"/>
       <argument>C:/xampp/htdocs/PROJECTS/SymfonyProjects/BeautyLogBundle/BeautyLogBundle/src/So/LogboardBundle/Tests/app/cache/test/secure_random.seed</argument>
       <argument>null</argument>
+    </service>
+    <service id="security.csrf.token_manager" class="Symfony\Component\Security\Csrf\CsrfTokenManager">
+      <argument type="service">
+        <service class="Symfony\Component\Security\Csrf\TokenGenerator\UriSafeTokenGenerator" public="false">
+          <argument type="service" id="security.secure_random"/>
+        </service>
+      </argument>
+      <argument type="service">
+        <service class="Symfony\Component\Security\Csrf\TokenStorage\SessionTokenStorage" public="false">
+          <argument type="service" id="session"/>
+        </service>
+      </argument>
+    </service>
+    <service id="form.resolved_type_factory" class="Symfony\Component\Form\Extension\DataCollector\Proxy\ResolvedTypeFactoryDataCollectorProxy">
+      <argument type="service">
+        <service class="Symfony\Component\Form\ResolvedFormTypeFactory" public="false"/>
+      </argument>
+      <argument type="service" id="data_collector.form"/>
+    </service>
+    <service id="form.registry" class="Symfony\Component\Form\FormRegistry">
+      <argument type="collection">
+        <argument type="service">
+          <service class="Symfony\Component\Form\Extension\DependencyInjection\DependencyInjectionExtension" public="false">
+            <argument type="service" id="service_container"/>
+            <argument type="collection">
+              <argument key="form">form.type.form</argument>
+              <argument key="birthday">form.type.birthday</argument>
+              <argument key="checkbox">form.type.checkbox</argument>
+              <argument key="choice">form.type.choice</argument>
+              <argument key="collection">form.type.collection</argument>
+              <argument key="country">form.type.country</argument>
+              <argument key="date">form.type.date</argument>
+              <argument key="datetime">form.type.datetime</argument>
+              <argument key="email">form.type.email</argument>
+              <argument key="file">form.type.file</argument>
+              <argument key="hidden">form.type.hidden</argument>
+              <argument key="integer">form.type.integer</argument>
+              <argument key="language">form.type.language</argument>
+              <argument key="locale">form.type.locale</argument>
+              <argument key="money">form.type.money</argument>
+              <argument key="number">form.type.number</argument>
+              <argument key="password">form.type.password</argument>
+              <argument key="percent">form.type.percent</argument>
+              <argument key="radio">form.type.radio</argument>
+              <argument key="repeated">form.type.repeated</argument>
+              <argument key="search">form.type.search</argument>
+              <argument key="textarea">form.type.textarea</argument>
+              <argument key="text">form.type.text</argument>
+              <argument key="time">form.type.time</argument>
+              <argument key="timezone">form.type.timezone</argument>
+              <argument key="url">form.type.url</argument>
+              <argument key="button">form.type.button</argument>
+              <argument key="submit">form.type.submit</argument>
+              <argument key="reset">form.type.reset</argument>
+              <argument key="currency">form.type.currency</argument>
+            </argument>
+            <argument type="collection">
+              <argument key="form" type="collection">
+                <argument>form.type_extension.form.http_foundation</argument>
+                <argument>form.type_extension.form.validator</argument>
+                <argument>form.type_extension.csrf</argument>
+                <argument>form.type_extension.form.data_collector</argument>
+              </argument>
+              <argument key="repeated" type="collection">
+                <argument>form.type_extension.repeated.validator</argument>
+              </argument>
+              <argument key="submit" type="collection">
+                <argument>form.type_extension.submit.validator</argument>
+              </argument>
+            </argument>
+            <argument type="collection">
+              <argument>form.type_guesser.validator</argument>
+            </argument>
+          </service>
+        </argument>
+      </argument>
+      <argument type="service" id="form.resolved_type_factory"/>
+    </service>
+    <service id="form.factory" class="Symfony\Component\Form\FormFactory">
+      <argument type="service" id="form.registry"/>
+      <argument type="service" id="form.resolved_type_factory"/>
+    </service>
+    <service id="form.type_guesser.validator" class="Symfony\Component\Form\Extension\Validator\ValidatorTypeGuesser">
+      <tag name="form.type_guesser"/>
+      <argument type="service" id="validator.mapping.class_metadata_factory"/>
+    </service>
+    <service id="form.type.form" class="Symfony\Component\Form\Extension\Core\Type\FormType">
+      <tag name="form.type" alias="form"/>
+      <argument type="service" id="property_accessor"/>
+    </service>
+    <service id="form.type.birthday" class="Symfony\Component\Form\Extension\Core\Type\BirthdayType">
+      <tag name="form.type" alias="birthday"/>
+    </service>
+    <service id="form.type.checkbox" class="Symfony\Component\Form\Extension\Core\Type\CheckboxType">
+      <tag name="form.type" alias="checkbox"/>
+    </service>
+    <service id="form.type.choice" class="Symfony\Component\Form\Extension\Core\Type\ChoiceType">
+      <tag name="form.type" alias="choice"/>
+    </service>
+    <service id="form.type.collection" class="Symfony\Component\Form\Extension\Core\Type\CollectionType">
+      <tag name="form.type" alias="collection"/>
+    </service>
+    <service id="form.type.country" class="Symfony\Component\Form\Extension\Core\Type\CountryType">
+      <tag name="form.type" alias="country"/>
+    </service>
+    <service id="form.type.date" class="Symfony\Component\Form\Extension\Core\Type\DateType">
+      <tag name="form.type" alias="date"/>
+    </service>
+    <service id="form.type.datetime" class="Symfony\Component\Form\Extension\Core\Type\DateTimeType">
+      <tag name="form.type" alias="datetime"/>
+    </service>
+    <service id="form.type.email" class="Symfony\Component\Form\Extension\Core\Type\EmailType">
+      <tag name="form.type" alias="email"/>
+    </service>
+    <service id="form.type.file" class="Symfony\Component\Form\Extension\Core\Type\FileType">
+      <tag name="form.type" alias="file"/>
+    </service>
+    <service id="form.type.hidden" class="Symfony\Component\Form\Extension\Core\Type\HiddenType">
+      <tag name="form.type" alias="hidden"/>
+    </service>
+    <service id="form.type.integer" class="Symfony\Component\Form\Extension\Core\Type\IntegerType">
+      <tag name="form.type" alias="integer"/>
+    </service>
+    <service id="form.type.language" class="Symfony\Component\Form\Extension\Core\Type\LanguageType">
+      <tag name="form.type" alias="language"/>
+    </service>
+    <service id="form.type.locale" class="Symfony\Component\Form\Extension\Core\Type\LocaleType">
+      <tag name="form.type" alias="locale"/>
+    </service>
+    <service id="form.type.money" class="Symfony\Component\Form\Extension\Core\Type\MoneyType">
+      <tag name="form.type" alias="money"/>
+    </service>
+    <service id="form.type.number" class="Symfony\Component\Form\Extension\Core\Type\NumberType">
+      <tag name="form.type" alias="number"/>
+    </service>
+    <service id="form.type.password" class="Symfony\Component\Form\Extension\Core\Type\PasswordType">
+      <tag name="form.type" alias="password"/>
+    </service>
+    <service id="form.type.percent" class="Symfony\Component\Form\Extension\Core\Type\PercentType">
+      <tag name="form.type" alias="percent"/>
+    </service>
+    <service id="form.type.radio" class="Symfony\Component\Form\Extension\Core\Type\RadioType">
+      <tag name="form.type" alias="radio"/>
+    </service>
+    <service id="form.type.repeated" class="Symfony\Component\Form\Extension\Core\Type\RepeatedType">
+      <tag name="form.type" alias="repeated"/>
+    </service>
+    <service id="form.type.search" class="Symfony\Component\Form\Extension\Core\Type\SearchType">
+      <tag name="form.type" alias="search"/>
+    </service>
+    <service id="form.type.textarea" class="Symfony\Component\Form\Extension\Core\Type\TextareaType">
+      <tag name="form.type" alias="textarea"/>
+    </service>
+    <service id="form.type.text" class="Symfony\Component\Form\Extension\Core\Type\TextType">
+      <tag name="form.type" alias="text"/>
+    </service>
+    <service id="form.type.time" class="Symfony\Component\Form\Extension\Core\Type\TimeType">
+      <tag name="form.type" alias="time"/>
+    </service>
+    <service id="form.type.timezone" class="Symfony\Component\Form\Extension\Core\Type\TimezoneType">
+      <tag name="form.type" alias="timezone"/>
+    </service>
+    <service id="form.type.url" class="Symfony\Component\Form\Extension\Core\Type\UrlType">
+      <tag name="form.type" alias="url"/>
+    </service>
+    <service id="form.type.button" class="Symfony\Component\Form\Extension\Core\Type\ButtonType">
+      <tag name="form.type" alias="button"/>
+    </service>
+    <service id="form.type.submit" class="Symfony\Component\Form\Extension\Core\Type\SubmitType">
+      <tag name="form.type" alias="submit"/>
+    </service>
+    <service id="form.type.reset" class="Symfony\Component\Form\Extension\Core\Type\ResetType">
+      <tag name="form.type" alias="reset"/>
+    </service>
+    <service id="form.type.currency" class="Symfony\Component\Form\Extension\Core\Type\CurrencyType">
+      <tag name="form.type" alias="currency"/>
+    </service>
+    <service id="form.type_extension.form.http_foundation" class="Symfony\Component\Form\Extension\HttpFoundation\Type\FormTypeHttpFoundationExtension">
+      <tag name="form.type_extension" alias="form"/>
+    </service>
+    <service id="form.type_extension.form.validator" class="Symfony\Component\Form\Extension\Validator\Type\FormTypeValidatorExtension">
+      <tag name="form.type_extension" alias="form"/>
+      <argument type="service" id="validator"/>
+    </service>
+    <service id="form.type_extension.repeated.validator" class="Symfony\Component\Form\Extension\Validator\Type\RepeatedTypeValidatorExtension">
+      <tag name="form.type_extension" alias="repeated"/>
+    </service>
+    <service id="form.type_extension.submit.validator" class="Symfony\Component\Form\Extension\Validator\Type\SubmitTypeValidatorExtension">
+      <tag name="form.type_extension" alias="submit"/>
+    </service>
+    <service id="form.csrf_provider" class="Symfony\Component\Form\Extension\Csrf\CsrfProvider\CsrfTokenManagerAdapter">
+      <argument type="service" id="security.csrf.token_manager"/>
+    </service>
+    <service id="form.type_extension.csrf" class="Symfony\Component\Form\Extension\Csrf\Type\FormTypeCsrfExtension">
+      <tag name="form.type_extension" alias="form"/>
+      <argument type="service" id="form.csrf_provider"/>
+      <argument>true</argument>
+      <argument>_token</argument>
+      <argument type="service" id="translator.default"/>
+      <argument>validators</argument>
     </service>
     <service id="templating.name_parser" class="Symfony\Bundle\FrameworkBundle\Templating\TemplateNameParser">
       <argument type="service" id="kernel"/>
@@ -644,7 +992,7 @@
               </argument>
             </service>
           </argument>
-          <argument>null</argument>
+          <argument type="service" id="form.csrf_provider" on-invalid="null"/>
         </service>
       </argument>
     </service>
@@ -654,6 +1002,154 @@
     </service>
     <service id="templating.globals" class="Symfony\Bundle\FrameworkBundle\Templating\GlobalVariables">
       <argument type="service" id="service_container"/>
+    </service>
+    <service id="validator" class="Symfony\Component\Validator\Validator">
+      <argument type="service" id="validator.mapping.class_metadata_factory"/>
+      <argument type="service">
+        <service class="Symfony\Bundle\FrameworkBundle\Validator\ConstraintValidatorFactory" public="false">
+          <argument type="service" id="service_container"/>
+          <argument type="collection">
+            <argument key="validator.expression">validator.expression</argument>
+          </argument>
+        </service>
+      </argument>
+      <argument type="service" id="translator"/>
+      <argument>validators</argument>
+      <argument type="collection"/>
+    </service>
+    <service id="validator.mapping.class_metadata_factory" class="Symfony\Component\Validator\Mapping\ClassMetadataFactory" public="false">
+      <argument type="service">
+        <service class="Symfony\Component\Validator\Mapping\Loader\LoaderChain" public="false">
+          <argument type="collection">
+            <argument type="service">
+              <service class="Symfony\Component\Validator\Mapping\Loader\AnnotationLoader" public="false">
+                <argument type="service" id="annotation_reader"/>
+              </service>
+            </argument>
+            <argument type="service">
+              <service class="Symfony\Component\Validator\Mapping\Loader\StaticMethodLoader" public="false"/>
+            </argument>
+            <argument type="service">
+              <service class="Symfony\Component\Validator\Mapping\Loader\XmlFilesLoader" public="false">
+                <argument type="collection">
+                  <argument>C:\xampp\htdocs\PROJECTS\SymfonyProjects\BeautyLogBundle\BeautyLogBundle\src\So\LogboardBundle\vendor\symfony\symfony\src\Symfony\Component\Form/Resources/config/validation.xml</argument>
+                </argument>
+              </service>
+            </argument>
+            <argument type="service">
+              <service class="Symfony\Component\Validator\Mapping\Loader\YamlFilesLoader" public="false">
+                <argument type="collection"/>
+              </service>
+            </argument>
+          </argument>
+        </service>
+      </argument>
+      <argument>null</argument>
+    </service>
+    <service id="validator.expression" class="Symfony\Component\Validator\Constraints\ExpressionValidator">
+      <tag name="validator.constraint_validator" alias="validator.expression"/>
+      <argument type="service" id="property_accessor"/>
+    </service>
+    <service id="fragment.listener" class="Symfony\Component\HttpKernel\EventListener\FragmentListener">
+      <tag name="kernel.event_subscriber"/>
+      <argument type="service" id="uri_signer"/>
+      <argument>/_fragment</argument>
+    </service>
+    <service id="form.type_extension.form.data_collector" class="Symfony\Component\Form\Extension\DataCollector\Type\DataCollectorTypeExtension">
+      <tag name="form.type_extension" alias="form"/>
+      <argument type="service" id="data_collector.form"/>
+    </service>
+    <service id="profiler" class="Symfony\Component\HttpKernel\Profiler\Profiler">
+      <tag name="monolog.logger" channel="profiler"/>
+      <argument type="service">
+        <service class="Symfony\Component\HttpKernel\Profiler\FileProfilerStorage" public="false">
+          <argument>file:C:/xampp/htdocs/PROJECTS/SymfonyProjects/BeautyLogBundle/BeautyLogBundle/src/So/LogboardBundle/Tests/app/cache/test/profiler</argument>
+          <argument></argument>
+          <argument></argument>
+          <argument>86400</argument>
+        </service>
+      </argument>
+      <argument>null</argument>
+      <call method="add">
+        <argument type="service">
+          <service class="Symfony\Component\HttpKernel\DataCollector\ConfigDataCollector" public="false">
+            <tag name="data_collector" template="@WebProfiler/Collector/config.html.twig" id="config" priority="255"/>
+            <call method="setKernel">
+              <argument type="service" id="kernel" on-invalid="ignore"/>
+            </call>
+          </service>
+        </argument>
+      </call>
+      <call method="add">
+        <argument type="service" id="data_collector.request"/>
+      </call>
+      <call method="add">
+        <argument type="service">
+          <service class="Symfony\Component\HttpKernel\DataCollector\ExceptionDataCollector" public="false">
+            <tag name="data_collector" template="@WebProfiler/Collector/exception.html.twig" id="exception" priority="255"/>
+          </service>
+        </argument>
+      </call>
+      <call method="add">
+        <argument type="service">
+          <service class="Symfony\Component\HttpKernel\DataCollector\EventDataCollector" public="false">
+            <tag name="data_collector" template="@WebProfiler/Collector/events.html.twig" id="events" priority="255"/>
+            <argument type="service" id="debug.event_dispatcher" on-invalid="ignore"/>
+          </service>
+        </argument>
+      </call>
+      <call method="add">
+        <argument type="service">
+          <service class="Symfony\Component\HttpKernel\DataCollector\LoggerDataCollector" public="false">
+            <tag name="data_collector" template="@WebProfiler/Collector/logger.html.twig" id="logger" priority="255"/>
+            <tag name="monolog.logger" channel="profiler"/>
+            <argument>null</argument>
+          </service>
+        </argument>
+      </call>
+      <call method="add">
+        <argument type="service">
+          <service class="Symfony\Component\HttpKernel\DataCollector\TimeDataCollector" public="false">
+            <tag name="data_collector" template="@WebProfiler/Collector/time.html.twig" id="time" priority="255"/>
+            <argument type="service" id="kernel" on-invalid="ignore"/>
+            <argument type="service" id="debug.stopwatch" on-invalid="ignore"/>
+          </service>
+        </argument>
+      </call>
+      <call method="add">
+        <argument type="service">
+          <service class="Symfony\Component\HttpKernel\DataCollector\MemoryDataCollector" public="false">
+            <tag name="data_collector" template="@WebProfiler/Collector/memory.html.twig" id="memory" priority="255"/>
+          </service>
+        </argument>
+      </call>
+      <call method="add">
+        <argument type="service" id="data_collector.router"/>
+      </call>
+      <call method="add">
+        <argument type="service" id="data_collector.form"/>
+      </call>
+    </service>
+    <service id="profiler_listener" class="Symfony\Component\HttpKernel\EventListener\ProfilerListener">
+      <tag name="kernel.event_subscriber"/>
+      <argument type="service" id="profiler"/>
+      <argument>null</argument>
+      <argument>false</argument>
+      <argument>false</argument>
+      <argument type="service" id="request_stack"/>
+    </service>
+    <service id="data_collector.request" class="Symfony\Component\HttpKernel\DataCollector\RequestDataCollector">
+      <tag name="kernel.event_subscriber"/>
+      <tag name="data_collector" template="@WebProfiler/Collector/request.html.twig" id="request" priority="255"/>
+    </service>
+    <service id="data_collector.router" class="Symfony\Bundle\FrameworkBundle\DataCollector\RouterDataCollector">
+      <tag name="kernel.event_listener" event="kernel.controller" method="onKernelController"/>
+      <tag name="data_collector" template="@WebProfiler/Collector/router.html.twig" id="router" priority="255"/>
+    </service>
+    <service id="data_collector.form.extractor" class="Symfony\Component\Form\Extension\DataCollector\FormDataExtractor"/>
+    <service id="data_collector.form" class="Symfony\Component\Form\Extension\DataCollector\FormDataCollector">
+      <tag name="data_collector" template="@WebProfiler/Collector/form.html.twig" id="form" priority="255"/>
+      <argument type="service" id="data_collector.form.extractor"/>
     </service>
     <service id="routing.loader" class="Symfony\Bundle\FrameworkBundle\Routing\DelegatingLoader">
       <tag name="monolog.logger" channel="router"/>
@@ -789,6 +1285,25 @@
       </call>
       <call method="addExtension">
         <argument type="service">
+          <service class="Symfony\Bridge\Twig\Extension\FormExtension" public="false">
+            <tag name="twig.extension"/>
+            <argument type="service">
+              <service class="Symfony\Bridge\Twig\Form\TwigRenderer" public="false">
+                <argument type="service">
+                  <service class="Symfony\Bridge\Twig\Form\TwigRendererEngine" public="false">
+                    <argument type="collection">
+                      <argument>form_div_layout.html.twig</argument>
+                    </argument>
+                  </service>
+                </argument>
+                <argument type="service" id="form.csrf_provider" on-invalid="null"/>
+              </service>
+            </argument>
+          </service>
+        </argument>
+      </call>
+      <call method="addExtension">
+        <argument type="service">
           <service class="Twig_Extension_Debug" public="false">
             <tag name="twig.extension"/>
           </service>
@@ -812,6 +1327,14 @@
     <service id="twig.controller.exception" class="Symfony\Bundle\TwigBundle\Controller\ExceptionController">
       <argument type="service" id="twig"/>
       <argument>true</argument>
+    </service>
+    <service id="session.storage.filesystem" class="Symfony\Component\HttpFoundation\Session\Storage\MockFileSessionStorage">
+      <argument>C:/xampp/htdocs/PROJECTS/SymfonyProjects/BeautyLogBundle/BeautyLogBundle/src/So/LogboardBundle/Tests/app/cache/test/sessions</argument>
+      <argument>MOCKSESSID</argument>
+      <argument type="service" id="session.storage.metadata_bag"/>
+    </service>
+    <service id="session.handler" class="Symfony\Component\HttpFoundation\Session\Storage\Handler\NativeFileSessionHandler">
+      <argument>C:/xampp/htdocs/PROJECTS/SymfonyProjects/BeautyLogBundle/BeautyLogBundle/src/So/LogboardBundle/Tests/app/cache/test/sessions</argument>
     </service>
     <service id="templating.loader" class="Symfony\Bundle\FrameworkBundle\Templating\Loader\FilesystemLoader">
       <argument type="service" id="templating.locator"/>
@@ -889,8 +1412,12 @@
         <argument>C:\xampp\htdocs\PROJECTS\SymfonyProjects\BeautyLogBundle\BeautyLogBundle\src\So\LogboardBundle\vendor\symfony\symfony\src\Symfony\Bundle\TwigBundle/Resources/views</argument>
         <argument>Twig</argument>
       </call>
+      <call method="addPath">
+        <argument>C:\xampp\htdocs\PROJECTS\SymfonyProjects\BeautyLogBundle\BeautyLogBundle\src\So\LogboardBundle\vendor\symfony\symfony\src\Symfony\Bridge\Twig/Resources/views/Form</argument>
+      </call>
     </service>
     <service id="event_dispatcher" alias="debug.event_dispatcher"/>
+    <service id="session.storage" alias="session.storage.native"/>
     <service id="debug.templating.engine.twig" alias="templating"/>
   </services>
 </container>

@@ -22,7 +22,6 @@ class FileStorageParametersTest extends KernelTest
 {
     public function testGetParameters()
     {
-
         $this->setUp();
 
         $filesystem = $this->container->get('filesystem');

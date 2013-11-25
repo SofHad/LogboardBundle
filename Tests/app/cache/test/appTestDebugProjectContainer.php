@@ -36,6 +36,10 @@ class appTestDebugProjectContainer extends Container
             'cache_clearer' => 'getCacheClearerService',
             'cache_warmer' => 'getCacheWarmerService',
             'controller_name_converter' => 'getControllerNameConverterService',
+            'data_collector.form' => 'getDataCollector_FormService',
+            'data_collector.form.extractor' => 'getDataCollector_Form_ExtractorService',
+            'data_collector.request' => 'getDataCollector_RequestService',
+            'data_collector.router' => 'getDataCollector_RouterService',
             'debug.controller_resolver' => 'getDebug_ControllerResolverService',
             'debug.deprecation_logger_listener' => 'getDebug_DeprecationLoggerListenerService',
             'debug.emergency_logger_listener' => 'getDebug_EmergencyLoggerListenerService',
@@ -44,13 +48,57 @@ class appTestDebugProjectContainer extends Container
             'debug.templating.engine.php' => 'getDebug_Templating_Engine_PhpService',
             'file_locator' => 'getFileLocatorService',
             'filesystem' => 'getFilesystemService',
+            'form.csrf_provider' => 'getForm_CsrfProviderService',
+            'form.factory' => 'getForm_FactoryService',
+            'form.registry' => 'getForm_RegistryService',
+            'form.resolved_type_factory' => 'getForm_ResolvedTypeFactoryService',
+            'form.type.birthday' => 'getForm_Type_BirthdayService',
+            'form.type.button' => 'getForm_Type_ButtonService',
+            'form.type.checkbox' => 'getForm_Type_CheckboxService',
+            'form.type.choice' => 'getForm_Type_ChoiceService',
+            'form.type.collection' => 'getForm_Type_CollectionService',
+            'form.type.country' => 'getForm_Type_CountryService',
+            'form.type.currency' => 'getForm_Type_CurrencyService',
+            'form.type.date' => 'getForm_Type_DateService',
+            'form.type.datetime' => 'getForm_Type_DatetimeService',
+            'form.type.email' => 'getForm_Type_EmailService',
+            'form.type.file' => 'getForm_Type_FileService',
+            'form.type.form' => 'getForm_Type_FormService',
+            'form.type.hidden' => 'getForm_Type_HiddenService',
+            'form.type.integer' => 'getForm_Type_IntegerService',
+            'form.type.language' => 'getForm_Type_LanguageService',
+            'form.type.locale' => 'getForm_Type_LocaleService',
+            'form.type.money' => 'getForm_Type_MoneyService',
+            'form.type.number' => 'getForm_Type_NumberService',
+            'form.type.password' => 'getForm_Type_PasswordService',
+            'form.type.percent' => 'getForm_Type_PercentService',
+            'form.type.radio' => 'getForm_Type_RadioService',
+            'form.type.repeated' => 'getForm_Type_RepeatedService',
+            'form.type.reset' => 'getForm_Type_ResetService',
+            'form.type.search' => 'getForm_Type_SearchService',
+            'form.type.submit' => 'getForm_Type_SubmitService',
+            'form.type.text' => 'getForm_Type_TextService',
+            'form.type.textarea' => 'getForm_Type_TextareaService',
+            'form.type.time' => 'getForm_Type_TimeService',
+            'form.type.timezone' => 'getForm_Type_TimezoneService',
+            'form.type.url' => 'getForm_Type_UrlService',
+            'form.type_extension.csrf' => 'getForm_TypeExtension_CsrfService',
+            'form.type_extension.form.data_collector' => 'getForm_TypeExtension_Form_DataCollectorService',
+            'form.type_extension.form.http_foundation' => 'getForm_TypeExtension_Form_HttpFoundationService',
+            'form.type_extension.form.validator' => 'getForm_TypeExtension_Form_ValidatorService',
+            'form.type_extension.repeated.validator' => 'getForm_TypeExtension_Repeated_ValidatorService',
+            'form.type_extension.submit.validator' => 'getForm_TypeExtension_Submit_ValidatorService',
+            'form.type_guesser.validator' => 'getForm_TypeGuesser_ValidatorService',
             'fragment.handler' => 'getFragment_HandlerService',
+            'fragment.listener' => 'getFragment_ListenerService',
             'fragment.renderer.esi' => 'getFragment_Renderer_EsiService',
             'fragment.renderer.hinclude' => 'getFragment_Renderer_HincludeService',
             'fragment.renderer.inline' => 'getFragment_Renderer_InlineService',
             'http_kernel' => 'getHttpKernelService',
             'kernel' => 'getKernelService',
             'locale_listener' => 'getLocaleListenerService',
+            'profiler' => 'getProfilerService',
+            'profiler_listener' => 'getProfilerListenerService',
             'property_accessor' => 'getPropertyAccessorService',
             'request' => 'getRequestService',
             'request_stack' => 'getRequestStackService',
@@ -59,8 +107,16 @@ class appTestDebugProjectContainer extends Container
             'router.request_context' => 'getRouter_RequestContextService',
             'router_listener' => 'getRouterListenerService',
             'routing.loader' => 'getRouting_LoaderService',
+            'security.csrf.token_manager' => 'getSecurity_Csrf_TokenManagerService',
             'security.secure_random' => 'getSecurity_SecureRandomService',
             'service_container' => 'getServiceContainerService',
+            'session' => 'getSessionService',
+            'session.handler' => 'getSession_HandlerService',
+            'session.storage.filesystem' => 'getSession_Storage_FilesystemService',
+            'session.storage.metadata_bag' => 'getSession_Storage_MetadataBagService',
+            'session.storage.native' => 'getSession_Storage_NativeService',
+            'session.storage.php_bridge' => 'getSession_Storage_PhpBridgeService',
+            'session_listener' => 'getSessionListenerService',
             'streamed_response_listener' => 'getStreamedResponseListenerService',
             'templating' => 'getTemplatingService',
             'templating.asset.package_factory' => 'getTemplating_Asset_PackageFactoryService',
@@ -113,10 +169,14 @@ class appTestDebugProjectContainer extends Container
             'twig.loader' => 'getTwig_LoaderService',
             'twig.translation.extractor' => 'getTwig_Translation_ExtractorService',
             'uri_signer' => 'getUriSignerService',
+            'validator' => 'getValidatorService',
+            'validator.expression' => 'getValidator_ExpressionService',
+            'validator.mapping.class_metadata_factory' => 'getValidator_Mapping_ClassMetadataFactoryService',
         );
         $this->aliases = array(
             'debug.templating.engine.twig' => 'templating',
             'event_dispatcher' => 'debug.event_dispatcher',
+            'session.storage' => 'session.storage.native',
         );
     }
 
@@ -162,6 +222,58 @@ class appTestDebugProjectContainer extends Container
         $c = new \Symfony\Bundle\FrameworkBundle\CacheWarmer\TemplateFinder($a, $b, 'C:/xampp/htdocs/PROJECTS/SymfonyProjects/BeautyLogBundle/BeautyLogBundle/src/So/LogboardBundle/Tests/app/Resources');
 
         return $this->services['cache_warmer'] = new \Symfony\Component\HttpKernel\CacheWarmer\CacheWarmerAggregate(array(0 => new \Symfony\Bundle\FrameworkBundle\CacheWarmer\TemplatePathsCacheWarmer($c, $this->get('templating.locator')), 1 => new \Symfony\Bundle\FrameworkBundle\CacheWarmer\RouterCacheWarmer($this->get('router')), 2 => new \Symfony\Bundle\TwigBundle\CacheWarmer\TemplateCacheCacheWarmer($this, $c)));
+    }
+
+    /**
+     * Gets the 'data_collector.form' service.
+     *
+     * This service is shared.
+     * This method always returns the same instance of the service.
+     *
+     * @return Symfony\Component\Form\Extension\DataCollector\FormDataCollector A Symfony\Component\Form\Extension\DataCollector\FormDataCollector instance.
+     */
+    protected function getDataCollector_FormService()
+    {
+        return $this->services['data_collector.form'] = new \Symfony\Component\Form\Extension\DataCollector\FormDataCollector($this->get('data_collector.form.extractor'));
+    }
+
+    /**
+     * Gets the 'data_collector.form.extractor' service.
+     *
+     * This service is shared.
+     * This method always returns the same instance of the service.
+     *
+     * @return Symfony\Component\Form\Extension\DataCollector\FormDataExtractor A Symfony\Component\Form\Extension\DataCollector\FormDataExtractor instance.
+     */
+    protected function getDataCollector_Form_ExtractorService()
+    {
+        return $this->services['data_collector.form.extractor'] = new \Symfony\Component\Form\Extension\DataCollector\FormDataExtractor();
+    }
+
+    /**
+     * Gets the 'data_collector.request' service.
+     *
+     * This service is shared.
+     * This method always returns the same instance of the service.
+     *
+     * @return Symfony\Component\HttpKernel\DataCollector\RequestDataCollector A Symfony\Component\HttpKernel\DataCollector\RequestDataCollector instance.
+     */
+    protected function getDataCollector_RequestService()
+    {
+        return $this->services['data_collector.request'] = new \Symfony\Component\HttpKernel\DataCollector\RequestDataCollector();
+    }
+
+    /**
+     * Gets the 'data_collector.router' service.
+     *
+     * This service is shared.
+     * This method always returns the same instance of the service.
+     *
+     * @return Symfony\Bundle\FrameworkBundle\DataCollector\RouterDataCollector A Symfony\Bundle\FrameworkBundle\DataCollector\RouterDataCollector instance.
+     */
+    protected function getDataCollector_RouterService()
+    {
+        return $this->services['data_collector.router'] = new \Symfony\Bundle\FrameworkBundle\DataCollector\RouterDataCollector();
     }
 
     /**
@@ -215,11 +327,16 @@ class appTestDebugProjectContainer extends Container
     {
         $this->services['debug.event_dispatcher'] = $instance = new \Symfony\Component\HttpKernel\Debug\TraceableEventDispatcher(new \Symfony\Component\EventDispatcher\ContainerAwareEventDispatcher($this), $this->get('debug.stopwatch'), NULL);
 
+        $instance->addListenerService('kernel.controller', array(0 => 'data_collector.router', 1 => 'onKernelController'), 0);
         $instance->addSubscriberService('response_listener', 'Symfony\\Component\\HttpKernel\\EventListener\\ResponseListener');
         $instance->addSubscriberService('streamed_response_listener', 'Symfony\\Component\\HttpKernel\\EventListener\\StreamedResponseListener');
         $instance->addSubscriberService('locale_listener', 'Symfony\\Component\\HttpKernel\\EventListener\\LocaleListener');
         $instance->addSubscriberService('debug.emergency_logger_listener', 'Symfony\\Component\\HttpKernel\\EventListener\\ErrorsLoggerListener');
         $instance->addSubscriberService('debug.deprecation_logger_listener', 'Symfony\\Component\\HttpKernel\\EventListener\\ErrorsLoggerListener');
+        $instance->addSubscriberService('session_listener', 'Symfony\\Bundle\\FrameworkBundle\\EventListener\\SessionListener');
+        $instance->addSubscriberService('fragment.listener', 'Symfony\\Component\\HttpKernel\\EventListener\\FragmentListener');
+        $instance->addSubscriberService('profiler_listener', 'Symfony\\Component\\HttpKernel\\EventListener\\ProfilerListener');
+        $instance->addSubscriberService('data_collector.request', 'Symfony\\Component\\HttpKernel\\DataCollector\\RequestDataCollector');
         $instance->addSubscriberService('router_listener', 'Symfony\\Component\\HttpKernel\\EventListener\\RouterListener');
         $instance->addSubscriberService('twig.exception_listener', 'Symfony\\Component\\HttpKernel\\EventListener\\ExceptionListener');
 
@@ -283,6 +400,539 @@ class appTestDebugProjectContainer extends Container
     }
 
     /**
+     * Gets the 'form.csrf_provider' service.
+     *
+     * This service is shared.
+     * This method always returns the same instance of the service.
+     *
+     * @return Symfony\Component\Form\Extension\Csrf\CsrfProvider\CsrfTokenManagerAdapter A Symfony\Component\Form\Extension\Csrf\CsrfProvider\CsrfTokenManagerAdapter instance.
+     */
+    protected function getForm_CsrfProviderService()
+    {
+        return $this->services['form.csrf_provider'] = new \Symfony\Component\Form\Extension\Csrf\CsrfProvider\CsrfTokenManagerAdapter($this->get('security.csrf.token_manager'));
+    }
+
+    /**
+     * Gets the 'form.factory' service.
+     *
+     * This service is shared.
+     * This method always returns the same instance of the service.
+     *
+     * @return Symfony\Component\Form\FormFactory A Symfony\Component\Form\FormFactory instance.
+     */
+    protected function getForm_FactoryService()
+    {
+        return $this->services['form.factory'] = new \Symfony\Component\Form\FormFactory($this->get('form.registry'), $this->get('form.resolved_type_factory'));
+    }
+
+    /**
+     * Gets the 'form.registry' service.
+     *
+     * This service is shared.
+     * This method always returns the same instance of the service.
+     *
+     * @return Symfony\Component\Form\FormRegistry A Symfony\Component\Form\FormRegistry instance.
+     */
+    protected function getForm_RegistryService()
+    {
+        return $this->services['form.registry'] = new \Symfony\Component\Form\FormRegistry(array(0 => new \Symfony\Component\Form\Extension\DependencyInjection\DependencyInjectionExtension($this, array('form' => 'form.type.form', 'birthday' => 'form.type.birthday', 'checkbox' => 'form.type.checkbox', 'choice' => 'form.type.choice', 'collection' => 'form.type.collection', 'country' => 'form.type.country', 'date' => 'form.type.date', 'datetime' => 'form.type.datetime', 'email' => 'form.type.email', 'file' => 'form.type.file', 'hidden' => 'form.type.hidden', 'integer' => 'form.type.integer', 'language' => 'form.type.language', 'locale' => 'form.type.locale', 'money' => 'form.type.money', 'number' => 'form.type.number', 'password' => 'form.type.password', 'percent' => 'form.type.percent', 'radio' => 'form.type.radio', 'repeated' => 'form.type.repeated', 'search' => 'form.type.search', 'textarea' => 'form.type.textarea', 'text' => 'form.type.text', 'time' => 'form.type.time', 'timezone' => 'form.type.timezone', 'url' => 'form.type.url', 'button' => 'form.type.button', 'submit' => 'form.type.submit', 'reset' => 'form.type.reset', 'currency' => 'form.type.currency'), array('form' => array(0 => 'form.type_extension.form.http_foundation', 1 => 'form.type_extension.form.validator', 2 => 'form.type_extension.csrf', 3 => 'form.type_extension.form.data_collector'), 'repeated' => array(0 => 'form.type_extension.repeated.validator'), 'submit' => array(0 => 'form.type_extension.submit.validator')), array(0 => 'form.type_guesser.validator'))), $this->get('form.resolved_type_factory'));
+    }
+
+    /**
+     * Gets the 'form.resolved_type_factory' service.
+     *
+     * This service is shared.
+     * This method always returns the same instance of the service.
+     *
+     * @return Symfony\Component\Form\Extension\DataCollector\Proxy\ResolvedTypeFactoryDataCollectorProxy A Symfony\Component\Form\Extension\DataCollector\Proxy\ResolvedTypeFactoryDataCollectorProxy instance.
+     */
+    protected function getForm_ResolvedTypeFactoryService()
+    {
+        return $this->services['form.resolved_type_factory'] = new \Symfony\Component\Form\Extension\DataCollector\Proxy\ResolvedTypeFactoryDataCollectorProxy(new \Symfony\Component\Form\ResolvedFormTypeFactory(), $this->get('data_collector.form'));
+    }
+
+    /**
+     * Gets the 'form.type.birthday' service.
+     *
+     * This service is shared.
+     * This method always returns the same instance of the service.
+     *
+     * @return Symfony\Component\Form\Extension\Core\Type\BirthdayType A Symfony\Component\Form\Extension\Core\Type\BirthdayType instance.
+     */
+    protected function getForm_Type_BirthdayService()
+    {
+        return $this->services['form.type.birthday'] = new \Symfony\Component\Form\Extension\Core\Type\BirthdayType();
+    }
+
+    /**
+     * Gets the 'form.type.button' service.
+     *
+     * This service is shared.
+     * This method always returns the same instance of the service.
+     *
+     * @return Symfony\Component\Form\Extension\Core\Type\ButtonType A Symfony\Component\Form\Extension\Core\Type\ButtonType instance.
+     */
+    protected function getForm_Type_ButtonService()
+    {
+        return $this->services['form.type.button'] = new \Symfony\Component\Form\Extension\Core\Type\ButtonType();
+    }
+
+    /**
+     * Gets the 'form.type.checkbox' service.
+     *
+     * This service is shared.
+     * This method always returns the same instance of the service.
+     *
+     * @return Symfony\Component\Form\Extension\Core\Type\CheckboxType A Symfony\Component\Form\Extension\Core\Type\CheckboxType instance.
+     */
+    protected function getForm_Type_CheckboxService()
+    {
+        return $this->services['form.type.checkbox'] = new \Symfony\Component\Form\Extension\Core\Type\CheckboxType();
+    }
+
+    /**
+     * Gets the 'form.type.choice' service.
+     *
+     * This service is shared.
+     * This method always returns the same instance of the service.
+     *
+     * @return Symfony\Component\Form\Extension\Core\Type\ChoiceType A Symfony\Component\Form\Extension\Core\Type\ChoiceType instance.
+     */
+    protected function getForm_Type_ChoiceService()
+    {
+        return $this->services['form.type.choice'] = new \Symfony\Component\Form\Extension\Core\Type\ChoiceType();
+    }
+
+    /**
+     * Gets the 'form.type.collection' service.
+     *
+     * This service is shared.
+     * This method always returns the same instance of the service.
+     *
+     * @return Symfony\Component\Form\Extension\Core\Type\CollectionType A Symfony\Component\Form\Extension\Core\Type\CollectionType instance.
+     */
+    protected function getForm_Type_CollectionService()
+    {
+        return $this->services['form.type.collection'] = new \Symfony\Component\Form\Extension\Core\Type\CollectionType();
+    }
+
+    /**
+     * Gets the 'form.type.country' service.
+     *
+     * This service is shared.
+     * This method always returns the same instance of the service.
+     *
+     * @return Symfony\Component\Form\Extension\Core\Type\CountryType A Symfony\Component\Form\Extension\Core\Type\CountryType instance.
+     */
+    protected function getForm_Type_CountryService()
+    {
+        return $this->services['form.type.country'] = new \Symfony\Component\Form\Extension\Core\Type\CountryType();
+    }
+
+    /**
+     * Gets the 'form.type.currency' service.
+     *
+     * This service is shared.
+     * This method always returns the same instance of the service.
+     *
+     * @return Symfony\Component\Form\Extension\Core\Type\CurrencyType A Symfony\Component\Form\Extension\Core\Type\CurrencyType instance.
+     */
+    protected function getForm_Type_CurrencyService()
+    {
+        return $this->services['form.type.currency'] = new \Symfony\Component\Form\Extension\Core\Type\CurrencyType();
+    }
+
+    /**
+     * Gets the 'form.type.date' service.
+     *
+     * This service is shared.
+     * This method always returns the same instance of the service.
+     *
+     * @return Symfony\Component\Form\Extension\Core\Type\DateType A Symfony\Component\Form\Extension\Core\Type\DateType instance.
+     */
+    protected function getForm_Type_DateService()
+    {
+        return $this->services['form.type.date'] = new \Symfony\Component\Form\Extension\Core\Type\DateType();
+    }
+
+    /**
+     * Gets the 'form.type.datetime' service.
+     *
+     * This service is shared.
+     * This method always returns the same instance of the service.
+     *
+     * @return Symfony\Component\Form\Extension\Core\Type\DateTimeType A Symfony\Component\Form\Extension\Core\Type\DateTimeType instance.
+     */
+    protected function getForm_Type_DatetimeService()
+    {
+        return $this->services['form.type.datetime'] = new \Symfony\Component\Form\Extension\Core\Type\DateTimeType();
+    }
+
+    /**
+     * Gets the 'form.type.email' service.
+     *
+     * This service is shared.
+     * This method always returns the same instance of the service.
+     *
+     * @return Symfony\Component\Form\Extension\Core\Type\EmailType A Symfony\Component\Form\Extension\Core\Type\EmailType instance.
+     */
+    protected function getForm_Type_EmailService()
+    {
+        return $this->services['form.type.email'] = new \Symfony\Component\Form\Extension\Core\Type\EmailType();
+    }
+
+    /**
+     * Gets the 'form.type.file' service.
+     *
+     * This service is shared.
+     * This method always returns the same instance of the service.
+     *
+     * @return Symfony\Component\Form\Extension\Core\Type\FileType A Symfony\Component\Form\Extension\Core\Type\FileType instance.
+     */
+    protected function getForm_Type_FileService()
+    {
+        return $this->services['form.type.file'] = new \Symfony\Component\Form\Extension\Core\Type\FileType();
+    }
+
+    /**
+     * Gets the 'form.type.form' service.
+     *
+     * This service is shared.
+     * This method always returns the same instance of the service.
+     *
+     * @return Symfony\Component\Form\Extension\Core\Type\FormType A Symfony\Component\Form\Extension\Core\Type\FormType instance.
+     */
+    protected function getForm_Type_FormService()
+    {
+        return $this->services['form.type.form'] = new \Symfony\Component\Form\Extension\Core\Type\FormType($this->get('property_accessor'));
+    }
+
+    /**
+     * Gets the 'form.type.hidden' service.
+     *
+     * This service is shared.
+     * This method always returns the same instance of the service.
+     *
+     * @return Symfony\Component\Form\Extension\Core\Type\HiddenType A Symfony\Component\Form\Extension\Core\Type\HiddenType instance.
+     */
+    protected function getForm_Type_HiddenService()
+    {
+        return $this->services['form.type.hidden'] = new \Symfony\Component\Form\Extension\Core\Type\HiddenType();
+    }
+
+    /**
+     * Gets the 'form.type.integer' service.
+     *
+     * This service is shared.
+     * This method always returns the same instance of the service.
+     *
+     * @return Symfony\Component\Form\Extension\Core\Type\IntegerType A Symfony\Component\Form\Extension\Core\Type\IntegerType instance.
+     */
+    protected function getForm_Type_IntegerService()
+    {
+        return $this->services['form.type.integer'] = new \Symfony\Component\Form\Extension\Core\Type\IntegerType();
+    }
+
+    /**
+     * Gets the 'form.type.language' service.
+     *
+     * This service is shared.
+     * This method always returns the same instance of the service.
+     *
+     * @return Symfony\Component\Form\Extension\Core\Type\LanguageType A Symfony\Component\Form\Extension\Core\Type\LanguageType instance.
+     */
+    protected function getForm_Type_LanguageService()
+    {
+        return $this->services['form.type.language'] = new \Symfony\Component\Form\Extension\Core\Type\LanguageType();
+    }
+
+    /**
+     * Gets the 'form.type.locale' service.
+     *
+     * This service is shared.
+     * This method always returns the same instance of the service.
+     *
+     * @return Symfony\Component\Form\Extension\Core\Type\LocaleType A Symfony\Component\Form\Extension\Core\Type\LocaleType instance.
+     */
+    protected function getForm_Type_LocaleService()
+    {
+        return $this->services['form.type.locale'] = new \Symfony\Component\Form\Extension\Core\Type\LocaleType();
+    }
+
+    /**
+     * Gets the 'form.type.money' service.
+     *
+     * This service is shared.
+     * This method always returns the same instance of the service.
+     *
+     * @return Symfony\Component\Form\Extension\Core\Type\MoneyType A Symfony\Component\Form\Extension\Core\Type\MoneyType instance.
+     */
+    protected function getForm_Type_MoneyService()
+    {
+        return $this->services['form.type.money'] = new \Symfony\Component\Form\Extension\Core\Type\MoneyType();
+    }
+
+    /**
+     * Gets the 'form.type.number' service.
+     *
+     * This service is shared.
+     * This method always returns the same instance of the service.
+     *
+     * @return Symfony\Component\Form\Extension\Core\Type\NumberType A Symfony\Component\Form\Extension\Core\Type\NumberType instance.
+     */
+    protected function getForm_Type_NumberService()
+    {
+        return $this->services['form.type.number'] = new \Symfony\Component\Form\Extension\Core\Type\NumberType();
+    }
+
+    /**
+     * Gets the 'form.type.password' service.
+     *
+     * This service is shared.
+     * This method always returns the same instance of the service.
+     *
+     * @return Symfony\Component\Form\Extension\Core\Type\PasswordType A Symfony\Component\Form\Extension\Core\Type\PasswordType instance.
+     */
+    protected function getForm_Type_PasswordService()
+    {
+        return $this->services['form.type.password'] = new \Symfony\Component\Form\Extension\Core\Type\PasswordType();
+    }
+
+    /**
+     * Gets the 'form.type.percent' service.
+     *
+     * This service is shared.
+     * This method always returns the same instance of the service.
+     *
+     * @return Symfony\Component\Form\Extension\Core\Type\PercentType A Symfony\Component\Form\Extension\Core\Type\PercentType instance.
+     */
+    protected function getForm_Type_PercentService()
+    {
+        return $this->services['form.type.percent'] = new \Symfony\Component\Form\Extension\Core\Type\PercentType();
+    }
+
+    /**
+     * Gets the 'form.type.radio' service.
+     *
+     * This service is shared.
+     * This method always returns the same instance of the service.
+     *
+     * @return Symfony\Component\Form\Extension\Core\Type\RadioType A Symfony\Component\Form\Extension\Core\Type\RadioType instance.
+     */
+    protected function getForm_Type_RadioService()
+    {
+        return $this->services['form.type.radio'] = new \Symfony\Component\Form\Extension\Core\Type\RadioType();
+    }
+
+    /**
+     * Gets the 'form.type.repeated' service.
+     *
+     * This service is shared.
+     * This method always returns the same instance of the service.
+     *
+     * @return Symfony\Component\Form\Extension\Core\Type\RepeatedType A Symfony\Component\Form\Extension\Core\Type\RepeatedType instance.
+     */
+    protected function getForm_Type_RepeatedService()
+    {
+        return $this->services['form.type.repeated'] = new \Symfony\Component\Form\Extension\Core\Type\RepeatedType();
+    }
+
+    /**
+     * Gets the 'form.type.reset' service.
+     *
+     * This service is shared.
+     * This method always returns the same instance of the service.
+     *
+     * @return Symfony\Component\Form\Extension\Core\Type\ResetType A Symfony\Component\Form\Extension\Core\Type\ResetType instance.
+     */
+    protected function getForm_Type_ResetService()
+    {
+        return $this->services['form.type.reset'] = new \Symfony\Component\Form\Extension\Core\Type\ResetType();
+    }
+
+    /**
+     * Gets the 'form.type.search' service.
+     *
+     * This service is shared.
+     * This method always returns the same instance of the service.
+     *
+     * @return Symfony\Component\Form\Extension\Core\Type\SearchType A Symfony\Component\Form\Extension\Core\Type\SearchType instance.
+     */
+    protected function getForm_Type_SearchService()
+    {
+        return $this->services['form.type.search'] = new \Symfony\Component\Form\Extension\Core\Type\SearchType();
+    }
+
+    /**
+     * Gets the 'form.type.submit' service.
+     *
+     * This service is shared.
+     * This method always returns the same instance of the service.
+     *
+     * @return Symfony\Component\Form\Extension\Core\Type\SubmitType A Symfony\Component\Form\Extension\Core\Type\SubmitType instance.
+     */
+    protected function getForm_Type_SubmitService()
+    {
+        return $this->services['form.type.submit'] = new \Symfony\Component\Form\Extension\Core\Type\SubmitType();
+    }
+
+    /**
+     * Gets the 'form.type.text' service.
+     *
+     * This service is shared.
+     * This method always returns the same instance of the service.
+     *
+     * @return Symfony\Component\Form\Extension\Core\Type\TextType A Symfony\Component\Form\Extension\Core\Type\TextType instance.
+     */
+    protected function getForm_Type_TextService()
+    {
+        return $this->services['form.type.text'] = new \Symfony\Component\Form\Extension\Core\Type\TextType();
+    }
+
+    /**
+     * Gets the 'form.type.textarea' service.
+     *
+     * This service is shared.
+     * This method always returns the same instance of the service.
+     *
+     * @return Symfony\Component\Form\Extension\Core\Type\TextareaType A Symfony\Component\Form\Extension\Core\Type\TextareaType instance.
+     */
+    protected function getForm_Type_TextareaService()
+    {
+        return $this->services['form.type.textarea'] = new \Symfony\Component\Form\Extension\Core\Type\TextareaType();
+    }
+
+    /**
+     * Gets the 'form.type.time' service.
+     *
+     * This service is shared.
+     * This method always returns the same instance of the service.
+     *
+     * @return Symfony\Component\Form\Extension\Core\Type\TimeType A Symfony\Component\Form\Extension\Core\Type\TimeType instance.
+     */
+    protected function getForm_Type_TimeService()
+    {
+        return $this->services['form.type.time'] = new \Symfony\Component\Form\Extension\Core\Type\TimeType();
+    }
+
+    /**
+     * Gets the 'form.type.timezone' service.
+     *
+     * This service is shared.
+     * This method always returns the same instance of the service.
+     *
+     * @return Symfony\Component\Form\Extension\Core\Type\TimezoneType A Symfony\Component\Form\Extension\Core\Type\TimezoneType instance.
+     */
+    protected function getForm_Type_TimezoneService()
+    {
+        return $this->services['form.type.timezone'] = new \Symfony\Component\Form\Extension\Core\Type\TimezoneType();
+    }
+
+    /**
+     * Gets the 'form.type.url' service.
+     *
+     * This service is shared.
+     * This method always returns the same instance of the service.
+     *
+     * @return Symfony\Component\Form\Extension\Core\Type\UrlType A Symfony\Component\Form\Extension\Core\Type\UrlType instance.
+     */
+    protected function getForm_Type_UrlService()
+    {
+        return $this->services['form.type.url'] = new \Symfony\Component\Form\Extension\Core\Type\UrlType();
+    }
+
+    /**
+     * Gets the 'form.type_extension.csrf' service.
+     *
+     * This service is shared.
+     * This method always returns the same instance of the service.
+     *
+     * @return Symfony\Component\Form\Extension\Csrf\Type\FormTypeCsrfExtension A Symfony\Component\Form\Extension\Csrf\Type\FormTypeCsrfExtension instance.
+     */
+    protected function getForm_TypeExtension_CsrfService()
+    {
+        return $this->services['form.type_extension.csrf'] = new \Symfony\Component\Form\Extension\Csrf\Type\FormTypeCsrfExtension($this->get('form.csrf_provider'), true, '_token', $this->get('translator.default'), 'validators');
+    }
+
+    /**
+     * Gets the 'form.type_extension.form.data_collector' service.
+     *
+     * This service is shared.
+     * This method always returns the same instance of the service.
+     *
+     * @return Symfony\Component\Form\Extension\DataCollector\Type\DataCollectorTypeExtension A Symfony\Component\Form\Extension\DataCollector\Type\DataCollectorTypeExtension instance.
+     */
+    protected function getForm_TypeExtension_Form_DataCollectorService()
+    {
+        return $this->services['form.type_extension.form.data_collector'] = new \Symfony\Component\Form\Extension\DataCollector\Type\DataCollectorTypeExtension($this->get('data_collector.form'));
+    }
+
+    /**
+     * Gets the 'form.type_extension.form.http_foundation' service.
+     *
+     * This service is shared.
+     * This method always returns the same instance of the service.
+     *
+     * @return Symfony\Component\Form\Extension\HttpFoundation\Type\FormTypeHttpFoundationExtension A Symfony\Component\Form\Extension\HttpFoundation\Type\FormTypeHttpFoundationExtension instance.
+     */
+    protected function getForm_TypeExtension_Form_HttpFoundationService()
+    {
+        return $this->services['form.type_extension.form.http_foundation'] = new \Symfony\Component\Form\Extension\HttpFoundation\Type\FormTypeHttpFoundationExtension();
+    }
+
+    /**
+     * Gets the 'form.type_extension.form.validator' service.
+     *
+     * This service is shared.
+     * This method always returns the same instance of the service.
+     *
+     * @return Symfony\Component\Form\Extension\Validator\Type\FormTypeValidatorExtension A Symfony\Component\Form\Extension\Validator\Type\FormTypeValidatorExtension instance.
+     */
+    protected function getForm_TypeExtension_Form_ValidatorService()
+    {
+        return $this->services['form.type_extension.form.validator'] = new \Symfony\Component\Form\Extension\Validator\Type\FormTypeValidatorExtension($this->get('validator'));
+    }
+
+    /**
+     * Gets the 'form.type_extension.repeated.validator' service.
+     *
+     * This service is shared.
+     * This method always returns the same instance of the service.
+     *
+     * @return Symfony\Component\Form\Extension\Validator\Type\RepeatedTypeValidatorExtension A Symfony\Component\Form\Extension\Validator\Type\RepeatedTypeValidatorExtension instance.
+     */
+    protected function getForm_TypeExtension_Repeated_ValidatorService()
+    {
+        return $this->services['form.type_extension.repeated.validator'] = new \Symfony\Component\Form\Extension\Validator\Type\RepeatedTypeValidatorExtension();
+    }
+
+    /**
+     * Gets the 'form.type_extension.submit.validator' service.
+     *
+     * This service is shared.
+     * This method always returns the same instance of the service.
+     *
+     * @return Symfony\Component\Form\Extension\Validator\Type\SubmitTypeValidatorExtension A Symfony\Component\Form\Extension\Validator\Type\SubmitTypeValidatorExtension instance.
+     */
+    protected function getForm_TypeExtension_Submit_ValidatorService()
+    {
+        return $this->services['form.type_extension.submit.validator'] = new \Symfony\Component\Form\Extension\Validator\Type\SubmitTypeValidatorExtension();
+    }
+
+    /**
+     * Gets the 'form.type_guesser.validator' service.
+     *
+     * This service is shared.
+     * This method always returns the same instance of the service.
+     *
+     * @return Symfony\Component\Form\Extension\Validator\ValidatorTypeGuesser A Symfony\Component\Form\Extension\Validator\ValidatorTypeGuesser instance.
+     */
+    protected function getForm_TypeGuesser_ValidatorService()
+    {
+        return $this->services['form.type_guesser.validator'] = new \Symfony\Component\Form\Extension\Validator\ValidatorTypeGuesser($this->get('validator.mapping.class_metadata_factory'));
+    }
+
+    /**
      * Gets the 'fragment.handler' service.
      *
      * This service is shared.
@@ -299,6 +949,19 @@ class appTestDebugProjectContainer extends Container
         $instance->addRenderer($this->get('fragment.renderer.esi'));
 
         return $instance;
+    }
+
+    /**
+     * Gets the 'fragment.listener' service.
+     *
+     * This service is shared.
+     * This method always returns the same instance of the service.
+     *
+     * @return Symfony\Component\HttpKernel\EventListener\FragmentListener A Symfony\Component\HttpKernel\EventListener\FragmentListener instance.
+     */
+    protected function getFragment_ListenerService()
+    {
+        return $this->services['fragment.listener'] = new \Symfony\Component\HttpKernel\EventListener\FragmentListener($this->get('uri_signer'), '/_fragment');
     }
 
     /**
@@ -389,6 +1052,51 @@ class appTestDebugProjectContainer extends Container
     protected function getLocaleListenerService()
     {
         return $this->services['locale_listener'] = new \Symfony\Component\HttpKernel\EventListener\LocaleListener('en', $this->get('router', ContainerInterface::NULL_ON_INVALID_REFERENCE), $this->get('request_stack'));
+    }
+
+    /**
+     * Gets the 'profiler' service.
+     *
+     * This service is shared.
+     * This method always returns the same instance of the service.
+     *
+     * @return Symfony\Component\HttpKernel\Profiler\Profiler A Symfony\Component\HttpKernel\Profiler\Profiler instance.
+     */
+    protected function getProfilerService()
+    {
+        $a = $this->get('kernel', ContainerInterface::NULL_ON_INVALID_REFERENCE);
+
+        $b = new \Symfony\Component\HttpKernel\DataCollector\ConfigDataCollector();
+        if ($this->has('kernel')) {
+            $b->setKernel($a);
+        }
+
+        $this->services['profiler'] = $instance = new \Symfony\Component\HttpKernel\Profiler\Profiler(new \Symfony\Component\HttpKernel\Profiler\FileProfilerStorage('file:C:/xampp/htdocs/PROJECTS/SymfonyProjects/BeautyLogBundle/BeautyLogBundle/src/So/LogboardBundle/Tests/app/cache/test/profiler', '', '', 86400), NULL);
+
+        $instance->add($b);
+        $instance->add($this->get('data_collector.request'));
+        $instance->add(new \Symfony\Component\HttpKernel\DataCollector\ExceptionDataCollector());
+        $instance->add(new \Symfony\Component\HttpKernel\DataCollector\EventDataCollector($this->get('debug.event_dispatcher', ContainerInterface::NULL_ON_INVALID_REFERENCE)));
+        $instance->add(new \Symfony\Component\HttpKernel\DataCollector\LoggerDataCollector(NULL));
+        $instance->add(new \Symfony\Component\HttpKernel\DataCollector\TimeDataCollector($a, $this->get('debug.stopwatch', ContainerInterface::NULL_ON_INVALID_REFERENCE)));
+        $instance->add(new \Symfony\Component\HttpKernel\DataCollector\MemoryDataCollector());
+        $instance->add($this->get('data_collector.router'));
+        $instance->add($this->get('data_collector.form'));
+
+        return $instance;
+    }
+
+    /**
+     * Gets the 'profiler_listener' service.
+     *
+     * This service is shared.
+     * This method always returns the same instance of the service.
+     *
+     * @return Symfony\Component\HttpKernel\EventListener\ProfilerListener A Symfony\Component\HttpKernel\EventListener\ProfilerListener instance.
+     */
+    protected function getProfilerListenerService()
+    {
+        return $this->services['profiler_listener'] = new \Symfony\Component\HttpKernel\EventListener\ProfilerListener($this->get('profiler'), NULL, false, false, $this->get('request_stack'));
     }
 
     /**
@@ -495,6 +1203,19 @@ class appTestDebugProjectContainer extends Container
     }
 
     /**
+     * Gets the 'security.csrf.token_manager' service.
+     *
+     * This service is shared.
+     * This method always returns the same instance of the service.
+     *
+     * @return Symfony\Component\Security\Csrf\CsrfTokenManager A Symfony\Component\Security\Csrf\CsrfTokenManager instance.
+     */
+    protected function getSecurity_Csrf_TokenManagerService()
+    {
+        return $this->services['security.csrf.token_manager'] = new \Symfony\Component\Security\Csrf\CsrfTokenManager(new \Symfony\Component\Security\Csrf\TokenGenerator\UriSafeTokenGenerator($this->get('security.secure_random')), new \Symfony\Component\Security\Csrf\TokenStorage\SessionTokenStorage($this->get('session')));
+    }
+
+    /**
      * Gets the 'security.secure_random' service.
      *
      * This service is shared.
@@ -518,6 +1239,84 @@ class appTestDebugProjectContainer extends Container
     protected function getServiceContainerService()
     {
         throw new RuntimeException('You have requested a synthetic service ("service_container"). The DIC does not know how to construct this service.');
+    }
+
+    /**
+     * Gets the 'session' service.
+     *
+     * This service is shared.
+     * This method always returns the same instance of the service.
+     *
+     * @return Symfony\Component\HttpFoundation\Session\Session A Symfony\Component\HttpFoundation\Session\Session instance.
+     */
+    protected function getSessionService()
+    {
+        return $this->services['session'] = new \Symfony\Component\HttpFoundation\Session\Session($this->get('session.storage.native'), new \Symfony\Component\HttpFoundation\Session\Attribute\AttributeBag(), new \Symfony\Component\HttpFoundation\Session\Flash\FlashBag());
+    }
+
+    /**
+     * Gets the 'session.handler' service.
+     *
+     * This service is shared.
+     * This method always returns the same instance of the service.
+     *
+     * @return Symfony\Component\HttpFoundation\Session\Storage\Handler\NativeFileSessionHandler A Symfony\Component\HttpFoundation\Session\Storage\Handler\NativeFileSessionHandler instance.
+     */
+    protected function getSession_HandlerService()
+    {
+        return $this->services['session.handler'] = new \Symfony\Component\HttpFoundation\Session\Storage\Handler\NativeFileSessionHandler('C:/xampp/htdocs/PROJECTS/SymfonyProjects/BeautyLogBundle/BeautyLogBundle/src/So/LogboardBundle/Tests/app/cache/test/sessions');
+    }
+
+    /**
+     * Gets the 'session.storage.filesystem' service.
+     *
+     * This service is shared.
+     * This method always returns the same instance of the service.
+     *
+     * @return Symfony\Component\HttpFoundation\Session\Storage\MockFileSessionStorage A Symfony\Component\HttpFoundation\Session\Storage\MockFileSessionStorage instance.
+     */
+    protected function getSession_Storage_FilesystemService()
+    {
+        return $this->services['session.storage.filesystem'] = new \Symfony\Component\HttpFoundation\Session\Storage\MockFileSessionStorage('C:/xampp/htdocs/PROJECTS/SymfonyProjects/BeautyLogBundle/BeautyLogBundle/src/So/LogboardBundle/Tests/app/cache/test/sessions', 'MOCKSESSID', $this->get('session.storage.metadata_bag'));
+    }
+
+    /**
+     * Gets the 'session.storage.native' service.
+     *
+     * This service is shared.
+     * This method always returns the same instance of the service.
+     *
+     * @return Symfony\Component\HttpFoundation\Session\Storage\NativeSessionStorage A Symfony\Component\HttpFoundation\Session\Storage\NativeSessionStorage instance.
+     */
+    protected function getSession_Storage_NativeService()
+    {
+        return $this->services['session.storage.native'] = new \Symfony\Component\HttpFoundation\Session\Storage\NativeSessionStorage(array(), $this->get('session.handler'), $this->get('session.storage.metadata_bag'));
+    }
+
+    /**
+     * Gets the 'session.storage.php_bridge' service.
+     *
+     * This service is shared.
+     * This method always returns the same instance of the service.
+     *
+     * @return Symfony\Component\HttpFoundation\Session\Storage\PhpBridgeSessionStorage A Symfony\Component\HttpFoundation\Session\Storage\PhpBridgeSessionStorage instance.
+     */
+    protected function getSession_Storage_PhpBridgeService()
+    {
+        return $this->services['session.storage.php_bridge'] = new \Symfony\Component\HttpFoundation\Session\Storage\PhpBridgeSessionStorage($this->get('session.handler'), $this->get('session.storage.metadata_bag'));
+    }
+
+    /**
+     * Gets the 'session_listener' service.
+     *
+     * This service is shared.
+     * This method always returns the same instance of the service.
+     *
+     * @return Symfony\Bundle\FrameworkBundle\EventListener\SessionListener A Symfony\Bundle\FrameworkBundle\EventListener\SessionListener instance.
+     */
+    protected function getSessionListenerService()
+    {
+        return $this->services['session_listener'] = new \Symfony\Bundle\FrameworkBundle\EventListener\SessionListener($this);
     }
 
     /**
@@ -644,7 +1443,7 @@ class appTestDebugProjectContainer extends Container
      */
     protected function getTemplating_Helper_FormService()
     {
-        return $this->services['templating.helper.form'] = new \Symfony\Bundle\FrameworkBundle\Templating\Helper\FormHelper(new \Symfony\Component\Form\FormRenderer(new \Symfony\Component\Form\Extension\Templating\TemplatingRendererEngine($this->get('debug.templating.engine.php'), array(0 => 'FrameworkBundle:Form')), NULL));
+        return $this->services['templating.helper.form'] = new \Symfony\Bundle\FrameworkBundle\Templating\Helper\FormHelper(new \Symfony\Component\Form\FormRenderer(new \Symfony\Component\Form\Extension\Templating\TemplatingRendererEngine($this->get('debug.templating.engine.php'), array(0 => 'FrameworkBundle:Form')), $this->get('form.csrf_provider', ContainerInterface::NULL_ON_INVALID_REFERENCE)));
     }
 
     /**
@@ -1158,6 +1957,7 @@ class appTestDebugProjectContainer extends Container
         $instance->addExtension(new \Symfony\Bridge\Twig\Extension\StopwatchExtension($this->get('debug.stopwatch', ContainerInterface::NULL_ON_INVALID_REFERENCE)));
         $instance->addExtension(new \Symfony\Bridge\Twig\Extension\ExpressionExtension());
         $instance->addExtension(new \Symfony\Bridge\Twig\Extension\HttpKernelExtension($this->get('fragment.handler')));
+        $instance->addExtension(new \Symfony\Bridge\Twig\Extension\FormExtension(new \Symfony\Bridge\Twig\Form\TwigRenderer(new \Symfony\Bridge\Twig\Form\TwigRendererEngine(array(0 => 'form_div_layout.html.twig')), $this->get('form.csrf_provider', ContainerInterface::NULL_ON_INVALID_REFERENCE))));
         $instance->addExtension(new \Twig_Extension_Debug());
         $instance->addGlobal('app', $this->get('templating.globals'));
 
@@ -1204,6 +2004,7 @@ class appTestDebugProjectContainer extends Container
 
         $instance->addPath('C:\\xampp\\htdocs\\PROJECTS\\SymfonyProjects\\BeautyLogBundle\\BeautyLogBundle\\src\\So\\LogboardBundle\\vendor\\symfony\\symfony\\src\\Symfony\\Bundle\\FrameworkBundle/Resources/views', 'Framework');
         $instance->addPath('C:\\xampp\\htdocs\\PROJECTS\\SymfonyProjects\\BeautyLogBundle\\BeautyLogBundle\\src\\So\\LogboardBundle\\vendor\\symfony\\symfony\\src\\Symfony\\Bundle\\TwigBundle/Resources/views', 'Twig');
+        $instance->addPath('C:\\xampp\\htdocs\\PROJECTS\\SymfonyProjects\\BeautyLogBundle\\BeautyLogBundle\\src\\So\\LogboardBundle\\vendor\\symfony\\symfony\\src\\Symfony\\Bridge\\Twig/Resources/views/Form');
 
         return $instance;
     }
@@ -1232,6 +2033,32 @@ class appTestDebugProjectContainer extends Container
     protected function getUriSignerService()
     {
         return $this->services['uri_signer'] = new \Symfony\Component\HttpKernel\UriSigner('sfiushlfihuslmqfuhsdlqghiugf');
+    }
+
+    /**
+     * Gets the 'validator' service.
+     *
+     * This service is shared.
+     * This method always returns the same instance of the service.
+     *
+     * @return Symfony\Component\Validator\Validator A Symfony\Component\Validator\Validator instance.
+     */
+    protected function getValidatorService()
+    {
+        return $this->services['validator'] = new \Symfony\Component\Validator\Validator($this->get('validator.mapping.class_metadata_factory'), new \Symfony\Bundle\FrameworkBundle\Validator\ConstraintValidatorFactory($this, array('validator.expression' => 'validator.expression')), $this->get('translator'), 'validators', array());
+    }
+
+    /**
+     * Gets the 'validator.expression' service.
+     *
+     * This service is shared.
+     * This method always returns the same instance of the service.
+     *
+     * @return Symfony\Component\Validator\Constraints\ExpressionValidator A Symfony\Component\Validator\Constraints\ExpressionValidator instance.
+     */
+    protected function getValidator_ExpressionService()
+    {
+        return $this->services['validator.expression'] = new \Symfony\Component\Validator\Constraints\ExpressionValidator($this->get('property_accessor'));
     }
 
     /**
@@ -1269,6 +2096,23 @@ class appTestDebugProjectContainer extends Container
     }
 
     /**
+     * Gets the 'session.storage.metadata_bag' service.
+     *
+     * This service is shared.
+     * This method always returns the same instance of the service.
+     *
+     * This service is private.
+     * If you want to be able to request this service from the container directly,
+     * make it public, otherwise you might end up with broken code.
+     *
+     * @return Symfony\Component\HttpFoundation\Session\Storage\MetadataBag A Symfony\Component\HttpFoundation\Session\Storage\MetadataBag instance.
+     */
+    protected function getSession_Storage_MetadataBagService()
+    {
+        return $this->services['session.storage.metadata_bag'] = new \Symfony\Component\HttpFoundation\Session\Storage\MetadataBag('_sf2_meta', '0');
+    }
+
+    /**
      * Gets the 'templating.locator' service.
      *
      * This service is shared.
@@ -1300,6 +2144,23 @@ class appTestDebugProjectContainer extends Container
     protected function getTranslator_SelectorService()
     {
         return $this->services['translator.selector'] = new \Symfony\Component\Translation\MessageSelector();
+    }
+
+    /**
+     * Gets the 'validator.mapping.class_metadata_factory' service.
+     *
+     * This service is shared.
+     * This method always returns the same instance of the service.
+     *
+     * This service is private.
+     * If you want to be able to request this service from the container directly,
+     * make it public, otherwise you might end up with broken code.
+     *
+     * @return Symfony\Component\Validator\Mapping\ClassMetadataFactory A Symfony\Component\Validator\Mapping\ClassMetadataFactory instance.
+     */
+    protected function getValidator_Mapping_ClassMetadataFactoryService()
+    {
+        return $this->services['validator.mapping.class_metadata_factory'] = new \Symfony\Component\Validator\Mapping\ClassMetadataFactory(new \Symfony\Component\Validator\Mapping\Loader\LoaderChain(array(0 => new \Symfony\Component\Validator\Mapping\Loader\AnnotationLoader($this->get('annotation_reader')), 1 => new \Symfony\Component\Validator\Mapping\Loader\StaticMethodLoader(), 2 => new \Symfony\Component\Validator\Mapping\Loader\XmlFilesLoader(array(0 => 'C:\\xampp\\htdocs\\PROJECTS\\SymfonyProjects\\BeautyLogBundle\\BeautyLogBundle\\src\\So\\LogboardBundle\\vendor\\symfony\\symfony\\src\\Symfony\\Component\\Form/Resources/config/validation.xml')), 3 => new \Symfony\Component\Validator\Mapping\Loader\YamlFilesLoader(array()))), NULL);
     }
 
     /**
@@ -1439,7 +2300,33 @@ class appTestDebugProjectContainer extends Container
 
             ),
             'kernel.default_locale' => 'en',
+            'session.class' => 'Symfony\\Component\\HttpFoundation\\Session\\Session',
+            'session.flashbag.class' => 'Symfony\\Component\\HttpFoundation\\Session\\Flash\\FlashBag',
+            'session.attribute_bag.class' => 'Symfony\\Component\\HttpFoundation\\Session\\Attribute\\AttributeBag',
+            'session.storage.metadata_bag.class' => 'Symfony\\Component\\HttpFoundation\\Session\\Storage\\MetadataBag',
+            'session.metadata.storage_key' => '_sf2_meta',
+            'session.storage.native.class' => 'Symfony\\Component\\HttpFoundation\\Session\\Storage\\NativeSessionStorage',
+            'session.storage.php_bridge.class' => 'Symfony\\Component\\HttpFoundation\\Session\\Storage\\PhpBridgeSessionStorage',
+            'session.storage.mock_file.class' => 'Symfony\\Component\\HttpFoundation\\Session\\Storage\\MockFileSessionStorage',
+            'session.handler.native_file.class' => 'Symfony\\Component\\HttpFoundation\\Session\\Storage\\Handler\\NativeFileSessionHandler',
+            'session.handler.write_check.class' => 'Symfony\\Component\\HttpFoundation\\Session\\Storage\\Handler\\WriteCheckSessionHandler',
+            'session_listener.class' => 'Symfony\\Bundle\\FrameworkBundle\\EventListener\\SessionListener',
+            'session.storage.options' => array(
+
+            ),
+            'session.save_path' => 'C:/xampp/htdocs/PROJECTS/SymfonyProjects/BeautyLogBundle/BeautyLogBundle/src/So/LogboardBundle/Tests/app/cache/test/sessions',
+            'session.metadata.update_threshold' => '0',
             'security.secure_random.class' => 'Symfony\\Component\\Security\\Core\\Util\\SecureRandom',
+            'security.csrf.token_generator.class' => 'Symfony\\Component\\Security\\Csrf\\TokenGenerator\\UriSafeTokenGenerator',
+            'security.csrf.token_storage.class' => 'Symfony\\Component\\Security\\Csrf\\TokenStorage\\SessionTokenStorage',
+            'security.csrf.token_manager.class' => 'Symfony\\Component\\Security\\Csrf\\CsrfTokenManager',
+            'form.resolved_type_factory.class' => 'Symfony\\Component\\Form\\ResolvedFormTypeFactory',
+            'form.registry.class' => 'Symfony\\Component\\Form\\FormRegistry',
+            'form.factory.class' => 'Symfony\\Component\\Form\\FormFactory',
+            'form.extension.class' => 'Symfony\\Component\\Form\\Extension\\DependencyInjection\\DependencyInjectionExtension',
+            'form.type_guesser.validator.class' => 'Symfony\\Component\\Form\\Extension\\Validator\\ValidatorTypeGuesser',
+            'form.type_extension.csrf.enabled' => true,
+            'form.type_extension.csrf.field_name' => '_token',
             'templating.engine.delegating.class' => 'Symfony\\Bundle\\FrameworkBundle\\Templating\\DelegatingEngine',
             'templating.name_parser.class' => 'Symfony\\Bundle\\FrameworkBundle\\Templating\\TemplateNameParser',
             'templating.filename_parser.class' => 'Symfony\\Bundle\\FrameworkBundle\\Templating\\TemplateFilenameParser',
@@ -1475,9 +2362,45 @@ class appTestDebugProjectContainer extends Container
             'templating.engines' => array(
                 0 => 'twig',
             ),
-            'data_collector.templates' => array(
+            'validator.class' => 'Symfony\\Component\\Validator\\Validator',
+            'validator.mapping.class_metadata_factory.class' => 'Symfony\\Component\\Validator\\Mapping\\ClassMetadataFactory',
+            'validator.mapping.cache.apc.class' => 'Symfony\\Component\\Validator\\Mapping\\Cache\\ApcCache',
+            'validator.mapping.cache.prefix' => '',
+            'validator.mapping.loader.loader_chain.class' => 'Symfony\\Component\\Validator\\Mapping\\Loader\\LoaderChain',
+            'validator.mapping.loader.static_method_loader.class' => 'Symfony\\Component\\Validator\\Mapping\\Loader\\StaticMethodLoader',
+            'validator.mapping.loader.annotation_loader.class' => 'Symfony\\Component\\Validator\\Mapping\\Loader\\AnnotationLoader',
+            'validator.mapping.loader.xml_files_loader.class' => 'Symfony\\Component\\Validator\\Mapping\\Loader\\XmlFilesLoader',
+            'validator.mapping.loader.yaml_files_loader.class' => 'Symfony\\Component\\Validator\\Mapping\\Loader\\YamlFilesLoader',
+            'validator.validator_factory.class' => 'Symfony\\Bundle\\FrameworkBundle\\Validator\\ConstraintValidatorFactory',
+            'validator.mapping.loader.xml_files_loader.mapping_files' => array(
+                0 => 'C:\\xampp\\htdocs\\PROJECTS\\SymfonyProjects\\BeautyLogBundle\\BeautyLogBundle\\src\\So\\LogboardBundle\\vendor\\symfony\\symfony\\src\\Symfony\\Component\\Form/Resources/config/validation.xml',
+            ),
+            'validator.mapping.loader.yaml_files_loader.mapping_files' => array(
 
             ),
+            'validator.expression.class' => 'Symfony\\Component\\Validator\\Constraints\\ExpressionValidator',
+            'validator.translation_domain' => 'validators',
+            'fragment.listener.class' => 'Symfony\\Component\\HttpKernel\\EventListener\\FragmentListener',
+            'form.resolved_type_factory.data_collector_proxy.class' => 'Symfony\\Component\\Form\\Extension\\DataCollector\\Proxy\\ResolvedTypeFactoryDataCollectorProxy',
+            'form.type_extension.form.data_collector.class' => 'Symfony\\Component\\Form\\Extension\\DataCollector\\Type\\DataCollectorTypeExtension',
+            'profiler.class' => 'Symfony\\Component\\HttpKernel\\Profiler\\Profiler',
+            'profiler_listener.class' => 'Symfony\\Component\\HttpKernel\\EventListener\\ProfilerListener',
+            'data_collector.config.class' => 'Symfony\\Component\\HttpKernel\\DataCollector\\ConfigDataCollector',
+            'data_collector.request.class' => 'Symfony\\Component\\HttpKernel\\DataCollector\\RequestDataCollector',
+            'data_collector.exception.class' => 'Symfony\\Component\\HttpKernel\\DataCollector\\ExceptionDataCollector',
+            'data_collector.events.class' => 'Symfony\\Component\\HttpKernel\\DataCollector\\EventDataCollector',
+            'data_collector.logger.class' => 'Symfony\\Component\\HttpKernel\\DataCollector\\LoggerDataCollector',
+            'data_collector.time.class' => 'Symfony\\Component\\HttpKernel\\DataCollector\\TimeDataCollector',
+            'data_collector.memory.class' => 'Symfony\\Component\\HttpKernel\\DataCollector\\MemoryDataCollector',
+            'data_collector.router.class' => 'Symfony\\Bundle\\FrameworkBundle\\DataCollector\\RouterDataCollector',
+            'data_collector.form.class' => 'Symfony\\Component\\Form\\Extension\\DataCollector\\FormDataCollector',
+            'data_collector.form.extractor.class' => 'Symfony\\Component\\Form\\Extension\\DataCollector\\FormDataExtractor',
+            'profiler_listener.only_exceptions' => false,
+            'profiler_listener.only_master_requests' => false,
+            'profiler.storage.dsn' => 'file:C:/xampp/htdocs/PROJECTS/SymfonyProjects/BeautyLogBundle/BeautyLogBundle/src/So/LogboardBundle/Tests/app/cache/test/profiler',
+            'profiler.storage.username' => '',
+            'profiler.storage.password' => '',
+            'profiler.storage.lifetime' => 86400,
             'router.class' => 'Symfony\\Bundle\\FrameworkBundle\\Routing\\Router',
             'router.request_context.class' => 'Symfony\\Component\\Routing\\RequestContext',
             'routing.loader.class' => 'Symfony\\Bundle\\FrameworkBundle\\Routing\\DelegatingLoader',
@@ -1539,6 +2462,44 @@ class appTestDebugProjectContainer extends Container
                 'debug' => true,
                 'paths' => array(
 
+                ),
+            ),
+            'data_collector.templates' => array(
+                'data_collector.config' => array(
+                    0 => 'config',
+                    1 => '@WebProfiler/Collector/config.html.twig',
+                ),
+                'data_collector.request' => array(
+                    0 => 'request',
+                    1 => '@WebProfiler/Collector/request.html.twig',
+                ),
+                'data_collector.exception' => array(
+                    0 => 'exception',
+                    1 => '@WebProfiler/Collector/exception.html.twig',
+                ),
+                'data_collector.events' => array(
+                    0 => 'events',
+                    1 => '@WebProfiler/Collector/events.html.twig',
+                ),
+                'data_collector.logger' => array(
+                    0 => 'logger',
+                    1 => '@WebProfiler/Collector/logger.html.twig',
+                ),
+                'data_collector.time' => array(
+                    0 => 'time',
+                    1 => '@WebProfiler/Collector/time.html.twig',
+                ),
+                'data_collector.memory' => array(
+                    0 => 'memory',
+                    1 => '@WebProfiler/Collector/memory.html.twig',
+                ),
+                'data_collector.router' => array(
+                    0 => 'router',
+                    1 => '@WebProfiler/Collector/router.html.twig',
+                ),
+                'data_collector.form' => array(
+                    0 => 'form',
+                    1 => '@WebProfiler/Collector/form.html.twig',
                 ),
             ),
             'console.command.ids' => array(
