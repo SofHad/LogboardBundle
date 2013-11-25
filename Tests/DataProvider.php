@@ -20,7 +20,11 @@ class DataProvider
 {
 
     const SYMFONY_PATTERN_DATE = '/^\[([0-9]{4}-[[0-9]{2}-[[0-9]{2}).*/';
-    const TESTS_LOG_FILE = 'unit_testing_logs.log';
+    const TESTS_LOG_FILE = '/app/logs/unit_testing_logs.log';
+
+    public static function getTestsLogFilePath(){
+        return __DIR__.self::TESTS_LOG_FILE;
+    }
 
     public function unrefinedProfilerData()
     {
