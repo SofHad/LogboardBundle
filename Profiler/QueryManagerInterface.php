@@ -14,8 +14,9 @@ use So\LogboardBundle\Profiler\Engine\EngineInterface;
 use Symfony\Component\HttpFoundation\Request;
 
 /**
- * Query Manager Interface
+ * Class QueryManagerInterface
  *
+ * @package So\LogboardBundle\Profiler
  * @author Sofiane HADDAG <sofiane.haddag@yahoo.fr>
  */
 interface QueryManagerInterface

@@ -18,4 +18,9 @@
             </exclude>
         </whitelist>
     </filter>
+	
+	<logging>
+	  <log type="tap" target="../Tests_logs/logfile.tap"/>
+	  <log type="testdox-text" target="../Tests_logs/txt_logfile.txt"/>
+    </logging>
 </phpunit>
