@@ -2,10 +2,11 @@ language: php
 
 php:
   - 5.4
+  - 5.3
 
 before_script:
   - wget http://getcomposer.org/composer.phar
   - composer update --dev
 
-script: phpunit --coverage-html
+script: phpunit --coverage-text
 
