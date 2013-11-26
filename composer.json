@@ -16,7 +16,7 @@
         }
     ],
     "require": {
-        "symfony/symfony": "2.5.*@dev"
+        "symfony/symfony": "v2.4.0-BETA2"
     },
     "autoload": {
         "psr-0": {

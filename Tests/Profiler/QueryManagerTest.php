@@ -20,7 +20,7 @@ use Symfony\Component\HttpKernel\Profiler\FileProfilerStorage;
 use Symfony\Component\HttpKernel\Profiler\Profiler;
 
 
-abstract class QueryManagerTest extends KernelTest
+ class QueryManagerTest extends KernelTest
 {
 
     protected $request;
@@ -102,7 +102,7 @@ abstract class QueryManagerTest extends KernelTest
     public function getDsn()
     {
         $file = "/index.csv";
-        $dsn = sprintf('%s/../app/cache.unit/', __DIR__);
+        $dsn = sprintf('%s/../app/cache/test/profiler/', __DIR__);
 
         if (file_exists($dsn . $file)) {
             return sprintf('file:%s', $dsn);

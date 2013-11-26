@@ -6,6 +6,8 @@ use Symfony\Component\DependencyInjection\Exception\InactiveScopeException;
 use Symfony\Component\DependencyInjection\Exception\InvalidArgumentException;
 use Symfony\Component\DependencyInjection\Exception\LogicException;
 use Symfony\Component\DependencyInjection\Exception\RuntimeException;
+use Symfony\Component\DependencyInjection\Reference;
+use Symfony\Component\DependencyInjection\Parameter;
 use Symfony\Component\DependencyInjection\ParameterBag\FrozenParameterBag;
 
 /**
@@ -201,7 +203,7 @@ class appTestDebugProjectContainer extends Container
      */
     protected function getAnnotationReaderService()
     {
-        return $this->services['annotation_reader'] = new \Doctrine\Common\Annotations\FileCacheReader(new \Doctrine\Common\Annotations\AnnotationReader(), 'C:/xampp/htdocs/PROJECTS/SymfonyProjects/BeautyLogBundle/BeautyLogBundle/src/So/LogboardBundle/Tests/app/cache/test/annotations', true);
+        return $this->services['annotation_reader'] = new \Doctrine\Common\Annotations\FileCacheReader(new \Doctrine\Common\Annotations\AnnotationReader(), 'C:/xampp/htdocs/LogboardBundle/Symfony.2.4/src/So/LogboardBundle/Tests/app/cache/test/annotations', true);
     }
 
     /**
@@ -230,7 +232,7 @@ class appTestDebugProjectContainer extends Container
         $a = $this->get('kernel');
         $b = $this->get('templating.filename_parser');
 
-        $c = new \Symfony\Bundle\FrameworkBundle\CacheWarmer\TemplateFinder($a, $b, 'C:/xampp/htdocs/PROJECTS/SymfonyProjects/BeautyLogBundle/BeautyLogBundle/src/So/LogboardBundle/Tests/app/Resources');
+        $c = new \Symfony\Bundle\FrameworkBundle\CacheWarmer\TemplateFinder($a, $b, 'C:/xampp/htdocs/LogboardBundle/Symfony.2.4/src/So/LogboardBundle/Tests/app/Resources');
 
         return $this->services['cache_warmer'] = new \Symfony\Component\HttpKernel\CacheWarmer\CacheWarmerAggregate(array(0 => new \Symfony\Bundle\FrameworkBundle\CacheWarmer\TemplatePathsCacheWarmer($c, $this->get('templating.locator')), 1 => new \Symfony\Bundle\FrameworkBundle\CacheWarmer\RouterCacheWarmer($this->get('router')), 2 => new \Symfony\Bundle\TwigBundle\CacheWarmer\TemplateCacheCacheWarmer($this, $c)));
     }
@@ -395,7 +397,7 @@ class appTestDebugProjectContainer extends Container
      */
     protected function getFileLocatorService()
     {
-        return $this->services['file_locator'] = new \Symfony\Component\HttpKernel\Config\FileLocator($this->get('kernel'), 'C:/xampp/htdocs/PROJECTS/SymfonyProjects/BeautyLogBundle/BeautyLogBundle/src/So/LogboardBundle/Tests/app/Resources');
+        return $this->services['file_locator'] = new \Symfony\Component\HttpKernel\Config\FileLocator($this->get('kernel'), 'C:/xampp/htdocs/LogboardBundle/Symfony.2.4/src/So/LogboardBundle/Tests/app/Resources');
     }
 
     /**
@@ -1180,7 +1182,7 @@ class appTestDebugProjectContainer extends Container
             $b->setKernel($a);
         }
 
-        $this->services['profiler'] = $instance = new \Symfony\Component\HttpKernel\Profiler\Profiler(new \Symfony\Component\HttpKernel\Profiler\FileProfilerStorage('file:C:/xampp/htdocs/PROJECTS/SymfonyProjects/BeautyLogBundle/BeautyLogBundle/src/So/LogboardBundle/Tests/app/cache/test/profiler', '', '', 86400), NULL);
+        $this->services['profiler'] = $instance = new \Symfony\Component\HttpKernel\Profiler\Profiler(new \Symfony\Component\HttpKernel\Profiler\FileProfilerStorage('file:C:/xampp/htdocs/LogboardBundle/Symfony.2.4/src/So/LogboardBundle/Tests/app/cache/test/profiler', '', '', 86400), NULL);
 
         $instance->add($b);
         $instance->add($this->get('data_collector.request'));
@@ -1275,7 +1277,7 @@ class appTestDebugProjectContainer extends Container
      */
     protected function getRouterService()
     {
-        return $this->services['router'] = new \Symfony\Bundle\FrameworkBundle\Routing\Router($this, 'C:/xampp/htdocs/PROJECTS/SymfonyProjects/BeautyLogBundle/BeautyLogBundle/src/So/LogboardBundle/Tests/app/config/routing.yml', array('cache_dir' => 'C:/xampp/htdocs/PROJECTS/SymfonyProjects/BeautyLogBundle/BeautyLogBundle/src/So/LogboardBundle/Tests/app/cache/test', 'debug' => true, 'generator_class' => 'Symfony\\Component\\Routing\\Generator\\UrlGenerator', 'generator_base_class' => 'Symfony\\Component\\Routing\\Generator\\UrlGenerator', 'generator_dumper_class' => 'Symfony\\Component\\Routing\\Generator\\Dumper\\PhpGeneratorDumper', 'generator_cache_class' => 'appTestUrlGenerator', 'matcher_class' => 'Symfony\\Bundle\\FrameworkBundle\\Routing\\RedirectableUrlMatcher', 'matcher_base_class' => 'Symfony\\Bundle\\FrameworkBundle\\Routing\\RedirectableUrlMatcher', 'matcher_dumper_class' => 'Symfony\\Component\\Routing\\Matcher\\Dumper\\PhpMatcherDumper', 'matcher_cache_class' => 'appTestUrlMatcher', 'strict_requirements' => NULL), $this->get('router.request_context', ContainerInterface::NULL_ON_INVALID_REFERENCE), NULL);
+        return $this->services['router'] = new \Symfony\Bundle\FrameworkBundle\Routing\Router($this, 'C:/xampp/htdocs/LogboardBundle/Symfony.2.4/src/So/LogboardBundle/Tests/app/config/routing.yml', array('cache_dir' => 'C:/xampp/htdocs/LogboardBundle/Symfony.2.4/src/So/LogboardBundle/Tests/app/cache/test', 'debug' => true, 'generator_class' => 'Symfony\\Component\\Routing\\Generator\\UrlGenerator', 'generator_base_class' => 'Symfony\\Component\\Routing\\Generator\\UrlGenerator', 'generator_dumper_class' => 'Symfony\\Component\\Routing\\Generator\\Dumper\\PhpGeneratorDumper', 'generator_cache_class' => 'appTestUrlGenerator', 'matcher_class' => 'Symfony\\Bundle\\FrameworkBundle\\Routing\\RedirectableUrlMatcher', 'matcher_base_class' => 'Symfony\\Bundle\\FrameworkBundle\\Routing\\RedirectableUrlMatcher', 'matcher_dumper_class' => 'Symfony\\Component\\Routing\\Matcher\\Dumper\\PhpMatcherDumper', 'matcher_cache_class' => 'appTestUrlMatcher', 'strict_requirements' => NULL), $this->get('router.request_context', ContainerInterface::NULL_ON_INVALID_REFERENCE), NULL);
     }
 
     /**
@@ -1334,7 +1336,7 @@ class appTestDebugProjectContainer extends Container
      */
     protected function getSecurity_SecureRandomService()
     {
-        return $this->services['security.secure_random'] = new \Symfony\Component\Security\Core\Util\SecureRandom('C:/xampp/htdocs/PROJECTS/SymfonyProjects/BeautyLogBundle/BeautyLogBundle/src/So/LogboardBundle/Tests/app/cache/test/secure_random.seed', NULL);
+        return $this->services['security.secure_random'] = new \Symfony\Component\Security\Core\Util\SecureRandom('C:/xampp/htdocs/LogboardBundle/Symfony.2.4/src/So/LogboardBundle/Tests/app/cache/test/secure_random.seed', NULL);
     }
 
     /**
@@ -1373,7 +1375,7 @@ class appTestDebugProjectContainer extends Container
      */
     protected function getSession_HandlerService()
     {
-        return $this->services['session.handler'] = new \Symfony\Component\HttpFoundation\Session\Storage\Handler\NativeFileSessionHandler('C:/xampp/htdocs/PROJECTS/SymfonyProjects/BeautyLogBundle/BeautyLogBundle/src/So/LogboardBundle/Tests/app/cache/test/sessions');
+        return $this->services['session.handler'] = new \Symfony\Component\HttpFoundation\Session\Storage\Handler\NativeFileSessionHandler('C:/xampp/htdocs/LogboardBundle/Symfony.2.4/src/So/LogboardBundle/Tests/app/cache/test/sessions');
     }
 
     /**
@@ -1386,7 +1388,7 @@ class appTestDebugProjectContainer extends Container
      */
     protected function getSession_Storage_FilesystemService()
     {
-        return $this->services['session.storage.filesystem'] = new \Symfony\Component\HttpFoundation\Session\Storage\MockFileSessionStorage('C:/xampp/htdocs/PROJECTS/SymfonyProjects/BeautyLogBundle/BeautyLogBundle/src/So/LogboardBundle/Tests/app/cache/test/sessions', 'MOCKSESSID', $this->get('session.storage.metadata_bag'));
+        return $this->services['session.storage.filesystem'] = new \Symfony\Component\HttpFoundation\Session\Storage\MockFileSessionStorage('C:/xampp/htdocs/LogboardBundle/Symfony.2.4/src/So/LogboardBundle/Tests/app/cache/test/sessions', 'MOCKSESSID', $this->get('session.storage.metadata_bag'));
     }
 
     /**
@@ -1539,7 +1541,7 @@ class appTestDebugProjectContainer extends Container
      */
     protected function getTemplating_Helper_CodeService()
     {
-        return $this->services['templating.helper.code'] = new \Symfony\Bundle\FrameworkBundle\Templating\Helper\CodeHelper(NULL, 'C:/xampp/htdocs/PROJECTS/SymfonyProjects/BeautyLogBundle/BeautyLogBundle/src/So/LogboardBundle/Tests/app', 'UTF-8');
+        return $this->services['templating.helper.code'] = new \Symfony\Bundle\FrameworkBundle\Templating\Helper\CodeHelper(NULL, 'C:/xampp/htdocs/LogboardBundle/Symfony.2.4/src/So/LogboardBundle/Tests/app', 'UTF-8');
     }
 
     /**
@@ -1869,11 +1871,11 @@ class appTestDebugProjectContainer extends Container
      * This service is shared.
      * This method always returns the same instance of the service.
      *
-     * @return Symfony\Component\Translation\Loader\IcuDatFileLoader A Symfony\Component\Translation\Loader\IcuDatFileLoader instance.
+     * @return Symfony\Component\Translation\Loader\IcuResFileLoader A Symfony\Component\Translation\Loader\IcuResFileLoader instance.
      */
     protected function getTranslation_Loader_DatService()
     {
-        return $this->services['translation.loader.dat'] = new \Symfony\Component\Translation\Loader\IcuDatFileLoader();
+        return $this->services['translation.loader.dat'] = new \Symfony\Component\Translation\Loader\IcuResFileLoader();
     }
 
     /**
@@ -2042,7 +2044,7 @@ class appTestDebugProjectContainer extends Container
      */
     protected function getTranslator_DefaultService()
     {
-        return $this->services['translator.default'] = new \Symfony\Bundle\FrameworkBundle\Translation\Translator($this, $this->get('translator.selector'), array('translation.loader.php' => array(0 => 'php'), 'translation.loader.yml' => array(0 => 'yml'), 'translation.loader.xliff' => array(0 => 'xlf', 1 => 'xliff'), 'translation.loader.po' => array(0 => 'po'), 'translation.loader.mo' => array(0 => 'mo'), 'translation.loader.qt' => array(0 => 'ts'), 'translation.loader.csv' => array(0 => 'csv'), 'translation.loader.res' => array(0 => 'res'), 'translation.loader.dat' => array(0 => 'dat'), 'translation.loader.ini' => array(0 => 'ini'), 'translation.loader.json' => array(0 => 'json')), array('cache_dir' => 'C:/xampp/htdocs/PROJECTS/SymfonyProjects/BeautyLogBundle/BeautyLogBundle/src/So/LogboardBundle/Tests/app/cache/test/translations', 'debug' => true));
+        return $this->services['translator.default'] = new \Symfony\Bundle\FrameworkBundle\Translation\Translator($this, $this->get('translator.selector'), array('translation.loader.php' => array(0 => 'php'), 'translation.loader.yml' => array(0 => 'yml'), 'translation.loader.xliff' => array(0 => 'xlf', 1 => 'xliff'), 'translation.loader.po' => array(0 => 'po'), 'translation.loader.mo' => array(0 => 'mo'), 'translation.loader.qt' => array(0 => 'ts'), 'translation.loader.csv' => array(0 => 'csv'), 'translation.loader.res' => array(0 => 'res'), 'translation.loader.dat' => array(0 => 'dat'), 'translation.loader.ini' => array(0 => 'ini'), 'translation.loader.json' => array(0 => 'json')), array('cache_dir' => 'C:/xampp/htdocs/LogboardBundle/Symfony.2.4/src/So/LogboardBundle/Tests/app/cache/test/translations', 'debug' => true));
     }
 
     /**
@@ -2055,12 +2057,12 @@ class appTestDebugProjectContainer extends Container
      */
     protected function getTwigService()
     {
-        $this->services['twig'] = $instance = new \Twig_Environment($this->get('twig.loader'), array('exception_controller' => 'twig.controller.exception:showAction', 'autoescape_service' => NULL, 'autoescape_service_method' => NULL, 'cache' => 'C:/xampp/htdocs/PROJECTS/SymfonyProjects/BeautyLogBundle/BeautyLogBundle/src/So/LogboardBundle/Tests/app/cache/test/twig', 'charset' => 'UTF-8', 'debug' => true, 'paths' => array()));
+        $this->services['twig'] = $instance = new \Twig_Environment($this->get('twig.loader'), array('exception_controller' => 'twig.controller.exception:showAction', 'autoescape_service' => NULL, 'autoescape_service_method' => NULL, 'cache' => 'C:/xampp/htdocs/LogboardBundle/Symfony.2.4/src/So/LogboardBundle/Tests/app/cache/test/twig', 'charset' => 'UTF-8', 'debug' => true, 'paths' => array()));
 
         $instance->addExtension(new \Symfony\Bridge\Twig\Extension\TranslationExtension($this->get('translator')));
         $instance->addExtension(new \Symfony\Bundle\TwigBundle\Extension\AssetsExtension($this));
         $instance->addExtension(new \Symfony\Bundle\TwigBundle\Extension\ActionsExtension($this));
-        $instance->addExtension(new \Symfony\Bridge\Twig\Extension\CodeExtension(NULL, 'C:/xampp/htdocs/PROJECTS/SymfonyProjects/BeautyLogBundle/BeautyLogBundle/src/So/LogboardBundle/Tests/app', 'UTF-8'));
+        $instance->addExtension(new \Symfony\Bridge\Twig\Extension\CodeExtension(NULL, 'C:/xampp/htdocs/LogboardBundle/Symfony.2.4/src/So/LogboardBundle/Tests/app', 'UTF-8'));
         $instance->addExtension(new \Symfony\Bridge\Twig\Extension\RoutingExtension($this->get('router')));
         $instance->addExtension(new \Symfony\Bridge\Twig\Extension\YamlExtension());
         $instance->addExtension(new \Symfony\Bridge\Twig\Extension\StopwatchExtension($this->get('debug.stopwatch', ContainerInterface::NULL_ON_INVALID_REFERENCE)));
@@ -2111,11 +2113,11 @@ class appTestDebugProjectContainer extends Container
     {
         $this->services['twig.loader'] = $instance = new \Symfony\Bundle\TwigBundle\Loader\FilesystemLoader($this->get('templating.locator'), $this->get('templating.name_parser'));
 
-        $instance->addPath('C:\\xampp\\htdocs\\PROJECTS\\SymfonyProjects\\BeautyLogBundle\\BeautyLogBundle\\src\\So\\LogboardBundle\\vendor\\symfony\\symfony\\src\\Symfony\\Bundle\\FrameworkBundle/Resources/views', 'Framework');
-        $instance->addPath('C:\\xampp\\htdocs\\PROJECTS\\SymfonyProjects\\BeautyLogBundle\\BeautyLogBundle\\src\\So\\LogboardBundle\\vendor\\symfony\\symfony\\src\\Symfony\\Bundle\\TwigBundle/Resources/views', 'Twig');
-        $instance->addPath('C:\\xampp\\htdocs\\PROJECTS\\SymfonyProjects\\BeautyLogBundle\\BeautyLogBundle\\src\\So\\LogboardBundle/Resources/views', 'Logboard');
-        $instance->addPath('C:\\xampp\\htdocs\\PROJECTS\\SymfonyProjects\\BeautyLogBundle\\BeautyLogBundle\\src\\So\\LogboardBundle\\vendor\\symfony\\symfony\\src\\Symfony\\Bundle\\WebProfilerBundle/Resources/views', 'WebProfiler');
-        $instance->addPath('C:\\xampp\\htdocs\\PROJECTS\\SymfonyProjects\\BeautyLogBundle\\BeautyLogBundle\\src\\So\\LogboardBundle\\vendor\\symfony\\symfony\\src\\Symfony\\Bridge\\Twig/Resources/views/Form');
+        $instance->addPath('C:\\xampp\\htdocs\\LogboardBundle\\Symfony.2.4\\src\\So\\LogboardBundle\\vendor\\symfony\\symfony\\src\\Symfony\\Bundle\\FrameworkBundle/Resources/views', 'Framework');
+        $instance->addPath('C:\\xampp\\htdocs\\LogboardBundle\\Symfony.2.4\\src\\So\\LogboardBundle\\vendor\\symfony\\symfony\\src\\Symfony\\Bundle\\TwigBundle/Resources/views', 'Twig');
+        $instance->addPath('C:\\xampp\\htdocs\\LogboardBundle\\Symfony.2.4\\src\\So\\LogboardBundle/Resources/views', 'Logboard');
+        $instance->addPath('C:\\xampp\\htdocs\\LogboardBundle\\Symfony.2.4\\src\\So\\LogboardBundle\\vendor\\symfony\\symfony\\src\\Symfony\\Bundle\\WebProfilerBundle/Resources/views', 'WebProfiler');
+        $instance->addPath('C:\\xampp\\htdocs\\LogboardBundle\\Symfony.2.4\\src\\So\\LogboardBundle\\vendor\\symfony\\symfony\\src\\Symfony\\Bridge\\Twig/Resources/views/Form');
 
         return $instance;
     }
@@ -2293,7 +2295,7 @@ class appTestDebugProjectContainer extends Container
      */
     protected function getTemplating_LocatorService()
     {
-        return $this->services['templating.locator'] = new \Symfony\Bundle\FrameworkBundle\Templating\Loader\TemplateLocator($this->get('file_locator'), 'C:/xampp/htdocs/PROJECTS/SymfonyProjects/BeautyLogBundle/BeautyLogBundle/src/So/LogboardBundle/Tests/app/cache/test');
+        return $this->services['templating.locator'] = new \Symfony\Bundle\FrameworkBundle\Templating\Loader\TemplateLocator($this->get('file_locator'), 'C:/xampp/htdocs/LogboardBundle/Symfony.2.4/src/So/LogboardBundle/Tests/app/cache/test');
     }
 
     /**
@@ -2327,7 +2329,7 @@ class appTestDebugProjectContainer extends Container
      */
     protected function getValidator_Mapping_ClassMetadataFactoryService()
     {
-        return $this->services['validator.mapping.class_metadata_factory'] = new \Symfony\Component\Validator\Mapping\ClassMetadataFactory(new \Symfony\Component\Validator\Mapping\Loader\LoaderChain(array(0 => new \Symfony\Component\Validator\Mapping\Loader\AnnotationLoader($this->get('annotation_reader')), 1 => new \Symfony\Component\Validator\Mapping\Loader\StaticMethodLoader(), 2 => new \Symfony\Component\Validator\Mapping\Loader\XmlFilesLoader(array(0 => 'C:\\xampp\\htdocs\\PROJECTS\\SymfonyProjects\\BeautyLogBundle\\BeautyLogBundle\\src\\So\\LogboardBundle\\vendor\\symfony\\symfony\\src\\Symfony\\Component\\Form/Resources/config/validation.xml')), 3 => new \Symfony\Component\Validator\Mapping\Loader\YamlFilesLoader(array()))), NULL);
+        return $this->services['validator.mapping.class_metadata_factory'] = new \Symfony\Component\Validator\Mapping\ClassMetadataFactory(new \Symfony\Component\Validator\Mapping\Loader\LoaderChain(array(0 => new \Symfony\Component\Validator\Mapping\Loader\AnnotationLoader($this->get('annotation_reader')), 1 => new \Symfony\Component\Validator\Mapping\Loader\StaticMethodLoader(), 2 => new \Symfony\Component\Validator\Mapping\Loader\XmlFilesLoader(array(0 => 'C:\\xampp\\htdocs\\LogboardBundle\\Symfony.2.4\\src\\So\\LogboardBundle\\vendor\\symfony\\symfony\\src\\Symfony\\Component\\Form/Resources/config/validation.xml')), 3 => new \Symfony\Component\Validator\Mapping\Loader\YamlFilesLoader(array()))), NULL);
     }
 
     /**
@@ -2381,12 +2383,12 @@ class appTestDebugProjectContainer extends Container
     protected function getDefaultParameters()
     {
         return array(
-            'kernel.root_dir' => 'C:/xampp/htdocs/PROJECTS/SymfonyProjects/BeautyLogBundle/BeautyLogBundle/src/So/LogboardBundle/Tests/app',
+            'kernel.root_dir' => 'C:/xampp/htdocs/LogboardBundle/Symfony.2.4/src/So/LogboardBundle/Tests/app',
             'kernel.environment' => 'test',
             'kernel.debug' => true,
             'kernel.name' => 'app',
-            'kernel.cache_dir' => 'C:/xampp/htdocs/PROJECTS/SymfonyProjects/BeautyLogBundle/BeautyLogBundle/src/So/LogboardBundle/Tests/app/cache/test',
-            'kernel.logs_dir' => 'C:/xampp/htdocs/PROJECTS/SymfonyProjects/BeautyLogBundle/BeautyLogBundle/src/So/LogboardBundle/Tests/app/logs',
+            'kernel.cache_dir' => 'C:/xampp/htdocs/LogboardBundle/Symfony.2.4/src/So/LogboardBundle/Tests/app/cache/test',
+            'kernel.logs_dir' => 'C:/xampp/htdocs/LogboardBundle/Symfony.2.4/src/So/LogboardBundle/Tests/app/logs',
             'kernel.bundles' => array(
                 'FrameworkBundle' => 'Symfony\\Bundle\\FrameworkBundle\\FrameworkBundle',
                 'TwigBundle' => 'Symfony\\Bundle\\TwigBundle\\TwigBundle',
@@ -2458,7 +2460,7 @@ class appTestDebugProjectContainer extends Container
             'debug.errors_logger_listener.class' => 'Symfony\\Component\\HttpKernel\\EventListener\\ErrorsLoggerListener',
             'debug.event_dispatcher.class' => 'Symfony\\Component\\HttpKernel\\Debug\\TraceableEventDispatcher',
             'debug.stopwatch.class' => 'Symfony\\Component\\Stopwatch\\Stopwatch',
-            'debug.container.dump' => 'C:/xampp/htdocs/PROJECTS/SymfonyProjects/BeautyLogBundle/BeautyLogBundle/src/So/LogboardBundle/Tests/app/cache/test/appTestDebugProjectContainer.xml',
+            'debug.container.dump' => 'C:/xampp/htdocs/LogboardBundle/Symfony.2.4/src/So/LogboardBundle/Tests/app/cache/test/appTestDebugProjectContainer.xml',
             'debug.controller_resolver.class' => 'Symfony\\Component\\HttpKernel\\Controller\\TraceableControllerResolver',
             'kernel.secret' => 'sfiushlfihuslmqfuhsdlqghiugf',
             'kernel.http_method_override' => true,
@@ -2483,7 +2485,7 @@ class appTestDebugProjectContainer extends Container
             'session.storage.options' => array(
 
             ),
-            'session.save_path' => 'C:/xampp/htdocs/PROJECTS/SymfonyProjects/BeautyLogBundle/BeautyLogBundle/src/So/LogboardBundle/Tests/app/cache/test/sessions',
+            'session.save_path' => 'C:/xampp/htdocs/LogboardBundle/Symfony.2.4/src/So/LogboardBundle/Tests/app/cache/test/sessions',
             'session.metadata.update_threshold' => '0',
             'security.secure_random.class' => 'Symfony\\Component\\Security\\Core\\Util\\SecureRandom',
             'security.csrf.token_generator.class' => 'Symfony\\Component\\Security\\Csrf\\TokenGenerator\\UriSafeTokenGenerator',
@@ -2542,7 +2544,7 @@ class appTestDebugProjectContainer extends Container
             'validator.mapping.loader.yaml_files_loader.class' => 'Symfony\\Component\\Validator\\Mapping\\Loader\\YamlFilesLoader',
             'validator.validator_factory.class' => 'Symfony\\Bundle\\FrameworkBundle\\Validator\\ConstraintValidatorFactory',
             'validator.mapping.loader.xml_files_loader.mapping_files' => array(
-                0 => 'C:\\xampp\\htdocs\\PROJECTS\\SymfonyProjects\\BeautyLogBundle\\BeautyLogBundle\\src\\So\\LogboardBundle\\vendor\\symfony\\symfony\\src\\Symfony\\Component\\Form/Resources/config/validation.xml',
+                0 => 'C:\\xampp\\htdocs\\LogboardBundle\\Symfony.2.4\\src\\So\\LogboardBundle\\vendor\\symfony\\symfony\\src\\Symfony\\Component\\Form/Resources/config/validation.xml',
             ),
             'validator.mapping.loader.yaml_files_loader.mapping_files' => array(
 
@@ -2566,7 +2568,7 @@ class appTestDebugProjectContainer extends Container
             'data_collector.form.extractor.class' => 'Symfony\\Component\\Form\\Extension\\DataCollector\\FormDataExtractor',
             'profiler_listener.only_exceptions' => false,
             'profiler_listener.only_master_requests' => false,
-            'profiler.storage.dsn' => 'file:C:/xampp/htdocs/PROJECTS/SymfonyProjects/BeautyLogBundle/BeautyLogBundle/src/So/LogboardBundle/Tests/app/cache/test/profiler',
+            'profiler.storage.dsn' => 'file:C:/xampp/htdocs/LogboardBundle/Symfony.2.4/src/So/LogboardBundle/Tests/app/cache/test/profiler',
             'profiler.storage.username' => '',
             'profiler.storage.password' => '',
             'profiler.storage.lifetime' => 86400,
@@ -2590,7 +2592,7 @@ class appTestDebugProjectContainer extends Container
             'router.request_context.host' => 'localhost',
             'router.request_context.scheme' => 'http',
             'router.request_context.base_url' => '',
-            'router.resource' => 'C:/xampp/htdocs/PROJECTS/SymfonyProjects/BeautyLogBundle/BeautyLogBundle/src/So/LogboardBundle/Tests/app/config/routing.yml',
+            'router.resource' => 'C:/xampp/htdocs/LogboardBundle/Symfony.2.4/src/So/LogboardBundle/Tests/app/config/routing.yml',
             'router.cache_class_prefix' => 'appTest',
             'request_listener.http_port' => 80,
             'request_listener.https_port' => 443,
@@ -2626,7 +2628,7 @@ class appTestDebugProjectContainer extends Container
                 'exception_controller' => 'twig.controller.exception:showAction',
                 'autoescape_service' => NULL,
                 'autoescape_service_method' => NULL,
-                'cache' => 'C:/xampp/htdocs/PROJECTS/SymfonyProjects/BeautyLogBundle/BeautyLogBundle/src/So/LogboardBundle/Tests/app/cache/test/twig',
+                'cache' => 'C:/xampp/htdocs/LogboardBundle/Symfony.2.4/src/So/LogboardBundle/Tests/app/cache/test/twig',
                 'charset' => 'UTF-8',
                 'debug' => true,
                 'paths' => array(

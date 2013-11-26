@@ -3,7 +3,7 @@
         "This file locks the dependencies of your project to a known state",
         "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file"
     ],
-    "hash": "bb44463f4232726d4f043452182e6ed3",
+    "hash": "0e610c8ed0d19f6d1adb067ec5a67948",
     "packages": [
         {
             "name": "doctrine/annotations",
@@ -43,7 +43,7 @@
             ],
             "authors": [
                 {
-                    "name": "Jonathan H. Wage",
+                    "name": "Jonathan Wage",
                     "email": "jonwage@gmail.com",
                     "homepage": "http://www.jwage.com/",
                     "role": "Creator"
@@ -62,7 +62,7 @@
                     "email": "kontakt@beberlei.de"
                 },
                 {
-                    "name": "Johannes M. Schmitt",
+                    "name": "Johannes Schmitt",
                     "email": "schmittjoh@gmail.com",
                     "homepage": "http://jmsyst.com",
                     "role": "Developer of wrapped JMSSerializerBundle"
@@ -396,7 +396,7 @@
                     "email": "roman@code-factory.org"
                 },
                 {
-                    "name": "Johannes M. Schmitt",
+                    "name": "Johannes Schmitt",
                     "email": "schmittjoh@gmail.com",
                     "homepage": "http://jmsyst.com",
                     "role": "Developer of wrapped JMSSerializerBundle"
@@ -498,16 +498,16 @@
         },
         {
             "name": "symfony/symfony",
-            "version": "dev-master",
+            "version": "v2.4.0-BETA2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/symfony.git",
-                "reference": "4aab341d59ba217a70e7c114c73ac00a61e75377"
+                "reference": "b6310973d7ebc28955841ca0a294e2667d5e8a63"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/symfony/zipball/4aab341d59ba217a70e7c114c73ac00a61e75377",
-                "reference": "4aab341d59ba217a70e7c114c73ac00a61e75377",
+                "url": "https://api.github.com/repos/symfony/symfony/zipball/b6310973d7ebc28955841ca0a294e2667d5e8a63",
+                "reference": "b6310973d7ebc28955841ca0a294e2667d5e8a63",
                 "shasum": ""
             },
             "require": {
@@ -573,7 +573,7 @@
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "2.5-dev"
+                    "dev-master": "2.4-dev"
                 }
             },
             "autoload": {
@@ -607,7 +607,7 @@
             "keywords": [
                 "framework"
             ],
-            "time": "2013-11-24 20:17:07"
+            "time": "2013-10-30 13:25:52"
         },
         {
             "name": "twig/twig",
@@ -667,7 +667,7 @@
     ],
     "minimum-stability": "stable",
     "stability-flags": {
-        "symfony/symfony": 20
+        "symfony/symfony": 10
     },
     "platform": [
 
