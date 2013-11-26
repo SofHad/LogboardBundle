@@ -2,28 +2,6 @@ language: php
 
 php:
   - 5.4
-<<<<<<< HEAD
-
-before_script:
-<<<<<<< HEAD
-    - 'git clone git@github.com:symfony/symfony-standard.git'
-    - wget http://getcomposer.org/composer.phar
-    - php composer.phar install
-    - composer self-update
-    - composer require --no-update symfony/framework-bundle:${SYMFONY_VERSION}
-    - composer install --prefer-source
-
-script: phpunit -c app
-=======
-    - cd ..
-    - git clone git@github.com:symfony/symfony-standard.git build-environment
-    - composer require symfony/framework-bundle:${SYMFONY_VERSION} --no-update
-    - composer update --dev
-
-
-script: script: phpunit -c app/
->>>>>>> travis1
-=======
   - 5.3
 
 before_script:
@@ -31,5 +9,4 @@ before_script:
   - composer update --dev
 
 script: phpunit --coverage-text
->>>>>>> d2
 
