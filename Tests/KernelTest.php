@@ -10,9 +10,6 @@
 
 namespace So\LogboardBundle\Tests;
 
-<<<<<<< HEAD
-use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
-=======
 $kernelClass =  __DIR__ . '/app/AppKernel.php';
 
 if(!file_exists($kernelClass)){
@@ -20,22 +17,16 @@ if(!file_exists($kernelClass)){
 }
 
 require_once $kernelClass;
->>>>>>> d2
 
 /**
  * KernelTest
  */
-abstract class KernelTest extends WebTestCase
+abstract class KernelTest extends \PHPUnit_Framework_TestCase
 {
     /**
      * @var \Symfony\Component\HttpKernel\AppKernel
      */
-<<<<<<< HEAD
-    protected $kernelTest;
-
-=======
     protected $kernel;
->>>>>>> d2
     /**
      * @var \Symfony\Component\DependencyInjection\Container
      */
@@ -46,11 +37,6 @@ abstract class KernelTest extends WebTestCase
      */
     public function setUp()
     {
-<<<<<<< HEAD
-        if (null !== static::$kernel) {
-            static::$kernel->shutdown();
-        }
-=======
         $this->kernel = new \AppKernel('test', true);
         $this->kernel->boot();
 
@@ -58,9 +44,14 @@ abstract class KernelTest extends WebTestCase
 
         parent::setUp();
     }
->>>>>>> d2
 
+    /**
+     * @return void
+     */
+    public function tearDown()
+    {
+        $this->kernel->shutdown();
 
-        $this->container = static::$kernel->getContainer();
+        parent::tearDown();
     }
 }
