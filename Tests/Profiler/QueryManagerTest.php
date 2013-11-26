@@ -20,7 +20,7 @@ use Symfony\Component\HttpKernel\Profiler\FileProfilerStorage;
 use Symfony\Component\HttpKernel\Profiler\Profiler;
 
 
-class QueryManagerTest extends KernelTest
+ class QueryManagerTest extends KernelTest
 {
 
     protected $request;
@@ -88,7 +88,6 @@ class QueryManagerTest extends KernelTest
         $this->assertTrue(is_array($this->found));
         $this->assertCount(1, $this->found);
         $this->assertArrayHasKey("token", $this->found[0]);
-
     }
 
     public function testTheResultAfterHandlingQueries()
@@ -102,9 +101,8 @@ class QueryManagerTest extends KernelTest
 
     public function getDsn()
     {
-
         $file = "/index.csv";
-        $dsn = sprintf('%s/../cache.profiler/', __DIR__);
+        $dsn = sprintf('%s/../app/cache/test/profiler/', __DIR__);
 
         if (file_exists($dsn . $file)) {
             return sprintf('file:%s', $dsn);
@@ -112,6 +110,4 @@ class QueryManagerTest extends KernelTest
 
         throw new NotFoundHttpException('The resource index.csv file not found in the "%s" directory.', $dsn);
     }
-
-
 }

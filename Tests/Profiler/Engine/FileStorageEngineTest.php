@@ -45,7 +45,7 @@ class FileStorageEngineTest extends KernelTest
         $this->assertObjectHasAttribute('decompiler', $finder);
 
         //LogFile
-        $logFileForTests = sprintf("%s/../../%s", __DIR__, $dataProvider::TESTS_LOG_FILE);
+        $logFileForTests = $dataProvider::getTestsLogFilePath();
         $this->assertFileExists($logFileForTests);
 
         //Parameters
