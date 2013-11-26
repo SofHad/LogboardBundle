@@ -7,5 +7,5 @@ before_script:
   - wget http://getcomposer.org/composer.phar
   - composer update --dev
 
-script: phpunit --coverage-text
+script: phpunit --coverage-html
 
