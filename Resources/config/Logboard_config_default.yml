@@ -46,7 +46,7 @@ logboard:
         title: PHP logs
         src: file
 
-        #Replace this with the path to your php errors log and adapt the regex
+        #Replace this with the path to your php error log and adapt the regex
         data: "@LogboardBundle/../Resources/config/default.log.path/php/php_error_log"
         engine: file_storage
         decompiler: pattern_matcher
@@ -77,7 +77,7 @@ logboard:
         title: Apache logs
         src: file
 
-        #Replace this with the path to your Apache errors log and adapt the regex
+        #Replace this with the path to your Apache error log and adapt the regex
         data: "@LogboardBundle/../Resources/config/default.log.path/Apache/error.log"
         engine: file_storage
         decompiler: pattern_matcher

@@ -20,7 +20,7 @@ use Symfony\Component\HttpKernel\Event\FilterControllerEvent;
 use Symfony\Component\HttpKernel\KernelEvents;
 
 /**
- * Profiler Listner
+ * Profiler Listener
  *
  * @author Sofiane HADDAG <sofiane.haddag@yahoo.fr>
  */
