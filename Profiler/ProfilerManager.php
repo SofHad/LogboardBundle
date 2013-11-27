@@ -265,5 +265,4 @@ class ProfilerManager implements ProfilerManagerInterface
     {
         return $this->countedData;
     }
-
 }

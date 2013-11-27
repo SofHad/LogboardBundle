@@ -10,8 +10,7 @@
 
 namespace So\LogboardBundle\Tests\Profiler;
 
-use So\LogboardBundle\Profiler\Counter;
-use So\LogboardBundle\Profiler\ProfilerManager;
+use So\LogboardBundle\Tests\DataProvider;
 use So\LogboardBundle\Tests\KernelTest;
 
 /**
@@ -25,34 +24,43 @@ class ProfilerManagerTest extends KernelTest
     protected $profiler;
     protected $profilerManagerMock;
     protected $panel;
-
+    protected $counter;
+    protected $queryManagerMock;
+    protected $profile;
 
     public function setUp()
     {
         parent::setUp();
+
         $this->profiler = $this->container->get('profiler');
         $this->panel = $this->container->getParameter('logboard.panel');
+        $this->counter = $this->container->get('logboard.counter');
+
+        $this->profilerManagerMock = $this->getMockBuilder('So\LogboardBundle\Profiler\ProfilerManager')
+            ->setMethods(array('loadProfiles'))
+            ->enableOriginalConstructor()
+            ->setConstructorArgs(
+                array(
+                    $this->counter,
+                    $this->profiler,
+                    $this->panel
+                )
+            )
+            ->getMock();
     }
 
-    public function testGetCollector()
+    public function testLoadProfiles()
     {
-
-        $collector = new \Symfony\Component\HttpKernel\DataCollector\LoggerDataCollector();
-
-        $this->profilerManagerMock = $this->getMockBuilder('So\LogboardBundle\Profiler\ProfilerManagerInterface')
-                                          ->setConstructorArgs(
-                                                                array(
-                                                                    $this->anything(array()),
-                                                                    $this->profiler,
-                                                                    $this->panel
-                                                                )
-                                                              )
-                                           ->getMock()
+        $queryManager = $this->getMockBuilder('So\LogboardBundle\Profiler\QueryManager')
+            ->disableOriginalConstructor()
+            ->getMock()
         ;
-        
-        $this->profilerManagerMock->expects($this->any())
-                                  ->method('getCollector')
+
+        $queryManager->expects($this->any())
+            ->method('getToken')
+            ->will($this->returnValue(DataProvider::TOKEN))
         ;
-        $collector = $this->profilerManagerMock->getCollector();
+
+     $this->profilerManagerMock->loadProfiles($queryManager);
     }
 }
