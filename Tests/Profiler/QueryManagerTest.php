@@ -19,8 +19,13 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpKernel\Profiler\FileProfilerStorage;
 use Symfony\Component\HttpKernel\Profiler\Profiler;
 
-
- class QueryManagerTest extends KernelTest
+/**
+ * Class QueryManagerTest
+ *
+ * @package So\LogboardBundle\Tests\Profiler
+ * @author Sofiane HADDAG <sofiane.haddag@yahoo.fr>
+ */
+class QueryManagerTest extends KernelTest
 {
 
     protected $request;
@@ -30,9 +35,6 @@ use Symfony\Component\HttpKernel\Profiler\Profiler;
     protected $panel;
     protected $found;
 
-    /**
-     * @return void
-     */
     public function setUp()
     {
         parent::setUp();

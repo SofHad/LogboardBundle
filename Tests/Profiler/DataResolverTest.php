@@ -15,8 +15,9 @@ use So\LogboardBundle\Tests\DataProvider;
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 
 /**
- * Data Resolver Test
+ * Class DataResolverTest
  *
+ * @package So\LogboardBundle\Tests\Profiler
  * @author Sofiane HADDAG <sofiane.haddag@yahoo.fr>
  */
 class DataResolverTest extends WebTestCase
@@ -24,7 +25,6 @@ class DataResolverTest extends WebTestCase
 
     public function testRefine()
     {
-
         $DataProvider = new DataProvider();
         $collections = $DataProvider->unrefinedProfilerData();
 

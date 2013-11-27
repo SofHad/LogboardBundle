@@ -33,3 +33,7 @@ Here is a quick look at the log reporting dashboard:
 ![Screenshot](Resources/assets/screen_view1.png)
 ![Screenshot](Resources/assets/screen_view2.png)
 ![Screenshot](Resources/assets/screen_view3.png)
+
+##License
+
+This bundle is available under the [MIT license](Resources/meta/LICENSE).

@@ -14,8 +14,9 @@ use So\LogboardBundle\Profiler\Parameter\FileStorageParameters;
 use So\LogboardBundle\Tests\KernelTest;
 
 /**
- * Testing the FileStorageParameters class
+ * Class FileStorageParametersTest
  *
+ * @package So\LogboardBundle\Tests\Profiler\Parameter
  * @author Sofiane HADDAG <sofiane.haddag@yahoo.fr>
  */
 class FileStorageParametersTest extends KernelTest

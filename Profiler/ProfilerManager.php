@@ -161,9 +161,6 @@ class ProfilerManager implements ProfilerManagerInterface
         }
 
          return $this->collector = $this->profile->getCollector($this->panel);
-
-
-
     }
 
     /**
