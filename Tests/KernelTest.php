@@ -10,10 +10,16 @@
 
 namespace So\LogboardBundle\Tests;
 
-require_once dirname(__DIR__) . '/../../../app/AppKernel.php';
+$kernelClass =  __DIR__ . '/app/AppKernel.php';
+
+if(!file_exists($kernelClass)){
+    throw new \LogicException(sprintf('Could not find "%s"', $kernelClass));
+}
+
+require_once $kernelClass;
 
 /**
- * Crea
+ * KernelTest
  */
 abstract class KernelTest extends \PHPUnit_Framework_TestCase
 {
@@ -21,7 +27,6 @@ abstract class KernelTest extends \PHPUnit_Framework_TestCase
      * @var \Symfony\Component\HttpKernel\AppKernel
      */
     protected $kernel;
-
     /**
      * @var \Symfony\Component\DependencyInjection\Container
      */

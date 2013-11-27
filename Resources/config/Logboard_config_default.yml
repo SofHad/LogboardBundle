@@ -42,9 +42,12 @@ logboard:
 #-----------------------------------------------------------------------------------------------------------------------
 
     PHP:
+        enabled: true
         title: PHP logs
         src: file
-        data: C:\xampp\php\logs\php_error_log
+
+        #Replace this with the path to your php errors log and adapt the regex
+        data: "@LogboardBundle/../Resources/config/default.log.path/php/php_error_log"
         engine: file_storage
         decompiler: pattern_matcher
         menu:
@@ -70,9 +73,12 @@ logboard:
 #-----------------------------------------------------------------------------------------------------------------------
 
     Apache:
+        enabled: true
         title: Apache logs
         src: file
-        data: C:\xampp\apache\logs\error.log
+
+        #Replace this with the path to your Apache errors log and adapt the regex
+        data: "@LogboardBundle/../Resources/config/default.log.path/Apache/error.log"
         engine: file_storage
         decompiler: pattern_matcher
         menu:
@@ -102,7 +108,9 @@ logboard:
 
             SSL_REQUEST :
                 title: SSL Request
-                data: C:\xampp\apache\logs\ssl_request.log
+
+                #Replace this with the path to your Apache ssl_request log and adapt the regex
+                data: "@LogboardBundle/../Resources/config/default.log.path/Apache/ssl_request.log"
                 split:
                     parameter: /^\[([0-9\/A-Za-z]*)(.*)/
 #-----------------------------------------------------------------------------------------------------------------------

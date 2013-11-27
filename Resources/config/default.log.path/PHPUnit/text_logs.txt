@@ -1,0 +1,185 @@
+Doctrine\Tests\Common\ClassLoader
+ [x] Class loader
+ [x] Class exists
+ [x] Get class loader
+ [x] Class exists with silent autoloader
+
+Doctrine\Tests\Common\EventManager
+ [ ] Initial state
+ [ ] Add event listener
+ [x] Dispatch event
+ [ ] Remove event listener
+ [ ] Add event subscriber
+
+Doctrine\Tests\Common\Persistence\Mapping\DriverChain
+ [x] Delegate to matching namespace driver
+ [x] testLoadMetadata NoDelegatorFound ThrowsMappingException
+ [x] Gather all class names
+ [x] Is transient
+ [x] Default driver
+ [x] Default driver get all class names
+
+Doctrine\Tests\Common\Persistence\Mapping\ClassMetadataFactory
+ [x] Get cache driver
+ [x] Get metadata for
+ [x] Get metadata for absent class
+ [x] Get parent metadata
+ [x] Get cached metadata
+ [x] Cache get metadata for
+ [x] Get aliased metadata
+
+Doctrine\Tests\Common\Persistence\Mapping\DefaultFileLocator
+ [x] Get paths
+ [x] Get file extension
+ [x] Unique paths
+ [x] Find mapping file
+ [x] Find mapping file not found
+ [x] Get all class names
+ [x] Get all class names non matching file extension
+ [x] File exists
+
+Doctrine\Tests\Common\Persistence\Mapping\FileDriver
+ [x] Global basename
+ [x] Get element from global file
+ [x] Get element from file
+ [x] Get all class names global basename
+ [x] Get all class names from mapping file
+ [x] Get all class names both sources
+ [x] Is not transient
+ [x] Is transient
+ [x] Non locator fallback
+
+Doctrine\Tests\Common\Persistence\Mapping\PHPDriver
+ [x] Load metadata
+
+Doctrine\Tests\Common\Persistence\Mapping\RuntimeReflectionService
+ [x] Shortname
+ [x] Class namespace name
+ [x] Get parent classes
+ [x] Get parent classes for absent class
+ [x] Get reflection class
+ [x] Get methods
+ [x] Get accessible property
+
+Doctrine\Tests\Common\Persistence\Mapping\StaticPHPDriver
+ [x] Load metadata
+ [x] Get all class names
+
+Doctrine\Tests\Common\Persistence\Mapping\StaticReflectionService
+ [x] Shortname
+ [x] Class namespace name
+ [x] Get parent classes
+ [x] Get reflection class
+ [x] Get methods
+ [x] Get accessible property
+
+Doctrine\Tests\Common\Persistence\Mapping\SymfonyFileLocator
+ [x] Get paths
+ [x] Get prefixes
+ [x] Get file extension
+ [x] File exists
+ [x] Get all class names
+ [x] Find mapping file
+ [x] Find mapping file not found
+
+Doctrine\Tests\Common\Persistence\ObjectManagerDecorator
+ [x] All method calls are delegated to the wrapped instance
+
+Doctrine\Tests\Common\Persistence\PersistentObject
+ [x] Get object manager
+ [x] Non matching object manager
+ [x] Get field
+ [x] Set field
+ [x] Get identifier
+ [x] Set identifier
+ [x] Set unknown field
+ [x] Get unknown field
+ [x] Get to one association
+ [x] Set to one association
+ [x] Set invalid to one association
+ [x] Set to one association null
+ [x] Add to many association
+ [x] Add invalid to many association
+ [x] No object manager set
+ [x] Invalid method
+ [x] Add invalid collection
+
+Doctrine\Tests\Common\Proxy\AbstractProxyFactory
+ [x] Generate proxy classes
+ [x] Get proxy
+ [x] Reset unitialized proxy
+ [x] Disallows resetting initialized proxy
+
+Doctrine\Tests\Common\Proxy\Autoloader
+ [x] Resolve file
+ [x] Autoload
+ [x] Register with invalid callback
+
+Doctrine\Tests\Common\Proxy\ProxyClassGenerator
+ [x] Reference proxy respects methods parameters type hinting
+ [x] Proxy respects methods which return values by reference
+ [x] Proxy respects by ref method parameters
+ [x] Creates association proxy as subclass of the original one
+ [x] Non namespaced proxy generation
+ [x] Class with sleep proxy generation
+ [x] Class with callable type hint on proxied method
+ [x] Class with invalid type hint on proxied method
+ [x] No config dir throws exception
+ [x] No namespace throws exception
+ [x] Invalid placeholder throws exception
+ [x] Use eval if no filename is given
+
+Doctrine\Tests\Common\Proxy\ProxyLogic
+ [x] Fetching public identifier does not cause lazy loading
+ [x] Fetching identifiers via public getter does not cause lazy loading
+ [x] Calling method causes lazy loading
+ [x] Fetching public fields causes lazy loading
+ [x] Fetching public association causes lazy loading
+ [x] Fetching protected association via public getter causes lazy loading
+ [x] Lazy loading triggered only at first public property read
+ [x] Notice when reading non existent public properties
+ [x] False when checking non existent property
+ [x] No error when setting non existent property
+ [x] Cloning calls cloner with cloned object
+ [x] Fetching transient properties will not trigger lazy loading
+ [x] Load proxy method
+ [x] Loading with persister will be triggered only once
+ [x] Failed loading will throw exception
+ [x] Cloning with persister
+ [x] Not initialized proxy unserialization
+ [x] Initialized proxy unserialization
+ [x] Initialization restores default public lazy loaded field values
+ [x] Setting public fields causes lazy loading
+ [x] Setting public association causes lazy loading
+ [x] Checking public fields causes lazy loading
+ [x] Checking public association causes lazy loading
+
+Doctrine\Tests\Common\Proxy\ProxyMagicMethods
+ [x] Inherited magic get
+ [x] Inherited magic get by ref
+ [x] Inherited magic set
+ [x] Inherited magic sleep
+ [x] Inherited magic wakeup
+ [x] Inherited magic isset
+ [x] Inherited magic clone
+
+Doctrine\Tests\Common\Reflection\RuntimePublicReflectionProperty
+ [x] Get value on proxy public property
+ [x] Set value on proxy public property
+
+Doctrine\Tests\Common\Reflection\StaticReflectionParser
+ [x] Parent class
+
+Doctrine\Tests\Common\Util\ClassUtils
+ [x] Get real class
+ [x] Get class
+ [x] Get parent class
+ [x] Generate proxy class name
+ [x] New reflection class
+ [x] New reflection object
+
+Doctrine\Tests\Common\Util\Debug
+ [x] Export object
+ [x] Export date time
+ [x] Export array traversable
+

@@ -26,13 +26,4 @@ class FileStorageEngine extends Engine
     {
         return $this->profiles = $this->data;
     }
-
-    /**
-     * {@inheritdoc}
-     *
-     */
-    public function getName()
-    {
-        return 'file.storage';
-    }
 }

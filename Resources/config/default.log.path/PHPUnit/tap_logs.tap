@@ -1,0 +1,194 @@
+TAP version 13
+ok 1 - Doctrine\Tests\Common\ClassLoaderTest::testClassLoader
+ok 2 - Doctrine\Tests\Common\ClassLoaderTest::testClassExists
+ok 3 - Doctrine\Tests\Common\ClassLoaderTest::testGetClassLoader
+ok 4 - Doctrine\Tests\Common\ClassLoaderTest::testClassExistsWithSilentAutoloader
+not ok 5 - Failure: Doctrine\Tests\Common\EventManagerTest::testInitialState
+  ---
+  message: 'null does not match expected type "array".'
+  severity: fail
+  data:
+      got: null
+      expected: {  }
+  ...
+not ok 6 - Failure: Doctrine\Tests\Common\EventManagerTest::testAddEventListener
+  ---
+  message: 'Failed asserting that null is true.'
+  severity: fail
+  ...
+ok 7 - Doctrine\Tests\Common\EventManagerTest::testDispatchEvent
+not ok 8 - Failure: Doctrine\Tests\Common\EventManagerTest::testRemoveEventListener
+  ---
+  message: 'Failed asserting that null is true.'
+  severity: fail
+  ...
+not ok 9 - Failure: Doctrine\Tests\Common\EventManagerTest::testAddEventSubscriber
+  ---
+  message: 'Failed asserting that null is true.'
+  severity: fail
+  ...
+ok 10 - Doctrine\Tests\Common\Persistence\Mapping\DriverChainTest::testDelegateToMatchingNamespaceDriver
+ok 11 - Doctrine\Tests\Common\Persistence\Mapping\DriverChainTest::testLoadMetadata_NoDelegatorFound_ThrowsMappingException
+ok 12 - Doctrine\Tests\Common\Persistence\Mapping\DriverChainTest::testGatherAllClassNames
+ok 13 - Doctrine\Tests\Common\Persistence\Mapping\DriverChainTest::testIsTransient
+ok 14 - Doctrine\Tests\Common\Persistence\Mapping\DriverChainTest::testDefaultDriver
+ok 15 - Doctrine\Tests\Common\Persistence\Mapping\DriverChainTest::testDefaultDriverGetAllClassNames
+ok 16 - Doctrine\Tests\Common\Persistence\Mapping\ClassMetadataFactoryTest::testGetCacheDriver
+ok 17 - Doctrine\Tests\Common\Persistence\Mapping\ClassMetadataFactoryTest::testGetMetadataFor
+ok 18 - Doctrine\Tests\Common\Persistence\Mapping\ClassMetadataFactoryTest::testGetMetadataForAbsentClass
+ok 19 - Doctrine\Tests\Common\Persistence\Mapping\ClassMetadataFactoryTest::testGetParentMetadata
+ok 20 - Doctrine\Tests\Common\Persistence\Mapping\ClassMetadataFactoryTest::testGetCachedMetadata
+ok 21 - Doctrine\Tests\Common\Persistence\Mapping\ClassMetadataFactoryTest::testCacheGetMetadataFor
+ok 22 - Doctrine\Tests\Common\Persistence\Mapping\ClassMetadataFactoryTest::testGetAliasedMetadata
+ok 23 - Doctrine\Tests\Common\Persistence\Mapping\DefaultFileLocatorTest::testGetPaths
+ok 24 - Doctrine\Tests\Common\Persistence\Mapping\DefaultFileLocatorTest::testGetFileExtension
+ok 25 - Doctrine\Tests\Common\Persistence\Mapping\DefaultFileLocatorTest::testUniquePaths
+ok 26 - Doctrine\Tests\Common\Persistence\Mapping\DefaultFileLocatorTest::testFindMappingFile
+ok 27 - Doctrine\Tests\Common\Persistence\Mapping\DefaultFileLocatorTest::testFindMappingFileNotFound
+ok 28 - Doctrine\Tests\Common\Persistence\Mapping\DefaultFileLocatorTest::testGetAllClassNames
+ok 29 - Doctrine\Tests\Common\Persistence\Mapping\DefaultFileLocatorTest::testGetAllClassNamesNonMatchingFileExtension
+ok 30 - Doctrine\Tests\Common\Persistence\Mapping\DefaultFileLocatorTest::testFileExists
+ok 31 - Doctrine\Tests\Common\Persistence\Mapping\FileDriverTest::testGlobalBasename
+ok 32 - Doctrine\Tests\Common\Persistence\Mapping\FileDriverTest::testGetElementFromGlobalFile
+ok 33 - Doctrine\Tests\Common\Persistence\Mapping\FileDriverTest::testGetElementFromFile
+ok 34 - Doctrine\Tests\Common\Persistence\Mapping\FileDriverTest::testGetAllClassNamesGlobalBasename
+ok 35 - Doctrine\Tests\Common\Persistence\Mapping\FileDriverTest::testGetAllClassNamesFromMappingFile
+ok 36 - Doctrine\Tests\Common\Persistence\Mapping\FileDriverTest::testGetAllClassNamesBothSources
+ok 37 - Doctrine\Tests\Common\Persistence\Mapping\FileDriverTest::testIsNotTransient
+ok 38 - Doctrine\Tests\Common\Persistence\Mapping\FileDriverTest::testIsTransient
+ok 39 - Doctrine\Tests\Common\Persistence\Mapping\FileDriverTest::testNonLocatorFallback
+ok 40 - Doctrine\Tests\Common\Persistence\Mapping\PHPDriverTest::testLoadMetadata
+ok 41 - Doctrine\Tests\Common\Persistence\Mapping\RuntimeReflectionServiceTest::testShortname
+ok 42 - Doctrine\Tests\Common\Persistence\Mapping\RuntimeReflectionServiceTest::testClassNamespaceName
+ok 43 - Doctrine\Tests\Common\Persistence\Mapping\RuntimeReflectionServiceTest::testGetParentClasses
+ok 44 - Doctrine\Tests\Common\Persistence\Mapping\RuntimeReflectionServiceTest::testGetParentClassesForAbsentClass
+ok 45 - Doctrine\Tests\Common\Persistence\Mapping\RuntimeReflectionServiceTest::testGetReflectionClass
+ok 46 - Doctrine\Tests\Common\Persistence\Mapping\RuntimeReflectionServiceTest::testGetMethods
+ok 47 - Doctrine\Tests\Common\Persistence\Mapping\RuntimeReflectionServiceTest::testGetAccessibleProperty
+ok 48 - Doctrine\Tests\Common\Persistence\Mapping\StaticPHPDriverTest::testLoadMetadata
+ok 49 - Doctrine\Tests\Common\Persistence\Mapping\StaticPHPDriverTest::testGetAllClassNames
+ok 50 - Doctrine\Tests\Common\Persistence\Mapping\StaticReflectionServiceTest::testShortname
+ok 51 - Doctrine\Tests\Common\Persistence\Mapping\StaticReflectionServiceTest::testClassNamespaceName
+ok 52 - Doctrine\Tests\Common\Persistence\Mapping\StaticReflectionServiceTest::testGetParentClasses
+ok 53 - Doctrine\Tests\Common\Persistence\Mapping\StaticReflectionServiceTest::testGetReflectionClass
+ok 54 - Doctrine\Tests\Common\Persistence\Mapping\StaticReflectionServiceTest::testGetMethods
+ok 55 - Doctrine\Tests\Common\Persistence\Mapping\StaticReflectionServiceTest::testGetAccessibleProperty
+ok 56 - Doctrine\Tests\Common\Persistence\Mapping\SymfonyFileLocatorTest::testGetPaths
+ok 57 - Doctrine\Tests\Common\Persistence\Mapping\SymfonyFileLocatorTest::testGetPrefixes
+ok 58 - Doctrine\Tests\Common\Persistence\Mapping\SymfonyFileLocatorTest::testGetFileExtension
+ok 59 - Doctrine\Tests\Common\Persistence\Mapping\SymfonyFileLocatorTest::testFileExists
+ok 60 - Doctrine\Tests\Common\Persistence\Mapping\SymfonyFileLocatorTest::testGetAllClassNames
+ok 61 - Doctrine\Tests\Common\Persistence\Mapping\SymfonyFileLocatorTest::testFindMappingFile
+ok 62 - Doctrine\Tests\Common\Persistence\Mapping\SymfonyFileLocatorTest::testFindMappingFileNotFound
+ok 63 - Doctrine\Tests\Common\Persistence\ObjectManagerDecoratorTest::testAllMethodCallsAreDelegatedToTheWrappedInstance with data set #0 ('find', array('req', 'req'))
+ok 64 - Doctrine\Tests\Common\Persistence\ObjectManagerDecoratorTest::testAllMethodCallsAreDelegatedToTheWrappedInstance with data set #1 ('persist', array('req'))
+ok 65 - Doctrine\Tests\Common\Persistence\ObjectManagerDecoratorTest::testAllMethodCallsAreDelegatedToTheWrappedInstance with data set #2 ('remove', array('req'))
+ok 66 - Doctrine\Tests\Common\Persistence\ObjectManagerDecoratorTest::testAllMethodCallsAreDelegatedToTheWrappedInstance with data set #3 ('merge', array('req'))
+ok 67 - Doctrine\Tests\Common\Persistence\ObjectManagerDecoratorTest::testAllMethodCallsAreDelegatedToTheWrappedInstance with data set #4 ('clear', array())
+ok 68 - Doctrine\Tests\Common\Persistence\ObjectManagerDecoratorTest::testAllMethodCallsAreDelegatedToTheWrappedInstance with data set #5 ('clear', array('all'))
+ok 69 - Doctrine\Tests\Common\Persistence\ObjectManagerDecoratorTest::testAllMethodCallsAreDelegatedToTheWrappedInstance with data set #6 ('detach', array('req'))
+ok 70 - Doctrine\Tests\Common\Persistence\ObjectManagerDecoratorTest::testAllMethodCallsAreDelegatedToTheWrappedInstance with data set #7 ('refresh', array('req'))
+ok 71 - Doctrine\Tests\Common\Persistence\ObjectManagerDecoratorTest::testAllMethodCallsAreDelegatedToTheWrappedInstance with data set #8 ('flush', array())
+ok 72 - Doctrine\Tests\Common\Persistence\ObjectManagerDecoratorTest::testAllMethodCallsAreDelegatedToTheWrappedInstance with data set #9 ('getRepository', array('req'))
+ok 73 - Doctrine\Tests\Common\Persistence\ObjectManagerDecoratorTest::testAllMethodCallsAreDelegatedToTheWrappedInstance with data set #10 ('getClassMetadata', array('req'))
+ok 74 - Doctrine\Tests\Common\Persistence\ObjectManagerDecoratorTest::testAllMethodCallsAreDelegatedToTheWrappedInstance with data set #11 ('getMetadataFactory', array())
+ok 75 - Doctrine\Tests\Common\Persistence\ObjectManagerDecoratorTest::testAllMethodCallsAreDelegatedToTheWrappedInstance with data set #12 ('initializeObject', array('req'))
+ok 76 - Doctrine\Tests\Common\Persistence\ObjectManagerDecoratorTest::testAllMethodCallsAreDelegatedToTheWrappedInstance with data set #13 ('contains', array('req'))
+ok 77 - Doctrine\Tests\Common\Persistence\PersistentObjectTest::testGetObjectManager
+ok 78 - Doctrine\Tests\Common\Persistence\PersistentObjectTest::testNonMatchingObjectManager
+ok 79 - Doctrine\Tests\Common\Persistence\PersistentObjectTest::testGetField
+ok 80 - Doctrine\Tests\Common\Persistence\PersistentObjectTest::testSetField
+ok 81 - Doctrine\Tests\Common\Persistence\PersistentObjectTest::testGetIdentifier
+ok 82 - Doctrine\Tests\Common\Persistence\PersistentObjectTest::testSetIdentifier
+ok 83 - Doctrine\Tests\Common\Persistence\PersistentObjectTest::testSetUnknownField
+ok 84 - Doctrine\Tests\Common\Persistence\PersistentObjectTest::testGetUnknownField
+ok 85 - Doctrine\Tests\Common\Persistence\PersistentObjectTest::testGetToOneAssociation
+ok 86 - Doctrine\Tests\Common\Persistence\PersistentObjectTest::testSetToOneAssociation
+ok 87 - Doctrine\Tests\Common\Persistence\PersistentObjectTest::testSetInvalidToOneAssociation
+ok 88 - Doctrine\Tests\Common\Persistence\PersistentObjectTest::testSetToOneAssociationNull
+ok 89 - Doctrine\Tests\Common\Persistence\PersistentObjectTest::testAddToManyAssociation
+ok 90 - Doctrine\Tests\Common\Persistence\PersistentObjectTest::testAddInvalidToManyAssociation
+ok 91 - Doctrine\Tests\Common\Persistence\PersistentObjectTest::testNoObjectManagerSet
+ok 92 - Doctrine\Tests\Common\Persistence\PersistentObjectTest::testInvalidMethod
+ok 93 - Doctrine\Tests\Common\Persistence\PersistentObjectTest::testAddInvalidCollection
+ok 94 - Doctrine\Tests\Common\Proxy\AbstractProxyFactoryTest::testGenerateProxyClasses
+ok 95 - Doctrine\Tests\Common\Proxy\AbstractProxyFactoryTest::testGetProxy
+ok 96 - Doctrine\Tests\Common\Proxy\AbstractProxyFactoryTest::testResetUnitializedProxy
+ok 97 - Doctrine\Tests\Common\Proxy\AbstractProxyFactoryTest::testDisallowsResettingInitializedProxy
+ok 98 - Doctrine\Tests\Common\Proxy\AutoloaderTest::testResolveFile with data set #0 ('/tmp', 'MyProxy', 'MyProxy\\__CG__\\RealClass', '/tmp\\__CG__RealClass.php')
+ok 99 - Doctrine\Tests\Common\Proxy\AutoloaderTest::testResolveFile with data set #1 ('/tmp', 'MyProxy\\Subdir', 'MyProxy\\Subdir\\__CG__\\RealClass', '/tmp\\__CG__RealClass.php')
+ok 100 - Doctrine\Tests\Common\Proxy\AutoloaderTest::testResolveFile with data set #2 ('/tmp', 'MyProxy', 'MyProxy\\__CG__\\Other\\RealClass', '/tmp\\__CG__OtherRealClass.php')
+ok 101 - Doctrine\Tests\Common\Proxy\AutoloaderTest::testAutoload
+ok 102 - Doctrine\Tests\Common\Proxy\AutoloaderTest::testRegisterWithInvalidCallback
+ok 103 - Doctrine\Tests\Common\Proxy\ProxyClassGeneratorTest::testReferenceProxyRespectsMethodsParametersTypeHinting
+ok 104 - Doctrine\Tests\Common\Proxy\ProxyClassGeneratorTest::testProxyRespectsMethodsWhichReturnValuesByReference
+ok 105 - Doctrine\Tests\Common\Proxy\ProxyClassGeneratorTest::testProxyRespectsByRefMethodParameters
+ok 106 - Doctrine\Tests\Common\Proxy\ProxyClassGeneratorTest::testCreatesAssociationProxyAsSubclassOfTheOriginalOne
+ok 107 - Doctrine\Tests\Common\Proxy\ProxyClassGeneratorTest::testNonNamespacedProxyGeneration
+ok 108 - Doctrine\Tests\Common\Proxy\ProxyClassGeneratorTest::testClassWithSleepProxyGeneration
+ok 109 - Doctrine\Tests\Common\Proxy\ProxyClassGeneratorTest::testClassWithCallableTypeHintOnProxiedMethod
+ok 110 - Doctrine\Tests\Common\Proxy\ProxyClassGeneratorTest::testClassWithInvalidTypeHintOnProxiedMethod
+ok 111 - Doctrine\Tests\Common\Proxy\ProxyClassGeneratorTest::testNoConfigDirThrowsException
+ok 112 - Doctrine\Tests\Common\Proxy\ProxyClassGeneratorTest::testNoNamespaceThrowsException
+ok 113 - Doctrine\Tests\Common\Proxy\ProxyClassGeneratorTest::testInvalidPlaceholderThrowsException
+ok 114 - Doctrine\Tests\Common\Proxy\ProxyClassGeneratorTest::testUseEvalIfNoFilenameIsGiven
+ok 115 - Doctrine\Tests\Common\Proxy\ProxyLogicTest::testFetchingPublicIdentifierDoesNotCauseLazyLoading
+ok 116 - Doctrine\Tests\Common\Proxy\ProxyLogicTest::testFetchingIdentifiersViaPublicGetterDoesNotCauseLazyLoading
+ok 117 - Doctrine\Tests\Common\Proxy\ProxyLogicTest::testCallingMethodCausesLazyLoading
+ok 118 - Doctrine\Tests\Common\Proxy\ProxyLogicTest::testFetchingPublicFieldsCausesLazyLoading
+ok 119 - Doctrine\Tests\Common\Proxy\ProxyLogicTest::testFetchingPublicAssociationCausesLazyLoading
+ok 120 - Doctrine\Tests\Common\Proxy\ProxyLogicTest::testFetchingProtectedAssociationViaPublicGetterCausesLazyLoading
+ok 121 - Doctrine\Tests\Common\Proxy\ProxyLogicTest::testLazyLoadingTriggeredOnlyAtFirstPublicPropertyRead
+ok 122 - Doctrine\Tests\Common\Proxy\ProxyLogicTest::testNoticeWhenReadingNonExistentPublicProperties
+ok 123 - Doctrine\Tests\Common\Proxy\ProxyLogicTest::testFalseWhenCheckingNonExistentProperty
+ok 124 - Doctrine\Tests\Common\Proxy\ProxyLogicTest::testNoErrorWhenSettingNonExistentProperty
+ok 125 - Doctrine\Tests\Common\Proxy\ProxyLogicTest::testCloningCallsClonerWithClonedObject
+ok 126 - Doctrine\Tests\Common\Proxy\ProxyLogicTest::testFetchingTransientPropertiesWillNotTriggerLazyLoading
+ok 127 - Doctrine\Tests\Common\Proxy\ProxyLogicTest::testLoadProxyMethod
+ok 128 - Doctrine\Tests\Common\Proxy\ProxyLogicTest::testLoadingWithPersisterWillBeTriggeredOnlyOnce
+ok 129 - Doctrine\Tests\Common\Proxy\ProxyLogicTest::testFailedLoadingWillThrowException
+ok 130 - Doctrine\Tests\Common\Proxy\ProxyLogicTest::testCloningWithPersister
+ok 131 - Doctrine\Tests\Common\Proxy\ProxyLogicTest::testNotInitializedProxyUnserialization
+ok 132 - Doctrine\Tests\Common\Proxy\ProxyLogicTest::testInitializedProxyUnserialization
+ok 133 - Doctrine\Tests\Common\Proxy\ProxyLogicTest::testInitializationRestoresDefaultPublicLazyLoadedFieldValues
+ok 134 - Doctrine\Tests\Common\Proxy\ProxyLogicTest::testSettingPublicFieldsCausesLazyLoading
+ok 135 - Doctrine\Tests\Common\Proxy\ProxyLogicTest::testSettingPublicAssociationCausesLazyLoading
+ok 136 - Doctrine\Tests\Common\Proxy\ProxyLogicTest::testCheckingPublicFieldsCausesLazyLoading
+ok 137 - Doctrine\Tests\Common\Proxy\ProxyLogicTest::testCheckingPublicAssociationCausesLazyLoading
+ok 138 - Doctrine\Tests\Common\Proxy\ProxyMagicMethodsTest::testInheritedMagicGet
+ok 139 - Doctrine\Tests\Common\Proxy\ProxyMagicMethodsTest::testInheritedMagicGetByRef
+ok 140 - Doctrine\Tests\Common\Proxy\ProxyMagicMethodsTest::testInheritedMagicSet
+ok 141 - Doctrine\Tests\Common\Proxy\ProxyMagicMethodsTest::testInheritedMagicSleep
+ok 142 - Doctrine\Tests\Common\Proxy\ProxyMagicMethodsTest::testInheritedMagicWakeup
+ok 143 - Doctrine\Tests\Common\Proxy\ProxyMagicMethodsTest::testInheritedMagicIsset
+ok 144 - Doctrine\Tests\Common\Proxy\ProxyMagicMethodsTest::testInheritedMagicClone
+ok 145 - Doctrine\Tests\Common\Reflection\RuntimePublicReflectionPropertyTest::testGetValueOnProxyPublicProperty
+ok 146 - Doctrine\Tests\Common\Reflection\RuntimePublicReflectionPropertyTest::testSetValueOnProxyPublicProperty
+ok 147 - Doctrine\Tests\Common\Reflection\StaticReflectionParserTest::testParentClass with data set #0 (false)
+ok 148 - Doctrine\Tests\Common\Reflection\StaticReflectionParserTest::testParentClass with data set #1 (true)
+ok 149 - Doctrine\Tests\Common\Util\ClassUtilsTest::testGetRealClass with data set #0 ('stdClass', 'stdClass')
+ok 150 - Doctrine\Tests\Common\Util\ClassUtilsTest::testGetRealClass with data set #1 ('Doctrine\\Common\\Util\\ClassUtils', 'Doctrine\\Common\\Util\\ClassUtils')
+ok 151 - Doctrine\Tests\Common\Util\ClassUtilsTest::testGetRealClass with data set #2 ('MyProject\\Proxies\\__CG__\\stdClass', 'stdClass')
+ok 152 - Doctrine\Tests\Common\Util\ClassUtilsTest::testGetRealClass with data set #3 ('MyProject\\Proxies\\__CG__\\OtherProject\\Proxies\\__CG__\\stdClass', 'stdClass')
+ok 153 - Doctrine\Tests\Common\Util\ClassUtilsTest::testGetRealClass with data set #4 ('MyProject\\Proxies\\__CG__\\Doctrine\\Tests\\Common\\Util\\ChildObject', 'Doctrine\\Tests\\Common\\Util\\ChildObject')
+ok 154 - Doctrine\Tests\Common\Util\ClassUtilsTest::testGetClass with data set #0 ('stdClass', 'stdClass')
+ok 155 - Doctrine\Tests\Common\Util\ClassUtilsTest::testGetClass with data set #1 ('Doctrine\\Common\\Util\\ClassUtils', 'Doctrine\\Common\\Util\\ClassUtils')
+ok 156 - Doctrine\Tests\Common\Util\ClassUtilsTest::testGetClass with data set #2 ('MyProject\\Proxies\\__CG__\\stdClass', 'stdClass')
+ok 157 - Doctrine\Tests\Common\Util\ClassUtilsTest::testGetClass with data set #3 ('MyProject\\Proxies\\__CG__\\OtherProject\\Proxies\\__CG__\\stdClass', 'stdClass')
+ok 158 - Doctrine\Tests\Common\Util\ClassUtilsTest::testGetClass with data set #4 ('MyProject\\Proxies\\__CG__\\Doctrine\\Tests\\Common\\Util\\ChildObject', 'Doctrine\\Tests\\Common\\Util\\ChildObject')
+ok 159 - Doctrine\Tests\Common\Util\ClassUtilsTest::testGetParentClass
+ok 160 - Doctrine\Tests\Common\Util\ClassUtilsTest::testGenerateProxyClassName
+ok 161 - Doctrine\Tests\Common\Util\ClassUtilsTest::testNewReflectionClass with data set #0 ('stdClass', 'stdClass')
+ok 162 - Doctrine\Tests\Common\Util\ClassUtilsTest::testNewReflectionClass with data set #1 ('Doctrine\\Common\\Util\\ClassUtils', 'Doctrine\\Common\\Util\\ClassUtils')
+ok 163 - Doctrine\Tests\Common\Util\ClassUtilsTest::testNewReflectionClass with data set #2 ('MyProject\\Proxies\\__CG__\\stdClass', 'stdClass')
+ok 164 - Doctrine\Tests\Common\Util\ClassUtilsTest::testNewReflectionClass with data set #3 ('MyProject\\Proxies\\__CG__\\OtherProject\\Proxies\\__CG__\\stdClass', 'stdClass')
+ok 165 - Doctrine\Tests\Common\Util\ClassUtilsTest::testNewReflectionClass with data set #4 ('MyProject\\Proxies\\__CG__\\Doctrine\\Tests\\Common\\Util\\ChildObject', 'Doctrine\\Tests\\Common\\Util\\ChildObject')
+ok 166 - Doctrine\Tests\Common\Util\ClassUtilsTest::testNewReflectionObject with data set #0 ('stdClass', 'stdClass')
+ok 167 - Doctrine\Tests\Common\Util\ClassUtilsTest::testNewReflectionObject with data set #1 ('Doctrine\\Common\\Util\\ClassUtils', 'Doctrine\\Common\\Util\\ClassUtils')
+ok 168 - Doctrine\Tests\Common\Util\ClassUtilsTest::testNewReflectionObject with data set #2 ('MyProject\\Proxies\\__CG__\\stdClass', 'stdClass')
+ok 169 - Doctrine\Tests\Common\Util\ClassUtilsTest::testNewReflectionObject with data set #3 ('MyProject\\Proxies\\__CG__\\OtherProject\\Proxies\\__CG__\\stdClass', 'stdClass')
+ok 170 - Doctrine\Tests\Common\Util\ClassUtilsTest::testNewReflectionObject with data set #4 ('MyProject\\Proxies\\__CG__\\Doctrine\\Tests\\Common\\Util\\ChildObject', 'Doctrine\\Tests\\Common\\Util\\ChildObject')
+ok 171 - Doctrine\Tests\Common\Util\DebugTest::testExportObject
+ok 172 - Doctrine\Tests\Common\Util\DebugTest::testExportDateTime
+ok 173 - Doctrine\Tests\Common\Util\DebugTest::testExportArrayTraversable
+1..173

@@ -1,12 +1,12 @@
 language: php
 
 php:
-  - 5.3
   - 5.4
+  - 5.3
 
 before_script:
-  - curl -s http://getcomposer.org/installer | php -- --quiet
-  - php composer.phar install --dev
+  - wget http://getcomposer.org/composer.phar
+  - composer update --dev
 
-script:
-  - php bin/phpunit --coverage-text
+script: phpunit --coverage-text
+
