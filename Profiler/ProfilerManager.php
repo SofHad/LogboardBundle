@@ -16,8 +16,9 @@ use Symfony\Component\HttpKernel\Profiler\Profiler;
 use Symfony\Component\PropertyAccess\PropertyAccess;
 
 /**
- * Profiler Manager
+ * Class ProfilerManager
  *
+ * @package So\LogboardBundle\Profiler
  * @author Sofiane HADDAG <sofiane.haddag@yahoo.fr>
  */
 class ProfilerManager implements ProfilerManagerInterface
@@ -27,56 +28,67 @@ class ProfilerManager implements ProfilerManagerInterface
      * @var \Symfony\Component\HttpKernel\Profiler\Profiler
      */
     protected $profiler;
+
     /**
      * The counter
      * @var \So\LogboardBundle\Profiler\CounterInterface
      */
     protected $counter;
+
     /**
      * The token
      * @var string
      */
     protected $token;
+
     /**
      * Data counted
      * @var Array
      */
     protected $countedData;
+
     /**
      * Property accessor component
      * @var \Symfony\Component\PropertyAccess\PropertyAccessor
      */
     protected $accessor;
+
     /**
      * The profile
      * @var \Symfony\Component\HttpKernel\Profiler\Profile
      */
     protected $profile;
+
     /**
      * The engine
      * @var \So\LogboardBundle\Profiler\Engine\EngineInterface
      */
     protected $engine;
+
     /**
      * The panel
      * @var string
      */
     protected $panel;
+
     /**
      * The collector
      * @var \Symfony\Component\HttpKernel\DataCollector\DataCollectorInterface
      */
     protected $collector;
+
     /**
      * Query manager
      * @var \So\LogboardBundle\Profiler\QueryManagerInterface
      */
     protected $queryManager;
+
     /**
      * The data
      * @var Array
      */
     protected $data = array();
+
     /**
      * The preview data
      * @var Array
@@ -161,9 +173,6 @@ class ProfilerManager implements ProfilerManagerInterface
         }
 
          return $this->collector = $this->profile->getCollector($this->panel);
-
-
-
     }
 
     /**
@@ -209,7 +218,7 @@ class ProfilerManager implements ProfilerManagerInterface
         }
 
         $this->countedData = $this->counter->handle($this->data)
-            ->getCountedData();
+                                           ->getCountedData();
     }
 
     /**

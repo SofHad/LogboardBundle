@@ -17,8 +17,9 @@ use So\LogboardBundle\Tests\KernelTest;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 /**
- * Testing the PatternMatcher class
+ * Class PatternMatcherTest
  *
+ * @package So\LogboardBundle\Tests\Profiler\Engine\Decompiler
  * @author Sofiane HADDAG <sofiane.haddag@yahoo.fr>
  */
 class PatternMatcherTest extends KernelTest
@@ -27,9 +28,6 @@ class PatternMatcherTest extends KernelTest
     private $patternMatcherDate;
     private $patternMatcherPriority;
 
-    /**
-     * @return void
-     */
     public function setUp()
     {
         parent::setUp();
@@ -55,7 +53,6 @@ class PatternMatcherTest extends KernelTest
         $this->assertEquals('2013-10-14', $data['key']);
         $this->assertEquals(str_replace("[]", null, $input), $data['value']);
     }
-
 
     /**
      * @dataProvider Provider
@@ -99,5 +96,4 @@ class PatternMatcherTest extends KernelTest
             array('[2013-10-14 16:21:47] event.DEBUG: Notified event "kernel.controller" to listener "Sensio\Bundle\FrameworkExtraBundle\EventListener\TemplateListener::onKernelController". [] []')
         );
     }
-
 }

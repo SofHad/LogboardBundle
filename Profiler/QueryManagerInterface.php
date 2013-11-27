@@ -66,7 +66,7 @@ interface QueryManagerInterface
     public function hasEngine();
 
     /**
-     * Selact the chart
+     * Select the chart
      *
      * @return void
      */
