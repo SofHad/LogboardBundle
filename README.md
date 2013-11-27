@@ -30,5 +30,6 @@ Most of the time, we need this bundle to be only activated in the `dev` environm
 
 Here is a quick look at the log reporting dashboard:
 
-![Screenshot](screen.png)
-
+![Screenshot](Resources/assets/screen_view1.png)
+![Screenshot](Resources/assets/screen_view2.png)
+![Screenshot](Resources/assets/screen_view3.png)
