@@ -11,6 +11,7 @@
 namespace So\LogboardBundle\Profiler;
 
 use So\LogboardBundle\Exception\BadQueryHttpException;
+use So\LogboardBundle\Exception\InvalidArgumentException;
 use So\LogboardBundle\Exception\NotFoundHttpException;
 use Symfony\Component\HttpKernel\Profiler\Profiler;
 use Symfony\Component\PropertyAccess\PropertyAccess;
@@ -123,7 +124,7 @@ class ProfilerManager implements ProfilerManagerInterface
         $this->token = $this->queryManager->getToken();
         $this->engine = $this->queryManager->getEngine();
 
-        $this->getProfile();
+        $this->loadProfile();
 
         if (null === $this->profile) {
             return;
@@ -142,7 +143,7 @@ class ProfilerManager implements ProfilerManagerInterface
      * {@inheritdoc}
      *
      */
-    public function getProfile()
+    public function loadProfile()
     {
         $this->profile = $this->profiler->loadProfile($this->token);
 
@@ -151,6 +152,16 @@ class ProfilerManager implements ProfilerManagerInterface
         }
 
         return $this->profile;
+    }
+
+    /**
+     * Set the profile
+     *
+     * @param $profile
+     */
+    public function setProfile($profile)
+    {
+        $this->profile = $profile;
     }
 
     /**
@@ -227,6 +238,10 @@ class ProfilerManager implements ProfilerManagerInterface
      */
     public function hasCollector()
     {
+        if(!$this->profile instanceof \Symfony\Component\HttpKernel\Profiler\Profile){
+            throw new InvalidArgumentException('Proprety profile must be an instance of "\Symfony\Component\HttpKernel\Profiler\Profile"' );
+        }
+
         return $this->profile->hasCollector($this->panel);
     }
 
@@ -264,5 +279,14 @@ class ProfilerManager implements ProfilerManagerInterface
     public function getCountedData()
     {
         return $this->countedData;
+    }
+
+    /**
+     * {@inheritdoc}
+     *
+     */
+    public function getProfile()
+    {
+        return $this->profile;
     }
 }

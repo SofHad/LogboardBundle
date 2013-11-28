@@ -12,6 +12,7 @@ namespace So\LogboardBundle\Tests\Profiler;
 
 use So\LogboardBundle\Tests\DataProvider;
 use So\LogboardBundle\Tests\KernelTest;
+use Symfony\Component\Config\Definition\Exception\Exception;
 
 /**
  * Class ProfilerManagerTest
@@ -21,46 +22,82 @@ use So\LogboardBundle\Tests\KernelTest;
 class ProfilerManagerTest extends KernelTest
 {
     protected $profilerManager;
-    protected $profiler;
+    protected $profilerMock;
     protected $profilerManagerMock;
     protected $panel;
     protected $counter;
     protected $queryManagerMock;
-    protected $profile;
+    protected $profileMock;
 
     public function setUp()
     {
         parent::setUp();
 
-        $this->profiler = $this->container->get('profiler');
         $this->panel = $this->container->getParameter('logboard.panel');
         $this->counter = $this->container->get('logboard.counter');
 
+        $this->profilerMock = $this->getMockBuilder('Symfony\Component\HttpKernel\Profiler\Profiler')
+            ->disableOriginalConstructor()
+            ->getMock();
+
         $this->profilerManagerMock = $this->getMockBuilder('So\LogboardBundle\Profiler\ProfilerManager')
-            ->setMethods(array('loadProfiles'))
+            ->setMethods(array('getPanel'))
             ->enableOriginalConstructor()
             ->setConstructorArgs(
                 array(
                     $this->counter,
-                    $this->profiler,
+                    $this->profilerMock,
                     $this->panel
                 )
             )
             ->getMock();
+
+        $this->queryManagerMock = $this->getMockBuilder('So\LogboardBundle\Profiler\QueryManager')
+            ->disableOriginalConstructor()
+            ->getMock();
+
+        $this->profileMock = $this->getMockBuilder('Symfony\Component\HttpKernel\Profiler\Profile')
+            ->disableOriginalConstructor()
+            ->getMock();
+
+       $this->profilerManagerMock->setProfile($this->profileMock);
+
+    }
+
+    public function setCollectorStatus($value){
+        $this->profileMock->expects($this->any())
+            ->method('hasCollector')
+            ->with($this->anything())
+            ->will($this->returnValue($value));
+    }
+
+    public function testProfilerManagerHasCollectorIsEquivalentToProfileHasCollector()
+    {
+        $value=true;
+        $this->setCollectorStatus($value);
+        $this->assertEquals($value, $this->profilerManagerMock->hasCollector());
+
+        $this->setCollectorStatus(!$value);
+        $this->assertEquals(!$value, !$this->profilerManagerMock->hasCollector());
+    }
+
+    public function testThrowException()
+    {
+        $this->profilerManagerMock->setProfile(null);
+        $this->setExpectedException('\So\LogboardBundle\Exception\InvalidArgumentException');
+        $this->profilerManagerMock->hasCollector();
     }
 
     public function testLoadProfiles()
     {
-        $queryManager = $this->getMockBuilder('So\LogboardBundle\Profiler\QueryManager')
-            ->disableOriginalConstructor()
-            ->getMock()
-        ;
-
-        $queryManager->expects($this->any())
+        $this->queryManagerMock->expects($this->any())
             ->method('getToken')
-            ->will($this->returnValue(DataProvider::TOKEN))
-        ;
+            ->will($this->returnValue(DataProvider::TOKEN));
 
-     $this->profilerManagerMock->loadProfiles($queryManager);
+        $this->profilerManagerMock->expects($this->any())
+            ->method('getProfile')
+            ->will($this->returnValue(null));
     }
+
+
 }
