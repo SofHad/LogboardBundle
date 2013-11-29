@@ -37,11 +37,12 @@ class ProfilerManagerTest extends KernelTest
         $this->counter = $this->container->get('logboard.counter');
 
         $this->profilerMock = $this->getMockBuilder('Symfony\Component\HttpKernel\Profiler\Profiler')
+            ->setMethods(array('loadProfile'))
             ->disableOriginalConstructor()
             ->getMock();
 
         $this->profilerManagerMock = $this->getMockBuilder('So\LogboardBundle\Profiler\ProfilerManager')
-            ->setMethods(array('getPanel'))
+            ->setMethods(array('getPanel', 'hasCollector', 'loadProfile', 'setProfile', 'getCollector'))
             ->enableOriginalConstructor()
             ->setConstructorArgs(
                 array(
@@ -52,11 +53,12 @@ class ProfilerManagerTest extends KernelTest
             )
             ->getMock();
 
-        $this->queryManagerMock = $this->getMockBuilder('So\LogboardBundle\Profiler\QueryManager')
+        $this->queryManagerMock = $this->getMockBuilder('So\LogboardBundle\Profiler\QueryManagerInterface')
             ->disableOriginalConstructor()
             ->getMock();
 
         $this->profileMock = $this->getMockBuilder('Symfony\Component\HttpKernel\Profiler\Profile')
+        ->setMethods(array('hasCollector'))
             ->disableOriginalConstructor()
             ->getMock();
 
@@ -73,15 +75,20 @@ class ProfilerManagerTest extends KernelTest
 
     public function testProfilerManagerHasCollectorIsEquivalentToProfileHasCollector()
     {
-        $value=true;
-        $this->setCollectorStatus($value);
-        $this->assertEquals($value, $this->profilerManagerMock->hasCollector());
+        $this->profileMock->expects($this->any())
+            ->method('hasCollector')
+            ->with($this->anything())
+            ->will($this->returnValue(true));
 
-        $this->setCollectorStatus(!$value);
-        $this->assertEquals(!$value, !$this->profilerManagerMock->hasCollector());
+        $value=false;
+        //Finaliser
+
+        //$this->assertEquals($value, $this->profilerManagerMock->hasCollector());
+
+
     }
 
-    public function testThrowException()
+    public function testThrowExceptionForHasCollector()
     {
         $this->profilerManagerMock->setProfile(null);
         $this->setExpectedException('\So\LogboardBundle\Exception\InvalidArgumentException');
@@ -90,13 +97,22 @@ class ProfilerManagerTest extends KernelTest
 
     public function testLoadProfiles()
     {
-        $this->queryManagerMock->expects($this->any())
-            ->method('getToken')
-            ->will($this->returnValue(DataProvider::TOKEN));
+        $this->profilerManagerMock->setProfile($this->profileMock);
+
+        $this->profilerMock->expects($this->any())
+            ->method('loadProfile')
+            ->with($this->anything())
+            ->will($this->returnValue(new \Symfony\Component\HttpKernel\Profiler\profile("test")));
 
         $this->profilerManagerMock->expects($this->any())
-            ->method('getProfile')
-            ->will($this->returnValue(null));
+            ->method('hasCollector')
+            ->will($this->returnValue(true));
+
+        $this->profilerManagerMock->setProfile(new \Symfony\Component\HttpKernel\Profiler\profile("test"));
+
+        $this->assertEquals(null, $this->profilerManagerMock->loadProfile());
+
+
     }
 
 
