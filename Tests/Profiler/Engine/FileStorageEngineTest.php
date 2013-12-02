@@ -18,6 +18,12 @@ use So\LogboardBundle\Profiler\Parameter\FileStorageParameters;
 use So\LogboardBundle\Tests\DataProvider;
 use So\LogboardBundle\Tests\KernelTest;
 
+/**
+ * Class FileStorageEngineTest
+ *
+ * @package So\LogboardBundle\Tests\Profiler\Engine
+ * @author Sofiane HADDAG <sofiane.haddag@yahoo.fr>
+ */
 class FileStorageEngineTest extends KernelTest
 {
 

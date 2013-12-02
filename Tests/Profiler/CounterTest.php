@@ -15,8 +15,8 @@ use So\LogboardBundle\Tests\DataProvider;
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 
 /**
- * Counter Test
- *
+ * Class CounterTest
+ * @package So\LogboardBundle\Tests\Profiler
  * @author Sofiane HADDAG <sofiane.haddag@yahoo.fr>
  */
 class CounterTest extends WebTestCase
@@ -25,13 +25,15 @@ class CounterTest extends WebTestCase
     private $counter;
     private $refinedData;
 
+    /**
+     *
+     */
     protected function setUp()
     {
         $this->counter = new Counter();
         $dataProvider = new DataProvider();
         $this->refinedData = $dataProvider->refinedDataWithPriorityKey();
     }
-
 
     public function testHandlerWithData()
     {
@@ -53,7 +55,6 @@ class CounterTest extends WebTestCase
 
     public function testHandlerNull()
     {
-
         $data = array();
 
         $this->counter->handle($data);
