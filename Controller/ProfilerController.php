@@ -1,6 +1,6 @@
 <?php
 
-/*
+/**
  * This file is part of the SofHad package.
  *
  * (c) Sofiane HADDAG <sofiane.haddag@yahoo.fr>
