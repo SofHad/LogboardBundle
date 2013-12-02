@@ -63,11 +63,11 @@ interface ProfilerManagerInterface
     public function hasCollector();
 
     /**
-     * Load the profile
+     * Get Collector
      *
      * @return \Symfony\Component\HttpKernel\Profiler\Profile
      */
-    public function loadProfile();
+    public function getProfile();
 
     /**
      * Get preview data
@@ -104,11 +104,4 @@ interface ProfilerManagerInterface
      * @return Profiler
      */
     public function getCountedData();
-
-    /**
-     * Get Profile
-     *
-     * @return \Symfony\Component\HttpKernel\Profiler\Profile
-     */
-    public function getProfile();
 }
