@@ -1,121 +1,231 @@
 <?xml version="1.0" encoding="UTF-8"?>
+<project name="LogboardBundle" basedir="." default="build:main">
 
-<project name="YOUR_PROJECT_NAME" default="build" basedir=".">
-    <property name="source" value="src"/>
-    <property name="ignore" value="build"/>
+    <!-- Config files -->
+    <property name="dir.config"                  value="${project.basedir}" />
+    <property name="config.phpunit"              value="${dir.config}/phpunit.xml.dist" />
+    <property name="config.pmd"                  value="${dir.config}/pmd.xml.dist" />
 
-    <target name="clean"
-            description="Clean up and create artifact directories">
-        <delete dir="${basedir}/build/api"/>
-        <delete dir="${basedir}/build/code-browser"/>
-        <delete dir="${basedir}/build/coverage"/>
-        <delete dir="${basedir}/build/logs"/>
-        <delete dir="${basedir}/build/pdepend"/>
+    <!-- Build paths -->
+    <property name="dir.build"                   value="${project.basedir}/build" />
+    <property name="dir.reports"                 value="${dir.build}/reports" />
+    <property name="dir.reports.check"           value="${dir.reports}/check" />
+    <property name="dir.reports.test"            value="${dir.reports}/test" />
+    <property name="dir.reports.test.unit"       value="${dir.reports.test}/unit" />
+    <property name="dir.reports.test.coverage"   value="${dir.reports.test}/coverage" />
+    <property name="dir.docs"                    value="${dir.build}/docs" />
+    <property name="dir.docs.api"                value="${dir.docs}/api" />
+    <property name="dir.docs.rst"                value="${dir.docs}/rst" />
+    <property name="dir.docs.php"                value="${dir.docs}/php" />
 
-        <mkdir dir="${basedir}/build/api"/>
-        <mkdir dir="${basedir}/build/code-browser"/>
-        <mkdir dir="${basedir}/build/coverage"/>
-        <mkdir dir="${basedir}/build/logs"/>
-        <mkdir dir="${basedir}/build/pdepend"/>
+    <!-- Source paths -->
+    <property name="dir.src"                     value="${project.basedir}" />
+    <property name="dir.src.rst"                 value="${dir.src}/Resources/doc" />
+
+    <!-- Source fileset (used by check tasks) -->
+    <fileset id="sourcecode" dir="${dir.src}">
+        <include name="**/*.php" />
+        <exclude name="**/*Test.php" />
+        <exclude name="vendor/**/*.php" />
+    </fileset>
+
+
+    <!-- BUILD TASKS -->
+
+    <!-- Main (default) task -->
+    <target name="build:main"
+            depends="build:clean, build:prepare, build:check, build:test, build:doc"
+            description="Run all test and build everything"/>
+
+    <!-- Clean previous build files -->
+    <target name="build:clean"
+            description="Clean previous build files">
+
+        <delete dir="${dir.build}" verbose="true" />
+
     </target>
 
-    <target name="phpunit"
-            description="Run unit tests using PHPUnit and generates junit.xml and clover.xml">
-        <exec executable="phpunit" failonerror="true">
-            <arg line="--coverage-text"/>
+    <!-- Prepare build (performed by each build:* task when called as standalone) -->
+    <target name="build:prepare"
+            description="Prepare build">
+
+        <mkdir dir="${dir.build}" />
+
+    </target>
+
+    <!-- Check Project -->
+    <target name="build:check"
+            description="Check source code"
+            depends="build:prepare, check:prepare, check:cs, check:md, check:cpd"/>
+
+    <!-- Test Project -->
+    <target name="build:test"
+            description="Perform all tests"
+            depends="build:prepare, test:prepare, test:unit"/>
+
+    <!-- Generate documentation -->
+    <target name="build:doc"
+            depends="build:prepare, doc:prepare, doc:api"
+            description="Generate API documentation"/>
+
+    <!-- CHECK SECTION -->
+
+    <!-- Prepare check (performed by each check:* task when called as standalone) -->
+    <target name="check:prepare"
+            description="Create check directories">
+
+        <mkdir dir="${dir.reports.check}" />
+
+    </target>
+
+    <!-- CodeSniffer with Symfony2 convention -->
+    <target name="check:cs"
+            depends="check:prepare"
+            description="Generate PHP_CodeSniffer report">
+
+        <phpcodesniffer standard="Symfony2" showSniffs="true" showWarnings="true">
+            <fileset refid="sourcecode" />
+            <config name="error_severity"   value="1"/>
+            <config name="warning_severity" value="5"/>
+            <formatter type="checkstyle" outfile="${dir.reports.check}/checkstyle.xml" />
+        </phpcodesniffer>
+
+    </target>
+
+    <!-- PHP Copy and Paste Detector -->
+    <target name="check:cpd"
+            description="Generate phpcpd report"
+            depends="check:prepare">
+
+        <phpcpd>
+            <fileset refid="sourcecode" />
+            <formatter type="pmd" outfile="${dir.reports.check}/cpd.xml" />
+        </phpcpd>
+
+    </target>
+
+    <!-- PHP Mess detector -->
+    <target name="check:md"
+            description="Generate phpmd report"
+            depends="check:prepare" >
+
+        <!-- if config.pmd file not found, use default pmd config -->
+        <if>
+            <not><available file="${config.pmd}"/></not>
+            <then>
+                <echo msg="phpmd config file not found: ${config.pmd}" />
+                <property name="config.pmd" value="codesize,unusedcode,naming,design" override="yes"/>
+            </then>
+        </if>
+
+        <phpmd rulesets="${config.pmd}">
+            <fileset refid="sourcecode" />
+            <formatter type="xml" outfile="${dir.reports.check}/pmd.xml" />
+        </phpmd>
+
+    </target>
+
+    <!-- TEST SECTION -->
+
+    <!-- Prepare test environment (performed by each test:* task when called as standalone) -->
+    <target name="test:prepare"
+            description="Prepare the test environment">
+
+        <echo msg="Prepare test report directory" />
+        <mkdir dir="${dir.reports.test}" />
+
+        <echo msg="Installing/Updating vendors..." />
+        <exec command="composer update --dev" passthru="true"/>
+
+    </target>
+
+    <!-- Prepare unit test environment -->
+    <target name="test:unit:prepare"
+            description="Prepare the unit test environment"
+            depends="test:prepare">
+
+        <mkdir dir="${dir.reports.test.unit}" />
+
+    </target>
+
+    <!-- Execute unit tests and code coverage -->
+    <target name="test:unit"
+            description="Perform unit tests and code coverage"
+            depends="test:prepare, test:unit:prepare">
+
+        <exec executable="phpunit" logoutput="true">
+            <arg line="--log-junit ${dir.reports.test.unit}/phpunit.xml" />
+            <arg line="--coverage-clover ${dir.reports.test.coverage}/clover.xml" />
+            <arg line="--coverage-html ${dir.reports.test.coverage}/html" />
         </exec>
+
     </target>
 
-    <target name="parallelTasks"
-            description="Run the pdepend, phpmd, phpcpd, phpcs, phpdoc and phploc tasks in parallel using a maximum of 2 threads.">
-        <parallel threadCount="2">
-            <sequential>
-                <antcall target="pdepend"/>
-                <antcall target="phpmd"/>
-            </sequential>
-            <antcall target="phpcpd"/>
-            <antcall target="phpcs"/>
-            <antcall target="phpdoc"/>
-            <antcall target="phploc"/>
-        </parallel>
+    <!-- DOCUMENTATION SECTION -->
+
+    <!-- Prepare the documentation environment -->
+    <target name="doc:prepare"
+            description="Prepare the documentation">
+
+        <mkdir dir="${dir.docs}" />
+
     </target>
 
-    <target name="pdepend"
-            description="Generate jdepend.xml and software metrics charts using PHP_Depend">
-        <exec executable="pdepend">
-            <arg line="--jdepend-xml=${basedir}/build/logs/jdepend.xml
-                 --jdepend-chart=${basedir}/build/pdepend/dependencies.svg
-                 --overview-pyramid=${basedir}/build/pdepend/overview-pyramid.svg
-                 --exclude=${ignore}
-                 ${source}" />
+    <!-- Prepare the Api documentation -->
+    <target name="doc:api:prepare"
+            description="Prepare the API documentation">
+
+        <mkdir dir="${dir.docs.api}" />
+
+    </target>
+
+    <!-- Generate the Api documentation -->
+    <target name="doc:api"
+            description="Generate API documentation"
+            depends="doc:prepare, doc:api:prepare">
+
+        <exec executable="apigen" logoutput="true" passthru="true">
+            <arg line="--source ${dir.src}" />
+            <arg line="--exclude */vendor/*" />
+            <arg line="--exclude */Tests/*" />
+            <arg line="--destination ${dir.docs.api}" />
         </exec>
+
     </target>
 
-    <target name="phpmd"
-            description="Generate pmd.xml using PHPMD">
-        <exec executable="phpmd">
-            <arg line="${source}
-                 xml
-                 build/phpmd.xml
-                 --ignore=${ignore}
-                 --reportfile ${basedir}/build/logs/pmd.xml" />
+    <!-- Prepare the phpDoc documentation -->
+    <target name="doc:php:prepare"
+            description="Prepare the Php documentation">
+
+        <mkdir dir="${dir.docs.php}" />
+
+    </target>
+
+    <!-- Build the phpDoc documentation -->
+    <target name="doc:php"
+            description="Generate Php documentation"
+            depends="doc:prepare, doc:php:prepare">
+
+        <exec executable="phpdoc" logoutput="true" passthru="true">
+            <arg line="--directory ${dir.src}" />
+            <arg line="--ignore '*/vendor/*,*/Tests/*'" />
+            <arg line="--target ${dir.docs.php}" />
+            <arg line="--sourcecode" />
+
         </exec>
+
     </target>
 
-    <target name="phpcpd"
-            description="Generate pmd-cpd.xml using PHPCPD">
-        <exec executable="phpcpd">
-            <arg line="--log-pmd ${basedir}/build/logs/pmd-cpd.xml
-                 --exclude ${ignore}
-                 ${source}" />
-        </exec>
+    <!-- Generate the RST documentation -->
+    <target name="doc:rst"
+            description="Generate RST documentation"
+            depends="doc:prepare">
+
+        <!-- delete previous directory (sphinx refuses to work on an existing directory) -->
+        <delete dir="${dir.docs.rst}"/>
+
+        <exec command="sphinx-build -C -a -b html ${dir.src.rst} ${dir.docs.rst}" passthru="true" />
+
     </target>
 
-    <target name="phploc"
-            description="Generate phploc.csv">
-        <exec executable="phploc">
-            <arg line="--log-csv ${basedir}/build/logs/phploc.csv
-                 --exclude ${ignore}
-                 --suffixes php
-                 ${source}" />
-        </exec>
-    </target>
-
-    <target name="phpcs"
-            description="Generate checkstyle.xml using PHP_CodeSniffer">
-        <exec executable="phpcs" output="/dev/null">
-            <arg line="--report=checkstyle
-                 --report-file=${basedir}/build/logs/checkstyle.xml
-                 --standard=Symfony2
-                 --extensions=php
-                 ${source}" />
-        </exec>
-    </target>
-
-    <target name="phpdoc"
-            description="Generate API documentation using PHPDocumentor">
-        <exec executable="phpdoc">
-            <arg line="-d ${source} -t ${basedir}/build/api -i ${ignore}" />
-        </exec>
-    </target>
-
-    <target name="phpcb"
-            description="Aggregate tool output with PHP_CodeBrowser">
-        <exec executable="phpcb">
-            <arg line="--log=${basedir}/build/logs
-                 --source=${source}
-                 --output=${basedir}/build/code-browser
-                 --ignore=${ignore}
-                 " />
-        </exec>
-    </target>
-
-    <target name="vendors"
-            description="Install vendors">
-        <exec executable="bin/vendors" failonerror="true">
-            <arg value="install" />
-        </exec>
-    </target>
-
-    <target name="build" depends="clean,vendors,parallelTasks,phpunit,phpcb"/>
 </project>
