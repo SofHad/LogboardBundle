@@ -76,7 +76,6 @@ interface ProfilerManagerInterface
      */
     public function getPreviewData();
 
-
     /**
      * Get panel
      *
@@ -104,4 +103,40 @@ interface ProfilerManagerInterface
      * @return Profiler
      */
     public function getCountedData();
+
+    /**
+     * @param $token
+     * @return mixed
+     */
+    public function setToken($token);
+
+    /**
+     * @param $engine
+     * @return mixed
+     */
+    public function setEngine($engine);
+
+    /**
+     * @param $queryManager
+     * @return \So\LogboardBundle\Profiler\QueryManagerInterface
+     */
+    public function setQueryManager($queryManager);
+
+    /**
+     * @param $data
+     * @return mixed
+     */
+    public function setData($data);
+
+    /**
+     * @param $profile
+     * @return \Symfony\Component\HttpKernel\Profiler\Profile
+     */
+    public function setProfile($profile);
+
+    /**
+     * @param $collector
+     * @return \Symfony\Component\HttpKernel\DataCollector\LoggerDataCollector
+     */
+    public function setCollector($collector);
 }
