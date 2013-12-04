@@ -10,7 +10,12 @@
 
 namespace So\LogboardBundle\Profiler;
 
-
+/**
+ * Class ProfilerManagerInterface
+ *
+ * @package So\LogboardBundle\Profiler
+ * @author Sofiane HADDAG <sofiane.haddag@yahoo.fr>
+ */
 interface ProfilerManagerInterface
 {
 
@@ -21,7 +26,8 @@ interface ProfilerManagerInterface
      *
      * @return void
      *
-     * @throws \So\LogboardBundle\Exception\BadQueryHttpException when the data is null
+     * @throws
+     * \So\LogboardBundle\Exception\BadQueryHttpException when the data is null
      */
     public function loadProfiles(QueryManagerInterface $queryManager);
 
@@ -44,7 +50,9 @@ interface ProfilerManagerInterface
      *
      * @return void
      *
-     * @throws \So\LogboardBundle\Exception\BadQueryHttpException if the preview value is null
+     * @throws
+     * \So\LogboardBundle\Exception\BadQueryHttpException
+     * if the preview value is null
      */
     public function aggregateData();
 
@@ -100,7 +108,7 @@ interface ProfilerManagerInterface
     /**
      * Get counted data
      *
-     * @return Profiler
+     * @return \Symfony\Component\HttpKernel\Profiler\Profiler
      */
     public function getCountedData();
 

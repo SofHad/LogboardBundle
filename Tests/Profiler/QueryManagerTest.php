@@ -56,7 +56,9 @@ class QueryManagerTest extends KernelTest
         $defaultChart = $this->container->getParameter('logboard.default_chart');
         $index = $dataProvider->indexForQueryManager();
 
-        $this->queryManager = new QueryManager($router, $this->panel, $defaultChart, $index);
+        $this->queryManager = new QueryManager(
+            $router, $this->panel, $defaultChart, $index
+        );
     }
 
     public function findData()
@@ -110,6 +112,9 @@ class QueryManagerTest extends KernelTest
             return sprintf('file:%s', $dsn);
         }
 
-        throw new NotFoundHttpException('The resource index.csv file not found in the "%s" directory.', $dsn);
+        throw new NotFoundHttpException(
+            'The resource index.csv file not found in the "%s" directory.',
+            $dsn
+        );
     }
 }

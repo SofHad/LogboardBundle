@@ -19,13 +19,10 @@ use Symfony\Component\HttpKernel\Profiler\Profile;
  */
 class ProfilerFinderParameters implements ParametersHandlerInterface
 {
+
     /**
-     * Construct
-     *
-     * @param integer $dataCount The count of data
-     * @param string $panel The panel
-     *
-     * @return void
+     * @param integer $dataCount    The count
+     * @param string  $panel        The panel
      */
     public function __construct($dataCount, $panel)
     {
@@ -39,7 +36,7 @@ class ProfilerFinderParameters implements ParametersHandlerInterface
      */
     public function getParameters(Profile $profile = null)
     {
-        //There are no settings in the version 1.0
+        //There are no settings in the version 1.*
         return array(
             'ip' => null,
             'url' => null,

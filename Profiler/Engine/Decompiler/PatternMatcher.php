@@ -14,28 +14,33 @@ namespace So\LogboardBundle\Profiler\Engine\Decompiler;
 use So\LogboardBundle\Exception\InvalidArgumentException;
 use Symfony\Component\PropertyAccess\PropertyAccess;
 
+/**
+ * Class PatternMatcher
+ *
+ * @package So\LogboardBundle\Profiler\Engine\Decompiler
+ * @author Sofiane HADDAG <sofiane.haddag@yahoo.fr>
+ */
 class PatternMatcher implements DecompilerInterface
 {
     protected $pattern;
     protected $key;
 
     /**
-     * Constructor
-     *
-     * @param string $pattern The regex pattern
-     * @param integer $key The key
-     * @param integer $value The value
-     *
-     * @return void
+     * @param string  $pattern The pattern
+     * @param int $key         The key
      */
     public function __construct($pattern, $key = 1)
     {
         if (!is_string($pattern)) {
-            throw new InvalidArgumentException(sprintf('Argument 1 passed to "%s" must be a string', __METHOD__));
+            throw new InvalidArgumentException(sprintf(
+                'Argument 1 passed to "%s" must be a string', __METHOD__)
+            );
         }
 
         if (!is_integer($key)) {
-            throw new InvalidArgumentException(sprintf('Argument 2 passed to "%s" must be an integer', __METHOD__));
+            throw new InvalidArgumentException(
+                sprintf('Argument 2 passed to "%s" must be an integer', __METHOD__)
+            );
         }
 
         $this->accessor = PropertyAccess::createPropertyAccessor();
@@ -49,7 +54,6 @@ class PatternMatcher implements DecompilerInterface
      */
     public function split($input)
     {
-
         $output = array();
 
         if (empty($input)) {

@@ -10,14 +10,15 @@
 
 namespace So\LogboardBundle\Profiler\Engine;
 
-
 /**
- * File storage engine
+ * Class FileStorageEngine
  *
+ * @package So\LogboardBundle\Profiler\Engine
  * @author Sofiane HADDAG <sofiane.haddag@yahoo.fr>
  */
 class FileStorageEngine extends Engine
 {
+
     /**
      * {@inheritdoc}
      *

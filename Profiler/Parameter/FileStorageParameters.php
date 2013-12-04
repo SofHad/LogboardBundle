@@ -23,12 +23,8 @@ class FileStorageParameters implements ParametersHandlerInterface
     protected $file;
 
     /**
-     * Construct
-     *
-     * @param integer $dataCount The count of data
-     * @param string $file The file path
-     *
-     * @return void
+     * @param \Symfony\Component\Filesystem\Filesystem  $filesystem   The Filesystem component
+     * @param string                                    $file         The file path
      */
     public function __construct($filesystem, $file)
     {

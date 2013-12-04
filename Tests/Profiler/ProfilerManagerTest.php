@@ -79,7 +79,6 @@ class ProfilerManagerTest extends KernelTest
             ->getMock();
 
         $this->profilerManager->setProfile($this->profile);
-
     }
 
     public function testProfilerManagerConstruction()
@@ -126,6 +125,4 @@ class ProfilerManagerTest extends KernelTest
 
         $this->profilerManager->aggregateData();
     }
-
-
 }

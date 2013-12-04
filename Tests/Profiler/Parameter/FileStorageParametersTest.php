@@ -26,7 +26,10 @@ class FileStorageParametersTest extends KernelTest
         $this->setUp();
 
         $filesystem = $this->container->get('filesystem');
-        $file = sprintf('%s/dev.log', $this->container->getParameter('kernel.logs_dir'));
+        $file = sprintf(
+            '%s/dev.log',
+            $this->container->getParameter('kernel.logs_dir')
+        );
         $fileStorageParameters = new FileStorageParameters($filesystem, $file);
         $parameters = $fileStorageParameters->getParameters(null);
 

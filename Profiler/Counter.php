@@ -11,8 +11,9 @@
 namespace So\LogboardBundle\Profiler;
 
 /**
- * Counter
+ * Class Counter
  *
+ * @package So\LogboardBundle\Profiler
  * @author Sofiane HADDAG <sofiane.haddag@yahoo.fr>
  */
 class Counter implements CounterInterface

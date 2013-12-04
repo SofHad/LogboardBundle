@@ -104,7 +104,11 @@ class ProfilerManager implements ProfilerManagerInterface
      *
      * @return void
      */
-    public function __construct(CounterInterface $counter, Profiler $profiler, $panel)
+    public function __construct(
+        CounterInterface $counter,
+        Profiler $profiler,
+        $panel
+    )
     {
         $this->counter = $counter;
         $this->profiler = $profiler;
@@ -138,7 +142,9 @@ class ProfilerManager implements ProfilerManagerInterface
             );
         }
 
-        return $this->queryManager->isPreview() ? $this->aggregateData() : $this->countData();
+        return $this->queryManager->isPreview()
+            ? $this->aggregateData()
+            : $this->countData();
     }
 
     /**
@@ -322,7 +328,6 @@ class ProfilerManager implements ProfilerManagerInterface
     public function setProfile($profile)
     {
         return $this->profile = $profile;
-
     }
 
     /**
@@ -332,6 +337,5 @@ class ProfilerManager implements ProfilerManagerInterface
     public function setCollector($collector)
     {
         return $this->collector = $collector;
-
     }
 }

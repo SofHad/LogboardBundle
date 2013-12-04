@@ -11,8 +11,8 @@
 namespace So\LogboardBundle\Profiler;
 
 /**
- * Data Resolver
- *
+ * Class DataResolver
+ * @package So\LogboardBundle\Profiler
  * @author Sofiane HADDAG <sofiane.haddag@yahoo.fr>
  */
 class DataResolver

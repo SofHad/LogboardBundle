@@ -20,8 +20,9 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\PropertyAccess\PropertyAccess;
 
 /**
- * Logboard controller
+ * Class ProfilerController
  *
+ * @package So\LogboardBundle\Controller
  * @author Sofiane HADDAG <sofiane.haddag@yahoo.fr>
  */
 class ProfilerController extends ContainerAware
@@ -31,26 +32,31 @@ class ProfilerController extends ContainerAware
      * @var \Symfony\Component\HttpKernel\Profiler\Profiler
      */
     private $profiler;
+
     /**
      * Twig
      * @var \Twig_Environment
      */
     private $twig;
+
     /**
      * The template manager
      * @var \Symfony\Bundle\WebProfilerBundle\Profiler\TemplateManager
      */
     private $templateManager = null;
+
     /**
      * Templates
      * @var Array
      */
     private $templates;
+
     /**
      * Property accessor component
      * @var \Symfony\Component\PropertyAccess\PropertyAccessor
      */
     private $accessor;
+
     /**
      * The profiler manager
      * @var \So\LogboardBundle\Profiler\ProfilerManagerInterface
@@ -61,6 +67,7 @@ class ProfilerController extends ContainerAware
      * @var \So\LogboardBundle\Profiler\QueryManagerInterface
      */
     private $queryManager;
+
     /**
      * Engine
      * @var string
@@ -86,7 +93,7 @@ class ProfilerController extends ContainerAware
         if (null === $this->profiler = $this->profilerManager->getProfiler())
             throw new NotFoundHttpException('The profiler must be enabled.');
 
-        if (!$profile = $this->profilerManager->getProfile())
+        if (!$profilit e = $this->profilerManager->getProfile())
             return new Response($this->twig->render('WebProfilerBundle:Profiler:info.html.twig', array('about' => 'no_token', 'token' => $token)), 200, array('Content-Type' => 'text/html'));
 
         return new Response( $this->twig->render("LogboardBundle:Collector:logger.html.twig", array(
