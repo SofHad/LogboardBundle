@@ -93,7 +93,7 @@ class ProfilerController extends ContainerAware
         if (null === $this->profiler = $this->profilerManager->getProfiler())
             throw new NotFoundHttpException('The profiler must be enabled.');
 
-        if (!$profilit e = $this->profilerManager->getProfile())
+        if (!$profile = $this->profilerManager->getProfile())
             return new Response($this->twig->render('WebProfilerBundle:Profiler:info.html.twig', array('about' => 'no_token', 'token' => $token)), 200, array('Content-Type' => 'text/html'));
 
         return new Response( $this->twig->render("LogboardBundle:Collector:logger.html.twig", array(
@@ -108,8 +108,8 @@ class ProfilerController extends ContainerAware
     /**
      * Load the services
      *
-     * @param string $token The profiler token
-     * @param Request $request The Request
+     * @param string    $token      The profiler token
+     * @param Request   $request    The Request
      *
      * @return void
      */

@@ -20,8 +20,8 @@ use Symfony\Component\HttpKernel\Event\FilterControllerEvent;
 use Symfony\Component\HttpKernel\KernelEvents;
 
 /**
- * Profiler Listener
- *
+ * Class ProfilerLogListener
+ * @package So\LogboardBundle\EventListener
  * @author Sofiane HADDAG <sofiane.haddag@yahoo.fr>
  */
 class ProfilerLogListener implements EventSubscriberInterface
@@ -51,7 +51,21 @@ class ProfilerLogListener implements EventSubscriberInterface
      */
     private $type;
 
-    public function __construct(Request $request, ControllerResolverInterface $controllerResolver, $type, $panel)
+    /**
+     * @param \Symfony\Component\HttpFoundation\Request
+     *                                          $request The Request
+     * @param \Symfony\Component\HttpKernel\Controller\ControllerResolverInterface
+     *                                          $controllerResolver
+     * @param string                            $type   The type
+     * @param string                            $panel  The panel
+     *
+     * @throws BadQueryHttpException if the panel is null
+     */
+    public function __construct(
+        Request $request,
+        ControllerResolverInterface $controllerResolver,
+        $type,
+        $panel)
     {
         if (null === $panel) {
             throw new BadQueryHttpException("The panel must not be null");
@@ -91,8 +105,12 @@ class ProfilerLogListener implements EventSubscriberInterface
             return;
         }
 
-        $this->request->attributes->set('_controller', 'LogboardBundle:Profiler:logboard');
+        $this->request->attributes->set(
+            '_controller', 'LogboardBundle:Profiler:logboard'
+        );
 
-        return $event->setController($this->controllerResolver->getController($this->request));
+        return $event->setController(
+            $this->controllerResolver->getController($this->request)
+        );
     }
 }
