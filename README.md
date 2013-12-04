@@ -10,7 +10,7 @@ Add this in your `composer.json`
 
     "require-dev": {
         [...]
-        "so/logboard-bundle": "1.1.*@dev"
+        "so/logboard-bundle": "1.2.*@dev"
     },
 
 And run `php composer.phar update so/logboard-bundle`
