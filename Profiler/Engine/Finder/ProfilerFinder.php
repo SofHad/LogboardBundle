@@ -1,5 +1,5 @@
 <?php
-/*
+/**
  * This file is part of the SofHad package.
  *
  * (c) Sofiane HADDAG <sofiane.haddag@yahoo.fr>
@@ -13,8 +13,9 @@ namespace So\LogboardBundle\Profiler\Engine\Finder;
 use Symfony\Component\HttpKernel\Profiler\Profiler;
 
 /**
- * Profiler Finder
+ * Class ProfilerFinder
  *
+ * @package So\LogboardBundle\Profiler\Engine\Finder
  * @author Sofiane HADDAG <sofiane.haddag@yahoo.fr>
  */
 class ProfilerFinder implements FinderInterface
@@ -26,11 +27,7 @@ class ProfilerFinder implements FinderInterface
     protected $data = array();
 
     /**
-     * Constructor
-     *
-     * @param Profiler $profiler The Profiler
-     *
-     * @return void
+     * @param Profiler $profiler
      */
     public function __construct(Profiler $profiler)
     {

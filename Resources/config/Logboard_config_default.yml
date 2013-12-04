@@ -3,7 +3,7 @@
 ###########################################################################################
 #
 
-##Enable this resource only for tests
+##This resource is used only for tests
 #imports:
 #    - { resource: "@LogboardBundle/Tests/unit_testing_config.yml" }
 
@@ -72,7 +72,7 @@ logboard:
                     parameter: |.*Uncaught exception+.*\\+(\w*.php).*|
 #-----------------------------------------------------------------------------------------------------------------------
 
-    Apache:
+   Apache:
         enabled: true
         title: Apache logs
         src: file

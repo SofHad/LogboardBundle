@@ -1,5 +1,5 @@
 <?php
-/*
+/**
  * This file is part of the SofHad package.
  *
  * (c) Sofiane HADDAG <sofiane.haddag@yahoo.fr>
@@ -15,10 +15,10 @@ use So\LogboardBundle\Profiler\Parameter\ParametersHandlerInterface;
 use Symfony\Component\HttpKernel\Profiler\Profiler;
 use Symfony\Component\PropertyAccess\PropertyAccess;
 
-
 /**
- * Symfony logs handler
+ * Class Engine
  *
+ * @package So\LogboardBundle\Profiler\Engine
  * @author Sofiane HADDAG <sofiane.haddag@yahoo.fr>
  */
 abstract class Engine implements EngineInterface
@@ -84,17 +84,15 @@ abstract class Engine implements EngineInterface
     protected $parametersHandler;
 
     /**
-     * Construct
-     *
-     * @param Profiler $profiler The Profiler
-     * @param FinderInterface $finder The Finder
-     * @param ParametersHandlerInterface $parametersHandler The Finder
-     * @param integer $dataCount The count of data
-     * @param string $panel The panel
-     *
-     * @return void
+     * @param Profiler $profiler                            The Profiler
+     * @param FinderInterface $finder                       The Finder
+     * @param ParametersHandlerInterface $parametersHandler The Parameters Handler
      */
-    public function __construct(Profiler $profiler, FinderInterface $finder, ParametersHandlerInterface $parametersHandler)
+    public function __construct(
+        Profiler $profiler,
+        FinderInterface $finder,
+        ParametersHandlerInterface $parametersHandler
+    )
     {
         $this->profiler = $profiler;
         $this->finder = $finder;
@@ -114,7 +112,6 @@ abstract class Engine implements EngineInterface
         $this->find();
 
         $this->heapUp();
-
 
         return $this->profiles;
     }

@@ -1,5 +1,5 @@
 <?php
-/*
+/**
  * This file is part of the SofHad package.
  *
  * (c) Sofiane HADDAG <sofiane.haddag@yahoo.fr>
@@ -23,12 +23,8 @@ class FileStorageParameters implements ParametersHandlerInterface
     protected $file;
 
     /**
-     * Construct
-     *
-     * @param integer $dataCount The count of data
-     * @param string $file The file path
-     *
-     * @return void
+     * @param \Symfony\Component\Filesystem\Filesystem  $filesystem   The Filesystem component
+     * @param string                                    $file         The file path
      */
     public function __construct($filesystem, $file)
     {

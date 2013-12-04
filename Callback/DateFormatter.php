@@ -1,5 +1,5 @@
 <?php
-/*
+/**
  * This file is part of the SofHad package.
  *
  * (c) Sofiane HADDAG <sofiane.haddag@yahoo.fr>
@@ -45,7 +45,9 @@ class DateFormatter implements DateFormatterInterface
         //yyyy-mm-dd
         $date = explode("-", $data["key"]);
 
-        $data["key"] = date("D, j-M-Y", mktime(0, 0, 0, $date[1], $date[2], $date[0]));
+        $data["key"] = date(
+            "D, j-M-Y", mktime(0, 0, 0, $date[1], $date[2], $date[0])
+        );
 
         return $data;
     }
@@ -59,7 +61,9 @@ class DateFormatter implements DateFormatterInterface
 
         $parts = preg_split('/\s+/', $data["key"]);
 
-        $data["key"] = sprintf('%s, %s-%s-%s', $parts[0], $parts[2], $parts[1], $parts[4]);
+        $data["key"] = sprintf(
+            '%s, %s-%s-%s', $parts[0], $parts[2], $parts[1], $parts[4]
+        );
 
         return $data;
     }

@@ -1,5 +1,5 @@
 <?php
-/*
+/**
  * This file is part of the SofHad package.
  *
  * (c) Sofiane HADDAG <sofiane.haddag@yahoo.fr>
@@ -15,8 +15,9 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Router;
 
 /**
- * Profilers manager
+ * Class QueryManager
  *
+ * @package So\LogboardBundle\Profiler
  * @author Sofiane HADDAG <sofiane.haddag@yahoo.fr>
  */
 class QueryManager implements QueryManagerInterface
@@ -89,13 +90,10 @@ class QueryManager implements QueryManagerInterface
     protected $index;
 
     /**
-     * Constructor
-     *
-     * @param \Symfony\Component\Routing\Router $router The panel
-     * @param string $panel The panel
-     * @param string $defaultChart The default chart
-     *
-     * @return void
+     * @param \Symfony\Component\Routing\Router $router         The router
+     * @param string $panel          The panel
+     * @param string $defaultChart   The default chart
+     * @param Array $index          The index
      */
     public function __construct(Router $router, $panel, $defaultChart, $index)
     {
@@ -161,9 +159,10 @@ class QueryManager implements QueryManagerInterface
         $currentRoute = $this->request->attributes->get('_route');
 
         $this->router
-                    ->generate($currentRoute, array('token' => $this->token), true);
+            ->generate($currentRoute, array('token' => $this->token), true);
 
-        $this->iconSwitcherUrl = $this->engineSwitcherUrl .= "?panel=" . $this->panel;
+        $this->iconSwitcherUrl = $this
+            ->engineSwitcherUrl .= "?panel=" . $this->panel;
 
         if ($this->isEngineSubmitted) {
             $this->iconSwitcherUrl .= sprintf('&engine=%s', $this->engineServiceId);
@@ -320,13 +319,13 @@ class QueryManager implements QueryManagerInterface
      */
     public function getCurrentTitle()
     {
-       foreach($this->index as $menu){
-           foreach($menu as $subMenu){
-                if($subMenu['engine_service'] === $this->engineServiceId ){
+        foreach ($this->index as $menu) {
+            foreach ($menu as $subMenu) {
+                if ($subMenu['engine_service'] === $this->engineServiceId) {
                     return $subMenu['title'];
                 }
-           }
-       }
+            }
+        }
     }
 
 }

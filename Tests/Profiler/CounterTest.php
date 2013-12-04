@@ -1,5 +1,5 @@
 <?php
-/*
+/**
  * This file is part of the SofHad package.
  *
  * (c) Sofiane HADDAG <sofiane.haddag@yahoo.fr>
@@ -16,18 +16,15 @@ use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 
 /**
  * Class CounterTest
+ *
  * @package So\LogboardBundle\Tests\Profiler
  * @author Sofiane HADDAG <sofiane.haddag@yahoo.fr>
  */
 class CounterTest extends WebTestCase
 {
-
     private $counter;
     private $refinedData;
 
-    /**
-     *
-     */
     protected function setUp()
     {
         $this->counter = new Counter();

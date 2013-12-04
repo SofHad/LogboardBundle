@@ -1,5 +1,5 @@
 <?php
-/*
+/**
  * This file is part of the SofHad package.
  *
  * (c) Sofiane HADDAG <sofiane.haddag@yahoo.fr>
@@ -13,12 +13,11 @@ namespace So\LogboardBundle\Profiler\Engine;
 use So\LogboardBundle\Profiler\DataResolver;
 
 /**
- * Symfony logs engine handler
+ * Class SymfonyLogEngine
  *
+ * @package So\LogboardBundle\Profiler\Engine
  * @author Sofiane HADDAG <sofiane.haddag@yahoo.fr>
  */
-
-
 class SymfonyLogEngine extends Engine
 {
     /**
@@ -33,7 +32,10 @@ class SymfonyLogEngine extends Engine
             $token = $this->accessor->getValue($item, '[token]');
             $panel = $this->accessor->getValue($this->parameters, '[panel]');
             $profile = $this->profiler->loadProfile($token);
-            $collections = DataResolver::refine($profile->getCollector($panel)->getLogs());
+
+            $collections = DataResolver::refine(
+                $profile->getCollector($panel)->getLogs()
+            );
 
             $this->profiles = array_merge($collections, $this->profiles);
         }

@@ -1,5 +1,5 @@
 <?php
-/*
+/**
  * This file is part of the SofHad package.
  *
  * (c) Sofiane HADDAG <sofiane.haddag@yahoo.fr>
@@ -10,7 +10,12 @@
 
 namespace So\LogboardBundle\Profiler;
 
-
+/**
+ * Class ProfilerManagerInterface
+ *
+ * @package So\LogboardBundle\Profiler
+ * @author Sofiane HADDAG <sofiane.haddag@yahoo.fr>
+ */
 interface ProfilerManagerInterface
 {
 
@@ -21,7 +26,8 @@ interface ProfilerManagerInterface
      *
      * @return void
      *
-     * @throws \So\LogboardBundle\Exception\BadQueryHttpException when the data is null
+     * @throws
+     * \So\LogboardBundle\Exception\BadQueryHttpException when the data is null
      */
     public function loadProfiles(QueryManagerInterface $queryManager);
 
@@ -44,7 +50,9 @@ interface ProfilerManagerInterface
      *
      * @return void
      *
-     * @throws \So\LogboardBundle\Exception\BadQueryHttpException if the preview value is null
+     * @throws
+     * \So\LogboardBundle\Exception\BadQueryHttpException
+     * if the preview value is null
      */
     public function aggregateData();
 
@@ -76,7 +84,6 @@ interface ProfilerManagerInterface
      */
     public function getPreviewData();
 
-
     /**
      * Get panel
      *
@@ -101,7 +108,43 @@ interface ProfilerManagerInterface
     /**
      * Get counted data
      *
-     * @return Profiler
+     * @return \Symfony\Component\HttpKernel\Profiler\Profiler
      */
     public function getCountedData();
+
+    /**
+     * @param $token
+     * @return mixed
+     */
+    public function setToken($token);
+
+    /**
+     * @param $engine
+     * @return mixed
+     */
+    public function setEngine($engine);
+
+    /**
+     * @param $queryManager
+     * @return \So\LogboardBundle\Profiler\QueryManagerInterface
+     */
+    public function setQueryManager($queryManager);
+
+    /**
+     * @param $data
+     * @return mixed
+     */
+    public function setData($data);
+
+    /**
+     * @param $profile
+     * @return \Symfony\Component\HttpKernel\Profiler\Profile
+     */
+    public function setProfile($profile);
+
+    /**
+     * @param $collector
+     * @return \Symfony\Component\HttpKernel\DataCollector\LoggerDataCollector
+     */
+    public function setCollector($collector);
 }

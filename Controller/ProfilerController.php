@@ -1,6 +1,6 @@
 <?php
 
-/*
+/**
  * This file is part of the SofHad package.
  *
  * (c) Sofiane HADDAG <sofiane.haddag@yahoo.fr>
@@ -20,8 +20,9 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\PropertyAccess\PropertyAccess;
 
 /**
- * Logboard controller
+ * Class ProfilerController
  *
+ * @package So\LogboardBundle\Controller
  * @author Sofiane HADDAG <sofiane.haddag@yahoo.fr>
  */
 class ProfilerController extends ContainerAware
@@ -31,26 +32,31 @@ class ProfilerController extends ContainerAware
      * @var \Symfony\Component\HttpKernel\Profiler\Profiler
      */
     private $profiler;
+
     /**
      * Twig
      * @var \Twig_Environment
      */
     private $twig;
+
     /**
      * The template manager
      * @var \Symfony\Bundle\WebProfilerBundle\Profiler\TemplateManager
      */
     private $templateManager = null;
+
     /**
      * Templates
      * @var Array
      */
     private $templates;
+
     /**
      * Property accessor component
      * @var \Symfony\Component\PropertyAccess\PropertyAccessor
      */
     private $accessor;
+
     /**
      * The profiler manager
      * @var \So\LogboardBundle\Profiler\ProfilerManagerInterface
@@ -61,6 +67,7 @@ class ProfilerController extends ContainerAware
      * @var \So\LogboardBundle\Profiler\QueryManagerInterface
      */
     private $queryManager;
+
     /**
      * Engine
      * @var string
@@ -101,8 +108,8 @@ class ProfilerController extends ContainerAware
     /**
      * Load the services
      *
-     * @param string $token The profiler token
-     * @param Request $request The Request
+     * @param string    $token      The profiler token
+     * @param Request   $request    The Request
      *
      * @return void
      */

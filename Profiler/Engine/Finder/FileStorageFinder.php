@@ -1,5 +1,5 @@
 <?php
-/*
+/**
  * This file is part of the SofHad package.
  *
  * (c) Sofiane HADDAG <sofiane.haddag@yahoo.fr>
@@ -18,13 +18,15 @@ use Symfony\Component\HttpKernel\Profiler\Profiler;
 use Symfony\Component\PropertyAccess\PropertyAccess;
 
 /**
- * Profiler Finder
+ * Class FileStorageFinder
  *
+ * @package So\LogboardBundle\Profiler\Engine\Finder
  * @author Sofiane HADDAG <sofiane.haddag@yahoo.fr>
  */
 class FileStorageFinder implements FinderInterface
 {
     const PARSE_ERROR = "Parse error: unexpected value when trying to parse the log file";
+
     /**
      * Property accessor component
      * @var \Symfony\Component\PropertyAccess\PropertyAccessor
@@ -55,11 +57,8 @@ class FileStorageFinder implements FinderInterface
     protected $callback = null;
 
     /**
-     * Constructor
-     *
-     * @param Profiler $decompiler The Decompiler
-     *
-     * @return void
+     * @param DecompilerInterface   $decompiler
+     * @param string                $callback
      */
     public function __construct(DecompilerInterface $decompiler, $callback)
     {
@@ -74,8 +73,10 @@ class FileStorageFinder implements FinderInterface
      */
     public function find(Array $parameters)
     {
-
-        if (null === $this->accessor->getValue($parameters, '[filesystem]') || null === $this->accessor->getValue($parameters, '[data]')) {
+        if (
+            null === $this->accessor->getValue($parameters, '[filesystem]')
+            || null === $this->accessor->getValue($parameters, '[data]'))
+        {
             throw new InvalidArgumentException();
         }
 

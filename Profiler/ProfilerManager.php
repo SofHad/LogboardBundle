@@ -1,5 +1,5 @@
 <?php
-/*
+/**
  * This file is part of the SofHad package.
  *
  * (c) Sofiane HADDAG <sofiane.haddag@yahoo.fr>
@@ -104,7 +104,11 @@ class ProfilerManager implements ProfilerManagerInterface
      *
      * @return void
      */
-    public function __construct(CounterInterface $counter, Profiler $profiler, $panel)
+    public function __construct(
+        CounterInterface $counter,
+        Profiler $profiler,
+        $panel
+    )
     {
         $this->counter = $counter;
         $this->profiler = $profiler;
@@ -132,10 +136,15 @@ class ProfilerManager implements ProfilerManagerInterface
         $this->compile();
 
         if (null === $this->data) {
-            throw new BadQueryHttpException('The request was invalid or cannot be otherwise served because the data cannot be null.');
+            throw new BadQueryHttpException(
+                'The request was invalid or cannot be otherwise served
+                 because the data cannot be null.'
+            );
         }
 
-        return $this->queryManager->isPreview() ? $this->aggregateData() : $this->countData();
+        return $this->queryManager->isPreview()
+            ? $this->aggregateData()
+            : $this->countData();
     }
 
     /**
@@ -147,7 +156,12 @@ class ProfilerManager implements ProfilerManagerInterface
         $this->profile = $this->profiler->loadProfile($this->token);
 
         if(!$this->hasCollector()){
-            throw new NotFoundHttpException(sprintf('Panel "%s" is not available for token "%s".', $this->getPanel(), $this->queryManager->getToken()));
+            throw new NotFoundHttpException(
+                sprintf(
+                'Panel "%s" is not available for token "%s".',
+                    $this->getPanel(), $this->queryManager->getToken()
+                )
+            );
         }
 
         return $this->profile;
@@ -159,7 +173,9 @@ class ProfilerManager implements ProfilerManagerInterface
      */
     public function compile()
     {
-        $this->data = null === $this->engine ? DataResolver::refine($this->getCollector()->getLogs()) : $this->engine->loadProfiles();
+        $this->data = null === $this->engine
+            ? DataResolver::refine($this->getCollector()->getLogs())
+            : $this->engine->loadProfiles();
     }
 
     /**
@@ -193,7 +209,10 @@ class ProfilerManager implements ProfilerManagerInterface
         $preview = $this->queryManager->getPreview();
 
         if (null === $preview) {
-            throw new BadQueryHttpException('The request was invalid or cannot be otherwise served because the preview value cannot be null.');
+            throw new BadQueryHttpException(
+                'The request was invalid or cannot be otherwise served
+                because the preview value cannot be null.'
+            );
         }
 
         foreach ($this->data as $item) {
@@ -264,5 +283,59 @@ class ProfilerManager implements ProfilerManagerInterface
     public function getCountedData()
     {
         return $this->countedData;
+    }
+
+    /**
+     * {@inheritdoc}
+     *
+     */
+    public function setToken($token)
+    {
+        return $this->token = $token;
+    }
+
+    /**
+     * {@inheritdoc}
+     *
+     */
+    public function setEngine($engine)
+    {
+        return $this->engine = $engine;
+    }
+
+    /**
+     * {@inheritdoc}
+     *
+     */
+    public function setQueryManager($queryManager)
+    {
+        return $this->queryManager = $queryManager;
+    }
+
+    /**
+     * {@inheritdoc}
+     *
+     */
+    public function setData($data)
+    {
+        return $this->data = $data;
+    }
+
+    /**
+     * {@inheritdoc}
+     *
+     */
+    public function setProfile($profile)
+    {
+        return $this->profile = $profile;
+    }
+
+    /**
+     * {@inheritdoc}
+     *
+     */
+    public function setCollector($collector)
+    {
+        return $this->collector = $collector;
     }
 }
