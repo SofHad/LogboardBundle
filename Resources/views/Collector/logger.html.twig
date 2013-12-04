@@ -1,0 +1,103 @@
+{% set token = query_manager.token %}
+{% set panel = profiler_manager.getPanel %}
+
+{% extends '@WebProfiler/Profiler/layout.html.twig' %}
+
+{% import _self as logger %}
+
+{% set counted_data = profiler_manager.getCountedData %}
+{% block head %}
+    {{ parent() }}
+    {% include 'LogboardBundle:Collector:style.css.twig' %}
+
+    <!--Load the AJAX API-->
+    <script type="text/javascript" src="https://www.google.com/jsapi"></script>
+    {% include 'LogboardBundle:Collector:config_chart.js.twig' %}
+
+{% endblock %}
+{% import _self as logger %}
+
+{% block toolbar %}
+    {% include 'LogboardBundle:Collector:toolbar.html.twig' %}
+{% endblock %}
+
+{% block menu %}
+    {% include 'LogboardBundle:Collector:menu.html.twig' %}
+{% endblock %}
+
+{% block panel %}
+
+    {% set priority = query_manager.getRequest.query.get('priority', 0) %}
+    {# Chart #}
+    <h2>Logs</h2>
+
+    <table class="logboard-table">
+        <tr>
+            <td style="border-right: none;">
+                {% if counted_data is iterable %}
+                    <div id="chart_current" style="float: right; "></div>
+                {% else %}
+                    <p>
+                        <em>No logs available.</em>
+                    </p>
+                {% endif %}
+            </td>
+            <td style="width: 22px; margin:0; padding: 5px; border-left: none; ">
+                {% if counted_data is not empty %}
+                    <a href="{{ query_manager.getIconSwitcherUrl }}&chart=PieChart"><img width="50" height="50"
+                                                                                         title="Pie Chart"
+                                                                                         alt="Pie Chart"
+                                                                                         src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAGQAAABkCAYAAABw4pVUAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAA2ZpVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdpbj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDUuMy1jMDExIDY2LjE0NTY2MSwgMjAxMi8wMi8wNi0xNDo1NjoyNyAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wTU09Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9tbS8iIHhtbG5zOnN0UmVmPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvc1R5cGUvUmVzb3VyY2VSZWYjIiB4bWxuczp4bXA9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC8iIHhtcE1NOk9yaWdpbmFsRG9jdW1lbnRJRD0ieG1wLmRpZDoxMDQ2MERBRTkxNEZFMzExQkQ4NkRCNDNCNjQxNUNDQyIgeG1wTU06RG9jdW1lbnRJRD0ieG1wLmRpZDo3MjkwQjNEMzRGOUExMUUzOUEzMEJBMkZEODJDNjU4NSIgeG1wTU06SW5zdGFuY2VJRD0ieG1wLmlpZDo3MjkwQjNEMjRGOUExMUUzOUEzMEJBMkZEODJDNjU4NSIgeG1wOkNyZWF0b3JUb29sPSJBZG9iZSBQaG90b3Nob3AgQ1M2IChXaW5kb3dzKSI+IDx4bXBNTTpEZXJpdmVkRnJvbSBzdFJlZjppbnN0YW5jZUlEPSJ4bXAuaWlkOjE0NDYwREFFOTE0RkUzMTFCRDg2REI0M0I2NDE1Q0NDIiBzdFJlZjpkb2N1bWVudElEPSJ4bXAuZGlkOjEwNDYwREFFOTE0RkUzMTFCRDg2REI0M0I2NDE1Q0NDIi8+IDwvcmRmOkRlc2NyaXB0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"/></a>
+                    <a href="{{ query_manager.getIconSwitcherUrl }}&chart=LineChart"><img width="50" height="50"
+                                                                                          title="Line Chart"
+                                                                                          alt="Line Chart"
+                                                                                          src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAGQAAABkCAYAAABw4pVUAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAA2ZpVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdpbj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDUuMy1jMDExIDY2LjE0NTY2MSwgMjAxMi8wMi8wNi0xNDo1NjoyNyAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wTU09Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9tbS8iIHhtbG5zOnN0UmVmPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvc1R5cGUvUmVzb3VyY2VSZWYjIiB4bWxuczp4bXA9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC8iIHhtcE1NOk9yaWdpbmFsRG9jdW1lbnRJRD0ieG1wLmRpZDoxMDQ2MERBRTkxNEZFMzExQkQ4NkRCNDNCNjQxNUNDQyIgeG1wTU06RG9jdW1lbnRJRD0ieG1wLmRpZDo2QzRFODFCNTRGOUExMUUzOEY1NUVDMUI3MTk5QTQwMyIgeG1wTU06SW5zdGFuY2VJRD0ieG1wLmlpZDo2QzRFODFCNDRGOUExMUUzOEY1NUVDMUI3MTk5QTQwMyIgeG1wOkNyZWF0b3JUb29sPSJBZG9iZSBQaG90b3Nob3AgQ1M2IChXaW5kb3dzKSI+IDx4bXBNTTpEZXJpdmVkRnJvbSBzdFJlZjppbnN0YW5jZUlEPSJ4bXAuaWlkOjE0NDYwREFFOTE0RkUzMTFCRDg2REI0M0I2NDE1Q0NDIiBzdFJlZjpkb2N1bWVudElEPSJ4bXAuZGlkOjEwNDYwREFFOTE0RkUzMTFCRDg2REI0M0I2NDE1Q0NDIi8+IDwvcmRmOkRlc2NyaXB0aW9uPiA8L3JkZjpSREY+IDwveDp4bXBtZXRhPiA8P3hwYWNrZXQgZW5kPSJyIj8+VLcVpgAABC1JREFUeNrsnXuITFEcx+945rHyKNktkRWxeaxnQnY8YksKmz+I2DwikZayIsqzyPsR/vAIJXkUfyDcSR4bYtfKW22yJY+0Htk8dnxP89ua1rmze3dn7pyZ+X7rk23Obbr3fuac8zvnTsMXDAYtxpw04i2gEIZCKIShEAphKIRCGApJ7TTRvZjj9+uW79kB2y7WHJvSNxD3hD2EQxZDIRTCUAhDIRTCUAiFMBRCIQyFUAhDIQyFUAhDIRTCUAiFMBRCIQyFMBRCIQyFUAjjJjl+/1AKMUvGVQoxS0YbCjFcBoUYJoNC4ivjE4WYJWM0hRgkI2DbpRRiuAwKMUwGhRgmg0IMk2G6kOZgeCrJcCuksUfX5gPTwXNwCxwCLVNBhlshaR5c2yhwD5wEXeW1eeA+6JPsMkwasnqBiyAABmnae4uUhYb5iKoME4R0AgeBOvmJdZhT9oNzoF0yyoinkFZgLXgN5keYn75rXpsMSsCIZJMRDyHqx27mioh1IkaXl2AKSAdHNe2dZXhb7WGxEXMZXgtRQ5L6NaHDMlTp8hEsBlngvPSQOWCGprcoEevBNZCRDDK8EjIQ3JBJO8vhmEqwEWSCfeBPjfZToD94oCt0wOM6zEHGy4i1kC7ghFRHTj+qpX6X6wjoLsPPtwjv90YWits0bR1E+E6Z/BNSRqyEtAVbwQsZanwOx12RT30+KK/je/8CK0CuDG81sxTcBT28kCHVoWWqkGZgmXySl0f4pKoKaRyYIENNfXIZ9JX5o2aywUMwK9FkREuI6gHTwDOwHbR3OO4dmA0GONxIt3kPxoNCzZyjqrdjMmSmJYqMBgvJ8ftH4p8icBp0czjsK1glw4i6SVVRPH/1XluAOo8yTbsaMh9JYWG8jHoLgYie4AL+vAmGOBz2G+yVymkz+BnD6yiS+eiMpi1T5pWCCPOZETKqF2puRHSUFfaCWhZkantjJXjl4TqnQoZOtRm5C7QIa2sq1dkYGTY/mCjDbQ+ZKRP2oggy7siWxlSPZYRHLTzVBuUTTVuuLE7HmijDrRBVnrZ2aFNbIXki47YV/zwFg8EBTVu63PhNYSOEETKiUWV9Bkus0Pb4WVnomZJK6c2qt37RVIaFMgfmmSKjIUIqpbpRE+YemcBNzTmZ8HU9d5gUAkbIqI8Q1QOOqxI2YNuFoMJKjLy1Qk8jN9RSdsdVhtsqS61+8yGhxErM/AVrwHUr9Ig4wzQZbntIQQLLCE8A9AOXTJMRra2TRIwSMMkKbUaWmyIjlYVUz4e7Zcun1JST4jcXQ1v6FoUwFEIhDIVQCEMhFMJQCIUwFMJQCIUw7uILBv9/DO7wnxOrr4kWx+Ac1BfpquJ0/erR84943fyAbZfVfM3NE8Md/PxGv0NwyOIcwlAIhTAxrbIY9hCGQiiEoRAKYSgkufJPgAEAsI446jRShcgAAAAASUVORK5CYII="/></a>
+                    <a href="{{ query_manager.getIconSwitcherUrl }}&chart=ColumnChart"><img width="50" height="50"
+                                                                                            title=""
+                                                                                            alt=""
+                                                                                            src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAGQAAABkCAYAAABw4pVUAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAA2ZpVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdpbj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDUuMy1jMDExIDY2LjE0NTY2MSwgMjAxMi8wMi8wNi0xNDo1NjoyNyAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wTU09Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9tbS8iIHhtbG5zOnN0UmVmPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvc1R5cGUvUmVzb3VyY2VSZWYjIiB4bWxuczp4bXA9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC8iIHhtcE1NOk9yaWdpbmFsRG9jdW1lbnRJRD0ieG1wLmRpZDoxMDQ2MERBRTkxNEZFMzExQkQ4NkRCNDNCNjQxNUNDQyIgeG1wTU06RG9jdW1lbnRJRD0ieG1wLmRpZDo3RjVEMjFCNzRGOUExMUUzOTBEMUM3NDJGM0E3RjlBNSIgeG1wTU06SW5zdGFuY2VJRD0ieG1wLmlpZDo3RjVEMjFCNjRGOUExMUUzOTBEMUM3NDJGM0E3RjlBNSIgeG1wOkNyZWF0b3JUb29sPSJBZG9iZSBQaG90b3Nob3AgQ1M2IChXaW5kb3dzKSI+IDx4bXBNTTpEZXJpdmVkRnJvbSBzdFJlZjppbnN0YW5jZUlEPSJ4bXAuaWlkOjE0NDYwREFFOTE0RkUzMTFCRDg2REI0M0I2NDE1Q0NDIiBzdFJlZjpkb2N1bWVudElEPSJ4bXAuZGlkOjEwNDYwREFFOTE0RkUzMTFCRDg2REI0M0I2NDE1Q0NDIi8+IDwvcmRmOkRlc2NyaXB0aW9uPiA8L3JkZjpSREY+IDwveDp4bXBtZXRhPiA8P3hwYWNrZXQgZW5kPSJyIj8+earsaAAAAVtJREFUeNrs3cFtwjAAQFEccmUYNoCRmISRwgiMwAxInBAYIy5IBBQREwx5X8qlKmnrV5tENSXEGCcqp8oQABEQIAICRECACMi4q9s+uFgu227f55um2bZ87qgHMI2JGWLJEhAgAiIgQAQEiIAAERAgAiIgZVdnOMfpTdhzOqYI8s+Qyuy0ZAERECACIiBABASIgAARECACovtqQ9C51r/7dHh9zHnTNFMzpJzVpBrii8hzCBABERAgygViD1VhIDPDNc479euOxvDG4+I/LMEl/gBh4McBERAgAgJEQNyH/HB9/ql9MEMEBIiAABEQIAICREAEBIiAABEQIAICRECAGAIgelGOXSe5d2iEws7z8nzex9CSJSBAVEohxscdl0/enHiVju0Hvof95PYytm90TMfhW4OfLgh2fa6y1n5/808IS5bnEAEBoo9eZckMERAgAgJEQP6riwADAB4XKLcRgkTpAAAAAElFTkSuQmCC"/></a>
+                {% endif %}
+            </td>
+        </tr>
+        <tr>
+            <td colspan="2" style="padding: 3px; margin: 0">
+                <table style="padding: 0; margin: 0">
+                    <tr>
+                        <td>
+                            <h3>Token ({{ token }})</h3>
+
+                            <div class="menu-index{{ logger.selected(null, query_manager.getEngine) }}"><a
+                                        href="{{ query_manager.getEngineSwitcherUrl }}">Priority</a>
+                            </div>
+                        </td>
+                    </tr>
+
+                    {% if query_manager.getIndex and query_manager.getIndex is not empty %}
+                        {% for keyIndex, menu in query_manager.getIndex %}
+                            <tr>
+                                <td>
+                                    <h3>{{ keyIndex }}:</h3>
+                                    {% for sub_key, sub_menu in menu %}
+                                        <div class="menu-index{{ logger.selected(sub_menu["engine_service"], query_manager.getEngineServiceId) }}">
+                                            <a href="{{ query_manager.getEngineSwitcherUrl }}&engine={{ sub_menu["engine_service"] }}">{{ sub_menu["title"] }}</a>
+                                        </div>
+                                    {% endfor %}
+                                </td>
+                            </tr>
+                        {% endfor %}
+                    {% endif %}
+                </table>
+            </td>
+        </tr>
+    </table>
+{% endblock %}
+
+{% macro selected(value, engine) %}
+    {% if value == engine %}
+        {% spaceless %}
+            logboard-selected
+        {% endspaceless %}
+    {% endif %}
+{% endmacro %}
+
+
