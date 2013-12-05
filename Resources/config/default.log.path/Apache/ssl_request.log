@@ -49,3 +49,4 @@
 [10/Jun/2013:16:00:41 +0200] 127.0.0.1 TLSv1.1 ECDHE-RSA-AES256-SHA "GET /App/plugins/system/jcemediabox/themes/standard/popup.html HTTP/1.1" 1313
 [10/Jun/2013:16:00:41 +0200] 127.0.0.1 TLSv1.1 ECDHE-RSA-AES256-SHA "GET /App/template/litebox/loading.gif HTTP/1.1" 2767
 [11/Jun/2013:16:00:41 +0200] 127.0.0.1 TLSv1.1 ECDHE-RSA-AES256-SHA "GET /App/template/favicon.ico HTTP/1.1" 99678
+[11/Jun/2013:16:00:41 +0200] 127.0.0.1 TLSv1.1 ECDHE-RSA-AES256-SHA "GET /App/template/favicon.ico HTTP/1.1" 99678
