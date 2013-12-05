@@ -14,7 +14,6 @@ use So\LogboardBundle\Profiler\Engine\Decompiler\DecompilerInterface;
 use Symfony\Component\DependencyInjection\Exception\InvalidArgumentException;
 use Symfony\Component\Filesystem\Filesystem;
 use Symfony\Component\HttpFoundation\File\Exception\FileNotFoundException;
-use Symfony\Component\HttpKernel\Profiler\Profiler;
 use Symfony\Component\PropertyAccess\PropertyAccess;
 
 /**
