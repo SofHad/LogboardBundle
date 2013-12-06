@@ -152,8 +152,10 @@ class ProfilerManagerTest extends KernelTest
 
         $this->profilerManager->countData();
 
+        $countedData = $this->profilerManager->getCountedData();
+
         $this->assertEquals(
-            18, (int)$this->profilerManager->getCountedData()['DEBUG']['count']
+            18, (int)$countedData['DEBUG']['count']
         );
     }
 
