@@ -125,4 +125,36 @@ class ProfilerManagerTest extends KernelTest
 
         $this->profilerManager->aggregateData();
     }
+
+    public function testAggregateDataWhenPreviewIsNotNull()
+    {
+        $this->queryManagerMock->expects($this->once())
+            ->method("getPreview")
+            ->will($this->returnValue("DEBUG"));
+
+        $this->profilerManager->setData(DataProvider::refinedDataWithPriorityKey());
+
+        $this->profilerManager->aggregateData();
+
+        $this->assertCount(18, $this->profilerManager->getPreviewData());
+    }
+
+    public function testCountDataWhenTheDataIsNull(){
+        $this->profilerManager->setData(null);
+
+        $this->profilerManager->countData();
+
+        $this->assertNull($this->profilerManager->getCountedData());
+    }
+
+    public function testCountDataWhenTheDataIsNotNull(){
+        $this->profilerManager->setData(DataProvider::refinedDataWithPriorityKey());
+
+        $this->profilerManager->countData();
+
+        $this->assertEquals(18, (int)$this->profilerManager->getCountedData()['DEBUG']['count']);
+        $this->assertArrayHasKey("DEBUG", $this->profilerManager->getCountedData());
+    }
+
+
 }

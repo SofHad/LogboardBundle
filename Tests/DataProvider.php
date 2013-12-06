@@ -26,7 +26,7 @@ class DataProvider
         return __DIR__.self::TESTS_LOG_FILE;
     }
 
-    public function unrefinedProfilerData()
+    public static function unrefinedProfilerData()
     {
         $data = array();
 
@@ -193,7 +193,7 @@ class DataProvider
         return $data;
     }
 
-    public function refinedDataWithPriorityKey()
+    public static function refinedDataWithPriorityKey()
     {
         return array
         (

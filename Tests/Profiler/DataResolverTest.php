@@ -25,8 +25,7 @@ class DataResolverTest extends WebTestCase
 
     public function testRefine()
     {
-        $DataProvider = new DataProvider();
-        $collections = $DataProvider->unrefinedProfilerData();
+        $collections = DataProvider::unrefinedProfilerData();
 
         $data = DataResolver::refine($collections);
 

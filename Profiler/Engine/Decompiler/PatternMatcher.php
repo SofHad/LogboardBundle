@@ -28,6 +28,8 @@ class PatternMatcher implements DecompilerInterface
     /**
      * @param string  $pattern The pattern
      * @param int $key         The key
+     *
+     * @throws InvalidArgumentException  If errors in arguments
      */
     public function __construct($pattern, $key = 1)
     {

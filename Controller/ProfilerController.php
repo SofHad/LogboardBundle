@@ -106,7 +106,7 @@ class ProfilerController extends ContainerAware
     }
 
     /**
-     * Load the services
+     * Loading the services
      *
      * @param string    $token      The profiler token
      * @param Request   $request    The Request

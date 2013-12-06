@@ -28,8 +28,7 @@ class CounterTest extends WebTestCase
     protected function setUp()
     {
         $this->counter = new Counter();
-        $dataProvider = new DataProvider();
-        $this->refinedData = $dataProvider->refinedDataWithPriorityKey();
+        $this->refinedData = DataProvider::refinedDataWithPriorityKey();
     }
 
     public function testHandlerWithData()

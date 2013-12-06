@@ -96,13 +96,9 @@ class ProfilerManager implements ProfilerManagerInterface
     protected $previewData = array();
 
     /**
-     * Constructor
-     *
-     * @param CounterInterface $counter The counter
-     * @param \Symfony\Component\HttpKernel\Profiler\Profiler $profiler The profiler
-     * @param string $panel The panel
-     *
-     * @return void
+     * @param CounterInterface                                  $counter    The counter
+     * @param \Symfony\Component\HttpKernel\Profiler\Profiler   $profiler   The profiler
+     * @param string                                            $panel      The panel
      */
     public function __construct(
         CounterInterface $counter,
