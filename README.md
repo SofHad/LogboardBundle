@@ -29,7 +29,8 @@ Most of the time, we need this bundle to be only activated in the `dev` environm
 #### Configuration file
 - Create new file logboard.yml in app/config directory and import it in config_dev.yml
 - Copy/Paste the default configuration and adapt it to your environment
-  >> see: https://github.com/SofHad/LogboardBundle/blob/master/Resources/config/Logboard_config_default.yml
+
+  see: https://github.com/SofHad/LogboardBundle/blob/master/Resources/config/Logboard_config_default.yml
 
 
 ## Screenshot
