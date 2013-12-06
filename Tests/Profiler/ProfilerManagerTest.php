@@ -158,6 +158,4 @@ class ProfilerManagerTest extends KernelTest
             18, (int)$countedData['DEBUG']['count']
         );
     }
-
-
 }
