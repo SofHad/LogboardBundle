@@ -138,9 +138,7 @@ class ProfilerManager implements ProfilerManagerInterface
             );
         }
 
-        return $this->queryManager->isPreview()
-            ? $this->aggregateData()
-            : $this->countData();
+        $this->queryManager->isPreview()? $this->aggregateData():$this->countData();
     }
 
     /**

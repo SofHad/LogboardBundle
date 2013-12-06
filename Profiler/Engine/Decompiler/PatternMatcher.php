@@ -59,6 +59,7 @@ class PatternMatcher implements DecompilerInterface
         $output = array();
 
         if (empty($input)) {
+            /** @noinspection PhpInconsistentReturnPointsInspection */
             return;
         }
 
