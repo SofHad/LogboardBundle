@@ -1,11 +1,6 @@
 ###########################################################################################
 # Copy and paste this file in your app/config directory and import it in config_dev.yml   #
 ###########################################################################################
-#
-
-##This resource is used only for tests
-#imports:
-#    - { resource: "@LogboardBundle/Tests/unit_testing_config.yml" }
 
 logboard:
 #-----------------------------------------------------------------------------------------------------------------------
