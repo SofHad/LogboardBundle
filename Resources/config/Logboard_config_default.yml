@@ -1,5 +1,5 @@
 ###########################################################################################
-# Copy and paste this file in your app/config directory and import it in config_dev.yml   #
+# Copy and paste this file in your app/config directory and import it into config_dev.yml   #
 ###########################################################################################
 
 logboard:
