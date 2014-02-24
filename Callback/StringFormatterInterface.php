@@ -14,9 +14,10 @@ namespace So\LogboardBundle\Callback;
  * Interface StringFormatterInterface
  *
  * @package So\LogboardBundle\Callback
- * @author Sofiane HADDAG <sofiane.haddag@yahoo.fr>
+ * @author  Sofiane HADDAG <sofiane.haddag@yahoo.fr>
  */
-Interface StringFormatterInterface {
+Interface StringFormatterInterface
+{
 
     /**
      * Returns a string that has been converted to uppercase for $data['key]

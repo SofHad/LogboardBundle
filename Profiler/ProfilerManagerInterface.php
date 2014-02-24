@@ -14,7 +14,7 @@ namespace So\LogboardBundle\Profiler;
  * Class ProfilerManagerInterface
  *
  * @package So\LogboardBundle\Profiler
- * @author Sofiane HADDAG <sofiane.haddag@yahoo.fr>
+ * @author  Sofiane HADDAG <sofiane.haddag@yahoo.fr>
  */
 interface ProfilerManagerInterface
 {
@@ -114,36 +114,42 @@ interface ProfilerManagerInterface
 
     /**
      * @param $token
+     *
      * @return mixed
      */
     public function setToken($token);
 
     /**
      * @param $engine
+     *
      * @return mixed
      */
     public function setEngine($engine);
 
     /**
      * @param $queryManager
+     *
      * @return \So\LogboardBundle\Profiler\QueryManagerInterface
      */
     public function setQueryManager($queryManager);
 
     /**
      * @param $data
+     *
      * @return mixed
      */
     public function setData($data);
 
     /**
      * @param $profile
+     *
      * @return \Symfony\Component\HttpKernel\Profiler\Profile
      */
     public function setProfile($profile);
 
     /**
      * @param $collector
+     *
      * @return \Symfony\Component\HttpKernel\DataCollector\LoggerDataCollector
      */
     public function setCollector($collector);

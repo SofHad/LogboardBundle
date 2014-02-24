@@ -14,12 +14,13 @@ namespace So\LogboardBundle\Profiler;
  * Class Counter
  *
  * @package So\LogboardBundle\Profiler
- * @author Sofiane HADDAG <sofiane.haddag@yahoo.fr>
+ * @author  Sofiane HADDAG <sofiane.haddag@yahoo.fr>
  */
 class Counter implements CounterInterface
 {
 
     private $data = array();
+
     private $countedData = array();
 
     /**

@@ -21,13 +21,13 @@ class ProfilerFinderParameters implements ParametersHandlerInterface
 {
 
     /**
-     * @param integer $dataCount    The count
-     * @param string  $panel        The panel
+     * @param integer $dataCount The count
+     * @param string  $panel     The panel
      */
     public function __construct($dataCount, $panel)
     {
         $this->dataCount = $dataCount;
-        $this->panel = $panel;
+        $this->panel     = $panel;
     }
 
     /**
@@ -38,13 +38,13 @@ class ProfilerFinderParameters implements ParametersHandlerInterface
     {
         //There are no settings in the version 1.*
         return array(
-            'ip' => null,
-            'url' => null,
-            'method' => null,
-            'start' => null,
-            'end' => null,
+            'ip'         => null,
+            'url'        => null,
+            'method'     => null,
+            'start'      => null,
+            'end'        => null,
             'data_count' => $this->dataCount,
-            'panel' => $this->panel,
+            'panel'      => $this->panel,
         );
     }
 }

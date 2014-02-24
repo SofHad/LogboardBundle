@@ -17,7 +17,7 @@ use Symfony\Component\HttpFoundation\Request;
  * Class QueryManagerInterface
  *
  * @package So\LogboardBundle\Profiler
- * @author Sofiane HADDAG <sofiane.haddag@yahoo.fr>
+ * @author  Sofiane HADDAG <sofiane.haddag@yahoo.fr>
  */
 interface QueryManagerInterface
 {
@@ -25,8 +25,8 @@ interface QueryManagerInterface
     /**
      * Handle the queries
      *
-     * @param Request $request  The request
-     * @param string  $token    The token
+     * @param Request $request The request
+     * @param string  $token   The token
      *
      * @return void
      */

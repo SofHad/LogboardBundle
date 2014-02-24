@@ -16,7 +16,7 @@ use Symfony\Component\HttpKernel\Profiler\Profiler;
  * Class ProfilerFinder
  *
  * @package So\LogboardBundle\Profiler\Engine\Finder
- * @author Sofiane HADDAG <sofiane.haddag@yahoo.fr>
+ * @author  Sofiane HADDAG <sofiane.haddag@yahoo.fr>
  */
 class ProfilerFinder implements FinderInterface
 {

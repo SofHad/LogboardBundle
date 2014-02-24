@@ -19,7 +19,7 @@ use Symfony\Component\PropertyAccess\PropertyAccess;
  * Class Engine
  *
  * @package So\LogboardBundle\Profiler\Engine
- * @author Sofiane HADDAG <sofiane.haddag@yahoo.fr>
+ * @author  Sofiane HADDAG <sofiane.haddag@yahoo.fr>
  */
 abstract class Engine implements EngineInterface
 {
@@ -84,8 +84,8 @@ abstract class Engine implements EngineInterface
     protected $parametersHandler;
 
     /**
-     * @param Profiler $profiler                            The Profiler
-     * @param FinderInterface $finder                       The Finder
+     * @param Profiler                   $profiler          The Profiler
+     * @param FinderInterface            $finder            The Finder
      * @param ParametersHandlerInterface $parametersHandler The Parameters Handler
      */
     public function __construct(
@@ -94,11 +94,11 @@ abstract class Engine implements EngineInterface
         ParametersHandlerInterface $parametersHandler
     )
     {
-        $this->profiler = $profiler;
-        $this->finder = $finder;
+        $this->profiler          = $profiler;
+        $this->finder            = $finder;
         $this->parametersHandler = $parametersHandler;
-        $this->accessor = PropertyAccess::createPropertyAccessor();
-        $this->profiles = array();
+        $this->accessor          = PropertyAccess::createPropertyAccessor();
+        $this->profiles          = array();
     }
 
     /**

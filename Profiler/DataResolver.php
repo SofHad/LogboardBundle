@@ -13,7 +13,7 @@ namespace So\LogboardBundle\Profiler;
 /**
  * Class DataResolver
  * @package So\LogboardBundle\Profiler
- * @author Sofiane HADDAG <sofiane.haddag@yahoo.fr>
+ * @author  Sofiane HADDAG <sofiane.haddag@yahoo.fr>
  */
 class DataResolver
 {
@@ -30,7 +30,7 @@ class DataResolver
         $output = array();
 
         foreach ($collections as $k => $collection) {
-            $output[$k]["key"] = $collection['priorityName'];
+            $output[$k]["key"]   = $collection['priorityName'];
             $output[$k]["value"] = $collection['message'];
         }
 

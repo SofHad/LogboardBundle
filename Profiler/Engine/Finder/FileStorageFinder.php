@@ -20,7 +20,7 @@ use Symfony\Component\PropertyAccess\PropertyAccess;
  * Class FileStorageFinder
  *
  * @package So\LogboardBundle\Profiler\Engine\Finder
- * @author Sofiane HADDAG <sofiane.haddag@yahoo.fr>
+ * @author  Sofiane HADDAG <sofiane.haddag@yahoo.fr>
  */
 class FileStorageFinder implements FinderInterface
 {
@@ -31,6 +31,7 @@ class FileStorageFinder implements FinderInterface
      * @var \Symfony\Component\PropertyAccess\PropertyAccessor
      */
     protected $accessor;
+
     /**
      * The data
      * @var Array
@@ -56,14 +57,14 @@ class FileStorageFinder implements FinderInterface
     protected $callback = null;
 
     /**
-     * @param DecompilerInterface   $decompiler
-     * @param string                $callback
+     * @param DecompilerInterface $decompiler
+     * @param string              $callback
      */
     public function __construct(DecompilerInterface $decompiler, $callback)
     {
-        $this->accessor = PropertyAccess::createPropertyAccessor();
+        $this->accessor   = PropertyAccess::createPropertyAccessor();
         $this->decompiler = $decompiler;
-        $this->callback = $callback;
+        $this->callback   = $callback;
     }
 
     /**
@@ -74,8 +75,8 @@ class FileStorageFinder implements FinderInterface
     {
         if (
             null === $this->accessor->getValue($parameters, '[filesystem]')
-            || null === $this->accessor->getValue($parameters, '[data]'))
-        {
+            || null === $this->accessor->getValue($parameters, '[data]')
+        ) {
             throw new InvalidArgumentException();
         }
 

@@ -19,7 +19,7 @@ use Symfony\Component\PropertyAccess\PropertyAccess;
  * Class ProfilerManager
  *
  * @package So\LogboardBundle\Profiler
- * @author Sofiane HADDAG <sofiane.haddag@yahoo.fr>
+ * @author  Sofiane HADDAG <sofiane.haddag@yahoo.fr>
  */
 class ProfilerManager implements ProfilerManagerInterface
 {
@@ -96,9 +96,9 @@ class ProfilerManager implements ProfilerManagerInterface
     protected $previewData = array();
 
     /**
-     * @param CounterInterface                                  $counter    The counter
-     * @param \Symfony\Component\HttpKernel\Profiler\Profiler   $profiler   The profiler
-     * @param string                                            $panel      The panel
+     * @param CounterInterface                                $counter  The counter
+     * @param \Symfony\Component\HttpKernel\Profiler\Profiler $profiler The profiler
+     * @param string                                          $panel    The panel
      */
     public function __construct(
         CounterInterface $counter,
@@ -106,10 +106,10 @@ class ProfilerManager implements ProfilerManagerInterface
         $panel
     )
     {
-        $this->counter = $counter;
-        $this->profiler = $profiler;
-        $this->panel = $panel;
-        $this->accessor = PropertyAccess::createPropertyAccessor();
+        $this->counter   = $counter;
+        $this->profiler  = $profiler;
+        $this->panel     = $panel;
+        $this->accessor  = PropertyAccess::createPropertyAccessor();
         $this->collector = null;
     }
 
@@ -120,8 +120,8 @@ class ProfilerManager implements ProfilerManagerInterface
     public function loadProfiles(QueryManagerInterface $queryManager)
     {
         $this->queryManager = $queryManager;
-        $this->token = $this->queryManager->getToken();
-        $this->engine = $this->queryManager->getEngine();
+        $this->token        = $this->queryManager->getToken();
+        $this->engine       = $this->queryManager->getEngine();
 
         $this->getProfile();
 
@@ -138,7 +138,7 @@ class ProfilerManager implements ProfilerManagerInterface
             );
         }
 
-        $this->queryManager->isPreview()? $this->aggregateData():$this->countData();
+        $this->queryManager->isPreview() ? $this->aggregateData() : $this->countData();
     }
 
     /**
@@ -149,10 +149,10 @@ class ProfilerManager implements ProfilerManagerInterface
     {
         $this->profile = $this->profiler->loadProfile($this->token);
 
-        if(!$this->hasCollector()){
+        if (!$this->hasCollector()) {
             throw new NotFoundHttpException(
                 sprintf(
-                'Panel "%s" is not available for token "%s".',
+                    'Panel "%s" is not available for token "%s".',
                     $this->getPanel(), $this->queryManager->getToken()
                 )
             );
@@ -182,7 +182,7 @@ class ProfilerManager implements ProfilerManagerInterface
             $this->collector;
         }
 
-         return $this->collector = $this->profile->getCollector($this->panel);
+        return $this->collector = $this->profile->getCollector($this->panel);
     }
 
     /**
@@ -231,7 +231,7 @@ class ProfilerManager implements ProfilerManagerInterface
         }
 
         $this->countedData = $this->counter->handle($this->data)
-                                           ->getCountedData();
+            ->getCountedData();
     }
 
     /**

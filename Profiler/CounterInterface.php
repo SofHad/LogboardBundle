@@ -14,7 +14,7 @@ namespace So\LogboardBundle\Profiler;
  * Class CounterInterface
  *
  * @package So\LogboardBundle\Profiler
- * @author Sofiane HADDAG <sofiane.haddag@yahoo.fr>
+ * @author  Sofiane HADDAG <sofiane.haddag@yahoo.fr>
  */
 interface CounterInterface
 {

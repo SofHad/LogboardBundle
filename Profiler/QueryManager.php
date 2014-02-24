@@ -18,7 +18,7 @@ use Symfony\Component\Routing\Router;
  * Class QueryManager
  *
  * @package So\LogboardBundle\Profiler
- * @author Sofiane HADDAG <sofiane.haddag@yahoo.fr>
+ * @author  Sofiane HADDAG <sofiane.haddag@yahoo.fr>
  */
 class QueryManager implements QueryManagerInterface
 {
@@ -28,61 +28,73 @@ class QueryManager implements QueryManagerInterface
      * @var string
      */
     protected $iconSwitcherUrl;
+
     /**
      * The token
      * @var string
      */
     protected $token;
+
     /**
      * The request
      * @var \Symfony\Component\HttpFoundation\Request
      */
     protected $request;
+
     /**
      * The default chart
      * @var string
      */
     protected $defaultChart;
+
     /**
      * The chart
      * @var string
      */
     protected $chart;
+
     /**
      * Preview value
      * @var Boolean
      */
     protected $preview;
+
     /**
      * The engine links urls
      * @var string
      */
     protected $engineSwitcherUrl;
+
     /**
      * Engine
      * @var \So\LogboardBundle\Profiler\Engine\EngineInterface
      */
     protected $engine = null;
+
     /**
      * The engine service id
      * @var string
      */
     protected $engineServiceId = null;
+
     /**
      * The engine submission status
      * @var Boolean
      */
     protected $isEngineSubmitted = false;
+
     /**
      * The chart submission status
      * @var Boolean
      */
     protected $isChartSubmitted = false;
+
     /**
      * Isser preview
      * @var Boolean
      */
     protected $isPreview = false;
+
     /**
      * The index variables (Titles, labels, services names)
      * @var Array
@@ -90,17 +102,17 @@ class QueryManager implements QueryManagerInterface
     protected $index;
 
     /**
-     * @param \Symfony\Component\Routing\Router $router         The router
-     * @param string $panel          The panel
-     * @param string $defaultChart   The default chart
-     * @param Array $index          The index
+     * @param \Symfony\Component\Routing\Router $router       The router
+     * @param string                            $panel        The panel
+     * @param string                            $defaultChart The default chart
+     * @param Array                             $index        The index
      */
     public function __construct(Router $router, $panel, $defaultChart, $index)
     {
-        $this->router = $router;
-        $this->panel = $panel;
+        $this->router       = $router;
+        $this->panel        = $panel;
         $this->defaultChart = $defaultChart;
-        $this->index = $index;
+        $this->index        = $index;
     }
 
     /**
@@ -110,7 +122,7 @@ class QueryManager implements QueryManagerInterface
     public function handleQueries(Request $request, $token)
     {
         $this->request = $request;
-        $this->token = $token;
+        $this->token   = $token;
 
         $this->checkEngine();
 
@@ -144,7 +156,7 @@ class QueryManager implements QueryManagerInterface
 
         if (null !== $chart) {
             $this->isChartSubmitted = true;
-            $this->chart = $chart;
+            $this->chart            = $chart;
         } else {
             $this->chart = $this->defaultChart;
         }
@@ -179,7 +191,7 @@ class QueryManager implements QueryManagerInterface
      */
     public function checkPreview()
     {
-        $this->preview = $this->request->query->get('preview');
+        $this->preview   = $this->request->query->get('preview');
         $this->isPreview = null !== $this->preview ? true : false;
     }
 

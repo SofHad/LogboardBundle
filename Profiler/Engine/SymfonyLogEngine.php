@@ -16,7 +16,7 @@ use So\LogboardBundle\Profiler\DataResolver;
  * Class SymfonyLogEngine
  *
  * @package So\LogboardBundle\Profiler\Engine
- * @author Sofiane HADDAG <sofiane.haddag@yahoo.fr>
+ * @author  Sofiane HADDAG <sofiane.haddag@yahoo.fr>
  */
 class SymfonyLogEngine extends Engine
 {
@@ -29,8 +29,8 @@ class SymfonyLogEngine extends Engine
         $this->profiles = array();
 
         foreach ($this->data as $item) {
-            $token = $this->accessor->getValue($item, '[token]');
-            $panel = $this->accessor->getValue($this->parameters, '[panel]');
+            $token   = $this->accessor->getValue($item, '[token]');
+            $panel   = $this->accessor->getValue($this->parameters, '[panel]');
             $profile = $this->profiler->loadProfile($token);
 
             $collections = DataResolver::refine(

@@ -18,16 +18,17 @@ use Symfony\Component\PropertyAccess\PropertyAccess;
  * Class PatternMatcher
  *
  * @package So\LogboardBundle\Profiler\Engine\Decompiler
- * @author Sofiane HADDAG <sofiane.haddag@yahoo.fr>
+ * @author  Sofiane HADDAG <sofiane.haddag@yahoo.fr>
  */
 class PatternMatcher implements DecompilerInterface
 {
     protected $pattern;
+
     protected $key;
 
     /**
-     * @param string  $pattern The pattern
-     * @param int $key         The key
+     * @param string $pattern The pattern
+     * @param int    $key     The key
      *
      * @throws InvalidArgumentException  If errors in arguments
      */
@@ -35,7 +36,7 @@ class PatternMatcher implements DecompilerInterface
     {
         if (!is_string($pattern)) {
             throw new InvalidArgumentException(sprintf(
-                'Argument 1 passed to "%s" must be a string', __METHOD__)
+                                                   'Argument 1 passed to "%s" must be a string', __METHOD__)
             );
         }
 
@@ -46,8 +47,8 @@ class PatternMatcher implements DecompilerInterface
         }
 
         $this->accessor = PropertyAccess::createPropertyAccessor();
-        $this->pattern = $pattern;
-        $this->key = $key;
+        $this->pattern  = $pattern;
+        $this->key      = $key;
     }
 
     /**
@@ -69,7 +70,7 @@ class PatternMatcher implements DecompilerInterface
             return;
         }
 
-        $output['key'] = $matches[$this->key];
+        $output['key']   = $matches[$this->key];
         $output['value'] = str_replace("[]", null, $matches[0]);
 
         return $output;

@@ -20,16 +20,17 @@ use Symfony\Component\HttpKernel\Profiler\Profile;
 class FileStorageParameters implements ParametersHandlerInterface
 {
     protected $filesystem;
+
     protected $file;
 
     /**
-     * @param \Symfony\Component\Filesystem\Filesystem  $filesystem   The Filesystem component
-     * @param string                                    $file         The file path
+     * @param \Symfony\Component\Filesystem\Filesystem $filesystem The Filesystem component
+     * @param string                                   $file       The file path
      */
     public function __construct($filesystem, $file)
     {
         $this->filesystem = $filesystem;
-        $this->file = $file;
+        $this->file       = $file;
     }
 
     /**
@@ -40,7 +41,7 @@ class FileStorageParameters implements ParametersHandlerInterface
     {
         return array(
             'filesystem' => $this->filesystem,
-            'data' => $this->file
+            'data'       => $this->file
         );
     }
 }
