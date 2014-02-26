@@ -16,7 +16,7 @@
         }
     ],
     "require": {
-        "symfony/symfony": "2.*.*"
+        "symfony/symfony": ">=2.0"
     },
     "autoload": {
         "psr-0": {
